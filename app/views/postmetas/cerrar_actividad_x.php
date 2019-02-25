@@ -1,0 +1,1 @@
+<p>cerrar_actividad</p>

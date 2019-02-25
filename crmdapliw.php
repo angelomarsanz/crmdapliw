@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Crmdapliw
-Plugin URI: https://dapliw.org.ve
+Plugin URI: https://github.com/angelomarsanz/crmdapliw
 Description: CRM para Inmobiliarias
 Author: Ángel Omar Sanz
 Version: 1
