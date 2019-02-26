@@ -1,5 +1,34 @@
 <div class="container">
-    <?php if (isset($objects)): ?>
+    <?php if (isset($bienes) && isset($propiedadesBienes)):
+        $contadorRegistros = 0;
+        $datosBienes = [];
+        foreach ($propiedadesBienes as $propiedadesBien)
+        {
+            if ($propiedadesBien->meta_key == "REAL_HOMES_property_images")
+            {
+                $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][] = $propiedadesBien->meta_value; 
+            }
+            elseif ($propiedadesBien->meta_key == "CRMdapliw_actividad_agenda")
+            {
+                $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][] = $propiedadesBien->meta_value; 
+            }
+            elseif ($propiedadesBien->meta_key == "_thumbnail_id")
+            {
+                foreach ($posts as $post)
+                {
+                    if ($post->ID == $propiedadesBien->meta_value)
+                    {
+                        $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key] = $post->guid;
+                    }
+                }
+            }
+            else
+            {
+                $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key] = $propiedadesBien->meta_value;
+            }
+            $contadorRegistros++;
+        }
+    ?>
         <div class="row" id="encabezado">
             <div class="col-md-12">
             <div class="row">
@@ -103,45 +132,33 @@
             </div>
         </div>
         <br />
-        <div class="row propiedades">
+        <div class="row" id="bienes">
             <div class="col-md-12">
-                <?php foreach ($objects as $object): ?>
-                    <div class="row tituloDelPost">
-                        <p><b><?= $object->__name ?></b></p>
+                <?php foreach ($bienes as $bien): ?>
+                    <div class="row">
+                        <p id=<?= "nombreDelBien" . $bien->ID ?> style="color: #085b9e"><b><?= $bien->__name ?></b></p>
                     </div>
-                    <div class="row cuerpoDelPost">
-                        <div class="col-md-1" id="imagenDelPost">
+                    <div class="row">
+                        <div class="col-md-1" id=<?= "imagenDelBien" . $bien->ID ?>>
+                            <a href=<?= $bien->guid ?> title="Ver propiedad"><img src=<?= $datosBienes[$bien->ID]["_thumbnail_id"] ?> class="img-thumbnail" alt="Miniatura propiedad" class="icon"></a>
                         </div>
                         <div class="col-md-11">
-                            <div class="row datosDelPost">
+                            <div class="row">
                                 <div class="col-md-12">
-                                    <p>
-                                        <?=
-                                            'ID: ' . $object->ID .
-                                            ', autor: ' . $object->post_author . 
-                                            ', estatus: ' . $object->post_status .
-                                            ' Y URI: ' . $object->guid
-                                        ?>
+                                    <p id=<?php "detalleBien" . $bien->ID ?>>
+                                        
                                     </p>
                                 </div>
                             </div>
-                            <div class="row botonesDelPost">
+                            <div class="row">
                                 <div class="col-md-12">
-                                    <p><a href="#" class="agregarPropietario btn btn-light" id=<?= 'post' . $object->ID ?> title="Agregar datos del propietario"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/person.svg" ?> alt="Buscar" class="icon"></a></p>
-                                </div>
-                            </div>
-                            <div class="row formularioPost">
-                                <div class="col-md-12 camposFormularioPost">
+                                    <p><a href="#" class="btn btn-light botonAgenda" id=<?= "botonAgenda" . $bien->ID ?> title="Agenda"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/person.svg" ?> alt="Agenda" class="icon"></a></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <br />
                 <?php endforeach; ?>
-                <br />
-                <p class="paginacion"><?php echo $this->pagination(); ?></p>
-                <br />
-                <br />
             </div>
         </div>    
     <?php else: ?>
@@ -155,7 +172,7 @@
     <?php endif; ?>
     <div class='row noVer' id="formularioAgenda">
         <div class='col-md-12'> 
-            <p id="tituloPropiedadAgenda"></p> 
+            <p id="tituloAgenda"></p> 
             <div class='input-group mb-3'> 
                 <div class='input-group-prepend'> 
                     <label class='input-group-text' for='tipoDeDocumento'>Tipo de documento</label> 
@@ -226,16 +243,14 @@ $(document).ready(function()
         $('#formularioFiltros').toggle('slow');
         $('#lineaBotonBuscar').removeClass('noVer');
     });
-    $('.agregarPropietario').click(function()
+    $('.botonAgenda').click(function()
     {
-        /* $('#lineaBotonBuscar').addClass('noVer');
-        $('.propiedades').addClass('noVer');
-        $('.paginacion').addClass('noVer');
+        $('#lineaBotonBuscar').addClass('noVer');
+        $('#bienes').addClass('noVer');
         $('#formularioAgenda').removeClass('noVer');      
-        $('#tituloPropiedadAgenda').html('<b>' + $(this).attr('id').substring(4) + '</b>'); */
-        alert("Pasé por agregarPropietario");
-        // cerrarActividadAgenda($(this).attr('id').substring(4));
-        cerrarActividadAgenda(1029);
+        $('#tituloAgenda').html('<b>' + $(this).attr('id').substring(11) + '</b>'); 
+        alert("ID Post: " + $(this).attr('id').substring(11));
+        cerrarActividadAgenda($(this).attr('id').substring(11));
     });
 });
 </script>
