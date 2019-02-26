@@ -188,12 +188,11 @@
 function cerrarActividadAgenda(idPostmeta)
 {
     alert('Pasé por cerrarActividadAgenda');
-    alert('Los parámetros son: ' + "<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'cerrarActividad')) ?>" + ', ' + idPostmeta)
 
     $("#mensajesAlUusuario").html("Por favor espere un momento...");
 
-    $.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'cerrarActividad')) ?>", 
-        {"id" : idPostmeta}, null, "json")          
+    $.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'cerrar_actividad')) ?>", 
+        {"idPostmeta" : idPostmeta}, null, "json")          
     .done(function(response) 
     {
         if (response.success) 
@@ -235,7 +234,8 @@ $(document).ready(function()
         $('#formularioAgenda').removeClass('noVer');      
         $('#tituloPropiedadAgenda').html('<b>' + $(this).attr('id').substring(4) + '</b>'); */
         alert("Pasé por agregarPropietario");
-        cerrarActividadAgenda($(this).attr('id').substring(4));
+        // cerrarActividadAgenda($(this).attr('id').substring(4));
+        cerrarActividadAgenda(1029);
     });
 });
 </script>

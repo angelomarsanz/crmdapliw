@@ -22,7 +22,14 @@ class PostsController extends MvcPublicController
         $user = wp_get_current_user();
         if ($user->id > 0)
         {        
-            $this->set_objects();
+            $posts = $this->Post->find(array(
+                'conditions' => array(
+                    'post_type' => 'property',
+                    'post_status' => array('Publish', 'Pending'),
+                    'ID' => array(5763, 5849)),
+                'order' => 'ID ASC'));
+            
+            $this->set('posts', $posts);
         }
     }
 }
