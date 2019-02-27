@@ -361,16 +361,16 @@ function cerrarActividadAgenda(jsonCierreActividad)
     $("#mensajesAlUusuario").html("Por favor espere un momento...");
 
     $.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'cerrar_actividad')) ?>", 
-        jsonCierreActividad, null, "json")          
+        {"idPostmeta" : 5446, "informacionAdicional" : "OK"}, null, "json")          
     .done(function(response) 
     {
         if (response.success) 
         {
-            $("#mensajesAlUusuario").html("La actividad se cerró correctamente");
+            $("#mensajesAlUusuario").html("La actividad se cerró correctamente... Id: " + response.id);
         } 
         else 
         {
-            $("#mensajesAlUusuario").html("La actividad no se pudo cerrar. Intente nuevamente");
+            $("#mensajesAlUusuario").html("La actividad no se pudo cerrar. Por favor intente nuevamante");
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
@@ -439,9 +439,10 @@ $(document).ready(function()
     });
     $('.botonCerrarActividad').click(function()
     {
-        jsonCierreActividad = 
-            {"idPostmeta" : 5446,
-            "informacionAdicional" : "Ok" };
+        jsonCierreActividad =
+            {"idPostmeta" : 5446, 
+            "informacionAdicional" : "Se ejecutó la actividad"};
+
         cerrarActividadAgenda(jsonCierreActividad);
     });
 });

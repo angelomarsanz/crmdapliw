@@ -16,22 +16,24 @@ class PostmetasController extends MvcPublicController
         $this->set('postMetas', $postMetas);
     }
 
-    public function crear_actividad()
+    public function agregar_actividad()
     {
         $this->autoRender = false;
 
-        $jsondata = [];
+        if (isset($_POST['idPost']))
+        {
+            $jsondata = [];
 
-        $postmeta = ['post_id' => 5849, 'meta_key' => 'Agenda', 'meta_value' => 1];
-        $id = $this->Postmeta->insert($postmeta);
+            $postmeta = ['post_id' => $_POST['idPost'], 'meta_key' => 'CRMdapliw_actividad_agenda', 'meta_value' => json_encode($_POST['actividad'])];
+            $id = $this->Postmeta->insert($postmeta);
 
-        $jsondata["success"] = true;
-        $jsondata["message"] = "La actividad se cerró correctamente";
-        $jsondata["id"] = $id;
+            $jsondata["success"] = true;
+            $jsondata["message"] = "La actividad se agregó correctamente";
+            $jsondata["id"] = $id;
          
-        exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
+            exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
+        }
     }
-
     public function cerrar_actividad()
     {
         $this->autoRender = false;
@@ -43,8 +45,27 @@ class PostmetasController extends MvcPublicController
             $jsondata = [];
 
             $object = $this->Postmeta->find_by_id($idPostmeta);
-            
-            $this->Postmeta->update($object->__id, array('meta_value' => 0));
+
+            $objetoActividad = json_decode($object->meta_value);
+
+            $objetoActividad->informacionAdicional = $_POST['informacionAdicional'];
+
+            setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
+            date_default_timezone_set('America/Caracas');
+
+            $fechaHoy = new DateTime(); 
+            $fechaFormato = $fechaHoy->format('d-m-Y');            
+            $fechaVector = explode('-', $fechaFormato);
+
+            $objetoActividad->diaCierre = $fechaVector[0];
+            $objetoActividad->mesCierre = $fechaVector[1];
+            $objetoActividad->anoCierre = $fechaVector[2];
+
+            $objetoActividad->estatus = 0;
+
+            $jsonObjetoActividad = json_encode($objetoActividad);
+
+            $this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
             
             $jsondata["success"] = true;
             $jsondata["message"] = "La actividad se cerró correctamente";
