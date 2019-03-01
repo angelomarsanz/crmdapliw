@@ -10,7 +10,6 @@
             $matrizBienes[$bien->ID]['post_status'] = $bien->post_status;
             $contadorBienes++;
         }
-
         $contadorDatosBienes = 0;
         $datosBienes = [];
         foreach ($propiedadesBienes as $propiedadesBien)
@@ -21,7 +20,7 @@
             }
             elseif ($propiedadesBien->meta_key == "CRMdapliw_actividad_agenda")
             {
-                $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][] = $propiedadesBien->meta_value; 
+                $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][] = json_decode($propiedadesBien->meta_value);
             }
             elseif ($propiedadesBien->meta_key == "_thumbnail_id")
             {
@@ -40,148 +39,254 @@
             $contadorDatosBienes++;
         }
     ?>
-        <div class="row" id="encabezado">
-            <div class="col-md-12">
+        <!-- div con prefijo 10 -->
+        <div class="container" id="10menuCrm">
+            <nav class="fixed-bottom navbar-dark" style="text-align: right; background-color:#085b9e;">
+                
+                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="navbar-brand" id="10inicioCrm" title="Inicio CRM"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> alt="Inicio CRM" class="icon"></a>
+                <button title="Buscar" class="btn btn-link" id="10botonBuscar"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?> alt="Buscar" class="icon"></button>          
+                <a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link" id="10publicarPropiedad" title="Publicar propiedad"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/arrow-thick-top.svg" ?> alt="Publicar propiedad" class="icon"></a>
+                <button title="Otras opciones" class="btn btn-link" id="10otrasOpciones"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/grid-two-up.svg" ?> alt="Otras opciones" class="icon"></button>
+
+                <button title="Cancelar búsqueda" class="btn btn-link noVer" id="10cancelarBusqueda"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> alt="cancelar búsqueda" class="icon"></button>          
+                <button title="Ejecutar búsqueda" class="btn btn-link noVer" id="10ejecutarBusqueda"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?> alt="Ejecutar búsqueda" class="icon"></button>
+
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/ban.svg" ?> class="icon">            
+            </nav>
+        </div>
+
+        <!-- div con prefijo 20 -->
+        <div class="container">
+            <h1 class="letraAzul">CRM</h1>
+        </div>
+        
+        <!-- div con prefijo 30 -->
+        <div class="container">
+            <p id="mensajesAlUusuario"><p>
+        </div>
+        
+        <!-- div con prefijo 40 -->
+        <div class="container noVer" id="40busqueda">
             <div class="row">
-                    <div class="col-md-12">
-                        <br />
-                        <p id="mensajesAlUusuario"><p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1 style="color: #085b9e">CRM&nbsp;<spam id="lineaBotonBuscar"><a href="#" id="botonBuscar" title="Buscar" class="btn btn-basic"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?> alt="Buscar" class="icon"></a></spam></h1>
-                    </div>
-                </div>
-                <form id="formularioFiltros" style="display:none;">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <p>Agenda</p>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="busquedaActividadesAgenda">Actividades planificadas</label>
+                <div class="col-md-12">
+                    <form id="formularioBusqueda">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="letraAzul">Agenda</p>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="busquedaActividadesAgenda">Actividades planificadas</label>
+                                    </div>
+                                    <select class="custom-select" id="busquedadActividadesAgenda">
+                                        <option selected></option>
+                                        <option value="Actividades atrasadas">Actividades atrasadas</option>
+                                        <option value="Actividades del mes">Actividades del mes</option>
+                                        <option value="Actividades para hoy">Actividades para hoy</option>
+                                        <option value="Actividades para mañana">Actividades para mañana</option>
+                                    </select>
                                 </div>
-                                <select class="custom-select" id="busquedadActividadesAgenda">
-                                    <option selected></option>
-                                    <option value="Actividades atrasadas">Actividades atrasadas</option>
-                                    <option value="Actividades del mes">Actividades del mes</option>
-                                    <option value="Actividades para hoy">Actividades para hoy</option>
-                                    <option value="Actividades para mañana">Actividades para mañana</option>
-                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <p class="letraAzul">Personas</p>
+                                <div class="form-group">
+                                    <label for="busquedaCaptador">Captador</label>
+                                    <input type="text" class="form-control" id="busquedaCaptador">
+                                </div>
+                                <div class="form-group">
+                                    <label for="busquedaPromotor">Promotor</label>
+                                    <input type="text" class="form-control" id="busquedaPromotor">
+                                </div>
+                                <div class="form-group">
+                                    <label for="busquedaPropietario">Propietario</label>
+                                    <input type="text" class="form-control" id="busquedaPropietario">
+                                </div>
+                                <div class="form-group">
+                                    <label for="busquedaCompradorPotencial">Comprador potencial</label>
+                                    <input type="text" class="form-control" id="busquedaCompradorPotencial">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <p class="letraAzul">Prestaciones</p>
+                                <div class="form-group">
+                                    <label for="busquedaHabitaciones">Habitaciones</label>
+                                    <input type="number" class="form-control" id="busquedaHabitaciones">
+                                </div>
+                                <div class="form-group">
+                                    <label for="busquedaBanos">Baños</label>
+                                    <input type="Number" class="form-control" id="busquedaBanos">
+                                </div>
+                                <div class="form-group">
+                                    <label for="busquedaGarajes">Garajes</label>
+                                    <input type="Number" class="form-control" id="busquedaGarajes">
+                                </div>
+                                <div class="form-group">
+                                    <label for="busquedaArea">Área M2 (igual o mayor a)</label>
+                                    <input type="Number" class="form-control" id="busquedaArea">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <p class="letraAzul">Otros</p>
+                                <div class="form-group">
+                                    <label for="busquedaCodigo">Código</label>
+                                    <input type="text" class="form-control" id="busquedaCodigo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="busquedaNombre">Nombre</label>
+                                    <input type="text" class="form-control" id="busquedaNombre">
+                                </div>
+                                <div class="form-group">
+                                    <label for="busquedaUbicacion">Ubicación</label>
+                                    <input type="text" class="form-control" id="busquedaUbicacion">
+                                </div>
+                                <div class="form-group">
+                                    <label for="busquedaPrecioMaximo">Precio máximo</label>
+                                    <input type="number" class="form-control" id="busquedaPrecioMaximo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="busquedaPrecioMinimo">Precio mínimo</label>
+                                    <input type="number" class="form-control" id="busquedaPrecioMinimo">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <p>Personas</p>
-                            <div class="form-group">
-                                <label for="busquedaCaptador">Captador</label>
-                                <input type="text" class="form-control" id="busquedaCaptador">
-                            </div>
-                            <div class="form-group">
-                                <label for="busquedaPromotor">Promotor</label>
-                                <input type="text" class="form-control" id="busquedaPromotor">
-                            </div>
-                            <div class="form-group">
-                                <label for="busquedaPropietario">Propietario</label>
-                                <input type="text" class="form-control" id="busquedaPropietario">
-                            </div>
-                            <div class="form-group">
-                                <label for="busquedaCompradorPotencial">Comprador potencial</label>
-                                <input type="text" class="form-control" id="busquedaCompradorPotencial">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <p>Prestaciones</p>
-                            <div class="form-group">
-                                <label for="busquedaHabitaciones">Habitaciones</label>
-                                <input type="number" class="form-control" id="busquedaHabitaciones">
-                            </div>
-                            <div class="form-group">
-                                <label for="busquedaBanos">Baños</label>
-                                <input type="Number" class="form-control" id="busquedaBanos">
-                            </div>
-                            <div class="form-group">
-                                <label for="busquedaGarajes">Garajes</label>
-                                <input type="Number" class="form-control" id="busquedaGarajes">
-                            </div>
-                            <div class="form-group">
-                                <label for="busquedaArea">Área M2 (igual o mayor a)</label>
-                                <input type="Number" class="form-control" id="busquedaArea">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <p>Otros</p>
-                            <div class="form-group">
-                                <label for="busquedaCodigo">Código</label>
-                                <input type="text" class="form-control" id="busquedaCodigo">
-                            </div>
-                            <div class="form-group">
-                                <label for="busquedaNombre">Nombre</label>
-                                <input type="text" class="form-control" id="busquedaNombre">
-                            </div>
-                            <div class="form-group">
-                                <label for="busquedaUbicacion">Ubicación</label>
-                                <input type="text" class="form-control" id="busquedaUbicacion">
-                            </div>
-                            <div class="form-group">
-                                <label for="busquedaPrecioMaximo">Precio máximo</label>
-                                <input type="number" class="form-control" id="busquedaPrecioMaximo">
-                            </div>
-                            <div class="form-group">
-                                <label for="busquedaPrecioMinimo">Precio mínimo</label>
-                                <input type="number" class="form-control" id="busquedaPrecioMinimo">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <p>
-                            <button class="btn btn-light"><spam style="color: #085b9e">Búsqueda exacta</spam></button>
-                            <button class="btn btn-light"><spam style="color: #085b9e">Búsqueda opcional</spam></button>
-                            <a href="#" id="cancelarBusqueda" title="Cancelar búsqueda" class="btn btn-light"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> alt="Cancelar" class="icon"></a>
-                        </p>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
         <br />
-        <div class="row" id="bienes">
-            <div class="col-md-12">
-                <?php foreach ($bienes as $bien): ?>
-                    <div class="row">
-                        <p id=<?= "nombreDelBien" . $bien->ID ?> style="color: #085b9e"><b><?= $bien->__name ?></b></p>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-1" id=<?= "imagenDelBien" . $bien->ID ?>>
-                            <a href=<?= $bien->guid ?> title="Ver propiedad"><img src=<?= $datosBienes[$bien->ID]["_thumbnail_id"] ?> class="img-thumbnail" alt="Miniatura propiedad" class="icon"></a>
+        <br />
+        <br />
+        <br />
+        <!-- div con prefijo 50 -->
+        <!-- <div class="container" id="50bienes">
+            <div class="row">
+                <div class="col-md-12">
+                    <?php foreach ($bienes as $bien): ?>
+                        <div class="row">
+                            <p id=<?= "nombreDelBien" . $bien->ID ?> style="color: #085b9e"><b><?= $bien->__name ?></b></p>
                         </div>
-                        <div class="col-md-11">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p id=<?php "agenda" . $bien->ID ?>>
-                                        
-                                    </p>
+                        <div class="row">
+                            <div class="col-md-1" id=<?= "imagenDelBien" . $bien->ID ?>>
+                                <a href=<?= $bien->guid ?> title="Ver propiedad"><img src=<?= $datosBienes[$bien->ID]["_thumbnail_id"] ?> class="img-thumbnail" alt="Miniatura propiedad" class="icon"></a>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p id=<?php "agenda" . $bien->ID ?>>
+                                            
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p><button class="btn btn-light botonAgregarActividad" id=<?= "botonAgregarActividad" . $bien->ID ?> title="Agregar actividad"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> alt="Agregar actividad" class="icon"></button></p>
+                                        <p><button class="btn btn-light botonCerrarActividad" id=<?= "botonCerrarActividad" . $bien->ID ?> title="Cerrar Actividad"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/account-logout.svg" ?> alt="Cerrar actividad" class="icon"></button></p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p><a href="#" class="btn btn-light botonAgregarActividad" id=<?= "botonAgregarActividad" . $bien->ID ?> title="Agregar actividad"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> alt="Agregar actividad" class="icon"></a></p>
-                                    <p><a href="#" class="btn btn-light botonCerrarActividad" id=<?= "botonCerrarActividad" . $bien->ID ?> title="Cerrar Actividad"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/account-logout.svg" ?> alt="Cerrar actividad" class="icon"></a></p>
-                                </div>
-                            </div>
                         </div>
+                        <br />
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div> -->
+        <!-- div con prefijo 60 -->
+            <div class="row"> 
+                <?php foreach ($bienes as $bien): ?> 
+                <div class="col-12 col-sm-6 col-md-4 mb-3">
+                    <div class="card 60bienes">
+                        <a href=<?= $bien->guid ?> title="Ver propiedad"><img src=<?= $datosBienes[$bien->ID]["_thumbnail_id"] ?> class="card-img-top img-fluid" alt="Foto miniatura de la propiedad"></a>
+                        <div class="card-block">
+                            <h4 class="card-title" id=<?= "nombreDelBien" . $bien->ID ?>><?= $bien->__name ?></h4>
+                            <?php if (isset($datosBienes[$bien->ID]["CRMdapliw_actividad_agenda"][0])): ?>
+                                <?php
+                                    foreach ($datosBienes[$bien->ID]["CRMdapliw_actividad_agenda"] as $datosAgenda):
+                                        $ultimaActividadPlanificada = $datosAgenda->nombreActividad;
+                                        $fechaUltimaActividad = 
+                                            $datosAgenda->diaPlanificado . '/' . 
+                                            $datosAgenda->mesPlanificado . '/' .
+                                            $datosAgenda->anoPlanificado;                                    
+                                    endforeach;
+                                ?>
+                                <div class="card bg-light text-dark">
+                                    <div class="card-body">
+                                        <p style="color: #085b9e"><?= "<b>Actividad planificada: </b>" . $ultimaActividadPlanificada . " <b>Fecha: </b>" . $fechaUltimaActividad . "."?></p>
+                                        <p><button class="btn btn-link fondoAzul 60ultimaActividad" id=<?= "60ultimaActividad" . $bien->ID ?>>Ver más...</button></p>
+                                    </div>
+                                </div>
+                            <?php else: ?>
+                                <div class="card bg-light text-dark">
+                                    <div class="card-body"><p style="color: #085b9e">Esta propiedad no tiene actividades planificadas en la agenda.</p></div>
+                                </div>        
+                            <?php endif; ?>
+                        </div>
+                        <div class="card-footer">
+                            <p>                                                            
+                                <a href=<?= mvc_public_url(array("controller" => "submit-property")) . "?edit_property=" . $bien->ID ?> class="btn btn-light" id="60editarPropiedad" title="Editar propiedad"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/pencil.svg" ?> alt="Editar propiedad" class="icon"></a>
+                                <button class="btn btn-light 60personas" id=<?= "60personas" . $bien->ID ?> title="Personas"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/people.svg" ?> alt="Personas" class="icon"></button>
+                                <button class="btn btn-light 60documentos" id=<?= "60documentos" . $bien->ID ?> title="Documentos"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/document.svg" ?> alt="Documentos" class="icon"></button>
+                            </p>
+                        </div>  
                     </div>
-                    <br />
+                </div>
                 <?php endforeach; ?>
             </div>
-        </div>    
-    <?php else: ?>
-        <div class="row">
-            <br />
-            <br />
-            <p><b>Estimado usuario para acceder al CRM debes </b><?php echo $this->html->link('iniciar sesión', array('controller' => 'ingresar-al-sistema'), array('style' => 'color: blue;')); ?></p>
-            <br />
-            <br />
         </div>
+        <br />
+        <br />
+        <br />
+        <br />
+    <?php else: ?>
+        <!-- div con prefijo 70 -->
+        <div class="container">
+            <div class="row">
+                <br />
+                <br />
+                <p><b>Estimado usuario para acceder al CRM debes </b><?php echo $this->html->link('iniciar sesión', array('controller' => 'ingresar-al-sistema'), array('style' => 'color: blue;')); ?></p>
+                <br />
+                <br />
+            </div>
+        </div> 
+        <br />
+        <br />                           
     <?php endif; ?>
+    
+    <!-- div con prefijo 80 -->
+    <div class="row noVer" id="02agendaPlanificada">
+        <div class='col-md-12'> 
+            <p id="02tituloAgendaPlanificada"><b></b></p> 
+            <form>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group"> 
+                            <label for="02nombreActividad">Actividad</label> 
+                            <input type="text" class="form-control" id="02nombreActividad" disabled> 
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group"> 
+                            <label for="02informacionAdicional">Información adicional</label> 
+                            <input type="text" class="form-control" id="02informacionAdicional"> 
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-light 02botonPostponer" id=<?= "02botonPostponer" . $bien->ID ?> title="Postponer actividad"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/clock.svg" ?> alt="Postponer actividad" class="icon"></button>
+                        <button class="btn btn-light 02botonCerrar" id=<?= "02botonCerrar" . $bien->ID ?> title="Cerrar Actividad"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/puerta.svg" ?> alt="Cerrar actividad" class="icon"></button>
+                    </div>
+                </div>
+                <br />
+                <br />            
+                <button id="02cancelar" title="Cancelar" class="btn btn-light noVer"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> alt="Cancelar actividad" class="icon"></button>
+                <button id="02guardar" title="Guardar cambios" class="btn btn-light noVer"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> alt="Guardar actividad" class="icon"></button>
+            </form>
+        </div> 
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <!-- div con prefijo 90 -->
+
     <div class="row noVer" id="agregarActividad">
         <div class='col-md-6'> 
             <p id="tituloAgregarActividad"><b></b></p> 
@@ -319,12 +424,16 @@
                 </div>   
                 <br />
                 <br />            
-                <a href="#" id="descartarActividad" title="Descartar actividad " class="btn btn-light noVer"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> alt="Cancelar actividad" class="icon"></a>
-                <a href="#" id="guardarActividad" title="Guardar actividad" class="btn btn-light noVer"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> alt="Guardar actividad" class="icon"></a>
+                <button id="descartarActividad" title="Descartar actividad " class="btn btn-light noVer"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> alt="Cancelar actividad" class="icon"></button>
+                <button id="guardarActividad" title="Guardar actividad" class="btn btn-light noVer"><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> alt="Guardar actividad" class="icon"></button>
             </form>
         </div> 
     </div>
 </div>
+<br />
+<br />
+<br />
+<br />
 <br />
 <script>
 // Variables globales
@@ -382,19 +491,41 @@ function cerrarActividadAgenda(jsonCierreActividad)
 // Funciones Jquery
 $(document).ready(function()
 {
-    $('#botonBuscar').click(function()
+    $('#10botonBuscar').click(function()
     {
-        $('#formularioFiltros').toggle('slow');
-        $('#lineaBotonBuscar').addClass('noVer');
+        $(".60bienes").addClass('noVer');
+        $("#10botonBuscar").addClass('noVer');
+        $("#10otrasOpciones").addClass('noVer');
+        $("#40busqueda").removeClass('noVer');
+        $("#10cancelarBusqueda").removeClass('noVer');
+        $("#10ejecutarBusqueda").removeClass('noVer');
     });
-    $('#cancelarBusqueda').click(function()
+
+    $('#10cancelarBusqueda').click(function()
     {
-        $('#formularioFiltros').toggle('slow');
-        $('#lineaBotonBuscar').removeClass('noVer');
+        $("#40busqueda").addClass('noVer');
+        $("#10cancelarBusqueda").addClass('noVer');
+        $("#10ejecutarBusqueda").addClass('noVer');
+        $(".60bienes").removeClass('noVer');
+        $("#10botonBuscar").removeClass('noVer');
+        $("#10otrasOpciones").removeClass('noVer');
+    });
+
+    $('.60ultimaActividad').click(function()
+    {
+        alert($(this).attr('id') + ' ' + $(this).attr('id').substring(17));
+        $('#60bienes').addClass('noVer');
+        /* $('#BotonBuscar').addClass('noVer');
+        
+        $('#02agendaPlanificada').removeClass('noVer');
+        $('#descartarActividad').removeClass('noVer');
+        $('#guardarActividad').removeClass('noVer');
+        $('#tituloAgregarActividad').html(matrizBienes[$(this).attr('id').substring(21)]['post_title']); 
+        idBienSeleccionado = $(this).attr('id').substring(21); */
+ 
     });
     $('.botonAgregarActividad').click(function()
     {
-        // alert('id ' + $(this).attr('id') + ' ' + $(this).attr('id').substring(21));
         $('#lineaBotonBuscar').addClass('noVer');
         $('#bienes').addClass('noVer');
         $('#agregarActividad').removeClass('noVer');
