@@ -61,7 +61,7 @@ class PostmetasController extends MvcPublicController
             $objetoActividad->mesCierre = $fechaVector[1];
             $objetoActividad->anoCierre = $fechaVector[2];
 
-            $objetoActividad->estatus = 0;
+            $objetoActividad->estatus = "true";
 
             $jsonObjetoActividad = json_encode($objetoActividad);
 
