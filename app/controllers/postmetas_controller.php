@@ -4,16 +4,7 @@ class PostmetasController extends MvcPublicController
 {
     public function test_function()
     {
-        $postMetas = $this->Postmeta->find(array(
-            'joins' => array('Post'),
-            'includes' => array('Post'),
-            'conditions' => array(
-                'Post.post_type' => 'property',
-                'Post.post_status' => array('Publish', 'Pending'),
-                'Post.ID' => array(5763, 5849)),
-            'order' => 'Post.ID ASC'));
-        
-        $this->set('postMetas', $postMetas);
+
     }
 
     public function agregar_actividad()
@@ -34,47 +25,59 @@ class PostmetasController extends MvcPublicController
             exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
         }
     }
-    public function cerrar_actividad()
+
+    public function editar_actividad()
     {
         $this->autoRender = false;
 
-        if (isset($_POST['idPostmeta']))
+        $jsondata = [];
+        /*
+        $actividad = '{"actualizar":"Sí","idBien":"5297","idActividad":"5447","informacionAdicional":"ACTUALIZADA","diaPlanificado":"13","mesPlanificado":"11","anoPlanificado":"2019","estatus":"false"}';
+        
+        $_POST = json_decode($actividad, true);
+        */
+        if (isset($_POST["idActividad"]))
         {
-            $idPostmeta = $_POST['idPostmeta'];
-
-            $jsondata = [];
-
-            $object = $this->Postmeta->find_by_id($idPostmeta);
+            $object = $this->Postmeta->find_by_id($_POST["idActividad"]);
 
             $objetoActividad = json_decode($object->meta_value);
+    
+            $objetoActividad->informacionAdicional = $_POST["informacionAdicional"];
 
-            $objetoActividad->informacionAdicional = $_POST['informacionAdicional'];
+            if ($_POST["estatus"] == "true")
+            {
+                setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
+                date_default_timezone_set('America/Caracas');
+        
+                $fechaHoy = new DateTime(); 
+                $fechaFormato = $fechaHoy->format('d-m-Y');            
+                $fechaVector = explode('-', $fechaFormato);
+        
+                $objetoActividad->diaCierre = $fechaVector[0];
+                $objetoActividad->mesCierre = $fechaVector[1];
+                $objetoActividad->anoCierre = $fechaVector[2];
+        
+                $objetoActividad->estatus = "true";       
+            }
+            else
+            {
+                $objetoActividad->diaPlanificado = $_POST["diaPlanificado"];
+                $objetoActividad->mesPlanificado = $_POST["mesPlanificado"];
+                $objetoActividad->anoPlanificado = $_POST["anoPlanificado"];
 
-            setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
-            date_default_timezone_set('America/Caracas');
+            }
 
-            $fechaHoy = new DateTime(); 
-            $fechaFormato = $fechaHoy->format('d-m-Y');            
-            $fechaVector = explode('-', $fechaFormato);
-
-            $objetoActividad->diaCierre = $fechaVector[0];
-            $objetoActividad->mesCierre = $fechaVector[1];
-            $objetoActividad->anoCierre = $fechaVector[2];
-
-            $objetoActividad->estatus = "true";
-
-            $jsonObjetoActividad = json_encode($objetoActividad);
-
+            $jsonObjetoActividad = json_encode($objetoActividad);      
             $this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
-            
-            $jsondata["success"] = true;
-            $jsondata["message"] = "La actividad se cerró correctamente";
-        }
+
+            $jsondata["satisfactorio"] = true;
+            $jsondata["mensaje"] = "Los datos se guardaron exitosamente";    
+        } 
         else
         {
-            $jsondata["success"] = false;
-            $jsondata["message"] = "No se pudo cerrar la actividad";
-        } 
-        exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
+            $jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = $_POST;
+        }    
+        exit(json_encode($jsondata, JSON_FORCE_OBJECT));
     }
 }
