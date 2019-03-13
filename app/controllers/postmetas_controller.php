@@ -18,12 +18,16 @@ class PostmetasController extends MvcPublicController
             $postmeta = ['post_id' => $_POST['idPost'], 'meta_key' => 'CRMdapliw_actividad_agenda', 'meta_value' => json_encode($_POST['actividad'])];
             $id = $this->Postmeta->insert($postmeta);
 
-            $jsondata["success"] = true;
-            $jsondata["message"] = "La actividad se agregó correctamente";
+            $jsondata["satisfactorio"] = true;
+            $jsondata["mensaje"] = "La actividad se agregó correctamente";
             $jsondata["id"] = $id;
-         
-            exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
         }
+        else
+        {
+            $jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = "La actividad no se pudo agregar";
+        }
+        exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
     }
 
     public function editar_actividad()

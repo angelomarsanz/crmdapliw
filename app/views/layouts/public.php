@@ -6,6 +6,9 @@
 
 <script src=<?= mvc_js_url('crmdapliw', 'jquery-3.3.1.min.js') ?>></script>
 <script src=<?= mvc_js_url('crmdapliw', 'jquery-ui.min.js') ?>></script>
+
+<script>var $j = $.noConflict(true);</script>
+
 <script src=<?= mvc_js_url('crmdapliw', 'bootstrap.min.js') ?>></script>
 
 <?php $this->render_main_view(); ?>
