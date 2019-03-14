@@ -14,7 +14,7 @@ class PostsController extends MvcPublicController
 
             $bienes = $this->Post->find(array(
                 'conditions' => array(
-                'ID' => array(5297),
+                'ID' => array(5548),
                 'post_type' => 'property',
                 'post_status' => array('Publish', 'Pending')),
                 'order' => 'post_title ASC'));
@@ -23,7 +23,7 @@ class PostsController extends MvcPublicController
                 'joins' => array('Post'),
                 'includes' => array('Post'),
                 'conditions' => array(
-                'Post.ID' => array(5297),
+                'Post.ID' => array(5548),
                 'Post.post_type' => array('property', 'CRMdapliw'),
                 'Post.post_status' => array('Publish', 'Pending')),
                 'order' => 'Post.ID ASC, Postmeta.meta_key ASC, Postmeta.meta_id ASC'));            
@@ -43,6 +43,8 @@ class PostsController extends MvcPublicController
             
             $contadorDatos = 0;
             $posicion = 0;
+            $keyActual = 0;
+            $idPostAnterior = 0;
             $datosBienes = [];
             foreach ($propiedadesBienes as $propiedadesBien)
             {
@@ -52,6 +54,20 @@ class PostsController extends MvcPublicController
                 }
                 elseif ($keyActual != $propiedadesBien->meta_key)
                 {
+                    if ($keyActual == "CRMdapliw_actividad_agenda")
+                    {
+                        var_dump($datosBienes[$idPostAnterior]["CRMdapliw_actividad_agenda"]);
+                        echo "<br />";
+                        echo "<br />";
+                        
+                        $arregloInvertido = $this->array_orderby($datosBienes[$idPostAnterior]["CRMdapliw_actividad_agenda"], 'fechaInvertida', SORT_ASC); 
+
+                        $datosBienes[$idPostAnterior]["CRMdapliw_actividad_agenda"] = $arregloInvertido;
+
+                        var_dump($datosBienes[$idPostAnterior]["CRMdapliw_actividad_agenda"]);
+                        echo "<br />";
+                        echo "<br />";
+                    }
                     $posicion = 0;
                     $keyActual = $propiedadesBien->meta_key;
                 }
@@ -62,6 +78,7 @@ class PostsController extends MvcPublicController
                 
                 if ($propiedadesBien->meta_key == "CRMdapliw_actividad_agenda")
                 {
+                    $idPostAnterior = $propiedadesBien->post_id;
                     $arregloActividad = [];
                     $arregloActividad = json_decode($propiedadesBien->meta_value, true);
                     
@@ -69,11 +86,11 @@ class PostsController extends MvcPublicController
                     $arregloActividad["posicionOriginal"] = $posicion;
                     $arregloActividad["fechaInvertida"] = 
                         $arregloActividad["anoPlanificado"] . $arregloActividad["mesPlanificado"] . $arregloActividad["diaPlanificado"];
-
+                    /*
                     var_dump($arregloActividad); 
                     echo "<br />";
                     echo "<br />";
-
+                    */
                     $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = $arregloActividad;
                 }
                 elseif ($propiedadesBien->meta_key == "REAL_HOMES_property_images")
@@ -180,31 +197,66 @@ class PostsController extends MvcPublicController
                 $contadorBienes++;
             }
             
-            $contadorDatosBienes = 0;
+            $contadorDatos = 0;
+            $posicion = 0;
+            $keyActual = 0;
+            $idPostAnterior = 0;
             $datosBienes = [];
             foreach ($propiedadesBienes as $propiedadesBien)
             {
-                if ($propiedadesBien->meta_key == "CRMdapliw_actividad_agenda")
+                if ($contadorDatos == 0)
                 {
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][]["id"] = $propiedadesBien->meta_id;
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][]["valor"] = json_decode($propiedadesBien->meta_value);
+                    $keyActual = $propiedadesBien->meta_key;
                 }
-                elseif ($propiedadesBien->meta_key == "REAL_HOMES_property_images")
+                elseif ($keyActual != $propiedadesBien->meta_key)
                 {
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][]["id"] = $propiedadesBien->meta_id;
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][]["valor"] = $this->buscar_url($propiedadesBien->meta_value, $posts);
-                }
-                elseif ($propiedadesBien->meta_key == "_thumbnail_id")
-                {
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][]["id"] = $propiedadesBien->meta_id;
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][]["valor"] = $this->buscar_url($propiedadesBien->meta_value, $posts);
+                    if ($keyActual == "CRMdapliw_actividad_agenda")
+                    {                       
+                        $arregloInvertido = $this->array_orderby($datosBienes[$idPostAnterior]["CRMdapliw_actividad_agenda"], 'fechaInvertida', SORT_ASC); 
+
+                        $datosBienes[$idPostAnterior]["CRMdapliw_actividad_agenda"] = $arregloInvertido;
+                    }
+                    $posicion = 0;
+                    $keyActual = $propiedadesBien->meta_key;
                 }
                 else
                 {
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][]["id"] = $propiedadesBien->meta_id;
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][]["valor"] = $propiedadesBien->meta_value;
+                    $posicion++;
                 }
-                $contadorDatosBienes++;
+                
+                if ($propiedadesBien->meta_key == "CRMdapliw_actividad_agenda")
+                {
+                    $idPostAnterior = $propiedadesBien->post_id;
+                    $arregloActividad = [];
+                    $arregloActividad = json_decode($propiedadesBien->meta_value, true);
+                    
+                    $arregloActividad["id"] = $propiedadesBien->meta_id;
+                    $arregloActividad["posicionOriginal"] = $posicion;
+                    $arregloActividad["fechaInvertida"] = 
+                        $arregloActividad["anoPlanificado"] . $arregloActividad["mesPlanificado"] . $arregloActividad["diaPlanificado"];
+                    /*
+                    var_dump($arregloActividad); 
+                    echo "<br />";
+                    echo "<br />";
+                    */
+                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = $arregloActividad;
+                }
+                elseif ($propiedadesBien->meta_key == "REAL_HOMES_property_images")
+                {
+                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
+                        ["valor" => $this->buscar_url($propiedadesBien->meta_value, $posts), "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion];
+                }
+                elseif ($propiedadesBien->meta_key == "_thumbnail_id")
+                {
+                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
+                        ["valor" => $this->buscar_url($propiedadesBien->meta_value, $posts), "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion];
+                }
+                else
+                {
+                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
+                        ["valor" => $propiedadesBien->meta_value, "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion];           
+                }
+                $contadorDatos++;
             }
 
             $this->set("usuariosAsc", $usuariosAsc);

@@ -18,14 +18,15 @@
                         echo "idBien: " . $idBien;
                         echo " metaKey: " . $metaKey;
                         if ($metaKey == "CRMdapliw_actividad_agenda"):
+                            echo " posicion: " . $clave3;
                             echo " Actividad: " . $datos3["nombreActividad"];
                             echo " idKey: " . $datos3["id"];
-                            echo " posicion: " . $clave3;
+                            echo " posicionOriginal: " . $datos3["posicionOriginal"];
                             echo " fecha invertida: " . $datos3["fechaInvertida"];
                         else:
+                            echo " posicion: " . $clave3;
                             echo " Valor: " . $datos3["valor"];
                             echo " idKey: " . $datos3["id"];
-                            echo " posicion: " . $clave3;
                         endif;
                         echo "<br />";
                         echo "<br />"; 

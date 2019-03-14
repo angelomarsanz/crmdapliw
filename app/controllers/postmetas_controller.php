@@ -25,7 +25,7 @@ class PostmetasController extends MvcPublicController
         else
         {
             $jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "La actividad no se pudo agregar";
+            $jsondata["mensaje"] = "No se pudo agregar la actividad";
         }
         exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
     }
@@ -61,7 +61,14 @@ class PostmetasController extends MvcPublicController
                 $objetoActividad->mesCierre = $fechaVector[1];
                 $objetoActividad->anoCierre = $fechaVector[2];
         
-                $objetoActividad->estatus = "true";       
+                $objetoActividad->estatus = "true";  
+
+                $jsonObjetoActividad = json_encode($objetoActividad);      
+                $this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
+
+                $jsondata["satisfactorio"] = true;
+                $jsondata["mensaje"] = "La actividad se cerró correctamente";    
+     
             }
             else
             {
@@ -69,18 +76,17 @@ class PostmetasController extends MvcPublicController
                 $objetoActividad->mesPlanificado = $_POST["mesPlanificado"];
                 $objetoActividad->anoPlanificado = $_POST["anoPlanificado"];
 
+                $jsonObjetoActividad = json_encode($objetoActividad);      
+                $this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
+
+                $jsondata["satisfactorio"] = true;
+                $jsondata["mensaje"] = "";    
             }
-
-            $jsonObjetoActividad = json_encode($objetoActividad);      
-            $this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
-
-            $jsondata["satisfactorio"] = true;
-            $jsondata["mensaje"] = "Los datos se guardaron exitosamente";    
         } 
         else
         {
             $jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = $_POST;
+            $jsondata["mensaje"] = "";
         }    
         exit(json_encode($jsondata, JSON_FORCE_OBJECT));
     }
