@@ -492,7 +492,6 @@ function testFunction()
 }
 function agenda(idPost)
 {
-    alert("Entré a agenda, idPost: " + idPost);
     var agenda =
         "<h2 class='letraAzul' id='cabecera80'>Actividades planificadas para " + gMatrizBienes[idPost].post_title + "</h2>" +
         "<h3 class='letraAzul'>Promotor responsable: " + gMatrizBienes[idPost].nombre_autor + "</h3>" +
@@ -515,90 +514,78 @@ function agenda(idPost)
         agenda += "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
     }
 
-    arregloActividades = gDatosBienes[idPost]["CRMdapliw_actividad_agenda"];
-
-    console.log(arregloActividades);
-
-    arregloActividades.sort(function(a, b){return b-a});
-
-    console.log(arregloActividades);
-
-    $j.each(arregloActividades, function(clave, datos)  
+    if (gDatosBienes[idPost]["CRMdapliw_actividad_agenda"][0])
     {
-        if (datos['valor'])
+    $j.each(gDatosBienes[idPost]["CRMdapliw_actividad_agenda"], function(clave, datos)  
+    {
+        if (datos.estatus == "false")
         {
-            if (datos['valor'].estatus == "false")
-            {
-                posicionId = clave + 1;
+            idActividad = datos.id;
 
-                idActividad = arregloActividades[posicionId].id;
+            fechaPlanificada = 
+                datos.diaPlanificado +
+                "/" +
+                datos.mesPlanificado + 
+                "/" +
+                datos.anoPlanificado;
 
-                console.log("idActividad: " + idActividad);
+            agenda += 
+                "<div class='card' id='actividad80-" + clave + "-" + idActividad + "-" + idPost + "'>" +
+                    "<div class='card-block'>" + 
+                        "<h4 class='card-title'>" + datos.nombreActividad + "</h4>" +
+                        "<div class='card bg-light text-dark'>" +
+                            "<div class='card-body'>" +
 
-                fechaPlanificada = 
-                    datos['valor'].diaPlanificado +
-                    "/" +
-                    datos['valor'].mesPlanificado + 
-                    "/" +
-                    datos['valor'].anoPlanificado;
-
-                agenda += 
-                    "<div class='card' id='actividad80-" + clave + "-" + idActividad + "-" + idPost + "'>" +
-                        "<div class='card-block'>" + 
-                            "<h4 class='card-title'>" + datos['valor'].nombreActividad + "</h4>" +
-                            "<div class='card bg-light text-dark'>" +
-                                "<div class='card-body'>" +
-
-                                    "<div class='row'>" +
-                                        "<div class='col-md-12'>" +
-                                            "<div class='form-group'>" + 
-                                                "<label for='informacionAdicional80'>Notas</label>" +  
-                                                "<input type='text' class='form-control informacionAdicional10' id='informacionAdicional80-" + clave + "-" +
-                                                    idActividad + "-" + idPost + "' value='" + datos['valor'].informacionAdicional + "'>" + 
-                                            "</div>" +
-                                        "</div>" + 
-                                    "</div>" +
-
-                                    "<div class='row'>" +
-                                        "<div class='col-md-6'>" +
-                                            "<div class='form-group'>" + 
-                                                "<label for='fechaPlanificada80'>Fecha</label>" +  
-                                                "<input type='text' class='form-control fechaPlanificada80' id='fechaPlanificada80-" + clave + "-" + idActividad + 
-                                                    "-" + idPost + "' value=" + fechaPlanificada + ">" + 
-                                            "</div>" +
+                                "<div class='row'>" +
+                                    "<div class='col-md-12'>" +
+                                        "<div class='form-group'>" + 
+                                            "<label for='informacionAdicional80'>Notas</label>" +  
+                                            "<input type='text' class='form-control informacionAdicional10' id='informacionAdicional80-" + clave + "-" +
+                                                idActividad + "-" + idPost + "' value='" + datos.informacionAdicional + "'>" + 
                                         "</div>" +
-                                        
-                                        "<div class='col-md-3'>" +
-                                            "<div class='form-check'>" +
-                                                "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + clave + "-" + 
-                                                idActividad + "-" + idPost + "'>" +
-                                                "<label class='form-check-label' for='cerrarActividad80'>&nbsp;&nbsp;Cerrar</label>" +
-                                            "</div>" +
-                                        "</div>"+
+                                    "</div>" + 
+                                "</div>" +
 
-                                        "<div class='col-md-3'>" +
-                                            "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + clave + "-" + 
-                                                idActividad + "-" + idPost + "'>" + 
-                                                "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/pencil.svg' ?> alt='Guardar cambios' class='icon'></button>" +
-                                        "</div>"+
-
+                                "<div class='row'>" +
+                                    "<div class='col-md-6'>" +
+                                        "<div class='form-group'>" + 
+                                            "<label for='fechaPlanificada80'>Fecha</label>" +  
+                                            "<input type='text' class='form-control fechaPlanificada80' id='fechaPlanificada80-" + clave + "-" + idActividad + 
+                                                "-" + idPost + "' value=" + fechaPlanificada + ">" + 
+                                        "</div>" +
                                     "</div>" +
+                                    
+                                    "<div class='col-md-3'>" +
+                                        "<div class='form-check'>" +
+                                            "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + clave + "-" + 
+                                            idActividad + "-" + idPost + "'>" +
+                                            "<label class='form-check-label' for='cerrarActividad80'>&nbsp;&nbsp;Cerrar</label>" +
+                                        "</div>" +
+                                    "</div>"+
+
+                                    "<div class='col-md-3'>" +
+                                        "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + clave + "-" + 
+                                            idActividad + "-" + idPost + "'>" + 
+                                            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/pencil.svg' ?> alt='Guardar cambios' class='icon'></button>" +
+                                    "</div>"+
 
                                 "</div>" +
+
                             "</div>" +
                         "</div>" +
                     "</div>" +
-                    "<div class='row'>" +
-                        "<div class='col-md-12'>" +
-                            "<div id='mensajesUsuario80-" + clave + "-" + idActividad + "-" + idPost + "'>" +
-                            "</div>" +
+                "</div>" +
+                "<div class='row'>" +
+                    "<div class='col-md-12'>" +
+                        "<div id='mensajesUsuario80-" + clave + "-" + idActividad + "-" + idPost + "'>" +
                         "</div>" +
-                    "</div>" + 
-                    "<br />" +
-                    "<br />";
-            }
+                    "</div>" +
+                "</div>" + 
+                "<br />" +
+                "<br />";
         }
-    }); 
+    });
+    } 
 
     agenda +=
             "</div>" +
@@ -627,7 +614,7 @@ function agenda(idPost)
         "<br />" +
         "<br />";
 
-    $j("#agenda80").html(agenda).contents().find(".fechaPlanificada").datepicker(
+    $j("#agenda80").html(agenda).contents().find(".fechaPlanificada80").datepicker(
         {
             dateFormat: "dd/mm/yy", 
             monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
@@ -713,7 +700,7 @@ $j(document).ready(function()
         $j("#botonBuscar10").addClass('noVer');
         $j("#publicarPropiedad10").addClass('noVer');
         $j("#otrasOpciones10").addClass('noVer');
-        $j("#busqueda10").removeClass('noVer');
+        $j("#busqueda40").removeClass('noVer');
         $j("#cancelarBusqueda10").removeClass('noVer');
         $j("#ejecutarBusqueda10").removeClass('noVer');
         window.scrollTo(0, 0);
@@ -721,7 +708,7 @@ $j(document).ready(function()
 
     $j('#cancelarBusqueda10').click(function()
     {
-        $j("#busqueda10").addClass('noVer');
+        $j("#busqueda40").addClass('noVer');
         $j("#cancelarBusqueda10").addClass('noVer');
         $j("#ejecutarBusqueda10").addClass('noVer');
         $j("#bienes60").removeClass('noVer');
@@ -734,9 +721,7 @@ $j(document).ready(function()
     $j('.ultimaActividad60').click(function()
     {        
         gPosicionAnterior = $j(this).attr('id');
-        alert("gPosicionAnterior: " + gPosicionAnterior);
         gIdPostActual = $j(this).attr('id').substring(17);
-        alert("gIdPostActual: " + gIdPostActual);
         $j('#bienes60').addClass('noVer');
         $j("#botonBuscar10").addClass('noVer');
         $j("#publicarPropiedad10").addClass('noVer');
@@ -768,7 +753,7 @@ $j(document).ready(function()
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>Por favor espere mientras se guardan los datos</strong>" +
             "</div>";
-        var idActividad = $j(this).attr('id').substring(17);        
+        var idActividad = $j(this).attr('id').substring(17); 
         var arregloId = idActividad.split("-");
         var idMensaje = "#mensajesUsuario80-" + $j(this).attr('id').substring(17);
         var tarjeta = "#actividad80-" + $j(this).attr('id').substring(17);
@@ -787,14 +772,14 @@ $j(document).ready(function()
             if ($j(this).attr('id').substring(0, 22) == "informacionAdicional80")
             {
                 $j(this).val($j.trim($j(this).val().toUpperCase()));
-                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]]['valor'].informacionAdicional = $j(this).val();
+                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].informacionAdicional = $j(this).val();
                 informacionAdicionalObj = $j(this).val();
             }
             if ($j(this).attr('id').substring(0, 18) == "fechaPlanificada80")
             {
-                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]]['valor'].diaPlanificado = $j(this).val().substring(0, 2);
-                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]]['valor'].mesPlanificado = $j(this).val().substring(3, 5);
-                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]]['valor'].anoPlanificado = $j(this).val().substring(6, 10);
+                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].diaPlanificado = $j(this).val().substring(0, 2);
+                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].mesPlanificado = $j(this).val().substring(3, 5);
+                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].anoPlanificado = $j(this).val().substring(6, 10);
                                     
                 diaPlanificadoObj = $j(this).val().substring(0, 2);
                 mesPlanificadoObj = $j(this).val().substring(3, 5);
@@ -805,12 +790,12 @@ $j(document).ready(function()
             {
                 if ($j(this).prop("checked") == true)
                 {
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]]['valor'].estatus = "true";
+                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].estatus = "true";
                     estatusObj = "true";
                 }
                 else
                 {
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]]['valor'].estatus = "false";
+                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].estatus = "false";
                     estatusObj = "false";
                 }
             }
@@ -834,7 +819,7 @@ $j(document).ready(function()
                 mensajesUsuario =
                     "<div class='alert alert-success alert-dismissible'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                        "<strong>¡ Los datos se guardaron exitosamente ! </strong>" +
+                        "<strong>¡ Los datos se guardaron exitosamente ! " + response.mensaje + "</strong>" +
                     "</div>";
                 if (estatusObj == "true")
                 {
@@ -847,7 +832,7 @@ $j(document).ready(function()
                 mensajesUsuario =
                 "<div class='alert alert-danger alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>¡ Los datos no se pudieron guardar !</strong>" +
+                    "<strong>¡ Los datos no se pudieron guardar ! " + response.mensaje + "</strong>" +
                 "</div>"; 
 
             	$j(idMensaje).html(mensajesUsuario);
@@ -886,6 +871,7 @@ $j(document).ready(function()
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>Por favor espere mientras se guardan los datos</strong>" +
             "</div>";
+
         $j("#mensajesUsuario30").html(mensajesUsuario);
 
         $j("#informacionAdicional90").val($j.trim($j("#informacionAdicional90").val().toUpperCase()));
@@ -914,10 +900,28 @@ $j(document).ready(function()
         .done(function(response) 
         {
             if (response.satisfactorio) 
-            {               
-                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"].push({ "id" : response.id});
-                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"].push({ "valor" : jsonActividad.actividad});
+            {   
+                ultimaPosicion = 0;
 
+                $j.each(gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"], function(clave, datos)  
+                {
+                    ultimaPosicion = clave;
+                });
+                ultimaPosicion++;
+
+                fechaInvertida = 
+                    $j("#fechaPlanificada90").val().substring(6, 10) +
+                    $j("#fechaPlanificada90").val().substring(3, 5) +
+                    $j("#fechaPlanificada90").val().substring(0, 2);
+
+                jsonActividad.actividad.id = response.id;
+                jsonActividad.actividad.posicionOriginal = ultimaPosicion;
+                jsonActividad.actividad.fechaInvertida = fechaInvertida;
+
+                console.log(jsonActividad.actividad);
+                                
+                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"].push(jsonActividad.actividad);
+ 
                 mensajesUsuario =
                     "<div class='alert alert-success alert-dismissible'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -927,6 +931,7 @@ $j(document).ready(function()
                 $j("#mensajesUsuario30").html(mensajesUsuario);
 
                 agenda(gIdPostActual); 
+                $j("#guardarActividad10").addClass("noVer");
                 $j("#agenda80").removeClass("noVer");
                 $j("#agregarActividad10").removeClass("noVer");
                 window.scrollTo(0, 0);           
@@ -953,13 +958,13 @@ $j(document).ready(function()
             $j("#mensajesUsuario30").html(mensajesUsuario);
         });  
     });
-    $j('.buscarPromotor').autocomplete(
+    $j('.buscarPromotor60').autocomplete(
     {
         source: <?= json_encode($usuariosAsc) ?>,
         minLength: 3,
         select: function( event, ui ) 
         {   
-            idBien = $j(this).attr("id").substring(14);
+            idBien = $j(this).attr("id").substring(16);
             idPromotorAnterior = gMatrizBienes[idBien].post_author;
             idNuevoPromotor = ui.item.id;
             nombreNuevoPromotor = ui.item.value;
