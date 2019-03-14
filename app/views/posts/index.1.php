@@ -516,75 +516,80 @@ function agenda(idPost)
 
     if (gDatosBienes[idPost]["CRMdapliw_actividad_agenda"][0])
     {
-    $j.each(gDatosBienes[idPost]["CRMdapliw_actividad_agenda"], function(clave, datos)  
-    {
-        if (datos.estatus == "false")
+        arregloActividades = gDatosBienes[idPost]["CRMdapliw_actividad_agenda"].sort(function(a,b)
         {
-            idActividad = datos.id;
+            return (a.fechaInvertida - b.fechaInvertida);
+        });
 
-            fechaPlanificada = 
-                datos.diaPlanificado +
-                "/" +
-                datos.mesPlanificado + 
-                "/" +
-                datos.anoPlanificado;
+        $j.each(arregloActividades, function(clave, datos)  
+        {
+            if (datos.estatus == "false")
+            {
+                idActividad = datos.id;
 
-            agenda += 
-                "<div class='card' id='actividad80-" + clave + "-" + idActividad + "-" + idPost + "'>" +
-                    "<div class='card-block'>" + 
-                        "<h4 class='card-title'>" + datos.nombreActividad + "</h4>" +
-                        "<div class='card bg-light text-dark'>" +
-                            "<div class='card-body'>" +
+                fechaPlanificada = 
+                    datos.diaPlanificado +
+                    "/" +
+                    datos.mesPlanificado + 
+                    "/" +
+                    datos.anoPlanificado;
 
-                                "<div class='row'>" +
-                                    "<div class='col-md-12'>" +
-                                        "<div class='form-group'>" + 
-                                            "<label for='informacionAdicional80'>Notas</label>" +  
-                                            "<input type='text' class='form-control informacionAdicional10' id='informacionAdicional80-" + clave + "-" +
-                                                idActividad + "-" + idPost + "' value='" + datos.informacionAdicional + "'>" + 
-                                        "</div>" +
-                                    "</div>" + 
-                                "</div>" +
+                agenda += 
+                    "<div class='card' id='actividad80-" + clave + "-" + idActividad + "-" + idPost + "'>" +
+                        "<div class='card-block'>" + 
+                            "<h4 class='card-title'>" + datos.nombreActividad + "</h4>" +
+                            "<div class='card bg-light text-dark'>" +
+                                "<div class='card-body'>" +
 
-                                "<div class='row'>" +
-                                    "<div class='col-md-6'>" +
-                                        "<div class='form-group'>" + 
-                                            "<label for='fechaPlanificada80'>Fecha</label>" +  
-                                            "<input type='text' class='form-control fechaPlanificada80' id='fechaPlanificada80-" + clave + "-" + idActividad + 
-                                                "-" + idPost + "' value=" + fechaPlanificada + ">" + 
-                                        "</div>" +
+                                    "<div class='row'>" +
+                                        "<div class='col-md-12'>" +
+                                            "<div class='form-group'>" + 
+                                                "<label for='informacionAdicional80'>Notas</label>" +  
+                                                "<input type='text' class='form-control informacionAdicional10' id='informacionAdicional80-" + clave + "-" +
+                                                    idActividad + "-" + idPost + "' value='" + datos.informacionAdicional + "'>" + 
+                                            "</div>" +
+                                        "</div>" + 
                                     "</div>" +
-                                    
-                                    "<div class='col-md-3'>" +
-                                        "<div class='form-check'>" +
-                                            "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + clave + "-" + 
-                                            idActividad + "-" + idPost + "'>" +
-                                            "<label class='form-check-label' for='cerrarActividad80'>&nbsp;&nbsp;Cerrar</label>" +
-                                        "</div>" +
-                                    "</div>"+
 
-                                    "<div class='col-md-3'>" +
-                                        "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + clave + "-" + 
-                                            idActividad + "-" + idPost + "'>" + 
-                                            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/pencil.svg' ?> alt='Guardar cambios' class='icon'></button>" +
-                                    "</div>"+
+                                    "<div class='row'>" +
+                                        "<div class='col-md-6'>" +
+                                            "<div class='form-group'>" + 
+                                                "<label for='fechaPlanificada80'>Fecha</label>" +  
+                                                "<input type='text' class='form-control fechaPlanificada80' id='fechaPlanificada80-" + clave + "-" + idActividad + 
+                                                    "-" + idPost + "' value=" + fechaPlanificada + ">" + 
+                                            "</div>" +
+                                        "</div>" +
+                                        
+                                        "<div class='col-md-3'>" +
+                                            "<div class='form-check'>" +
+                                                "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + clave + "-" + 
+                                                idActividad + "-" + idPost + "'>" +
+                                                "<label class='form-check-label' for='cerrarActividad80'>&nbsp;&nbsp;Cerrar</label>" +
+                                            "</div>" +
+                                        "</div>"+
+
+                                        "<div class='col-md-3'>" +
+                                            "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + clave + "-" + 
+                                                idActividad + "-" + idPost + "'>" + 
+                                                "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/pencil.svg' ?> alt='Guardar cambios' class='icon'></button>" +
+                                        "</div>"+
+
+                                    "</div>" +
 
                                 "</div>" +
-
                             "</div>" +
                         "</div>" +
                     "</div>" +
-                "</div>" +
-                "<div class='row'>" +
-                    "<div class='col-md-12'>" +
-                        "<div id='mensajesUsuario80-" + clave + "-" + idActividad + "-" + idPost + "'>" +
+                    "<div class='row'>" +
+                        "<div class='col-md-12'>" +
+                            "<div id='mensajesUsuario80-" + clave + "-" + idActividad + "-" + idPost + "'>" +
+                            "</div>" +
                         "</div>" +
-                    "</div>" +
-                "</div>" + 
-                "<br />" +
-                "<br />";
-        }
-    });
+                    "</div>" + 
+                    "<br />" +
+                    "<br />";
+            }
+        });
     } 
 
     agenda +=
@@ -780,6 +785,9 @@ $j(document).ready(function()
                 gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].diaPlanificado = $j(this).val().substring(0, 2);
                 gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].mesPlanificado = $j(this).val().substring(3, 5);
                 gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].anoPlanificado = $j(this).val().substring(6, 10);
+
+                gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].fechaInvertida = 
+                    $j(this).val().substring(6, 10) + $j(this).val().substring(3, 5) + $j(this).val().substring(0, 2);
                                     
                 diaPlanificadoObj = $j(this).val().substring(0, 2);
                 mesPlanificadoObj = $j(this).val().substring(3, 5);
