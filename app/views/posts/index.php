@@ -195,6 +195,13 @@
         <div class="container" id="bienes60">
             <h2 class="letraAzul">Actividades planificadas de la agenda</h2>
             <br />
+            <div class="row" id="cicloBienes60">
+            </div>
+        </div> 
+
+        <!-- <div class="container" id="bienes60">
+            <h2 class="letraAzul">Actividades planificadas de la agenda</h2>
+            <br />
             <div class="row"> 
                 <?php foreach ($bienes as $bien): ?> 
                 <div class="col-12 col-sm-6 col-md-4 mb-3">
@@ -319,7 +326,8 @@
             <br />
             <br />
             <br />
-        </div>
+        </div> -->
+
     <?php else: ?>
         <!-- div con sufijo 70 -->
         <div class="container">
@@ -362,11 +370,115 @@
     <div class="container noVer" id="agenda80">
     </div> 
 
-    <!-- Inicio sesión de formularios adicionales -->
-        <!-- Formulario agregar actividad de la agenda -->
-        <?php include "formularios/agregar_actividad.php"; ?>
-    <!-- Fin de sesión de formularios adicionales -->
+    <!-- div con sufijo 90 -->
+    <div class="container noVer" id="agregarActividad90">
+        <div class="row">
+            <div class='col-md-6'> 
+                <h2 class="letraAzul" id="tituloAgregarActividad90"></h2>
+                <br />
+                <br /> 
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class='input-group mb-3'>
+                                <div class='input-group-prepend'>
+                                    <label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+                                </div>
+                                <select class='custom-select' id='actividadAgenda90'> 
+                                    <option selected></option> 
+                                    <option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                    <option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
+                                    <option value="Coordinar elaboración de pendon">Coordinar elaboración de pendon</option>
+                                    <option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
+                                    <option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
+                                    <option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
+                                    <option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
+                                    <option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
+                                    <option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>each
+                                    <option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
+                                    <option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
+                                    <option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
+                                    <option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
+                                    <option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
+                                    <option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
+                                    <option value="Firma documento de venta">Firma documento de venta</option> 
+                                    <option value="Firma opción compra-venta">Firma opción compra-venta</option> 
+                                    <option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
+                                    <option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
+                                    <option value="Llamar a propietario">Llamar a cliente potencial</option>
+                                    <option value="Mostrar el inmueble a un cliente">Mostrar el inmueble a un cliente</option>
+                                    <option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
+                                    <option value="Preparación del documento de venta">Preparación del documento de venta</option>
+                                    <option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
+                                    <option value="Publicar en las redes sociales">Publicar en las redes sociales</option>
+                                    <option value="Reunión con el propietario">Reunión con el propietario</option>
+                                    <option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
+                                    <option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>                   
+                                    <option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
+                                    <option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
+                                </select> 
+                            </div>
+                        </div>
+                    </div> 
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="informacionAdicional90">Información adicional</label> 
+                                <input type="text" class="form-control" id="informacionAdicional90"> 
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="fechaPlanificada90">Fecha</label>  
+                                <input type="text" class="form-control" id="fechaPlanificada90"> 
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            </div> 
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
 </div>
 <br />
 <br />
@@ -375,6 +487,7 @@
 <br />
 <script>
     // Variables globales
+    var gBienes = <?= json_encode($bienes) ?>;
     var gMatrizBienes = <?= json_encode($matrizBienes) ?>;
     var gDatosBienes = <?= json_encode($datosBienes) ?>;
     var gIdPostActual = 0;
@@ -384,6 +497,153 @@
     function testFunction()
     {
 
+    }
+
+    function primeraActividadPendiente(idBien)
+    {
+
+        actividadMasAntigua = "";
+        FechaMasAntigua = "";
+        fechaInvertidaAntigua = "";
+        datosActividadPendiente = "";
+
+        if (gDatosBienes[idBien].CRMdapliw_actividad_agenda[0])
+        {
+            arregloActividades = gDatosBienes[idBien].CRMdapliw_actividad_agenda.sort(function(a,b)
+            {
+                return (a.fechaInvertida - b.fechaInvertida);
+            });
+
+            $j.each(arregloActividades, function(clave, datos)  
+            {
+                if (datos.estatus == "false")
+                {
+                    actividadMasAntigua = datos.nombreActividad;
+                    fechaMasAntigua = 
+                        datos.diaPlanificado + "/" + 
+                        datos.mesPlanificado + "/" +
+                        datos.anoPlanificado;
+                    fechaInvertidaAntigua = datos.fechaInvertida;
+                    return false;
+                }
+            });        
+        }
+
+        if (actividadMasAntigua != "")
+        {
+            var fechaActual = new Date();
+
+            var mes = fechaActual.getMonth()+1;
+            var dia = fechaActual.getDate();
+
+            var fechaActualInvertida = fechaActual.getFullYear() + 
+                (mes<10 ? '0' : '') + mes + 
+            (dia<10 ? '0' : '') + dia;
+
+            if (fechaInvertidaAntigua < fechaActualInvertida)
+            {
+                datosActividadPendiente = 
+                    "<p class='letraAmarilla'>" +
+                        "<b>Actividad planificada: </b>" + actividadMasAntigua + 
+                        " <b>Fecha: </b>" + fechaMasAntigua +
+                    "</p>" +
+                    "<p>" +
+                        "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60" + idBien + "'>" +
+                            "Ver más..." +
+                        "</button>" +
+                    "</p>";
+            }
+            else
+            {
+                datosActividadPendiente = 
+                    "<p class='letraVerde'>" + 
+                        "<b>Actividad planificada: </b>" + actividadMasAntigua + 
+                        " <b>Fecha: </b>" + fechaMasAntigua +
+                    "</p>" +
+                    "<p>" +
+                        "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60" + idBien + "'>" +
+                            "Ver más..." +
+                        "</button>" +
+                    "</p>";
+            }
+        }
+        else
+        {
+            datosActividadPendiente =
+
+                "<p class='letraRoja'>" +
+                    "Esta propiedad no tiene actividades planificadas en la agenda." +
+                "</p>" +
+                "<p>" +
+                    "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60" + idBien + "'>" +
+                        "Ver más..." +
+                    "</button>" +
+                "</p>";
+        }
+
+        $j("#primeraActividadPendiente" + idBien).html(datosActividadPendiente);
+    }
+    
+    function mostrarAgenda()
+    {
+        var agendaPrincipal = "";
+
+        $j.each(gBienes, function(clave, bien)  
+        {
+            agendaPrincipal += 
+                "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
+                    "<div class='card detalleBienes60'>" +
+                        "<a href=" + bien.guid + "title='Ver propiedad'>" +
+                            "<img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>" +
+                        "</a>" +    
+                        "<div class='card-block'>" +
+                            "<h4 class='card-title' id='nombreDelBien" + bien.ID + "'>" + bien.__name + "</h4>" +
+
+                            "<div class='card bg-light text-dark'>" +
+                                "<div class='card-body' id='primeraActividadPendiente" + bien.ID + "'>" + 
+                                "</div>" +
+                            "</div>" + 
+
+                            "<div class='form-group'>" +
+                                "<label for='buscarPromotor60" + bien.ID + "'>Promotor responsable: </label>" +
+                                "<input type='text' id='buscarPromotor60" + bien.ID + "' class='form-control buscarPromotor60'" + 
+                                    "value='" + gMatrizBienes[bien.ID].nombre_autor + "'>" +
+                            "</div>" +
+                            "<div id='mensajesUsuario60" + bien.ID + "'>" +
+                            "</div>" +
+
+                            "<div class='card-footer'>" +
+                                "<p>" +                                                            
+                                    "<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
+                                        " class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
+                                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+                                        "crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icon'>" +
+                                    "</a>" +
+
+                                    "<button class='btn btn-light personas60' id='personas60" + bien.ID + "' title='Personas'>" +
+                                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+                                        "crmdapliw/app/public/images/people.svg alt='Personas' class='icon'>" +
+                                    "</button>" +
+
+                                    "<button class='btn btn-light documentos60' id='documentos60" + bien.ID + "' title='Documentos'>" +
+                                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+                                        "crmdapliw/app/public/images/document.svg alt='Documentos' class='icon'>" +
+                                    "</button>" +
+
+                                "</p>" +
+                            "</div>" +  
+
+                        "</div>" +
+                    "</div>" +
+                "</div>";
+        });
+
+        $j("#cicloBienes60").html(agendaPrincipal);
+
+        $j.each(gBienes, function(clave, bien)  
+        {
+            primeraActividadPendiente(bien.ID);
+        });    
     }
 
     function agenda(idPost)
@@ -441,8 +701,8 @@
                                             "<div class='col-md-12'>" +
                                                 "<div class='form-group'>" + 
                                                     "<label for='informacionAdicional80'>Notas</label>" +  
-                                                    "<input type='text' class='form-control informacionAdicional10' id='informacionAdicional80-" + clave + "-" +
-                                                        idActividad + "-" + idPost + "' value='" + datos.informacionAdicional + "'>" + 
+                                                    "<input type='text' class='form-control informacionAdicional10' id='informacionAdicional80-" + 
+                                                        clave + "-" + idActividad + "-" + idPost + "' value='" + datos.informacionAdicional + "'>" + 
                                                 "</div>" +
                                             "</div>" + 
                                         "</div>" +
@@ -451,23 +711,25 @@
                                             "<div class='col-md-6'>" +
                                                 "<div class='form-group'>" + 
                                                     "<label for='fechaPlanificada80'>Fecha</label>" +  
-                                                    "<input type='text' class='form-control fechaPlanificada80' id='fechaPlanificada80-" + clave + "-" + idActividad + 
-                                                        "-" + idPost + "' value=" + fechaPlanificada + ">" + 
+                                                    "<input type='text' class='form-control fechaPlanificada80' id='fechaPlanificada80-" + 
+                                                        clave + "-" + idActividad + "-" + idPost + "' value=" + fechaPlanificada + ">" + 
                                                 "</div>" +
                                             "</div>" +
                                             
                                             "<div class='col-md-3'>" +
                                                 "<div class='form-check'>" +
-                                                    "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + clave + "-" + 
-                                                    idActividad + "-" + idPost + "'>" +
+                                                    "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + 
+                                                        clave + "-" + idActividad + "-" + idPost + "'>" +
                                                     "<label class='form-check-label' for='cerrarActividad80'>&nbsp;&nbsp;Cerrar</label>" +
                                                 "</div>" +
                                             "</div>"+
 
                                             "<div class='col-md-3'>" +
-                                                "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + clave + "-" + 
-                                                    idActividad + "-" + idPost + "'>" + 
-                                                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/pencil.svg' ?> alt='Guardar cambios' class='icon'></button>" +
+                                                "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + 
+                                                    clave + "-" + idActividad + "-" + idPost + "'>" + 
+                                                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
+                                                    "crmdapliw/app/public/images/pencil.svg alt='Guardar cambios' class='icon'>" +
+                                                "</button>" +
                                             "</div>"+
 
                                         "</div>" +
@@ -586,6 +848,8 @@
     // Funciones jQuery
     $j(document).ready(function()
     {
+        mostrarAgenda();
+
         $j("#fechaPlanificada90").datepicker(
             {
                 dateFormat: "dd/mm/yy", 
