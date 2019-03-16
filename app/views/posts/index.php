@@ -197,137 +197,31 @@
             <br />
             <div class="row" id="cicloBienes60">
             </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
         </div> 
-
-        <!-- <div class="container" id="bienes60">
-            <h2 class="letraAzul">Actividades planificadas de la agenda</h2>
-            <br />
-            <div class="row"> 
-                <?php foreach ($bienes as $bien): ?> 
-                <div class="col-12 col-sm-6 col-md-4 mb-3">
-                    <div class="card detalleBienes60">
-                        <a href=<?= $bien->guid ?> title="Ver propiedad">
-                            <img src=<?= $datosBienes[$bien->ID]["_thumbnail_id"][0]['valor'] ?> class="card-img-top img-fluid" alt="Foto de la propiedad">
-                        </a>
-                        <div class="card-block">
-                            <h4 class="card-title" id=<?= "nombreDelBien" . $bien->ID ?>><?= $bien->__name ?></h4>
-                            <?php 
-                                $ultimaActividadPlanificada = "";
-                                $fechaUltimaActividad = "";
-                                if (isset($datosBienes[$bien->ID]["CRMdapliw_actividad_agenda"][0])):
-                                    foreach ($datosBienes[$bien->ID]["CRMdapliw_actividad_agenda"] as $datosAgenda):
-                                        if($datosAgenda["estatus"] == "false"):
-                                            $ultimaActividadPlanificada = $datosAgenda["nombreActividad"];
-                                            $fechaUltimaActividad = 
-                                                $datosAgenda["diaPlanificado"] . '/' . 
-                                                $datosAgenda["mesPlanificado"] . '/' .
-                                                $datosAgenda["anoPlanificado"];
-                                            $ultimaFechaInvertida = $datosAgenda["fechaInvertida"];
-                                            break;
-                                        endif;                                    
-                                    endforeach;
-                                endif;
-                                if ($ultimaActividadPlanificada != ""): 
-                                    setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
-                                    date_default_timezone_set('America/Caracas');
-                
-                                    $fechaHoy = new DateTime(); 
-                                    $fechaFormato = $fechaHoy->format('d-m-Y');            
-                                    $fechaVector = explode('-', $fechaFormato);
-                
-                                    $fechaHoyInvertida = 
-                                        $fechaVector[2] .
-                                        $fechaVector[1] .
-                                        $fechaVector[0];
-                            ?>                             
-                                    <div class="card bg-light text-dark">
-                                        <div class="card-body">
-                                            <?php if ($ultimaFechaInvertida < $fechaHoyInvertida): ?> 
-                                                <p class="letraAmarilla">
-                                            <?php else: ?>
-                                                <p class="letraVerde">
-                                            <?php endif; ?>
-                                                <?= "<b>Actividad planificada: </b>" . $ultimaActividadPlanificada . " 
-                                                <b>Fecha: </b>" . $fechaUltimaActividad . "." ?>
-                                            </p>
-                                            <p>
-                                                <button class="btn btn-link fondoAzul ultimaActividad60" id=<?= "ultimaActividad60" . $bien->ID ?>>
-                                                    Ver más...
-                                                </button>
-                                            </p>
-                                        </div>
-                                    </div>
-                                <?php else: ?>
-                                    <div class="card bg-light text-dark">
-                                        <div class="card-body">
-                                            <p class="letraRoja">
-                                                Esta propiedad no tiene actividades planificadas en la agenda.
-                                            </p>
-                                            <p>
-                                                <button class="btn btn-link fondoAzul ultimaActividad60" id=<?= "ultimaActividad60" . $bien->ID ?>>
-                                                    Ver más...
-                                                </button>
-                                            </p>
-                                        </div>
-                                    </div>        
-                                <?php endif; ?>
-                            <div class="form-group">
-                                <label for="buscarPromotor60">Promotor responsable: </label>
-                                <input type="text" id=<?= "buscarPromotor60" . $bien->ID ?> class="form-control buscarPromotor60" 
-                                    value="<?= $matrizBienes[$bien->ID]['nombre_autor'] ?>">
-                            </div>
-                            <div id=<?= "mensajesUsuario60" . $bien->ID ?>>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <p>                                                            
-                                <a href=<?= mvc_public_url(array("controller" => "submit-property")) . "?edit_property=" . $bien->ID ?> 
-                                    class="btn btn-light" id="60editarPropiedad" title="Editar propiedad">
-                                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 
-                                    "crmdapliw/app/public/images/pencil.svg" ?> alt="Editar propiedad" class="icon">
-                                </a>
-
-                                <button class="btn btn-light 60personas" id=<?= "personas60" . $bien->ID ?> title="Personas">
-                                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 
-                                    "crmdapliw/app/public/images/people.svg" ?> alt="Personas" class="icon">
-                                </button>
-
-                                <button class="btn btn-light documentos60" id=<?= "documentos60" . $bien->ID ?> title="Documentos">
-                                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 
-                                    "crmdapliw/app/public/images/document.svg" ?> alt="Documentos" class="icon">
-                                </button>
-                            </p>
-                        </div>  
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-        </div> -->
-
     <?php else: ?>
         <!-- div con sufijo 70 -->
         <div class="container">
@@ -501,13 +395,12 @@
 
     function primeraActividadPendiente(idBien)
     {
-
         actividadMasAntigua = "";
         FechaMasAntigua = "";
         fechaInvertidaAntigua = "";
         datosActividadPendiente = "";
 
-        if (gDatosBienes[idBien].CRMdapliw_actividad_agenda[0])
+        if (gDatosBienes[idBien].CRMdapliw_actividad_agenda)
         {
             arregloActividades = gDatosBienes[idBien].CRMdapliw_actividad_agenda.sort(function(a,b)
             {
@@ -593,8 +486,19 @@
             agendaPrincipal += 
                 "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
                     "<div class='card detalleBienes60'>" +
-                        "<a href=" + bien.guid + "title='Ver propiedad'>" +
-                            "<img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>" +
+                        "<a href=" + bien.guid + "title='Ver propiedad'>";
+                                                
+                        if (gDatosBienes[bien.ID]._thumbnail_id)
+                        {
+                            agendaPrincipal += 
+                                "<img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>";
+                        }
+                        else
+                        {
+                            agendaPrincipal += "Foto de la propiedad";
+                        }
+                
+                        agendaPrincipal +=                         
                         "</a>" +    
                         "<div class='card-block'>" +
                             "<h4 class='card-title' id='nombreDelBien" + bien.ID + "'>" + bien.__name + "</h4>" +

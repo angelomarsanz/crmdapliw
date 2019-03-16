@@ -168,7 +168,7 @@ class PostsController extends MvcPublicController
 
             $bienes = $this->Post->find(array(
                 'conditions' => array(
-                'ID' => array(5297),
+                // 'ID' => array(5297),
                 'post_type' => 'property',
                 'post_status' => array('Publish', 'Pending')),
                 'order' => 'post_title ASC'));
@@ -177,7 +177,7 @@ class PostsController extends MvcPublicController
                 'joins' => array('Post'),
                 'includes' => array('Post'),
                 'conditions' => array(
-                'Post.ID' => array(5297),
+                // 'Post.ID' => array(5297),
                 'Post.post_type' => array('property', 'CRMdapliw'),
                 'Post.post_status' => array('Publish', 'Pending')),
                 'order' => 'Post.ID ASC, Postmeta.meta_key ASC, Postmeta.meta_id ASC'));            
