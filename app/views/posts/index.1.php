@@ -7,15 +7,10 @@
         <!-- div con sufijo 10 -->
         <div class="container" id="menuCrm10">
             <nav class="fixed-bottom navbar-dark" style="text-align: right; background-color:#085b9e;">
-                <!-- <button title="Inicio CRM" class="btn btn-link" id="10inicioCrm" >
+                <button title="Inicio CRM" class="btn btn-link" id="inicioCrm10" >
                         <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
                         alt="Inicio CRM" class="icon">
-                </button> -->
-
-                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="inicioCrm10" title="Inicio CRM">
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
-                    alt="Inicio CRM" class="icon">
-                </a>
+                </button>
 
                 <button title="Buscar" class="btn btn-link" id="botonBuscar10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
@@ -32,10 +27,10 @@
                     alt="Otras opciones" class="icon">
                 </button>
 
-                <!-- <button title="Inicio CRM" class="btn btn-link noVer" id="inicioCrmBusqueda10" >
+                <button title="Inicio CRM" class="btn btn-link noVer" id="inicioCrmBusqueda10" >
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
                     alt="Inicio CRM" class="icon">
-                </button> -->
+                </button>
 
                 <button title="Cancelar" class="btn btn-link noVer" id="cancelarBusqueda10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
@@ -47,15 +42,25 @@
                     alt="Ejecutar búsqueda" class="icon">
                 </button>
 
-                <!-- <button title="Inicio CRM" class="btn btn-link noVer" id="inicioCrmAgenda10" >
+                <button title="Inicio CRM" class="btn btn-link noVer" id="inicioCrmAgenda10" >
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
                     alt="Inicio CRM" class="icon">
-                </button> -->
+                </button>
+
+                <button title="Cancelar" class="btn btn-link noVer" id="cancelarAgenda10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                    alt="cancelar búsqueda" class="icon">
+                </button>
 
                 <button title="Agregar actividad" class="btn btn-link noVer" id="agregarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
                     alt="Agregar actividad" class="icon">
                 </button>          
+
+                <button title="Cancelar" class="btn btn-link noVer" id="cancelarAgregarActividad10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                    alt="cancelar búsqueda" class="icon">
+                </button>
 
                 <button title="Guardar actividad" class="btn btn-link noVer" id="guardarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
@@ -197,137 +202,31 @@
             <br />
             <div class="row" id="cicloBienes60">
             </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
         </div> 
-
-        <!-- <div class="container" id="bienes60">
-            <h2 class="letraAzul">Actividades planificadas de la agenda</h2>
-            <br />
-            <div class="row"> 
-                <?php foreach ($bienes as $bien): ?> 
-                <div class="col-12 col-sm-6 col-md-4 mb-3">
-                    <div class="card detalleBienes60">
-                        <a href=<?= $bien->guid ?> title="Ver propiedad">
-                            <img src=<?= $datosBienes[$bien->ID]["_thumbnail_id"][0]['valor'] ?> class="card-img-top img-fluid" alt="Foto de la propiedad">
-                        </a>
-                        <div class="card-block">
-                            <h4 class="card-title" id=<?= "nombreDelBien" . $bien->ID ?>><?= $bien->__name ?></h4>
-                            <?php 
-                                $ultimaActividadPlanificada = "";
-                                $fechaUltimaActividad = "";
-                                if (isset($datosBienes[$bien->ID]["CRMdapliw_actividad_agenda"][0])):
-                                    foreach ($datosBienes[$bien->ID]["CRMdapliw_actividad_agenda"] as $datosAgenda):
-                                        if($datosAgenda["estatus"] == "false"):
-                                            $ultimaActividadPlanificada = $datosAgenda["nombreActividad"];
-                                            $fechaUltimaActividad = 
-                                                $datosAgenda["diaPlanificado"] . '/' . 
-                                                $datosAgenda["mesPlanificado"] . '/' .
-                                                $datosAgenda["anoPlanificado"];
-                                            $ultimaFechaInvertida = $datosAgenda["fechaInvertida"];
-                                            break;
-                                        endif;                                    
-                                    endforeach;
-                                endif;
-                                if ($ultimaActividadPlanificada != ""): 
-                                    setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
-                                    date_default_timezone_set('America/Caracas');
-                
-                                    $fechaHoy = new DateTime(); 
-                                    $fechaFormato = $fechaHoy->format('d-m-Y');            
-                                    $fechaVector = explode('-', $fechaFormato);
-                
-                                    $fechaHoyInvertida = 
-                                        $fechaVector[2] .
-                                        $fechaVector[1] .
-                                        $fechaVector[0];
-                            ?>                             
-                                    <div class="card bg-light text-dark">
-                                        <div class="card-body">
-                                            <?php if ($ultimaFechaInvertida < $fechaHoyInvertida): ?> 
-                                                <p class="letraAmarilla">
-                                            <?php else: ?>
-                                                <p class="letraVerde">
-                                            <?php endif; ?>
-                                                <?= "<b>Actividad planificada: </b>" . $ultimaActividadPlanificada . " 
-                                                <b>Fecha: </b>" . $fechaUltimaActividad . "." ?>
-                                            </p>
-                                            <p>
-                                                <button class="btn btn-link fondoAzul ultimaActividad60" id=<?= "ultimaActividad60" . $bien->ID ?>>
-                                                    Ver más...
-                                                </button>
-                                            </p>
-                                        </div>
-                                    </div>
-                                <?php else: ?>
-                                    <div class="card bg-light text-dark">
-                                        <div class="card-body">
-                                            <p class="letraRoja">
-                                                Esta propiedad no tiene actividades planificadas en la agenda.
-                                            </p>
-                                            <p>
-                                                <button class="btn btn-link fondoAzul ultimaActividad60" id=<?= "ultimaActividad60" . $bien->ID ?>>
-                                                    Ver más...
-                                                </button>
-                                            </p>
-                                        </div>
-                                    </div>        
-                                <?php endif; ?>
-                            <div class="form-group">
-                                <label for="buscarPromotor60">Promotor responsable: </label>
-                                <input type="text" id=<?= "buscarPromotor60" . $bien->ID ?> class="form-control buscarPromotor60" 
-                                    value="<?= $matrizBienes[$bien->ID]['nombre_autor'] ?>">
-                            </div>
-                            <div id=<?= "mensajesUsuario60" . $bien->ID ?>>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <p>                                                            
-                                <a href=<?= mvc_public_url(array("controller" => "submit-property")) . "?edit_property=" . $bien->ID ?> 
-                                    class="btn btn-light" id="60editarPropiedad" title="Editar propiedad">
-                                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 
-                                    "crmdapliw/app/public/images/pencil.svg" ?> alt="Editar propiedad" class="icon">
-                                </a>
-
-                                <button class="btn btn-light 60personas" id=<?= "personas60" . $bien->ID ?> title="Personas">
-                                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 
-                                    "crmdapliw/app/public/images/people.svg" ?> alt="Personas" class="icon">
-                                </button>
-
-                                <button class="btn btn-light documentos60" id=<?= "documentos60" . $bien->ID ?> title="Documentos">
-                                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 
-                                    "crmdapliw/app/public/images/document.svg" ?> alt="Documentos" class="icon">
-                                </button>
-                            </p>
-                        </div>  
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-        </div> -->
-
     <?php else: ?>
         <!-- div con sufijo 70 -->
         <div class="container">
@@ -499,6 +398,90 @@
 
     }
 
+    function primeraActividadPendiente(idBien)
+    {
+        actividadMasAntigua = "";
+        FechaMasAntigua = "";
+        fechaInvertidaAntigua = "";
+        datosActividadPendiente = "";
+
+        if (gDatosBienes[idBien].CRMdapliw_actividad_agenda)
+        {
+            arregloActividades = gDatosBienes[idBien].CRMdapliw_actividad_agenda.sort(function(a,b)
+            {
+                return (a.fechaInvertida - b.fechaInvertida);
+            });
+
+            $j.each(arregloActividades, function(clave, datos)  
+            {
+                if (datos.estatus == "false")
+                {
+                    actividadMasAntigua = datos.nombreActividad;
+                    fechaMasAntigua = 
+                        datos.diaPlanificado + "/" + 
+                        datos.mesPlanificado + "/" +
+                        datos.anoPlanificado;
+                    fechaInvertidaAntigua = datos.fechaInvertida;
+                    return false;
+                }
+            });        
+        }
+
+        if (actividadMasAntigua != "")
+        {
+            var fechaActual = new Date();
+
+            var mes = fechaActual.getMonth()+1;
+            var dia = fechaActual.getDate();
+
+            var fechaActualInvertida = fechaActual.getFullYear() + 
+                (mes<10 ? '0' : '') + mes + 
+            (dia<10 ? '0' : '') + dia;
+
+            if (fechaInvertidaAntigua < fechaActualInvertida)
+            {
+                datosActividadPendiente = 
+                    "<p class='letraAmarilla'>" +
+                        "<b>Actividad planificada: </b>" + actividadMasAntigua + 
+                        " <b>Fecha: </b>" + fechaMasAntigua +
+                    "</p>" +
+                    "<p>" +
+                        "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60" + idBien + "'>" +
+                            "Ver más..." +
+                        "</button>" +
+                    "</p>";
+            }
+            else
+            {
+                datosActividadPendiente = 
+                    "<p class='letraVerde'>" + 
+                        "<b>Actividad planificada: </b>" + actividadMasAntigua + 
+                        " <b>Fecha: </b>" + fechaMasAntigua +
+                    "</p>" +
+                    "<p>" +
+                        "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60" + idBien + "'>" +
+                            "Ver más..." +
+                        "</button>" +
+                    "</p>";
+            }
+        }
+        else
+        {
+            datosActividadPendiente =
+
+                "<p class='letraRoja'>" +
+                    "Esta propiedad no tiene actividades planificadas en la agenda." +
+                "</p>" +
+                "<p>" +
+                    "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60" + idBien + "'>" +
+                        "Ver más..." +
+                    "</button>" +
+                "</p>";
+        }
+
+        $j("#primeraActividadPendiente" + idBien).html(datosActividadPendiente);
+    }
+    
     function mostrarAgenda()
     {
         var agendaPrincipal = "";
@@ -508,8 +491,19 @@
             agendaPrincipal += 
                 "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
                     "<div class='card detalleBienes60'>" +
-                        "<a href=" + bien.guid + "title='Ver propiedad'>" +
-                            "<img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>" +
+                        "<a href=" + bien.guid + "title='Ver propiedad'>";
+                                                
+                        if (gDatosBienes[bien.ID]._thumbnail_id)
+                        {
+                            agendaPrincipal += 
+                                "<img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>";
+                        }
+                        else
+                        {
+                            agendaPrincipal += "Foto de la propiedad";
+                        }
+                
+                        agendaPrincipal +=                         
                         "</a>" +    
                         "<div class='card-block'>" +
                             "<h4 class='card-title' id='nombreDelBien" + bien.ID + "'>" + bien.__name + "</h4>" +
@@ -555,108 +549,11 @@
 
         $j("#cicloBienes60").html(agendaPrincipal);
 
+        $j.each(gBienes, function(clave, bien)  
+        {
+            primeraActividadPendiente(bien.ID);
+        });    
     }
-
-    /*    
-    <?php foreach ($bienes as $bien): ?> 
-    <div class="col-12 col-sm-6 col-md-4 mb-3">
-        <div class="card detalleBienes60">
-            <a href=<?= $bien->guid ?> title="Ver propiedad">
-                <img src=<?= $datosBienes[$bien->ID]["_thumbnail_id"][0]['valor'] ?> class="card-img-top img-fluid" alt="Foto de la propiedad">
-            </a>
-            <div class="card-block">
-                <h4 class="card-title" id=<?= "nombreDelBien" . $bien->ID ?>><?= $bien->__name ?></h4>
-                <?php 
-                    $ultimaActividadPlanificada = "";
-                    $fechaUltimaActividad = "";
-                    if (isset($datosBienes[$bien->ID]["CRMdapliw_actividad_agenda"][0])):
-                        foreach ($datosBienes[$bien->ID]["CRMdapliw_actividad_agenda"] as $datosAgenda):
-                            if($datosAgenda["estatus"] == "false"):
-                                $ultimaActividadPlanificada = $datosAgenda["nombreActividad"];
-                                $fechaUltimaActividad = 
-                                    $datosAgenda["diaPlanificado"] . '/' . 
-                                    $datosAgenda["mesPlanificado"] . '/' .
-                                    $datosAgenda["anoPlanificado"];
-                                $ultimaFechaInvertida = $datosAgenda["fechaInvertida"];
-                                break;
-                            endif;                                    
-                        endforeach;
-                    endif;
-                    if ($ultimaActividadPlanificada != ""): 
-                        setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
-                        date_default_timezone_set('America/Caracas');
-    
-                        $fechaHoy = new DateTime(); 
-                        $fechaFormato = $fechaHoy->format('d-m-Y');            
-                        $fechaVector = explode('-', $fechaFormato);
-    
-                        $fechaHoyInvertida = 
-                            $fechaVector[2] .
-                            $fechaVector[1] .
-                            $fechaVector[0];
-                ?>                             
-                        <div class="card bg-light text-dark">
-                            <div class="card-body">
-                                <?php if ($ultimaFechaInvertida < $fechaHoyInvertida): ?> 
-                                    <p class="letraAmarilla">
-                                <?php else: ?>
-                                    <p class="letraVerde">
-                                <?php endif; ?>
-                                    <?= "<b>Actividad planificada: </b>" . $ultimaActividadPlanificada . " 
-                                    <b>Fecha: </b>" . $fechaUltimaActividad . "." ?>
-                                </p>
-                                <p>
-                                    <button class="btn btn-link fondoAzul ultimaActividad60" id=<?= "ultimaActividad60" . $bien->ID ?>>
-                                        Ver más...
-                                    </button>
-                                </p>
-                            </div>
-                        </div>
-                    <?php else: ?>
-                        <div class="card bg-light text-dark">
-                            <div class="card-body">
-                                <p class="letraRoja">
-                                    Esta propiedad no tiene actividades planificadas en la agenda.
-                                </p>
-                                <p>
-                                    <button class="btn btn-link fondoAzul ultimaActividad60" id=<?= "ultimaActividad60" . $bien->ID ?>>
-                                        Ver más...
-                                    </button>
-                                </p>
-                            </div>
-                        </div>        
-                    <?php endif; ?>
-                <div class="form-group">
-                    <label for="buscarPromotor60">Promotor responsable: </label>
-                    <input type="text" id=<?= "buscarPromotor60" . $bien->ID ?> class="form-control buscarPromotor60" 
-                        value="<?= $matrizBienes[$bien->ID]['nombre_autor'] ?>">
-                </div>
-                <div id=<?= "mensajesUsuario60" . $bien->ID ?>>
-                </div>
-            </div>
-            <div class="card-footer">
-                <p>                                                            
-                    <a href=<?= mvc_public_url(array("controller" => "submit-property")) . "?edit_property=" . $bien->ID ?> 
-                        class="btn btn-light" id="60editarPropiedad" title="Editar propiedad">
-                        <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 
-                        "crmdapliw/app/public/images/pencil.svg" ?> alt="Editar propiedad" class="icon">
-                    </a>
-
-                    <button class="btn btn-light 60personas" id=<?= "personas60" . $bien->ID ?> title="Personas">
-                        <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 
-                        "crmdapliw/app/public/images/people.svg" ?> alt="Personas" class="icon">
-                    </button>
-
-                    <button class="btn btn-light documentos60" id=<?= "documentos60" . $bien->ID ?> title="Documentos">
-                        <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 
-                        "crmdapliw/app/public/images/document.svg" ?> alt="Documentos" class="icon">
-                    </button>
-                </p>
-            </div>  
-        </div>
-    </div>
-    <?php endforeach; ?>
-    */
 
     function agenda(idPost)
     {
@@ -671,8 +568,16 @@
         {
             agenda +=
                 "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
-                    "<div class='card'>" +
-                    "<img src=" + gDatosBienes[idPost]["_thumbnail_id"][0].valor + " alt='Foto de la propiedad' class='card-img-top img-fluid'>" +
+                    "<div class='card'>";
+                        if (gDatosBienes[idPost]._thumbnail_id)
+                        {
+                            agenda += 
+                                "<img src=" + gDatosBienes[idPost]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>";
+                        }
+                        else
+                        {
+                            agenda += "Foto de la propiedad";
+                        }
                     "</div>" +
                 "</div>" +
                 "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
@@ -682,9 +587,9 @@
             agenda += "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
         }
 
-        if (gDatosBienes[idPost]["CRMdapliw_actividad_agenda"][0])
+        if (gDatosBienes[idPost].CRMdapliw_actividad_agenda)
         {
-            arregloActividades = gDatosBienes[idPost]["CRMdapliw_actividad_agenda"].sort(function(a,b)
+            arregloActividades = gDatosBienes[idPost].CRMdapliw_actividad_agenda.sort(function(a,b)
             {
                 return (a.fechaInvertida - b.fechaInvertida);
             });
@@ -874,37 +779,58 @@
         $j("#botonBuscar10").click(function()
         {
             $j("#bienes60").addClass('noVer');
+            $j("#inicioCrm10").addClass('noVer');
             $j("#botonBuscar10").addClass('noVer');
             $j("#publicarPropiedad10").addClass('noVer');
             $j("#otrasOpciones10").addClass('noVer');
             $j("#busqueda40").removeClass('noVer');
+            $j("#inicioCrmBusqueda10").removeClass('noVer');            
             $j("#cancelarBusqueda10").removeClass('noVer');
             $j("#ejecutarBusqueda10").removeClass('noVer');
             window.scrollTo(0, 0);
         });
 
-        $j('#cancelarBusqueda10').click(function()
+        $j('#inicioCrmBusqueda10').click(function()
         {
             $j("#busqueda40").addClass('noVer');
+            $j("#inicioCrmBusqueda10").addClass('noVer');
             $j("#cancelarBusqueda10").addClass('noVer');
             $j("#ejecutarBusqueda10").addClass('noVer');
             $j("#bienes60").removeClass('noVer');
+            $j("#inicioCrm10").removeClass('noVer');           
             $j("#botonBuscar10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
             $j("#otrasOpciones10").removeClass('noVer');
             window.scrollTo(0, 0);
         });
 
-        $j('.ultimaActividad60').click(function()
-        {        
+        $j('#cancelarBusqueda10').click(function()
+        {
+            $j("#busqueda40").addClass('noVer');
+            $j("#inicioCrmBusqueda10").addClass('noVer');
+            $j("#cancelarBusqueda10").addClass('noVer');
+            $j("#ejecutarBusqueda10").addClass('noVer');
+            $j("#bienes60").removeClass('noVer');
+            $j("#inicioCrm10").removeClass('noVer');           
+            $j("#botonBuscar10").removeClass('noVer');
+            $j("#publicarPropiedad10").removeClass('noVer');
+            $j("#otrasOpciones10").removeClass('noVer');
+            window.scrollTo(0, 0);
+        });
+
+        $j("#cicloBienes60").on("click", ".ultimaActividad60", function()
+        {       
             gPosicionAnterior = $j(this).attr('id');
             gIdPostActual = $j(this).attr('id').substring(17);
             $j('#bienes60').addClass('noVer');
+            $j("#inicioCrm10").addClass('noVer');
             $j("#botonBuscar10").addClass('noVer');
             $j("#publicarPropiedad10").addClass('noVer');
             $j("#otrasOpciones10").addClass('noVer');
             agenda(gIdPostActual);
             $j("#agenda80").removeClass("noVer");
+            $j("#inicioCrmAgenda10").removeClass('noVer');
+            $j("#cancelarAgenda10").removeClass('noVer');
             $j("#agregarActividad10").removeClass("noVer");
             window.scrollTo(0, 0);
             
@@ -914,15 +840,34 @@
         {
             $j("#agenda80").addClass("noVer");
             $j("#inicioCrmAgenda10").addClass('noVer');
+            $j("#cancelarAgenda10").addClass('noVer');
+            $j("#agregarActividad10").addClass("noVer");
             $j("#mensajesUsuario30").html("");
             $j('#bienes60').removeClass('noVer');
+            primeraActividadPendiente(gIdPostActual);
             $j("#inicioCrm10").removeClass('noVer');
             $j("#botonBuscar10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
             $j("#otrasOpciones10").removeClass('noVer');
-            window.scrollTo(0, 0);
+            $j("#" + gPosicionAnterior).focus();
         });
        
+        $j('#cancelarAgenda10').click(function()
+        {
+            $j("#agenda80").addClass("noVer");
+            $j("#inicioCrmAgenda10").addClass('noVer');
+            $j("#cancelarAgenda10").addClass('noVer');
+            $j("#agregarActividad10").addClass("noVer");
+            $j("#mensajesUsuario30").html("");
+            $j('#bienes60').removeClass('noVer');
+            primeraActividadPendiente(gIdPostActual);
+            $j("#inicioCrm10").removeClass('noVer');
+            $j("#botonBuscar10").removeClass('noVer');
+            $j("#publicarPropiedad10").removeClass('noVer');
+            $j("#otrasOpciones10").removeClass('noVer');
+            $j("#" + gPosicionAnterior).focus();
+        });
+
         $j("#agenda80").on("click", ".guardarCambios80", function()
         {       
             var mensajesUsuario = 
@@ -1034,14 +979,26 @@
         $j('#agregarActividad10').click(function()
         {
             $j('#agenda80').addClass('noVer');
-            $j('#agregarActividad10').addClass('noVer');
-            $j('#guardarActividad10').removeClass('noVer');
             $j('#agregarActividad90').removeClass('noVer');
-            $j('#tituloAgregarActividad90').html("Planificar actividades para " + gMatrizBienes[gIdPostActual]['post_title']); 
             $j('#actividadAgenda90').val("");
             $j('#informacionAdicional90').val("");
             $j('#fechaPlanificada90').val("");
+            $j('#cancelarAgenda10').addClass('noVer');
+            $j('#agregarActividad10').addClass('noVer');
+            $j('#cancelarAgregarActividad10').removeClass('noVer');
+            $j('#guardarActividad10').removeClass('noVer');
+            $j('#tituloAgregarActividad90').html("Planificar actividades para " + gMatrizBienes[gIdPostActual]['post_title']); 
             window.scrollTo(0, 0);
+        });
+
+        $j('#cancelarAgregarActividad10').click(function()
+        {
+            $j("#agregarActividad90").addClass("noVer");
+            $j("#cancelarAgregarActividad10").addClass('noVer');
+            $j("#guardarActividad10").addClass("noVer");
+            $j('#agenda80').removeClass('noVer');
+            $j("#cancelarAgenda10").removeClass('noVer');
+            $j("#agregarActividad10").removeClass('noVer');
         });
 
         $j('#guardarActividad10').click(function()
@@ -1138,6 +1095,7 @@
                 $j("#mensajesUsuario30").html(mensajesUsuario);
             });  
         });
+
         $j('.buscarPromotor60').autocomplete(
         {
             source: <?= json_encode($usuariosAsc) ?>,

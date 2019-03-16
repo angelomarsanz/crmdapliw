@@ -6,16 +6,11 @@
 
         <!-- div con sufijo 10 -->
         <div class="container" id="menuCrm10">
-            <nav class="fixed-bottom navbar-dark" style="text-align: right; background-color:#085b9e;">
-                <!-- <button title="Inicio CRM" class="btn btn-link" id="10inicioCrm" >
+            <nav class="fixed-bottom navbar-dark" style="text-align: right; background-color:#085b9e;" id="opcionesMenu10">
+                <button title="Inicio CRM" class="btn btn-link" id="inicioCrm10" >
                         <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
                         alt="Inicio CRM" class="icon">
-                </button> -->
-
-                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="inicioCrm10" title="Inicio CRM">
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
-                    alt="Inicio CRM" class="icon">
-                </a>
+                </button>
 
                 <button title="Buscar" class="btn btn-link" id="botonBuscar10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
@@ -32,14 +27,9 @@
                     alt="Otras opciones" class="icon">
                 </button>
 
-                <!-- <button title="Inicio CRM" class="btn btn-link noVer" id="inicioCrmBusqueda10" >
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
-                    alt="Inicio CRM" class="icon">
-                </button> -->
-
-                <button title="Cancelar" class="btn btn-link noVer" id="cancelarBusqueda10">
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarBusqueda10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="cancelar búsqueda" class="icon">
+                    alt="Cerrar búsqueda" class="icon">
                 </button>
               
                 <button title="Ejecutar búsqueda" class="btn btn-link noVer" id="ejecutarBusqueda10">
@@ -47,15 +37,20 @@
                     alt="Ejecutar búsqueda" class="icon">
                 </button>
 
-                <!-- <button title="Inicio CRM" class="btn btn-link noVer" id="inicioCrmAgenda10" >
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
-                    alt="Inicio CRM" class="icon">
-                </button> -->
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgenda10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                    alt="Cerrar agenda" class="icon">
+                </button>
 
                 <button title="Agregar actividad" class="btn btn-link noVer" id="agregarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
                     alt="Agregar actividad" class="icon">
                 </button>          
+
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgregarActividad10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                    alt="Cerrar agregar actividad" class="icon">
+                </button>
 
                 <button title="Guardar actividad" class="btn btn-link noVer" id="guardarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
@@ -89,12 +84,12 @@
                                         <label class="input-group-text" for="busquedaActividadesAgenda">Actividades planificadas</label>
                                     </div>
                                     <select class="custom-select" id="busquedadActividadesAgenda">
-                                        <option selected></option>
                                         <option value="Actividades atrasadas">Actividades atrasadas</option>
                                         <option value="Actividades del mes">Actividades del mes</option>
                                         <option value="Actividades para hoy">Actividades para hoy</option>
                                         <option value="Actividades para mañana">Actividades para mañana</option>
                                         <option value="Sin actividad planificada">Sin actividad planificada</option>
+                                        <option selected value="Todas">Todas</option>
                                     </select>
                                 </div>
                             </div>
@@ -163,30 +158,12 @@
                     </form>
                 </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <?php
+                for ($i = 1; $i <= 200; $i++) 
+                {
+                    echo "<br />";
+                }
+            ?>
         </div>
         <!-- div con sufijo 50 -->
         <!-- Reservado para crear index de la agenda sin imágenes -->
@@ -197,30 +174,12 @@
             <br />
             <div class="row" id="cicloBienes60">
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <?php
+                for ($i = 1; $i <= 200; $i++) 
+                {
+                    echo "<br />";
+                }
+            ?>
         </div> 
     <?php else: ?>
         <!-- div con sufijo 70 -->
@@ -230,34 +189,11 @@
                 <br />
                 <p><b>Estimado usuario para acceder al CRM debes </b><?php echo $this->html->link('iniciar sesión', array('controller' => 'ingresar-al-sistema'), 
                     array('style' => 'color: blue;')); ?></p>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
             </div>
+            <br />
+            <br />
+            <br />
         </div> 
-        <br />
-        <br />                           
-        <br />
-        <br />                           
     <?php endif; ?>
     
     <!-- div con sufijo 80 -->
@@ -336,55 +272,22 @@
                 </form>
             <br />
             <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
             </div> 
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
+        <?php
+            for ($i = 1; $i <= 200; $i++) 
+            {
+                echo "<br />";
+            }
+        ?>
     </div>
 </div>
-<br />
-<br />
-<br />
-<br />
-<br />
 <script>
     // Variables globales
     var gBienes = <?= json_encode($bienes) ?>;
     var gMatrizBienes = <?= json_encode($matrizBienes) ?>;
     var gDatosBienes = <?= json_encode($datosBienes) ?>;
-    var gIdPostActual = 0;
+    var gIdPostActual = "";
     var gPosicionAnterior = "";
 
     // Funciones Javascript
@@ -553,7 +456,7 @@
     function agenda(idPost)
     {
         var agenda =
-            "<h2 class='letraAzul' id='cabecera80'>Actividades planificadas para " + gMatrizBienes[idPost].post_title + "</h2>" +
+            "<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + gMatrizBienes[idPost].post_title + "</h2>" +
             "<h3 class='letraAzul'>Promotor responsable: " + gMatrizBienes[idPost].nombre_autor + "</h3>" +
             "<br />" +
             "<br />" +
@@ -564,19 +467,25 @@
             agenda +=
                 "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
                     "<div class='card'>" +
-                    "<img src=" + gDatosBienes[idPost]["_thumbnail_id"][0].valor + " alt='Foto de la propiedad' class='card-img-top img-fluid'>" +
+                        "<img src=" + gDatosBienes[idPost]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>" +
                     "</div>" +
                 "</div>" +
                 "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
         }
         else
         {
-            agenda += "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
+            agenda +=
+                "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
+                    "<div class='card'>" +
+                        "Foto de la propiedad" +
+                    "</div>" +
+                "</div>" +
+                "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
         }
 
-        if (gDatosBienes[idPost]["CRMdapliw_actividad_agenda"][0])
+        if (gDatosBienes[idPost].CRMdapliw_actividad_agenda)
         {
-            arregloActividades = gDatosBienes[idPost]["CRMdapliw_actividad_agenda"].sort(function(a,b)
+            arregloActividades = gDatosBienes[idPost].CRMdapliw_actividad_agenda.sort(function(a,b)
             {
                 return (a.fechaInvertida - b.fechaInvertida);
             });
@@ -654,32 +563,12 @@
             });
         } 
 
-        agenda +=
-                "</div>" +
-            "</div>" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />";
+        agenda += "</div></div>";
+
+        for (i = 1; i <= 200; i++) 
+        {
+            agenda += "<br />";
+        }
 
         $j("#agenda80").html(agenda).contents().find(".fechaPlanificada80").datepicker(
             {
@@ -754,14 +643,68 @@
     {
         mostrarAgenda();
 
-        $j("#fechaPlanificada90").datepicker(
+        $j('#inicioCrm10').click(function()
+        {
+            if ($j("#busqueda40").hasClass('noVer') === false)
             {
-                dateFormat: "dd/mm/yy", 
-                monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
-                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ], 
-                changeMonth: true,
-                changeYear: true
+                $j("#busqueda40").addClass('noVer');
+            }
+
+            if ($j("#bienes60").hasClass('noVer') === false)
+            {
+                $j("#bienes60").addClass('noVer');
+            }
+
+            if ($j("#agenda80").hasClass('noVer') === false)
+            {
+                $j("#agenda80").addClass('noVer');
+            }
+
+            if ($j("#agregarActividad90").hasClass('noVer') === false)
+            {
+                $j("#agregarActividad90").addClass('noVer');
+            }
+
+            $j("#opcionesMenu10 button").each(function()
+            {   
+                if ($j(this).hasClass('noVer') === false)
+                {
+                    $j(this).addClass('noVer');
+                }           
             });
+
+            $j("#opcionesMenu10 a").each(function()
+            {   
+                if ($j(this).hasClass('noVer') === false)
+                {
+                    $j(this).addClass('noVer');
+                }           
+            });
+            
+            if (gIdPostActual != "")
+            {
+                primeraActividadPendiente(gIdPostActual);
+            }    
+
+            $j("#mensajesUsuario30").html(""); 
+          
+            $j("#bienes60").removeClass('noVer');
+
+            if (gPosicionAnterior != "")
+            {
+                $j("#" + gPosicionAnterior).focus();    
+            }
+            else
+            {
+                window.scrollTo(0, 0);
+            }
+
+            $j("#inicioCrm10").removeClass('noVer');           
+            $j("#botonBuscar10").removeClass('noVer');
+            $j("#publicarPropiedad10").removeClass('noVer');
+            $j("#otrasOpciones10").removeClass('noVer');
+
+        });
 
         $j("#botonBuscar10").click(function()
         {
@@ -770,25 +713,27 @@
             $j("#publicarPropiedad10").addClass('noVer');
             $j("#otrasOpciones10").addClass('noVer');
             $j("#busqueda40").removeClass('noVer');
-            $j("#cancelarBusqueda10").removeClass('noVer');
+            $j("#cerrarBusqueda10").removeClass('noVer');
             $j("#ejecutarBusqueda10").removeClass('noVer');
             window.scrollTo(0, 0);
         });
 
-        $j('#cancelarBusqueda10').click(function()
+        $j('#cerrarBusqueda10').click(function()
         {
             $j("#busqueda40").addClass('noVer');
-            $j("#cancelarBusqueda10").addClass('noVer');
+            $j("#inicioCrmBusqueda10").addClass('noVer');
+            $j("#cerrarBusqueda10").addClass('noVer');
             $j("#ejecutarBusqueda10").addClass('noVer');
             $j("#bienes60").removeClass('noVer');
+            $j("#inicioCrm10").removeClass('noVer');           
             $j("#botonBuscar10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
             $j("#otrasOpciones10").removeClass('noVer');
             window.scrollTo(0, 0);
         });
 
-        $j('.ultimaActividad60').click(function()
-        {        
+        $j("#cicloBienes60").on("click", ".ultimaActividad60", function()
+        {       
             gPosicionAnterior = $j(this).attr('id');
             gIdPostActual = $j(this).attr('id').substring(17);
             $j('#bienes60').addClass('noVer');
@@ -797,24 +742,28 @@
             $j("#otrasOpciones10").addClass('noVer');
             agenda(gIdPostActual);
             $j("#agenda80").removeClass("noVer");
+            $j("#cerrarAgenda10").removeClass('noVer');
             $j("#agregarActividad10").removeClass("noVer");
             window.scrollTo(0, 0);
             
         });
-
-        $j('#inicioCrmAgenda10').click(function()
+      
+        $j('#cerrarAgenda10').click(function()
         {
             $j("#agenda80").addClass("noVer");
             $j("#inicioCrmAgenda10").addClass('noVer');
+            $j("#cerrarAgenda10").addClass('noVer');
+            $j("#agregarActividad10").addClass("noVer");
             $j("#mensajesUsuario30").html("");
             $j('#bienes60').removeClass('noVer');
+            primeraActividadPendiente(gIdPostActual);
             $j("#inicioCrm10").removeClass('noVer');
             $j("#botonBuscar10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
             $j("#otrasOpciones10").removeClass('noVer');
-            window.scrollTo(0, 0);
+            $j("#" + gPosicionAnterior).focus();
         });
-       
+
         $j("#agenda80").on("click", ".guardarCambios80", function()
         {       
             var mensajesUsuario = 
@@ -841,16 +790,16 @@
                 if ($j(this).attr('id').substring(0, 22) == "informacionAdicional80")
                 {
                     $j(this).val($j.trim($j(this).val().toUpperCase()));
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].informacionAdicional = $j(this).val();
+                    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].informacionAdicional = $j(this).val();
                     informacionAdicionalObj = $j(this).val();
                 }
                 if ($j(this).attr('id').substring(0, 18) == "fechaPlanificada80")
                 {
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].diaPlanificado = $j(this).val().substring(0, 2);
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].mesPlanificado = $j(this).val().substring(3, 5);
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].anoPlanificado = $j(this).val().substring(6, 10);
+                    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].diaPlanificado = $j(this).val().substring(0, 2);
+                    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].mesPlanificado = $j(this).val().substring(3, 5);
+                    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].anoPlanificado = $j(this).val().substring(6, 10);
 
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].fechaInvertida = 
+                    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].fechaInvertida = 
                         $j(this).val().substring(6, 10) + $j(this).val().substring(3, 5) + $j(this).val().substring(0, 2);
                                         
                     diaPlanificadoObj = $j(this).val().substring(0, 2);
@@ -862,12 +811,12 @@
                 {
                     if ($j(this).prop("checked") == true)
                     {
-                        gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].estatus = "true";
+                        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "true";
                         estatusObj = "true";
                     }
                     else
                     {
-                        gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].estatus = "false";
+                        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "false";
                         estatusObj = "false";
                     }
                 }
@@ -926,14 +875,35 @@
         $j('#agregarActividad10').click(function()
         {
             $j('#agenda80').addClass('noVer');
-            $j('#agregarActividad10').addClass('noVer');
-            $j('#guardarActividad10').removeClass('noVer');
             $j('#agregarActividad90').removeClass('noVer');
-            $j('#tituloAgregarActividad90').html("Planificar actividades para " + gMatrizBienes[gIdPostActual]['post_title']); 
             $j('#actividadAgenda90').val("");
             $j('#informacionAdicional90').val("");
             $j('#fechaPlanificada90').val("");
+            $j('#cerrarAgenda10').addClass('noVer');
+            $j('#agregarActividad10').addClass('noVer');
+            $j('#cerrarAgregarActividad10').removeClass('noVer');
+            $j('#guardarActividad10').removeClass('noVer');
+            $j('#tituloAgregarActividad90').html("Planificar actividades para " + gMatrizBienes[gIdPostActual].post_title); 
             window.scrollTo(0, 0);
+        });
+
+        $j("#fechaPlanificada90").datepicker(
+            {
+                dateFormat: "dd/mm/yy", 
+                monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
+                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ], 
+                changeMonth: true,
+                changeYear: true
+            });
+
+        $j('#cerrarAgregarActividad10').click(function()
+        {
+            $j("#agregarActividad90").addClass("noVer");
+            $j("#cerrarAgregarActividad10").addClass('noVer');
+            $j("#guardarActividad10").addClass("noVer");
+            $j('#agenda80').removeClass('noVer');
+            $j("#cerrarAgenda10").removeClass('noVer');
+            $j("#agregarActividad10").removeClass('noVer');
         });
 
         $j('#guardarActividad10').click(function()
@@ -972,27 +942,35 @@
             .done(function(response) 
             {
                 if (response.satisfactorio) 
-                {   
-                    ultimaPosicion = 0;
-
-                    $j.each(gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"], function(clave, datos)  
-                    {
-                        ultimaPosicion = clave;
-                    });
-                    ultimaPosicion++;
-
+                {
                     fechaInvertida = 
                         $j("#fechaPlanificada90").val().substring(6, 10) +
                         $j("#fechaPlanificada90").val().substring(3, 5) +
                         $j("#fechaPlanificada90").val().substring(0, 2);
 
                     jsonActividad.actividad.id = response.id;
-                    jsonActividad.actividad.posicionOriginal = ultimaPosicion;
                     jsonActividad.actividad.fechaInvertida = fechaInvertida;
 
-                    console.log(jsonActividad.actividad);
-                                    
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"].push(jsonActividad.actividad);
+                    if (gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda)
+                    {
+                        ultimaPosicion = 0;
+
+                        $j.each(gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda, function(clave, datos)  
+                        {
+                            ultimaPosicion = clave;
+                        });
+
+                        ultimaPosicion++;
+                        jsonActividad.actividad.posicionOriginal = ultimaPosicion;
+                    
+                        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda.push(jsonActividad.actividad);
+                    }
+                    else
+                    {
+                        jsonActividad.actividad.posicionOriginal = 0;
+
+                        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda = [jsonActividad.actividad];
+                    }
      
                     mensajesUsuario =
                         "<div class='alert alert-success alert-dismissible'>" +
@@ -1003,8 +981,10 @@
                     $j("#mensajesUsuario30").html(mensajesUsuario);
 
                     agenda(gIdPostActual); 
+                    $j("#cerrarAgregarActividad10").addClass("noVer");
                     $j("#guardarActividad10").addClass("noVer");
                     $j("#agenda80").removeClass("noVer");
+                    $j("#cerrarAgenda10").removeClass("noVer");
                     $j("#agregarActividad10").removeClass("noVer");
                     window.scrollTo(0, 0);           
                 } 
@@ -1030,6 +1010,7 @@
                 $j("#mensajesUsuario30").html(mensajesUsuario);
             });  
         });
+
         $j('.buscarPromotor60').autocomplete(
         {
             source: <?= json_encode($usuariosAsc) ?>,
