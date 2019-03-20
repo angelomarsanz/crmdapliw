@@ -4,117 +4,7 @@ class PostsController extends MvcPublicController
 {
     public function test_function()
     {
-        $user = wp_get_current_user();
 
-        if ($user->id > 0)
-        {   
-            $this->load_model('Postmeta');
-
-            $posts = $this->Post->find(array('order' => 'ID ASC'));
-
-            $bienes = $this->Post->find(array(
-                'conditions' => array(
-                'ID' => array(5548),
-                'post_type' => 'property',
-                'post_status' => array('Publish', 'Pending')),
-                'order' => 'post_title ASC'));
-
-            $propiedadesBienes = $this->Postmeta->find(array(
-                'joins' => array('Post'),
-                'includes' => array('Post'),
-                'conditions' => array(
-                'Post.ID' => array(5548),
-                'Post.post_type' => array('property', 'CRMdapliw'),
-                'Post.post_status' => array('Publish', 'Pending')),
-                'order' => 'Post.ID ASC, Postmeta.meta_key ASC, Postmeta.meta_id ASC'));            
-                
-            $matrizBienes = [];
-            foreach ($bienes as $bien)
-            {
-                $matrizBienes[$bien->ID]['post_title'] = $bien->post_title;
-                $matrizBienes[$bien->ID]['post_author'] = $bien->post_author;
-                $matrizBienes[$bien->ID]['nombre_autor'] = $usuarios[$bien->post_author]['first_name'] . ' ' . $usuarios[$bien->post_author]['last_name'];
-
-                $matrizBienes[$bien->ID]['guid'] = $bien->guid;
-                $matrizBienes[$bien->ID]['post_status'] = $bien->post_status;
-            }
-            
-            $contadorDatos = 0;
-            $posicion = 0;
-            $keyActual = 0;
-            $idPostAnterior = 0;
-            $datosBienes = [];
-            foreach ($propiedadesBienes as $propiedadesBien)
-            {
-                if ($contadorDatos == 0)
-                {
-                    $keyActual = $propiedadesBien->meta_key;
-                }
-                elseif ($keyActual != $propiedadesBien->meta_key)
-                {
-                    if ($keyActual == "CRMdapliw_actividad_agenda")
-                    {
-                        var_dump($datosBienes[$idPostAnterior]["CRMdapliw_actividad_agenda"]);
-                        echo "<br />";
-                        echo "<br />";
-                        
-                        $arregloInvertido = $this->array_orderby($datosBienes[$idPostAnterior]["CRMdapliw_actividad_agenda"], 'fechaInvertida', SORT_ASC); 
-
-                        $datosBienes[$idPostAnterior]["CRMdapliw_actividad_agenda"] = $arregloInvertido;
-
-                        var_dump($datosBienes[$idPostAnterior]["CRMdapliw_actividad_agenda"]);
-                        echo "<br />";
-                        echo "<br />";
-                    }
-                    $posicion = 0;
-                    $keyActual = $propiedadesBien->meta_key;
-                }
-                else
-                {
-                    $posicion++;
-                }
-                
-                if ($propiedadesBien->meta_key == "CRMdapliw_actividad_agenda")
-                {
-                    $idPostAnterior = $propiedadesBien->post_id;
-                    $arregloActividad = [];
-                    $arregloActividad = json_decode($propiedadesBien->meta_value, true);
-                    
-                    $arregloActividad["id"] = $propiedadesBien->meta_id;
-                    $arregloActividad["posicionOriginal"] = $posicion;
-                    $arregloActividad["fechaInvertida"] = 
-                        $arregloActividad["anoPlanificado"] . $arregloActividad["mesPlanificado"] . $arregloActividad["diaPlanificado"];
-                    /*
-                    var_dump($arregloActividad); 
-                    echo "<br />";
-                    echo "<br />";
-                    */
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = $arregloActividad;
-                }
-                elseif ($propiedadesBien->meta_key == "REAL_HOMES_property_images")
-                {
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
-                        ["valor" => $this->buscar_url($propiedadesBien->meta_value, $posts), "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion];
-                }
-                elseif ($propiedadesBien->meta_key == "_thumbnail_id")
-                {
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
-                        ["valor" => $this->buscar_url($propiedadesBien->meta_value, $posts), "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion];
-                }
-                else
-                {
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
-                        ["valor" => $propiedadesBien->meta_value, "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion];           
-                }
-                $contadorDatos++;
-            }
-
-            $this->set('posts', $posts);
-            $this->set('bienes', $bienes);
-            $this->set('propiedadesBienes', $propiedadesBienes);
-            $this->set('matrizBienes', $matrizBienes);
-            $this->set('datosBienes', $datosBienes);            
-        }
     }
 
     public function index() 
@@ -191,6 +81,31 @@ class PostsController extends MvcPublicController
 
                 $matrizBienes[$bien->ID]['guid'] = $bien->guid;
                 $matrizBienes[$bien->ID]['post_status'] = $bien->post_status;
+            }
+
+            $contadorDatos = 0;
+            foreach ($propiedadesBienes as $propiedadesBien)
+            {
+                if ($propiedadesBien->meta_key == "CRMdapliw_promotor_anterior")
+                {
+                    if ($contadorDatos == 0)
+                    {
+                        $matrizBienes[$propiedadesBien->post_id]['captador'] = 
+                            $usuarios[$propiedadesBien->meta_value]['first_name'] . ' ' . $usuarios[$propiedadesBien->meta_value]['last_name'];
+
+                        $bienActual = $propiedadesBien->post_id;
+                    }
+
+                    if ($bienActual != $propiedadesBien->post_id)
+                    {
+                        $matrizBienes[$propiedadesBien->post_id]['captador'] = 
+                            $usuarios[$propiedadesBien->meta_value]['first_name'] . ' ' . $usuarios[$propiedadesBien->meta_value]['last_name'];
+
+                        $bienActual = $propiedadesBien->post_id;
+                    }
+
+                    $contadorDatos++;
+                }
             }
             
             $contadorDatos = 0;

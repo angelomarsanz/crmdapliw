@@ -57,6 +57,11 @@
                     alt="Agregar actividad" class="icon">
                 </button>
 
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarPersonas10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                    alt="Cerrar personas" class="icon">
+                </button>
+
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/ban.svg" ?>
                     class="icon">            
             </nav>
@@ -72,7 +77,7 @@
         </div>
         
         <!-- div con sufijo 40 -->
-        <div class="container noVer" id="busqueda40">
+        <div class="container formulario noVer" id="busqueda40">
             <div class="row">
                 <div class="col-md-12">
                     <form id="formularioBusqueda">
@@ -169,7 +174,7 @@
         <!-- Reservado para crear index de la agenda sin imágenes -->
 
         <!-- div con sufijo 60 -->
-        <div class="container" id="bienes60">
+        <div class="container formulario" id="bienes60">
             <h2 class="letraAzul">Actividades planificadas de la agenda</h2>
             <br />
             <div class="row" id="cicloBienes60">
@@ -197,11 +202,11 @@
     <?php endif; ?>
     
     <!-- div con sufijo 80 -->
-    <div class="container noVer" id="agenda80">
+    <div class="container formulario noVer" id="agenda80">
     </div> 
 
     <!-- div con sufijo 90 -->
-    <div class="container noVer" id="agregarActividad90">
+    <div class="container formulario noVer" id="agregarActividad90">
         <div class="row">
             <div class='col-md-6'> 
                 <h2 class="letraAzul" id="tituloAgregarActividad90"></h2>
@@ -273,6 +278,76 @@
             <br />
             <br />
             </div> 
+        </div>
+        <?php
+            for ($i = 1; $i <= 200; $i++) 
+            {
+                echo "<br />";
+            }
+        ?>
+    </div>
+
+    <!-- div con sufijo 100 -->
+    <div class="container formulario noVer" id="personas100">
+        <h2 class="letraAzul" id="tituloPersonas100"></h2>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 mb-3">
+                <div class="card" id="imagen100">
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-8 mb-3">
+                <form>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="nombreCaptador100">Captador</label> 
+                                <input type="text" class="form-control" id="nombreCaptador100" disabled> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="nombrePromotor100">Promotor</label> 
+                                <input type="text" class="form-control" id="nombrePromotor100"> 
+                            </div>
+                            <div id="mensajePromotor100"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="nombrePropietario100">Propietario</label> 
+                                <input type="text" class="form-control" id="nombrePropietario100"> 
+                            </div>
+                            <div id="mensajePropietario100"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="nombreCompradorPotencial100">Comprador potencial</label> 
+                                <input type="text" class="form-control" id="nombreCompradorPotencial100"> 
+                            </div>
+                            <div id="mensajeClientePotencial100"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="letraAzul">Compradores potenciales</h3>    
+                            <div id="compradoresPotenciales100"> 
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
         </div>
         <?php
             for ($i = 1; $i <= 200; $i++) 
@@ -413,7 +488,7 @@
 
                             "<div class='form-group'>" +
                                 "<label for='buscarPromotor60" + bien.ID + "'>Promotor responsable: </label>" +
-                                "<input type='text' id='buscarPromotor60" + bien.ID + "' class='form-control buscarPromotor60'" + 
+                                "<input type='text' id='buscarPromotor60-" + bien.ID + "' class='form-control buscarPromotor60'" + 
                                     "value='" + gMatrizBienes[bien.ID].nombre_autor + "'>" +
                             "</div>" +
                             "<div id='mensajesUsuario60" + bien.ID + "'>" +
@@ -427,12 +502,12 @@
                                         "crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icon'>" +
                                     "</a>" +
 
-                                    "<button class='btn btn-light personas60' id='personas60" + bien.ID + "' title='Personas'>" +
+                                    "<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
                                         "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
                                         "crmdapliw/app/public/images/people.svg alt='Personas' class='icon'>" +
                                     "</button>" +
 
-                                    "<button class='btn btn-light documentos60' id='documentos60" + bien.ID + "' title='Documentos'>" +
+                                    "<button class='btn btn-light documentos60' id='documentos60-" + bien.ID + "' title='Documentos'>" +
                                         "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
                                         "crmdapliw/app/public/images/document.svg alt='Documentos' class='icon'>" +
                                     "</button>" +
@@ -580,15 +655,13 @@
             });
     }
 
-    function actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor)
+    function actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje)
     {
         var mensajesUsuario = 
             "<div class='alert alert-info alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>Por favor espere mientras se guardan los datos</strong>" +
             "</div>";
-
-        var idMensaje = "#mensajesUsuario60" + idBien; 
 
       	$j(idMensaje).html(mensajesUsuario);
 
@@ -608,10 +681,15 @@
                 gMatrizBienes[idBien].post_author = idNuevoPromotor;
                 gMatrizBienes[idBien].nombre_autor = nombreNuevoPromotor;
 
+                if (indicadorPromotor == 1)
+                {
+                    $j("#buscarPromotor60-" + idBien).val(gMatrizBienes[idBien].nombre_autor);
+                }
+
                 mensajesUsuario =
                     "<div class='alert alert-success alert-dismissible'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                        "<strong>¡ Los datos se guardaron exitosamente ! " + response.mensaje + "</strong>" +
+                        "<strong>" + response.mensaje + "</strong>" +
                     "</div>";
                 $j(idMensaje).html(mensajesUsuario);
             } 
@@ -620,7 +698,7 @@
                 mensajesUsuario =
                 "<div class='alert alert-danger alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>¡ Los datos no se pudieron guardar ! " + response.mensaje + "</strong>" +
+                    "<strong>" + response.mensaje + "</strong>" +
                 "</div>"; 
 
             	$j(idMensaje).html(mensajesUsuario);
@@ -638,6 +716,31 @@
         });
     }
 
+    function personasBien(idBien)
+    {
+
+        $j("#tituloPersonas100").html("Actividades planificadas para " + gMatrizBienes[idBien].post_title);
+
+        if (gDatosBienes[idBien]._thumbnail_id)
+        {
+            $j("#imagen100").html("<img src=" + gDatosBienes[idBien]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>");
+        }
+        else
+        {
+            $j("#imagen100").html("Foto de la propiedad");
+        }
+
+        $j("#nombreCaptador100").val(gMatrizBienes[idBien].captador);
+        $j("#mensajeCaptador100").html("");
+
+        $j("#nombrePromotor100").val(gMatrizBienes[idBien].nombre_autor);
+        $j("#mensajePromotor100").html("");
+
+        $j("#mensajePropietario100").html("");
+
+        $j("#mensajeClientePotencial100").html("");
+    }
+
     // Funciones jQuery
     $j(document).ready(function()
     {
@@ -645,25 +748,13 @@
 
         $j('#inicioCrm10').click(function()
         {
-            if ($j("#busqueda40").hasClass('noVer') === false)
-            {
-                $j("#busqueda40").addClass('noVer');
-            }
-
-            if ($j("#bienes60").hasClass('noVer') === false)
-            {
-                $j("#bienes60").addClass('noVer');
-            }
-
-            if ($j("#agenda80").hasClass('noVer') === false)
-            {
-                $j("#agenda80").addClass('noVer');
-            }
-
-            if ($j("#agregarActividad90").hasClass('noVer') === false)
-            {
-                $j("#agregarActividad90").addClass('noVer');
-            }
+            $j(".formulario").each(function()
+            {   
+                if ($j(this).hasClass('noVer') === false)
+                {
+                    $j(this).addClass('noVer');
+                }           
+            });
 
             $j("#opcionesMenu10 button").each(function()
             {   
@@ -721,11 +812,9 @@
         $j('#cerrarBusqueda10').click(function()
         {
             $j("#busqueda40").addClass('noVer');
-            $j("#inicioCrmBusqueda10").addClass('noVer');
             $j("#cerrarBusqueda10").addClass('noVer');
             $j("#ejecutarBusqueda10").addClass('noVer');
             $j("#bienes60").removeClass('noVer');
-            $j("#inicioCrm10").removeClass('noVer');           
             $j("#botonBuscar10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
             $j("#otrasOpciones10").removeClass('noVer');
@@ -751,13 +840,11 @@
         $j('#cerrarAgenda10').click(function()
         {
             $j("#agenda80").addClass("noVer");
-            $j("#inicioCrmAgenda10").addClass('noVer');
             $j("#cerrarAgenda10").addClass('noVer');
             $j("#agregarActividad10").addClass("noVer");
             $j("#mensajesUsuario30").html("");
             $j('#bienes60').removeClass('noVer');
             primeraActividadPendiente(gIdPostActual);
-            $j("#inicioCrm10").removeClass('noVer');
             $j("#botonBuscar10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
             $j("#otrasOpciones10").removeClass('noVer');
@@ -1017,11 +1104,55 @@
             minLength: 3,
             select: function( event, ui ) 
             {   
-                idBien = $j(this).attr("id").substring(16);
+                idBien = $j(this).attr("id").substring(17);
                 idPromotorAnterior = gMatrizBienes[idBien].post_author;
                 idNuevoPromotor = ui.item.id;
                 nombreNuevoPromotor = ui.item.value;
-                actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor);
+                indicadorPromotor = 0;
+                idMensaje = "#mensajesUsuario60" + idBien; 
+                actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje);
+            }
+        });
+
+        $j("#cicloBienes60").on("click", ".personas60", function()
+        {       
+            gPosicionAnterior = $j(this).attr('id');
+            gIdPostActual = $j(this).attr('id').substring(11);
+            $j('#bienes60').addClass('noVer');
+            $j("#botonBuscar10").addClass('noVer');
+            $j("#publicarPropiedad10").addClass('noVer');
+            $j("#otrasOpciones10").addClass('noVer');
+            personasBien(gIdPostActual);
+            $j("#personas100").removeClass("noVer");
+            $j("#cerrarPersonas10").removeClass('noVer');
+            // $j("#agregarActividad10").removeClass("noVer");
+            window.scrollTo(0, 0);
+        });
+
+        $j('#cerrarPersonas10').click(function()
+        {
+            $j("#personas100").addClass("noVer");
+            $j("#cerrarPersonas10").addClass('noVer');
+            $j('#bienes60').removeClass('noVer');
+            $j("#botonBuscar10").removeClass('noVer');
+            $j("#publicarPropiedad10").removeClass('noVer');
+            $j("#otrasOpciones10").removeClass('noVer');
+            $j("#" + gPosicionAnterior).focus();
+        });
+
+        $j('#nombrePromotor100').autocomplete(
+        {
+            source: <?= json_encode($usuariosAsc) ?>,
+            minLength: 3,
+            select: function( event, ui ) 
+            {   
+                idBien = gIdPostActual;
+                idPromotorAnterior = gMatrizBienes[idBien].post_author;
+                idNuevoPromotor = ui.item.id;
+                nombreNuevoPromotor = ui.item.value;
+                indicadorPromotor = 1;
+                idMensaje = "#mensajePromotor100"; 
+                actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje);
             }
         });
     });
