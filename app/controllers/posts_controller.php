@@ -20,7 +20,7 @@ class PostsController extends MvcPublicController
                 'selects' => array('User.ID', 'User.user_email', 'Usermeta.user_id', 'Usermeta.meta_key', 'Usermeta.meta_value', 'Usermeta.umeta_id'),
                 'conditions' => array(
                     // 'User.ID' => array(32),
-                    'Usermeta.meta_key' => array("first_name", "last_name")),
+                    'Usermeta.meta_key' => array("first_name", "last_name", "CRMdapliw_roles")),
                 'order' => 'User.ID ASC, Usermeta.meta_key ASC, Usermeta.umeta_id ASC'));            
 
             $contadorUsuarios = 0;
@@ -38,19 +38,51 @@ class PostsController extends MvcPublicController
                     $idUsuarioActual = $userMeta->ID;
                     $usuarios[$idUsuarioActual]["email"] = $userMeta->user_email;
                 }
-                $usuarios[$idUsuarioActual][$userMeta->meta_key] = $userMeta->meta_value;
+                if ($userMeta->meta_key == "CRMdapliw_roles")
+                {
+                    $usuarios[$idUsuarioActual][$userMeta->meta_key] = json_decode($userMeta->meta_value);
+                }
+                else
+                {
+                    $usuarios[$idUsuarioActual][$userMeta->meta_key] = $userMeta->meta_value;
+                }
                 $contadorUsuarios++;
             }
 
-            $usuariosA = [];
-    
+            $captadores = [];
+            $promotores = [];
+            $propietarios = [];
+            $clientes = [];
+
             foreach ($usuarios as $clave => $usuario)
             {
                 $nombreCompleto = $usuario["first_name"] . ' ' . $usuario["last_name"];
-                $usuariosA[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+
+                foreach ($usuario["CRMdapliw_roles"] as $rol)
+                {
+                    if ($rol == "Captador")
+                    { 
+                        $captadores[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                    }
+                    elseif ($rol == "Promotor")
+                    {   
+                        $promotores[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                    }
+                    elseif ($rol == "Propietario")
+                    {   
+                        $propietarios[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                    }            
+                    else
+                    {
+                        $clientes[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                    }
+                }
             }
 
-            $usuariosAsc = $this->array_orderby($usuariosA, 'label', SORT_ASC); 
+            $captadoresAsc = $this->array_orderby($captadores, 'label', SORT_ASC); 
+            $promotoresAsc = $this->array_orderby($promotores, 'label', SORT_ASC); 
+            $propietariosAsc = $this->array_orderby($propietarios, 'label', SORT_ASC); 
+            $clientesAsc = $this->array_orderby($clientes, 'label', SORT_ASC); 
 
             $this->load_model('Postmeta');
 
@@ -106,6 +138,11 @@ class PostsController extends MvcPublicController
 
                     $contadorDatos++;
                 }
+                elseif ($propiedadesBien->meta_key == "CRMdapliw_propietario")
+                {
+                    $matrizBienes[$propiedadesBien->post_id]['propietario'] = 
+                        $usuarios[$propiedadesBien->meta_value]['first_name'] . ' ' . $usuarios[$propiedadesBien->meta_value]['last_name'];
+                }
             }
             
             $contadorDatos = 0;
@@ -145,11 +182,13 @@ class PostsController extends MvcPublicController
                     $arregloActividad["posicionOriginal"] = $posicion;
                     $arregloActividad["fechaInvertida"] = 
                         $arregloActividad["anoPlanificado"] . $arregloActividad["mesPlanificado"] . $arregloActividad["diaPlanificado"];
-                    /*
+                    
+                    /* Para pruebas
                     var_dump($arregloActividad); 
                     echo "<br />";
                     echo "<br />";
                     */
+
                     $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = $arregloActividad;
                 }
                 elseif ($propiedadesBien->meta_key == "REAL_HOMES_property_images")
@@ -162,15 +201,27 @@ class PostsController extends MvcPublicController
                     $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
                         ["valor" => $this->buscar_url($propiedadesBien->meta_value, $posts), "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion];
                 }
+                elseif ($propiedadesBien->meta_key == "CRMdapliw_cliente")
+                {
+                    $arregloCliente = json_decode($propiedadesBien->meta_value, true);
+
+                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
+                        ["valor" => $usuarios[$arregloCliente["idUser"]]["first_name"] . ' ' . $usuarios[$arregloCliente["idUser"]]["last_name"], 
+                        "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion, "idUser" => $arregloCliente["idUser"], "activo" => $arregloCliente["activo"]];
+                }
                 else
                 {
                     $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
                         ["valor" => $propiedadesBien->meta_value, "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion];           
                 }
+
                 $contadorDatos++;
             }
 
-            $this->set("usuariosAsc", $usuariosAsc);
+            $this->set("captadoresAsc", $captadoresAsc);
+            $this->set("promotoresAsc", $promotoresAsc);
+            $this->set("propietariosAsc", $propietariosAsc);
+            $this->set("clientesAsc", $clientesAsc);
             $this->set("userMetas", $userMetas);
             $this->set("usuarios", $usuarios);           
             $this->set('posts', $posts);

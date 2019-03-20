@@ -62,6 +62,11 @@
                     alt="Cerrar personas" class="icon">
                 </button>
 
+                <button title="Agregar persona" class="btn btn-link noVer" id="agregarPersona10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
+                    alt="Agregar persona" class="icon">
+                </button>          
+
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/ban.svg" ?>
                     class="icon">            
             </nav>
@@ -223,7 +228,7 @@
                                     <option selected></option> 
                                     <option value="Agregar datos del propietario">Agregar datos del propietario</option> 
                                     <option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
-                                    <option value="Coordinar elaboración de pendon">Coordinar elaboración de pendon</option>
+                                    <option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
                                     <option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
                                     <option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
                                     <option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
@@ -330,10 +335,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group"> 
-                                <label for="nombreCompradorPotencial100">Comprador potencial</label> 
-                                <input type="text" class="form-control" id="nombreCompradorPotencial100"> 
+                                <label for="nombreCliente100">Agregar comprador potencial</label> 
+                                <input type="text" class="form-control" id="nombreCliente100"> 
                             </div>
-                            <div id="mensajeClientePotencial100"></div>
+                            <div id="mensajeCliente100"></div>
                         </div>
                     </div>
 
@@ -716,6 +721,62 @@
         });
     }
 
+    function compradoresPotenciales(idBien)
+    {
+        var compradoresPotenciales =
+                "<div class='col-12 col-sm-6 col-md-12 mb-3'>";
+
+        if (gDatosBienes[idBien].CRMdapliw_cliente)
+        {
+            arregloCompradores = gDatosBienes[idBien].CRMdapliw_cliente.sort(function(a,b)
+            {
+                return (b.posicionOriginal - a.posicionOriginal);
+            });
+
+            $j.each(arregloCompradores, function(clave, datos)  
+            {
+                if (datos.activo == "true")
+                {
+                    compradoresPotenciales += 
+                        "<div class='card' id='comprador100-" + clave + "-" + datos.idUser + "-" + idBien + "'>" +
+                            "<div class='card-block'>" + 
+                                "<h4 class='card-title'>" + datos.valor + "</h4>" +
+                                "<div class='card bg-light text-dark'>" +
+                                    "<div class='card-body'>" +
+                                        "<div class='col-md-3'>" +
+                                            "<div class='form-check'>" +
+                                                "<input type='checkbox' class='form-check-input eliminarComprador100' id='eliminarComprador100-" + 
+                                                    clave + "-" + datos.idUser + "-" + idBien + "'>" +
+                                                "<label class='form-check-label' for='eliminarComprador100-" + 
+                                                    clave + "-" + datos.idUser + "-" + idBien + "'>&nbsp;&nbsp;Eliminar</label>" +
+                                            "</div>" +
+                                        "</div>"+
+
+                                    "</div>" +
+                                "</div>" +
+                            "</div>" +
+                        "</div>" +
+                        "<div class='row'>" +
+                            "<div class='col-md-12'>" +
+                                "<div id='mensajesComprador100-" + clave + "-" + datos.idUser + "-" + idBien + "'>" +
+                                "</div>" +
+                            "</div>" +
+                        "</div>" + 
+                        "<br />";
+                }
+            });
+        } 
+
+        compradoresPotenciales += "</div>";
+
+        for (i = 1; i <= 200; i++) 
+        {
+            compradoresPotenciales += "<br />";
+        }
+
+        $j("#compradoresPotenciales100").html(compradoresPotenciales);
+    }
+
     function personasBien(idBien)
     {
 
@@ -736,10 +797,14 @@
         $j("#nombrePromotor100").val(gMatrizBienes[idBien].nombre_autor);
         $j("#mensajePromotor100").html("");
 
+        $j("#nombrePropietario100").val(gMatrizBienes[idBien].propietario);
         $j("#mensajePropietario100").html("");
 
-        $j("#mensajeClientePotencial100").html("");
+        $j("#mensajeCliente100").html("");
+
+        compradoresPotenciales(idBien);
     }
+
 
     // Funciones jQuery
     $j(document).ready(function()
@@ -1100,7 +1165,7 @@
 
         $j('.buscarPromotor60').autocomplete(
         {
-            source: <?= json_encode($usuariosAsc) ?>,
+            source: <?= json_encode($promotoresAsc) ?>,
             minLength: 3,
             select: function( event, ui ) 
             {   
@@ -1125,7 +1190,7 @@
             personasBien(gIdPostActual);
             $j("#personas100").removeClass("noVer");
             $j("#cerrarPersonas10").removeClass('noVer');
-            // $j("#agregarActividad10").removeClass("noVer");
+            $j("#agregarPersona10").removeClass("noVer");
             window.scrollTo(0, 0);
         });
 
@@ -1133,6 +1198,7 @@
         {
             $j("#personas100").addClass("noVer");
             $j("#cerrarPersonas10").addClass('noVer');
+            $j("#agregarPersona10").addClass("noVer");
             $j('#bienes60').removeClass('noVer');
             $j("#botonBuscar10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
@@ -1142,7 +1208,7 @@
 
         $j('#nombrePromotor100').autocomplete(
         {
-            source: <?= json_encode($usuariosAsc) ?>,
+            source: <?= json_encode($promotoresAsc) ?>,
             minLength: 3,
             select: function( event, ui ) 
             {   
@@ -1153,6 +1219,42 @@
                 indicadorPromotor = 1;
                 idMensaje = "#mensajePromotor100"; 
                 actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje);
+            }
+        });
+
+        $j('#nombrePropietario100').autocomplete(
+        {
+            source: <?= json_encode($propietariosAsc) ?>,
+            minLength: 3,
+            select: function( event, ui ) 
+            {   
+                /*
+                idBien = gIdPostActual;
+                idPromotorAnterior = gMatrizBienes[idBien].post_author;
+                idNuevoPromotor = ui.item.id;
+                nombreNuevoPromotor = ui.item.value;
+                indicadorPromotor = 1;
+                idMensaje = "#mensajePromotor100"; 
+                actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje);
+                */
+            }
+        });
+
+        $j('#nombreCliente100').autocomplete(
+        {
+            source: <?= json_encode($clientesAsc) ?>,
+            minLength: 3,
+            select: function( event, ui ) 
+            {   
+                /*
+                idBien = gIdPostActual;
+                idPromotorAnterior = gMatrizBienes[idBien].post_author;
+                idNuevoPromotor = ui.item.id;
+                nombreNuevoPromotor = ui.item.value;
+                indicadorPromotor = 1;
+                idMensaje = "#mensajePromotor100"; 
+                actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje);
+                */
             }
         });
     });

@@ -10,7 +10,7 @@ class PostmetasController extends MvcPublicController
             'joins' => array('Post'),
             'includes' => array('Post'),
             'conditions' => array(
-            'Post.ID' => array(5548),
+            // 'Post.ID' => array(5548),
             'Post.post_type' => array('property', 'CRMdapliw'),
             'Post.post_status' => array('Publish', 'Pending'),
             'Postmeta.meta_key' => array('CRMdapliw_promotor_anterior')),
