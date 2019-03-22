@@ -6,69 +6,79 @@
 
         <!-- div con sufijo 10 -->
         <div class="container" id="menuCrm10">
-            <nav class="fixed-bottom navbar-dark" style="text-align: right; background-color:#085b9e;" id="opcionesMenu10">
+            <nav class="fixed-bottom navbar-dark" style="text-align: right; background-color:#085b9e; opacity: 0.5;" id="opcionesMenu10">
                 <button title="Inicio CRM" class="btn btn-link" id="inicioCrm10" >
                         <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
-                        alt="Inicio CRM" class="icon">
+                        alt="Inicio CRM" class="iconMenu">
                 </button>
 
                 <button title="Buscar" class="btn btn-link" id="botonBuscar10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-                    alt="Buscar" class="icon">
+                    alt="Buscar" class="iconMenu">
                 </button>
           
                 <a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link" id="publicarPropiedad10" title="Publicar propiedad">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
-                    alt="Publicar propiedad" class="icon">
+                    alt="Publicar propiedad" class="iconMenu">
                 </a>
                 
                 <button title="Otras opciones" class="btn btn-link" id="otrasOpciones10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/grid-two-up.svg" ?>
-                    alt="Otras opciones" class="icon">
+                    alt="Otras opciones" class="iconMenu">
                 </button>
 
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarBusqueda10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="Cerrar búsqueda" class="icon">
+                    alt="Cerrar búsqueda" class="iconMenu">
                 </button>
               
                 <button title="Ejecutar búsqueda" class="btn btn-link noVer" id="ejecutarBusqueda10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-                    alt="Ejecutar búsqueda" class="icon">
+                    alt="Ejecutar búsqueda" class="iconMenu">
                 </button>
 
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgenda10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="Cerrar agenda" class="icon">
+                    alt="Cerrar agenda" class="iconMenu">
                 </button>
 
                 <button title="Agregar actividad" class="btn btn-link noVer" id="agregarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
-                    alt="Agregar actividad" class="icon">
+                    alt="Agregar actividad" class="iconMenu">
                 </button>          
 
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgregarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="Cerrar agregar actividad" class="icon">
+                    alt="Cerrar agregar actividad" class="iconMenu">
                 </button>
 
                 <button title="Guardar actividad" class="btn btn-link noVer" id="guardarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
-                    alt="Agregar actividad" class="icon">
+                    alt="Agregar actividad" class="iconMenu">
                 </button>
 
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarPersonas10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="Cerrar personas" class="icon">
+                    alt="Cerrar personas" class="iconMenu">
                 </button>
 
                 <button title="Agregar persona" class="btn btn-link noVer" id="agregarPersona10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
-                    alt="Agregar persona" class="icon">
+                    alt="Agregar persona" class="iconMenu">
                 </button>          
 
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgregarPersona10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                    alt="Cerrar agregar persona" class="iconMenu">
+                </button>
+
+                <button title="Guardar persona" class="btn btn-link noVer" id="guardarPersona10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
+                    alt="Guardar persona" class="iconMenu">
+                </button>
+
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/ban.svg" ?>
-                    class="icon">            
+                    class="iconMenu">            
             </nav>
         </div>
 
@@ -122,7 +132,7 @@
                                     <input type="text" class="form-control" id="busquedaCompradorPotencial">
                                 </div>
                             </div>
-                            <!-- <div class="col-md-3">
+                            <div class="col-md-3">
                                 <p class="letraAzul">Prestaciones</p>
                                 <div class="form-group">
                                     <label for="busquedaHabitaciones">Habitaciones</label>
@@ -140,8 +150,8 @@
                                     <label for="busquedaArea">Área M2 (igual o mayor a)</label>
                                     <input type="Number" class="form-control" id="busquedaArea">
                                 </div>
-                            </div> -->
-                            <!-- <div class="col-md-3">
+                            </div>
+                            <div class="col-md-3">
                                 <p class="letraAzul">Otros</p>
                                 <div class="form-group">
                                     <label for="busquedaCodigo">Código</label>
@@ -163,7 +173,7 @@
                                     <label for="busquedaPrecioMinimo">Precio mínimo</label>
                                     <input type="number" class="form-control" id="busquedaPrecioMinimo">
                                 </div>
-                            </div> -->
+                            </div> 
                         </div>
                     </form>
                 </div>
@@ -245,7 +255,7 @@
                                     <option value="Firma opción compra-venta">Firma opción compra-venta</option> 
                                     <option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
                                     <option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
-                                    <option value="Llamar a propietario">Llamar a cliente potencial</option>
+                                    <option value="Llamar a propietario">Llamar a propietario</option>
                                     <option value="Mostrar el inmueble a un cliente">Mostrar el inmueble a un cliente</option>
                                     <option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
                                     <option value="Preparación del documento de venta">Preparación del documento de venta</option>
@@ -306,25 +316,6 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group"> 
-                                <label for="nombreCaptador100">Captador</label> 
-                                <input type="text" class="form-control" id="nombreCaptador100" disabled> 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group"> 
-                                <label for="nombrePromotor100">Promotor</label> 
-                                <input type="text" class="form-control" id="nombrePromotor100"> 
-                            </div>
-                            <div id="mensajePromotor100"></div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group"> 
                                 <label for="nombrePropietario100">Propietario</label> 
                                 <input type="text" class="form-control" id="nombrePropietario100"> 
                             </div>
@@ -335,7 +326,16 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group"> 
-                                <label for="nombreCliente100">Agregar comprador potencial</label> 
+                                <label for="nombreCaptador100">Captador</label> 
+                                <input type="text" class="form-control" id="nombreCaptador100"> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="nombreCliente100">Asignar de mi cartera de clientes un comprador potencial para esta propiedad</label> 
                                 <input type="text" class="form-control" id="nombreCliente100"> 
                             </div>
                             <div id="mensajeCliente100"></div>
@@ -344,8 +344,144 @@
 
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="nombrePromotor100">Promotor</label> 
+                                <input type="text" class="form-control" id="nombrePromotor100" disabled> 
+                            </div>
+                            <div id="mensajePromotor100"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-9">
                             <h3 class="letraAzul">Compradores potenciales</h3>    
-                            <div id="compradoresPotenciales100"> 
+                            <div id="compradoresPotenciales100"></div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <?php
+            for ($i = 1; $i <= 200; $i++) 
+            {
+                echo "<br />";
+            }
+        ?>
+    </div>
+
+    <!-- div con sufijo 110 -->
+    <div class="container formulario noVer" id="agregarPersonas110">
+        <h2 class="letraAzul" id="tituloAgregarPersonas110"></h2>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-8 mb-3">
+                <form>
+                    
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="tipoIdentificacion110">Tipo de identificación*</label> 
+                        </div>
+                        <select class="custom-select" id="tipoIdentificacion110"> 
+                            <option selected></option> 
+                            <option value="E">E - Extranjero</option>
+                            <option value="G">G - Gobierno</option>
+                            <option value="J">J - Jurídico</option> 
+                            <option value="P">P - Pasaporte</option>
+                            <option value="V">V - Venezolano</option>
+                        </select> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="numeroIdentificacion110">Nro. de identificación*</label> 
+                        <input type="text" class="form-control" id="numeroIdentificacion110"> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="nombres110">Nombre(s)*</label> 
+                        <input type="text" class="form-control" id="nombres110"> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="apellidos110">Apellido(s)*</label> 
+                        <input type="text" class="form-control" id="apellidos110"> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="celular110">Teléfono celular*</label> 
+                        <input type="text" class="form-control" id="celular110"> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="email110">Correo electrónico*</label> 
+                        <input type="email" class="form-control" id="celular110"> 
+                    </div>
+
+                    <div class="row" id="rolesCheckbox110">
+                        Roles*
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-9">
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="administrador110"> 
+                                <label class='form-check-label' for="administrador110">Administrador</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="gestorNegocios110"> 
+                                <label class='form-check-label' for="gestorNegocios110">Gestor de negocios</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="captador110"> 
+                                <label class='form-check-label' for="captador110">Captador</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="promotor110"> 
+                                <label class='form-check-label' for="promotor110">Asesor de inversión inmobiliaria</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="propietario110"> 
+                                <label class='form-check-label' for="propietario110">Propietario</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="cliente110"> 
+                                <label class='form-check-label' for="cliente110">Comprador potencial</label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="rolesSelect110">Rol*</label> 
+                        </div>
+                        <select class="custom-select" id="rolesSelect110"> 
+                            <option selected></option> 
+                            <option value="Cliente">Cliente</option>
+                            <option value="Propietario">Propietario</option>
+                        </select> 
+                    </div>
+
+                    <div class="row">
+                        Datos adicionales
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group"> 
+                                <label for="telefonoFijo110">Teléfono fijo</label> 
+                                <input type="text" class="form-control" id="telefonoFijo110"> 
+                            </div>
+
+                            <div class="form-group"> 
+                                <label for="direccion110">Dirección</label> 
+                                <input type="text" class="form-control" id="direccion110"> 
                             </div>
                         </div>
                     </div>
@@ -361,6 +497,7 @@
             }
         ?>
     </div>
+
 </div>
 <script>
     // Variables globales
@@ -492,8 +629,8 @@
                             "</div>" + 
 
                             "<div class='form-group'>" +
-                                "<label for='buscarPromotor60" + bien.ID + "'>Promotor responsable: </label>" +
-                                "<input type='text' id='buscarPromotor60-" + bien.ID + "' class='form-control buscarPromotor60'" + 
+                                "<label for='buscarCaptador60" + bien.ID + "'>Captador responsable: </label>" +
+                                "<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
                                     "value='" + gMatrizBienes[bien.ID].nombre_autor + "'>" +
                             "</div>" +
                             "<div id='mensajesUsuario60" + bien.ID + "'>" +
@@ -537,7 +674,7 @@
     {
         var agenda =
             "<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + gMatrizBienes[idPost].post_title + "</h2>" +
-            "<h3 class='letraAzul'>Promotor responsable: " + gMatrizBienes[idPost].nombre_autor + "</h3>" +
+            "<h3 class='letraAzul'>Captador responsable: " + gMatrizBienes[idPost].nombre_autor + "</h3>" +
             "<br />" +
             "<br />" +
             "<div class='row'>";
@@ -654,13 +791,13 @@
             {
                 dateFormat: "dd/mm/yy", 
                 monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
-                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ], 
+                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
                 changeMonth: true,
                 changeYear: true
             });
     }
 
-    function actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje)
+    function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje)
     {
         var mensajesUsuario = 
             "<div class='alert alert-info alert-dismissible'>" +
@@ -670,25 +807,25 @@
 
       	$j(idMensaje).html(mensajesUsuario);
 
-        var jsonActualizarPromotor = 
+        var jsonActualizarCaptador = 
         {
             "idBien" : idBien,
-            "idPromotorAnterior" : idPromotorAnterior,
-            "idNuevoPromotor" : idNuevoPromotor
+            "idCaptadorAnterior" : idCaptadorAnterior,
+            "idNuevoCaptador" : idNuevoCaptador
         }
 
-        $j.post("<?= mvc_public_url(array('controller' => 'posts', 'action' => 'actualizar_promotor')) ?>", 
-            jsonActualizarPromotor, null, "json")          
+        $j.post("<?= mvc_public_url(array('controller' => 'posts', 'action' => 'actualizar_captador')) ?>", 
+            jsonActualizarCaptador, null, "json")          
         .done(function(response) 
         {
             if (response.satisfactorio) 
             {
-                gMatrizBienes[idBien].post_author = idNuevoPromotor;
-                gMatrizBienes[idBien].nombre_autor = nombreNuevoPromotor;
+                gMatrizBienes[idBien].post_author = idNuevoCaptador;
+                gMatrizBienes[idBien].nombre_autor = nombreNuevoCaptador;
 
-                if (indicadorPromotor == 1)
+                if (indicadorCaptador == 1)
                 {
-                    $j("#buscarPromotor60-" + idBien).val(gMatrizBienes[idBien].nombre_autor);
+                    $j("#buscarCaptador60-" + idBien).val(gMatrizBienes[idBien].nombre_autor);
                 }
 
                 mensajesUsuario =
@@ -780,7 +917,7 @@
     function personasBien(idBien)
     {
 
-        $j("#tituloPersonas100").html("Actividades planificadas para " + gMatrizBienes[idBien].post_title);
+        $j("#tituloPersonas100").html("Personas relacionadas con la propiedad " + gMatrizBienes[idBien].post_title);
 
         if (gDatosBienes[idBien]._thumbnail_id)
         {
@@ -791,14 +928,14 @@
             $j("#imagen100").html("Foto de la propiedad");
         }
 
+        $j("#nombrePropietario100").val(gMatrizBienes[idBien].propietario);
+        $j("#mensajePropietario100").html("");
+
         $j("#nombreCaptador100").val(gMatrizBienes[idBien].captador);
         $j("#mensajeCaptador100").html("");
 
         $j("#nombrePromotor100").val(gMatrizBienes[idBien].nombre_autor);
         $j("#mensajePromotor100").html("");
-
-        $j("#nombrePropietario100").val(gMatrizBienes[idBien].propietario);
-        $j("#mensajePropietario100").html("");
 
         $j("#mensajeCliente100").html("");
 
@@ -1163,19 +1300,19 @@
             });  
         });
 
-        $j('.buscarPromotor60').autocomplete(
+        $j('.buscarCaptador60').autocomplete(
         {
-            source: <?= json_encode($promotoresAsc) ?>,
+            source: <?= json_encode($captadoresAsc) ?>,
             minLength: 3,
             select: function( event, ui ) 
             {   
                 idBien = $j(this).attr("id").substring(17);
-                idPromotorAnterior = gMatrizBienes[idBien].post_author;
-                idNuevoPromotor = ui.item.id;
-                nombreNuevoPromotor = ui.item.value;
-                indicadorPromotor = 0;
+                idCaptadorAnterior = gMatrizBienes[idBien].post_author;
+                idNuevoCaptador = ui.item.id;
+                nombreNuevoCaptador = ui.item.value;
+                indicadorCaptador = 0;
                 idMensaje = "#mensajesUsuario60" + idBien; 
-                actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje);
+                actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje);
             }
         });
 
@@ -1187,7 +1324,7 @@
             $j("#botonBuscar10").addClass('noVer');
             $j("#publicarPropiedad10").addClass('noVer');
             $j("#otrasOpciones10").addClass('noVer');
-            personasBien(gIdPostActual);
+            // personasBien(gIdPostActual);
             $j("#personas100").removeClass("noVer");
             $j("#cerrarPersonas10").removeClass('noVer');
             $j("#agregarPersona10").removeClass("noVer");
@@ -1206,19 +1343,19 @@
             $j("#" + gPosicionAnterior).focus();
         });
 
-        $j('#nombrePromotor100').autocomplete(
+        $j('#nombreCaptador100').autocomplete(
         {
-            source: <?= json_encode($promotoresAsc) ?>,
+            source: <?= json_encode($captadoresAsc) ?>,
             minLength: 3,
             select: function( event, ui ) 
             {   
                 idBien = gIdPostActual;
-                idPromotorAnterior = gMatrizBienes[idBien].post_author;
-                idNuevoPromotor = ui.item.id;
-                nombreNuevoPromotor = ui.item.value;
-                indicadorPromotor = 1;
-                idMensaje = "#mensajePromotor100"; 
-                actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje);
+                idCaptadorAnterior = gMatrizBienes[idBien].post_author;
+                idNuevoCaptador = ui.item.id;
+                nombreNuevoCaptador = ui.item.value;
+                indicadorCaptador = 1;
+                idMensaje = "#mensajeCaptador100"; 
+                actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje);
             }
         });
 
@@ -1228,15 +1365,6 @@
             minLength: 3,
             select: function( event, ui ) 
             {   
-                /*
-                idBien = gIdPostActual;
-                idPromotorAnterior = gMatrizBienes[idBien].post_author;
-                idNuevoPromotor = ui.item.id;
-                nombreNuevoPromotor = ui.item.value;
-                indicadorPromotor = 1;
-                idMensaje = "#mensajePromotor100"; 
-                actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje);
-                */
             }
         });
 
@@ -1246,16 +1374,19 @@
             minLength: 3,
             select: function( event, ui ) 
             {   
-                /*
-                idBien = gIdPostActual;
-                idPromotorAnterior = gMatrizBienes[idBien].post_author;
-                idNuevoPromotor = ui.item.id;
-                nombreNuevoPromotor = ui.item.value;
-                indicadorPromotor = 1;
-                idMensaje = "#mensajePromotor100"; 
-                actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor, indicadorPromotor, idMensaje);
-                */
             }
         });
+
+        $j("#agregarPersona10").click(function()
+        {       
+            $j("#personas100").addClass("noVer");
+            $j("#cerrarPersonas10").addClass('noVer');
+            $j("#agregarPersona10").addClass('noVer');
+            $j("#agregarPersonas110").removeClass("noVer");
+            $j("#cerrarAgregarPersona10").removeClass('noVer');
+            $j("#guardarPersona10").removeClass("noVer");
+            window.scrollTo(0, 0);
+        });
+
     });
 </script>

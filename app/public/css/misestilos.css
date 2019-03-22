@@ -3,6 +3,11 @@
   width: 16px;
   height: 16px;
 }
+.iconMenu 
+{
+  width: 32px;
+  height: 32px;
+}
 .noVer
 {
   display: none;

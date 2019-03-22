@@ -9,9 +9,10 @@ class PostsController extends MvcPublicController
 
     public function index() 
     {
-        $user = wp_get_current_user();
+        $usuarioConectado = wp_get_current_user();
+        $idUsuario = $usuarioConectado->id;
 
-        if ($user->id > 0)
+        if ($usuarioConectado->id > 0)
         {        
             $this->load_model('Usermeta');
 
@@ -21,7 +22,18 @@ class PostsController extends MvcPublicController
                 'conditions' => array(
                     // 'User.ID' => array(32),
                     'Usermeta.meta_key' => array("first_name", "last_name", "CRMdapliw_roles")),
-                'order' => 'User.ID ASC, Usermeta.meta_key ASC, Usermeta.umeta_id ASC'));            
+                'order' => 'User.ID ASC, Usermeta.meta_key ASC, Usermeta.umeta_id ASC')); 
+
+            foreach ($userMetas as $userMeta)
+            {
+                if ($userMeta->ID == $usuarioConectado->id)
+                { 
+                    if ($userMeta->meta_key == "CRMdapliw_roles")
+                    {
+                        $roles = json_decode($userMeta->meta_value, true);
+                    }
+                }
+            }           
 
             $contadorUsuarios = 0;
             $idUsuarioActual = "";
@@ -68,17 +80,21 @@ class PostsController extends MvcPublicController
                     {   
                         $promotores[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
                     }
+                    elseif ($rol == "Gestor de negocios")
+                    {   
+                        $gestores[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                    }
                     elseif ($rol == "Propietario")
                     {   
                         $propietarios[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
-                    }            
-                    else
+                    }                       
+                    elseif ($rol == "Cliente")
                     {
                         $clientes[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
                     }
                 }
             }
-
+            $gestoresAsc = $this->array_orderby($gestores, 'label', SORT_ASC); 
             $captadoresAsc = $this->array_orderby($captadores, 'label', SORT_ASC); 
             $promotoresAsc = $this->array_orderby($promotores, 'label', SORT_ASC); 
             $propietariosAsc = $this->array_orderby($propietarios, 'label', SORT_ASC); 
@@ -118,7 +134,7 @@ class PostsController extends MvcPublicController
             $contadorDatos = 0;
             foreach ($propiedadesBienes as $propiedadesBien)
             {
-                if ($propiedadesBien->meta_key == "CRMdapliw_promotor_anterior")
+                if ($propiedadesBien->meta_key == "CRMdapliw_captador_anterior")
                 {
                     if ($contadorDatos == 0)
                     {
@@ -218,6 +234,7 @@ class PostsController extends MvcPublicController
                 $contadorDatos++;
             }
 
+            $this->set("gestoresAsc", $gestoresAsc);
             $this->set("captadoresAsc", $captadoresAsc);
             $this->set("promotoresAsc", $promotoresAsc);
             $this->set("propietariosAsc", $propietariosAsc);
@@ -262,11 +279,11 @@ class PostsController extends MvcPublicController
         return array_pop($args);
     }
 
-    public function actualizar_promotor()
+    public function actualizar_captador()
     {
         $this->autoRender = false;
 
-        /*
+        /* Solo para pruebas
         $_POST['idBien'] = 5297;
         $_POST['idPromotorAnterior'] = "1";
         $_POST['idPromotorActual'] = 32;
@@ -278,19 +295,19 @@ class PostsController extends MvcPublicController
 
             $this->load_model('Postmeta');
             
-            $postmeta = ['post_id' => $_POST['idBien'], 'meta_key' => 'CRMdapliw_promotor_anterior', 'meta_value' => $_POST['idPromotorAnterior']];
+            $postmeta = ['post_id' => $_POST['idBien'], 'meta_key' => 'CRMdapliw_captador_anterior', 'meta_value' => $_POST['idCaptadorAnterior']];
             $id = $this->Postmeta->insert($postmeta);
 
             $object = $this->Post->find_by_id($_POST["idBien"]);
-            $this->Post->update($object->__id, array('post_author' => $_POST['idNuevoPromotor']));
+            $this->Post->update($object->__id, array('post_author' => $_POST['idNuevoCaptador']));
 
             $jsondata["satisfactorio"] = true;
-            $jsondata["mensaje"] = "El promotor se actualizó exitosamente";
+            $jsondata["mensaje"] = "El captador se actualizó exitosamente";
         }
         else
         {
             $jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "El promotor no se pudo actualizar";
+            $jsondata["mensaje"] = "El captador no se pudo actualizar";
         }
         exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
     }

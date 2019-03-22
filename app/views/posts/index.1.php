@@ -6,69 +6,79 @@
 
         <!-- div con sufijo 10 -->
         <div class="container" id="menuCrm10">
-            <nav class="fixed-bottom navbar-dark" style="text-align: right; background-color:#085b9e;">
+            <nav class="fixed-bottom navbar-dark" style="text-align: right; background-color:#085b9e; opacity: 0.5;" id="opcionesMenu10">
                 <button title="Inicio CRM" class="btn btn-link" id="inicioCrm10" >
                         <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
-                        alt="Inicio CRM" class="icon">
+                        alt="Inicio CRM" class="iconMenu">
                 </button>
 
                 <button title="Buscar" class="btn btn-link" id="botonBuscar10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-                    alt="Buscar" class="icon">
+                    alt="Buscar" class="iconMenu">
                 </button>
           
                 <a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link" id="publicarPropiedad10" title="Publicar propiedad">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
-                    alt="Publicar propiedad" class="icon">
+                    alt="Publicar propiedad" class="iconMenu">
                 </a>
                 
                 <button title="Otras opciones" class="btn btn-link" id="otrasOpciones10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/grid-two-up.svg" ?>
-                    alt="Otras opciones" class="icon">
+                    alt="Otras opciones" class="iconMenu">
                 </button>
 
-                <button title="Inicio CRM" class="btn btn-link noVer" id="inicioCrmBusqueda10" >
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
-                    alt="Inicio CRM" class="icon">
-                </button>
-
-                <button title="Cancelar" class="btn btn-link noVer" id="cancelarBusqueda10">
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarBusqueda10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="cancelar búsqueda" class="icon">
+                    alt="Cerrar búsqueda" class="iconMenu">
                 </button>
               
                 <button title="Ejecutar búsqueda" class="btn btn-link noVer" id="ejecutarBusqueda10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-                    alt="Ejecutar búsqueda" class="icon">
+                    alt="Ejecutar búsqueda" class="iconMenu">
                 </button>
 
-                <button title="Inicio CRM" class="btn btn-link noVer" id="inicioCrmAgenda10" >
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
-                    alt="Inicio CRM" class="icon">
-                </button>
-
-                <button title="Cancelar" class="btn btn-link noVer" id="cancelarAgenda10">
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgenda10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="cancelar búsqueda" class="icon">
+                    alt="Cerrar agenda" class="iconMenu">
                 </button>
 
                 <button title="Agregar actividad" class="btn btn-link noVer" id="agregarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
-                    alt="Agregar actividad" class="icon">
+                    alt="Agregar actividad" class="iconMenu">
                 </button>          
 
-                <button title="Cancelar" class="btn btn-link noVer" id="cancelarAgregarActividad10">
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgregarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="cancelar búsqueda" class="icon">
+                    alt="Cerrar agregar actividad" class="iconMenu">
                 </button>
 
                 <button title="Guardar actividad" class="btn btn-link noVer" id="guardarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
-                    alt="Agregar actividad" class="icon">
+                    alt="Agregar actividad" class="iconMenu">
+                </button>
+
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarPersonas10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                    alt="Cerrar personas" class="iconMenu">
+                </button>
+
+                <button title="Agregar persona" class="btn btn-link noVer" id="agregarPersona10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
+                    alt="Agregar persona" class="iconMenu">
+                </button>          
+
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgregarPersona10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                    alt="Cerrar agregar persona" class="iconMenu">
+                </button>
+
+                <button title="Guardar persona" class="btn btn-link noVer" id="guardarPersona10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
+                    alt="Guardar persona" class="iconMenu">
                 </button>
 
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/ban.svg" ?>
-                    class="icon">            
+                    class="iconMenu">            
             </nav>
         </div>
 
@@ -82,7 +92,7 @@
         </div>
         
         <!-- div con sufijo 40 -->
-        <div class="container noVer" id="busqueda40">
+        <div class="container formulario noVer" id="busqueda40">
             <div class="row">
                 <div class="col-md-12">
                     <form id="formularioBusqueda">
@@ -94,12 +104,12 @@
                                         <label class="input-group-text" for="busquedaActividadesAgenda">Actividades planificadas</label>
                                     </div>
                                     <select class="custom-select" id="busquedadActividadesAgenda">
-                                        <option selected></option>
                                         <option value="Actividades atrasadas">Actividades atrasadas</option>
                                         <option value="Actividades del mes">Actividades del mes</option>
                                         <option value="Actividades para hoy">Actividades para hoy</option>
                                         <option value="Actividades para mañana">Actividades para mañana</option>
                                         <option value="Sin actividad planificada">Sin actividad planificada</option>
+                                        <option selected value="Todas">Todas</option>
                                     </select>
                                 </div>
                             </div>
@@ -122,7 +132,7 @@
                                     <input type="text" class="form-control" id="busquedaCompradorPotencial">
                                 </div>
                             </div>
-                            <!-- <div class="col-md-3">
+                            <div class="col-md-3">
                                 <p class="letraAzul">Prestaciones</p>
                                 <div class="form-group">
                                     <label for="busquedaHabitaciones">Habitaciones</label>
@@ -140,8 +150,8 @@
                                     <label for="busquedaArea">Área M2 (igual o mayor a)</label>
                                     <input type="Number" class="form-control" id="busquedaArea">
                                 </div>
-                            </div> -->
-                            <!-- <div class="col-md-3">
+                            </div>
+                            <div class="col-md-3">
                                 <p class="letraAzul">Otros</p>
                                 <div class="form-group">
                                     <label for="busquedaCodigo">Código</label>
@@ -163,69 +173,33 @@
                                     <label for="busquedaPrecioMinimo">Precio mínimo</label>
                                     <input type="number" class="form-control" id="busquedaPrecioMinimo">
                                 </div>
-                            </div> -->
+                            </div> 
                         </div>
                     </form>
                 </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <?php
+                for ($i = 1; $i <= 200; $i++) 
+                {
+                    echo "<br />";
+                }
+            ?>
         </div>
         <!-- div con sufijo 50 -->
         <!-- Reservado para crear index de la agenda sin imágenes -->
 
         <!-- div con sufijo 60 -->
-        <div class="container" id="bienes60">
+        <div class="container formulario" id="bienes60">
             <h2 class="letraAzul">Actividades planificadas de la agenda</h2>
             <br />
             <div class="row" id="cicloBienes60">
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <?php
+                for ($i = 1; $i <= 200; $i++) 
+                {
+                    echo "<br />";
+                }
+            ?>
         </div> 
     <?php else: ?>
         <!-- div con sufijo 70 -->
@@ -235,42 +209,19 @@
                 <br />
                 <p><b>Estimado usuario para acceder al CRM debes </b><?php echo $this->html->link('iniciar sesión', array('controller' => 'ingresar-al-sistema'), 
                     array('style' => 'color: blue;')); ?></p>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
             </div>
+            <br />
+            <br />
+            <br />
         </div> 
-        <br />
-        <br />                           
-        <br />
-        <br />                           
     <?php endif; ?>
     
     <!-- div con sufijo 80 -->
-    <div class="container noVer" id="agenda80">
+    <div class="container formulario noVer" id="agenda80">
     </div> 
 
     <!-- div con sufijo 90 -->
-    <div class="container noVer" id="agregarActividad90">
+    <div class="container formulario noVer" id="agregarActividad90">
         <div class="row">
             <div class='col-md-6'> 
                 <h2 class="letraAzul" id="tituloAgregarActividad90"></h2>
@@ -287,7 +238,7 @@
                                     <option selected></option> 
                                     <option value="Agregar datos del propietario">Agregar datos del propietario</option> 
                                     <option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
-                                    <option value="Coordinar elaboración de pendon">Coordinar elaboración de pendon</option>
+                                    <option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
                                     <option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
                                     <option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
                                     <option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
@@ -304,7 +255,7 @@
                                     <option value="Firma opción compra-venta">Firma opción compra-venta</option> 
                                     <option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
                                     <option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
-                                    <option value="Llamar a propietario">Llamar a cliente potencial</option>
+                                    <option value="Llamar a propietario">Llamar a propietario</option>
                                     <option value="Mostrar el inmueble a un cliente">Mostrar el inmueble a un cliente</option>
                                     <option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
                                     <option value="Preparación del documento de venta">Preparación del documento de venta</option>
@@ -341,55 +292,221 @@
                 </form>
             <br />
             <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
             </div> 
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
+        <?php
+            for ($i = 1; $i <= 200; $i++) 
+            {
+                echo "<br />";
+            }
+        ?>
     </div>
+
+    <!-- div con sufijo 100 -->
+    <div class="container formulario noVer" id="personas100">
+        <h2 class="letraAzul" id="tituloPersonas100"></h2>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 mb-3">
+                <div class="card" id="imagen100">
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-8 mb-3">
+                <form>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="nombrePropietario100">Propietario</label> 
+                                <input type="text" class="form-control" id="nombrePropietario100"> 
+                            </div>
+                            <div id="mensajePropietario100"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="nombreCaptador100">Captador</label> 
+                                <input type="text" class="form-control" id="nombreCaptador100"> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="nombreCliente100">Asignar de mi cartera de clientes un comprador potencial para esta propiedad</label> 
+                                <input type="text" class="form-control" id="nombreCliente100"> 
+                            </div>
+                            <div id="mensajeCliente100"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="nombrePromotor100">Promotor</label> 
+                                <input type="text" class="form-control" id="nombrePromotor100" disabled> 
+                            </div>
+                            <div id="mensajePromotor100"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h3 class="letraAzul">Compradores potenciales</h3>    
+                            <div id="compradoresPotenciales100"> 
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <?php
+            for ($i = 1; $i <= 200; $i++) 
+            {
+                echo "<br />";
+            }
+        ?>
+    </div>
+
+    <!-- div con sufijo 110 -->
+    <div class="container formulario noVer" id="agregarPersonas110">
+        <h2 class="letraAzul" id="tituloAgregarPersonas110"></h2>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-8 mb-3">
+                <form>
+                    
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="tipoIdentificacion110">Tipo de identificación*</label> 
+                        </div>
+                        <select class="custom-select" id="tipoIdentificacion110"> 
+                            <option selected></option> 
+                            <option value="E">E - Extranjero</option>
+                            <option value="G">G - Gobierno</option>
+                            <option value="J">J - Jurídico</option> 
+                            <option value="P">P - Pasaporte</option>
+                            <option value="V">V - Venezolano</option>
+                        </select> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="numeroIdentificacion110">Nro. de identificación*</label> 
+                        <input type="text" class="form-control" id="numeroIdentificacion110"> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="nombres110">Nombre(s)*</label> 
+                        <input type="text" class="form-control" id="nombres110"> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="apellidos110">Apellido(s)*</label> 
+                        <input type="text" class="form-control" id="apellidos110"> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="celular110">Teléfono celular*</label> 
+                        <input type="text" class="form-control" id="celular110"> 
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="email110">Correo electrónico*</label> 
+                        <input type="email" class="form-control" id="celular110"> 
+                    </div>
+
+                    <div class="row" id="rolesCheckbox110">
+                        Roles*
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-9">
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="administrador110"> 
+                                <label class='form-check-label' for="administrador110">Administrador</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="gestorNegocios110"> 
+                                <label class='form-check-label' for="gestorNegocios110">Gestor de negocios</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="captador110"> 
+                                <label class='form-check-label' for="captador110">Captador</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="promotor110"> 
+                                <label class='form-check-label' for="promotor110">Asesor de inversión inmobiliaria</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="propietario110"> 
+                                <label class='form-check-label' for="propietario110">Propietario</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="cliente110"> 
+                                <label class='form-check-label' for="cliente110">Comprador potencial</label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="rolesSelect110">Rol*</label> 
+                        </div>
+                        <select class="custom-select" id="rolesSelect110"> 
+                            <option selected></option> 
+                            <option value="Cliente">Cliente</option>
+                            <option value="Propietario">Propietario</option>
+                        </select> 
+                    </div>
+
+                    <div class="row">
+                        Datos adicionales
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group"> 
+                                <label for="telefonoFijo110">Teléfono fijo</label> 
+                                <input type="text" class="form-control" id="telefonoFijo110"> 
+                            </div>
+
+                            <div class="form-group"> 
+                                <label for="direccion110">Dirección</label> 
+                                <input type="text" class="form-control" id="direccion110"> 
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <?php
+            for ($i = 1; $i <= 200; $i++) 
+            {
+                echo "<br />";
+            }
+        ?>
+    </div>
+
 </div>
-<br />
-<br />
-<br />
-<br />
-<br />
 <script>
     // Variables globales
     var gBienes = <?= json_encode($bienes) ?>;
     var gMatrizBienes = <?= json_encode($matrizBienes) ?>;
     var gDatosBienes = <?= json_encode($datosBienes) ?>;
-    var gIdPostActual = 0;
+    var gIdPostActual = "";
     var gPosicionAnterior = "";
 
     // Funciones Javascript
@@ -514,8 +631,8 @@
                             "</div>" + 
 
                             "<div class='form-group'>" +
-                                "<label for='buscarPromotor60" + bien.ID + "'>Promotor responsable: </label>" +
-                                "<input type='text' id='buscarPromotor60" + bien.ID + "' class='form-control buscarPromotor60'" + 
+                                "<label for='buscarCaptador60" + bien.ID + "'>Captador responsable: </label>" +
+                                "<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
                                     "value='" + gMatrizBienes[bien.ID].nombre_autor + "'>" +
                             "</div>" +
                             "<div id='mensajesUsuario60" + bien.ID + "'>" +
@@ -529,12 +646,12 @@
                                         "crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icon'>" +
                                     "</a>" +
 
-                                    "<button class='btn btn-light personas60' id='personas60" + bien.ID + "' title='Personas'>" +
+                                    "<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
                                         "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
                                         "crmdapliw/app/public/images/people.svg alt='Personas' class='icon'>" +
                                     "</button>" +
 
-                                    "<button class='btn btn-light documentos60' id='documentos60" + bien.ID + "' title='Documentos'>" +
+                                    "<button class='btn btn-light documentos60' id='documentos60-" + bien.ID + "' title='Documentos'>" +
                                         "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
                                         "crmdapliw/app/public/images/document.svg alt='Documentos' class='icon'>" +
                                     "</button>" +
@@ -558,8 +675,8 @@
     function agenda(idPost)
     {
         var agenda =
-            "<h2 class='letraAzul' id='cabecera80'>Actividades planificadas para " + gMatrizBienes[idPost].post_title + "</h2>" +
-            "<h3 class='letraAzul'>Promotor responsable: " + gMatrizBienes[idPost].nombre_autor + "</h3>" +
+            "<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + gMatrizBienes[idPost].post_title + "</h2>" +
+            "<h3 class='letraAzul'>Captador responsable: " + gMatrizBienes[idPost].nombre_autor + "</h3>" +
             "<br />" +
             "<br />" +
             "<div class='row'>";
@@ -568,23 +685,21 @@
         {
             agenda +=
                 "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
-                    "<div class='card'>";
-                        if (gDatosBienes[idPost]._thumbnail_id)
-                        {
-                            agenda += 
-                                "<img src=" + gDatosBienes[idPost]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>";
-                        }
-                        else
-                        {
-                            agenda += "Foto de la propiedad";
-                        }
+                    "<div class='card'>" +
+                        "<img src=" + gDatosBienes[idPost]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>" +
                     "</div>" +
                 "</div>" +
                 "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
         }
         else
         {
-            agenda += "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
+            agenda +=
+                "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
+                    "<div class='card'>" +
+                        "Foto de la propiedad" +
+                    "</div>" +
+                "</div>" +
+                "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
         }
 
         if (gDatosBienes[idPost].CRMdapliw_actividad_agenda)
@@ -667,44 +782,24 @@
             });
         } 
 
-        agenda +=
-                "</div>" +
-            "</div>" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />" +
-            "<br />";
+        agenda += "</div></div>";
+
+        for (i = 1; i <= 200; i++) 
+        {
+            agenda += "<br />";
+        }
 
         $j("#agenda80").html(agenda).contents().find(".fechaPlanificada80").datepicker(
             {
                 dateFormat: "dd/mm/yy", 
                 monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
-                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ], 
+                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
                 changeMonth: true,
                 changeYear: true
             });
     }
 
-    function actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor)
+    function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje)
     {
         var mensajesUsuario = 
             "<div class='alert alert-info alert-dismissible'>" +
@@ -712,30 +807,33 @@
                 "<strong>Por favor espere mientras se guardan los datos</strong>" +
             "</div>";
 
-        var idMensaje = "#mensajesUsuario60" + idBien; 
-
       	$j(idMensaje).html(mensajesUsuario);
 
-        var jsonActualizarPromotor = 
+        var jsonActualizarCaptador = 
         {
             "idBien" : idBien,
-            "idPromotorAnterior" : idPromotorAnterior,
-            "idNuevoPromotor" : idNuevoPromotor
+            "idCaptadorAnterior" : idCaptadorAnterior,
+            "idNuevoCaptador" : idNuevoCaptador
         }
 
-        $j.post("<?= mvc_public_url(array('controller' => 'posts', 'action' => 'actualizar_promotor')) ?>", 
-            jsonActualizarPromotor, null, "json")          
+        $j.post("<?= mvc_public_url(array('controller' => 'posts', 'action' => 'actualizar_captador')) ?>", 
+            jsonActualizarCaptador, null, "json")          
         .done(function(response) 
         {
             if (response.satisfactorio) 
             {
-                gMatrizBienes[idBien].post_author = idNuevoPromotor;
-                gMatrizBienes[idBien].nombre_autor = nombreNuevoPromotor;
+                gMatrizBienes[idBien].post_author = idNuevoCaptador;
+                gMatrizBienes[idBien].nombre_autor = nombreNuevoCaptador;
+
+                if (indicadorCaptador == 1)
+                {
+                    $j("#buscarCaptador60-" + idBien).val(gMatrizBienes[idBien].nombre_autor);
+                }
 
                 mensajesUsuario =
                     "<div class='alert alert-success alert-dismissible'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                        "<strong>¡ Los datos se guardaron exitosamente ! " + response.mensaje + "</strong>" +
+                        "<strong>" + response.mensaje + "</strong>" +
                     "</div>";
                 $j(idMensaje).html(mensajesUsuario);
             } 
@@ -744,7 +842,7 @@
                 mensajesUsuario =
                 "<div class='alert alert-danger alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>¡ Los datos no se pudieron guardar ! " + response.mensaje + "</strong>" +
+                    "<strong>" + response.mensaje + "</strong>" +
                 "</div>"; 
 
             	$j(idMensaje).html(mensajesUsuario);
@@ -762,56 +860,165 @@
         });
     }
 
+    function compradoresPotenciales(idBien)
+    {
+        var compradoresPotenciales =
+                "<div class='col-12 col-sm-6 col-md-12 mb-3'>";
+
+        if (gDatosBienes[idBien].CRMdapliw_cliente)
+        {
+            arregloCompradores = gDatosBienes[idBien].CRMdapliw_cliente.sort(function(a,b)
+            {
+                return (b.posicionOriginal - a.posicionOriginal);
+            });
+
+            $j.each(arregloCompradores, function(clave, datos)  
+            {
+                if (datos.activo == "true")
+                {
+                    compradoresPotenciales += 
+                        "<div class='card' id='comprador100-" + clave + "-" + datos.idUser + "-" + idBien + "'>" +
+                            "<div class='card-block'>" + 
+                                "<h4 class='card-title'>" + datos.valor + "</h4>" +
+                                "<div class='card bg-light text-dark'>" +
+                                    "<div class='card-body'>" +
+                                        "<div class='col-md-3'>" +
+                                            "<div class='form-check'>" +
+                                                "<input type='checkbox' class='form-check-input eliminarComprador100' id='eliminarComprador100-" + 
+                                                    clave + "-" + datos.idUser + "-" + idBien + "'>" +
+                                                "<label class='form-check-label' for='eliminarComprador100-" + 
+                                                    clave + "-" + datos.idUser + "-" + idBien + "'>&nbsp;&nbsp;Eliminar</label>" +
+                                            "</div>" +
+                                        "</div>"+
+
+                                    "</div>" +
+                                "</div>" +
+                            "</div>" +
+                        "</div>" +
+                        "<div class='row'>" +
+                            "<div class='col-md-12'>" +
+                                "<div id='mensajesComprador100-" + clave + "-" + datos.idUser + "-" + idBien + "'>" +
+                                "</div>" +
+                            "</div>" +
+                        "</div>" + 
+                        "<br />";
+                }
+            });
+        } 
+
+        compradoresPotenciales += "</div>";
+
+        for (i = 1; i <= 200; i++) 
+        {
+            compradoresPotenciales += "<br />";
+        }
+
+        $j("#compradoresPotenciales100").html(compradoresPotenciales);
+    }
+
+    function personasBien(idBien)
+    {
+
+        $j("#tituloPersonas100").html("Personas relacionadas con la propiedad " + gMatrizBienes[idBien].post_title);
+
+        if (gDatosBienes[idBien]._thumbnail_id)
+        {
+            $j("#imagen100").html("<img src=" + gDatosBienes[idBien]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>");
+        }
+        else
+        {
+            $j("#imagen100").html("Foto de la propiedad");
+        }
+
+        $j("#nombrePropietario100").val(gMatrizBienes[idBien].propietario);
+        $j("#mensajePropietario100").html("");
+
+        $j("#nombreCaptador100").val(gMatrizBienes[idBien].captador);
+        $j("#mensajeCaptador100").html("");
+
+        $j("#nombrePromotor100").val(gMatrizBienes[idBien].nombre_autor);
+        $j("#mensajePromotor100").html("");
+
+        $j("#mensajeCliente100").html("");
+
+        compradoresPotenciales(idBien);
+    }
+
+
     // Funciones jQuery
     $j(document).ready(function()
     {
         mostrarAgenda();
 
-        $j("#fechaPlanificada90").datepicker(
-            {
-                dateFormat: "dd/mm/yy", 
-                monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
-                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ], 
-                changeMonth: true,
-                changeYear: true
+        $j('#inicioCrm10').click(function()
+        {
+            $j(".formulario").each(function()
+            {   
+                if ($j(this).hasClass('noVer') === false)
+                {
+                    $j(this).addClass('noVer');
+                }           
             });
 
-        $j("#botonBuscar10").click(function()
-        {
-            $j("#bienes60").addClass('noVer');
-            $j("#inicioCrm10").addClass('noVer');
-            $j("#botonBuscar10").addClass('noVer');
-            $j("#publicarPropiedad10").addClass('noVer');
-            $j("#otrasOpciones10").addClass('noVer');
-            $j("#busqueda40").removeClass('noVer');
-            $j("#inicioCrmBusqueda10").removeClass('noVer');            
-            $j("#cancelarBusqueda10").removeClass('noVer');
-            $j("#ejecutarBusqueda10").removeClass('noVer');
-            window.scrollTo(0, 0);
-        });
+            $j("#opcionesMenu10 button").each(function()
+            {   
+                if ($j(this).hasClass('noVer') === false)
+                {
+                    $j(this).addClass('noVer');
+                }           
+            });
 
-        $j('#inicioCrmBusqueda10').click(function()
-        {
-            $j("#busqueda40").addClass('noVer');
-            $j("#inicioCrmBusqueda10").addClass('noVer');
-            $j("#cancelarBusqueda10").addClass('noVer');
-            $j("#ejecutarBusqueda10").addClass('noVer');
+            $j("#opcionesMenu10 a").each(function()
+            {   
+                if ($j(this).hasClass('noVer') === false)
+                {
+                    $j(this).addClass('noVer');
+                }           
+            });
+            
+            if (gIdPostActual != "")
+            {
+                primeraActividadPendiente(gIdPostActual);
+            }    
+
+            $j("#mensajesUsuario30").html(""); 
+          
             $j("#bienes60").removeClass('noVer');
+
+            if (gPosicionAnterior != "")
+            {
+                $j("#" + gPosicionAnterior).focus();    
+            }
+            else
+            {
+                window.scrollTo(0, 0);
+            }
+
             $j("#inicioCrm10").removeClass('noVer');           
             $j("#botonBuscar10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
             $j("#otrasOpciones10").removeClass('noVer');
+
+        });
+
+        $j("#botonBuscar10").click(function()
+        {
+            $j("#bienes60").addClass('noVer');
+            $j("#botonBuscar10").addClass('noVer');
+            $j("#publicarPropiedad10").addClass('noVer');
+            $j("#otrasOpciones10").addClass('noVer');
+            $j("#busqueda40").removeClass('noVer');
+            $j("#cerrarBusqueda10").removeClass('noVer');
+            $j("#ejecutarBusqueda10").removeClass('noVer');
             window.scrollTo(0, 0);
         });
 
-        $j('#cancelarBusqueda10').click(function()
+        $j('#cerrarBusqueda10').click(function()
         {
             $j("#busqueda40").addClass('noVer');
-            $j("#inicioCrmBusqueda10").addClass('noVer');
-            $j("#cancelarBusqueda10").addClass('noVer');
+            $j("#cerrarBusqueda10").addClass('noVer');
             $j("#ejecutarBusqueda10").addClass('noVer');
             $j("#bienes60").removeClass('noVer');
-            $j("#inicioCrm10").removeClass('noVer');           
             $j("#botonBuscar10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
             $j("#otrasOpciones10").removeClass('noVer');
@@ -823,45 +1030,25 @@
             gPosicionAnterior = $j(this).attr('id');
             gIdPostActual = $j(this).attr('id').substring(17);
             $j('#bienes60').addClass('noVer');
-            $j("#inicioCrm10").addClass('noVer');
             $j("#botonBuscar10").addClass('noVer');
             $j("#publicarPropiedad10").addClass('noVer');
             $j("#otrasOpciones10").addClass('noVer');
             agenda(gIdPostActual);
             $j("#agenda80").removeClass("noVer");
-            $j("#inicioCrmAgenda10").removeClass('noVer');
-            $j("#cancelarAgenda10").removeClass('noVer');
+            $j("#cerrarAgenda10").removeClass('noVer');
             $j("#agregarActividad10").removeClass("noVer");
             window.scrollTo(0, 0);
             
         });
-
-        $j('#inicioCrmAgenda10').click(function()
+      
+        $j('#cerrarAgenda10').click(function()
         {
             $j("#agenda80").addClass("noVer");
-            $j("#inicioCrmAgenda10").addClass('noVer');
-            $j("#cancelarAgenda10").addClass('noVer');
+            $j("#cerrarAgenda10").addClass('noVer');
             $j("#agregarActividad10").addClass("noVer");
             $j("#mensajesUsuario30").html("");
             $j('#bienes60').removeClass('noVer');
             primeraActividadPendiente(gIdPostActual);
-            $j("#inicioCrm10").removeClass('noVer');
-            $j("#botonBuscar10").removeClass('noVer');
-            $j("#publicarPropiedad10").removeClass('noVer');
-            $j("#otrasOpciones10").removeClass('noVer');
-            $j("#" + gPosicionAnterior).focus();
-        });
-       
-        $j('#cancelarAgenda10').click(function()
-        {
-            $j("#agenda80").addClass("noVer");
-            $j("#inicioCrmAgenda10").addClass('noVer');
-            $j("#cancelarAgenda10").addClass('noVer');
-            $j("#agregarActividad10").addClass("noVer");
-            $j("#mensajesUsuario30").html("");
-            $j('#bienes60').removeClass('noVer');
-            primeraActividadPendiente(gIdPostActual);
-            $j("#inicioCrm10").removeClass('noVer');
             $j("#botonBuscar10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
             $j("#otrasOpciones10").removeClass('noVer');
@@ -894,16 +1081,16 @@
                 if ($j(this).attr('id').substring(0, 22) == "informacionAdicional80")
                 {
                     $j(this).val($j.trim($j(this).val().toUpperCase()));
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].informacionAdicional = $j(this).val();
+                    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].informacionAdicional = $j(this).val();
                     informacionAdicionalObj = $j(this).val();
                 }
                 if ($j(this).attr('id').substring(0, 18) == "fechaPlanificada80")
                 {
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].diaPlanificado = $j(this).val().substring(0, 2);
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].mesPlanificado = $j(this).val().substring(3, 5);
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].anoPlanificado = $j(this).val().substring(6, 10);
+                    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].diaPlanificado = $j(this).val().substring(0, 2);
+                    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].mesPlanificado = $j(this).val().substring(3, 5);
+                    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].anoPlanificado = $j(this).val().substring(6, 10);
 
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].fechaInvertida = 
+                    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].fechaInvertida = 
                         $j(this).val().substring(6, 10) + $j(this).val().substring(3, 5) + $j(this).val().substring(0, 2);
                                         
                     diaPlanificadoObj = $j(this).val().substring(0, 2);
@@ -915,12 +1102,12 @@
                 {
                     if ($j(this).prop("checked") == true)
                     {
-                        gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].estatus = "true";
+                        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "true";
                         estatusObj = "true";
                     }
                     else
                     {
-                        gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"][arregloId[0]].estatus = "false";
+                        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "false";
                         estatusObj = "false";
                     }
                 }
@@ -983,21 +1170,30 @@
             $j('#actividadAgenda90').val("");
             $j('#informacionAdicional90').val("");
             $j('#fechaPlanificada90').val("");
-            $j('#cancelarAgenda10').addClass('noVer');
+            $j('#cerrarAgenda10').addClass('noVer');
             $j('#agregarActividad10').addClass('noVer');
-            $j('#cancelarAgregarActividad10').removeClass('noVer');
+            $j('#cerrarAgregarActividad10').removeClass('noVer');
             $j('#guardarActividad10').removeClass('noVer');
-            $j('#tituloAgregarActividad90').html("Planificar actividades para " + gMatrizBienes[gIdPostActual]['post_title']); 
+            $j('#tituloAgregarActividad90').html("Planificar actividades para " + gMatrizBienes[gIdPostActual].post_title); 
             window.scrollTo(0, 0);
         });
 
-        $j('#cancelarAgregarActividad10').click(function()
+        $j("#fechaPlanificada90").datepicker(
+            {
+                dateFormat: "dd/mm/yy", 
+                monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
+                dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ], 
+                changeMonth: true,
+                changeYear: true
+            });
+
+        $j('#cerrarAgregarActividad10').click(function()
         {
             $j("#agregarActividad90").addClass("noVer");
-            $j("#cancelarAgregarActividad10").addClass('noVer');
+            $j("#cerrarAgregarActividad10").addClass('noVer');
             $j("#guardarActividad10").addClass("noVer");
             $j('#agenda80').removeClass('noVer');
-            $j("#cancelarAgenda10").removeClass('noVer');
+            $j("#cerrarAgenda10").removeClass('noVer');
             $j("#agregarActividad10").removeClass('noVer');
         });
 
@@ -1037,27 +1233,35 @@
             .done(function(response) 
             {
                 if (response.satisfactorio) 
-                {   
-                    ultimaPosicion = 0;
-
-                    $j.each(gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"], function(clave, datos)  
-                    {
-                        ultimaPosicion = clave;
-                    });
-                    ultimaPosicion++;
-
+                {
                     fechaInvertida = 
                         $j("#fechaPlanificada90").val().substring(6, 10) +
                         $j("#fechaPlanificada90").val().substring(3, 5) +
                         $j("#fechaPlanificada90").val().substring(0, 2);
 
                     jsonActividad.actividad.id = response.id;
-                    jsonActividad.actividad.posicionOriginal = ultimaPosicion;
                     jsonActividad.actividad.fechaInvertida = fechaInvertida;
 
-                    console.log(jsonActividad.actividad);
-                                    
-                    gDatosBienes[gIdPostActual]["CRMdapliw_actividad_agenda"].push(jsonActividad.actividad);
+                    if (gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda)
+                    {
+                        ultimaPosicion = 0;
+
+                        $j.each(gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda, function(clave, datos)  
+                        {
+                            ultimaPosicion = clave;
+                        });
+
+                        ultimaPosicion++;
+                        jsonActividad.actividad.posicionOriginal = ultimaPosicion;
+                    
+                        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda.push(jsonActividad.actividad);
+                    }
+                    else
+                    {
+                        jsonActividad.actividad.posicionOriginal = 0;
+
+                        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda = [jsonActividad.actividad];
+                    }
      
                     mensajesUsuario =
                         "<div class='alert alert-success alert-dismissible'>" +
@@ -1068,8 +1272,10 @@
                     $j("#mensajesUsuario30").html(mensajesUsuario);
 
                     agenda(gIdPostActual); 
+                    $j("#cerrarAgregarActividad10").addClass("noVer");
                     $j("#guardarActividad10").addClass("noVer");
                     $j("#agenda80").removeClass("noVer");
+                    $j("#cerrarAgenda10").removeClass("noVer");
                     $j("#agregarActividad10").removeClass("noVer");
                     window.scrollTo(0, 0);           
                 } 
@@ -1096,18 +1302,93 @@
             });  
         });
 
-        $j('.buscarPromotor60').autocomplete(
+        $j('.buscarCaptador60').autocomplete(
         {
-            source: <?= json_encode($usuariosAsc) ?>,
+            source: <?= json_encode($captadoresAsc) ?>,
             minLength: 3,
             select: function( event, ui ) 
             {   
-                idBien = $j(this).attr("id").substring(16);
-                idPromotorAnterior = gMatrizBienes[idBien].post_author;
-                idNuevoPromotor = ui.item.id;
-                nombreNuevoPromotor = ui.item.value;
-                actualizarPromotor(idBien, idPromotorAnterior, idNuevoPromotor, nombreNuevoPromotor);
+                idBien = $j(this).attr("id").substring(17);
+                idCaptadorAnterior = gMatrizBienes[idBien].post_author;
+                idNuevoCaptador = ui.item.id;
+                nombreNuevoCaptador = ui.item.value;
+                indicadorCaptador = 0;
+                idMensaje = "#mensajesUsuario60" + idBien; 
+                actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje);
             }
         });
+
+        $j("#cicloBienes60").on("click", ".personas60", function()
+        {       
+            gPosicionAnterior = $j(this).attr('id');
+            gIdPostActual = $j(this).attr('id').substring(11);
+            $j('#bienes60').addClass('noVer');
+            $j("#botonBuscar10").addClass('noVer');
+            $j("#publicarPropiedad10").addClass('noVer');
+            $j("#otrasOpciones10").addClass('noVer');
+            // personasBien(gIdPostActual);
+            $j("#personas100").removeClass("noVer");
+            $j("#cerrarPersonas10").removeClass('noVer');
+            $j("#agregarPersona10").removeClass("noVer");
+            window.scrollTo(0, 0);
+        });
+
+        $j('#cerrarPersonas10').click(function()
+        {
+            $j("#personas100").addClass("noVer");
+            $j("#cerrarPersonas10").addClass('noVer');
+            $j("#agregarPersona10").addClass("noVer");
+            $j('#bienes60').removeClass('noVer');
+            $j("#botonBuscar10").removeClass('noVer');
+            $j("#publicarPropiedad10").removeClass('noVer');
+            $j("#otrasOpciones10").removeClass('noVer');
+            $j("#" + gPosicionAnterior).focus();
+        });
+
+        $j('#nombreCaptador100').autocomplete(
+        {
+            source: <?= json_encode($captadoresAsc) ?>,
+            minLength: 3,
+            select: function( event, ui ) 
+            {   
+                idBien = gIdPostActual;
+                idCaptadorAnterior = gMatrizBienes[idBien].post_author;
+                idNuevoCaptador = ui.item.id;
+                nombreNuevoCaptador = ui.item.value;
+                indicadorCaptador = 1;
+                idMensaje = "#mensajeCaptador100"; 
+                actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje);
+            }
+        });
+
+        $j('#nombrePropietario100').autocomplete(
+        {
+            source: <?= json_encode($propietariosAsc) ?>,
+            minLength: 3,
+            select: function( event, ui ) 
+            {   
+            }
+        });
+
+        $j('#nombreCliente100').autocomplete(
+        {
+            source: <?= json_encode($clientesAsc) ?>,
+            minLength: 3,
+            select: function( event, ui ) 
+            {   
+            }
+        });
+
+        $j("#agregarPersona10").click(function()
+        {       
+            $j("#personas100").addClass("noVer");
+            $j("#cerrarPersonas10").addClass('noVer');
+            $j("#agregarPersona10").addClass('noVer');
+            $j("#agregarPersonas110").removeClass("noVer");
+            $j("#cerrarAgregarPersona10").removeClass('noVer');
+            $j("#guardarPersona10").removeClass("noVer");
+            window.scrollTo(0, 0);
+        });
+
     });
 </script>
