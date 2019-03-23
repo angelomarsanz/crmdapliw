@@ -179,7 +179,7 @@
                 </div>
             </div>
             <?php
-                for ($i = 1; $i <= 200; $i++) 
+                for ($i = 1; $i <= 100; $i++) 
                 {
                     echo "<br />";
                 }
@@ -195,7 +195,7 @@
             <div class="row" id="cicloBienes60">
             </div>
             <?php
-                for ($i = 1; $i <= 200; $i++) 
+                for ($i = 1; $i <= 100; $i++) 
                 {
                     echo "<br />";
                 }
@@ -295,7 +295,7 @@
             </div> 
         </div>
         <?php
-            for ($i = 1; $i <= 200; $i++) 
+            for ($i = 1; $i <= 100; $i++) 
             {
                 echo "<br />";
             }
@@ -354,12 +354,10 @@
 
                     <div class="row">
                         <div class="col-md-3">
-                            </div>
                         </div>
                         <div class="col-md-9">
                             <h3 class="letraAzul">Compradores potenciales</h3>    
-                            <div id="compradoresPotenciales100"> 
-                            </div>
+                            <div id="compradoresPotenciales100"></div>
                         </div>
                     </div>
 
@@ -368,7 +366,7 @@
 
         </div>
         <?php
-            for ($i = 1; $i <= 200; $i++) 
+            for ($i = 1; $i <= 100; $i++) 
             {
                 echo "<br />";
             }
@@ -421,40 +419,40 @@
                         <input type="email" class="form-control" id="celular110"> 
                     </div>
 
+                    <p>Roles*</p>
                     <div class="row" id="rolesCheckbox110">
-                        Roles*
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-9">
 
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="administrador110"> 
-                                <label class='form-check-label' for="administrador110">Administrador</label>
+                                <label class='form-check-label' for="administrador110">&nbsp;&nbsp;Administrador</label>
                             </div>
 
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="gestorNegocios110"> 
-                                <label class='form-check-label' for="gestorNegocios110">Gestor de negocios</label>
+                                <label class='form-check-label' for="gestorNegocios110">&nbsp;&nbsp;Gestor de negocios</label>
                             </div>
 
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="captador110"> 
-                                <label class='form-check-label' for="captador110">Captador</label>
+                                <label class='form-check-label' for="captador110">&nbsp;&nbsp;Captador</label>
                             </div>
 
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="promotor110"> 
-                                <label class='form-check-label' for="promotor110">Asesor de inversión inmobiliaria</label>
+                                <label class='form-check-label' for="promotor110">&nbsp;&nbsp;Asesor de inversión inmobiliaria</label>
                             </div>
 
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="propietario110"> 
-                                <label class='form-check-label' for="propietario110">Propietario</label>
+                                <label class='form-check-label' for="propietario110">&nbsp;&nbsp;Propietario</label>
                             </div>
 
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="cliente110"> 
-                                <label class='form-check-label' for="cliente110">Comprador potencial</label>
+                                <label class='form-check-label' for="cliente110">&nbsp;&nbsp;Comprador potencial</label>
                             </div>
 
                         </div>
@@ -493,7 +491,7 @@
 
         </div>
         <?php
-            for ($i = 1; $i <= 200; $i++) 
+            for ($i = 1; $i <= 100; $i++) 
             {
                 echo "<br />";
             }
@@ -1326,7 +1324,7 @@
             $j("#botonBuscar10").addClass('noVer');
             $j("#publicarPropiedad10").addClass('noVer');
             $j("#otrasOpciones10").addClass('noVer');
-            // personasBien(gIdPostActual);
+            personasBien(gIdPostActual);
             $j("#personas100").removeClass("noVer");
             $j("#cerrarPersonas10").removeClass('noVer');
             $j("#agregarPersona10").removeClass("noVer");

@@ -234,6 +234,8 @@ class PostsController extends MvcPublicController
                 $contadorDatos++;
             }
 
+            $this->set("idUsuario", $idUsuario);
+            $this->set("roles", $roles);
             $this->set("gestoresAsc", $gestoresAsc);
             $this->set("captadoresAsc", $captadoresAsc);
             $this->set("promotoresAsc", $promotoresAsc);
