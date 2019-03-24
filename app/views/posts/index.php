@@ -317,7 +317,7 @@
                                 <label for="nombrePropietario100">Propietario</label> 
                                 <input type="text" class="form-control" id="nombrePropietario100"> 
                             </div>
-                            <div id="mensajePropietario100"></div>
+                            <div id="mensajesPropietario100"></div>
                         </div>
                     </div>
 
@@ -327,6 +327,7 @@
                                 <label for="nombreCaptador100">Captador</label> 
                                 <input type="text" class="form-control" id="nombreCaptador100"> 
                             </div>
+                            <div id="mensajesCaptador100"></div>
                         </div>
                     </div>
 
@@ -336,7 +337,7 @@
                                 <label for="nombreCliente100">Asignar de mi cartera de clientes un comprador potencial para esta propiedad</label> 
                                 <input type="text" class="form-control" id="nombreCliente100"> 
                             </div>
-                            <div id="mensajeCliente100"></div>
+                            <div id="mensajesCliente100"></div>
                         </div>
                     </div>
 
@@ -351,9 +352,9 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-10">
                             <h3 class="letraAzul">Compradores potenciales</h3>    
                             <div id="compradoresPotenciales100"></div>
                         </div>
@@ -1194,10 +1195,9 @@ function personasBien(idBien)
     $j("#nombrePropietario100").val(gMatrizBienes[idBien].propietario);
     $j("#mensajePropietario100").html("");
 
-    $j("#nombreCaptador100").val(gMatrizBienes[idBien].captador);
+    $j("#nombreCaptador100").val(gMatrizBienes[idBien].nombre_autor);
     $j("#mensajeCaptador100").html("");
 
-    $j("#nombrePromotor100").val(gMatrizBienes[idBien].nombre_autor);
     $j("#mensajePromotor100").html("");
 
     $j("#mensajeCliente100").html("");
@@ -1226,26 +1226,10 @@ function guardarPersona(indicadorCheckbox)
     $j("#direccion110").val($j.trim($j("#direccion110").val().toUpperCase())); 
 
     primerNombre = $j("#primerNombre110").val(); 
-
-    if ($j("#segundoNombre110").val().length > 0)
-    {
-        segundoNombre = $j("#segundoNombre110").val();  
-    }    
-    else
-    {
-        segundoNombre = "";
-    }
+    segundoNombre = $j("#segundoNombre110").val();  
 
     primerApellido = $j("#primerApellido110").val();
-
-    if ($j("#segundoApellido110").val().length > 0)
-    {
-        segundoApellido = $j("#segundoApellido110").val();  
-    }    
-    else
-    {
-        segundoApellido = "";
-    }
+    segundoApellido = $j("#segundoApellido110").val();  
 
     if (indicadorCheckbox == 0)
     {
@@ -1286,34 +1270,21 @@ function guardarPersona(indicadorCheckbox)
         });
     } 
 
-    if ($j("#celular110").val().length > 0)
-    {
-        celular = $j("#celular110").val(); 
-    }    
-    else
-    {
-        celular = "";
-    }
-
-    if ($j("#telefonoFijo110").val().length > 0)
-    {
-        telefonoFijo = $j("#telefonoFijo110").val();
-    }    
-    else
-    {
-        telefonoFijo = "";
-    }
+    celular = $j("#celular110").val(); 
+    telefonoFijo = $j("#telefonoFijo110").val();
 
     email = $j("#email110").val();
+    direccion = $j("#direccion110").val();  
+    
+    /* Descomentar solo para pruebas
+    arregloPrueba = [{"nombre" : "Ángel", "apellido" : "Sanz"}, {"nombre" : "Juan", "apellido" : "González"}];
 
-    if ($j("#direccion110").val().length > 0)
-    {
-        direccion = $j("#direccion110").val();  
-    }    
-    else
-    {
-        direccion = "";
-    }
+    pruebaJson = 
+        {
+            "idPost" : gIdPostActual,
+            "arregloPrueba" : arregloPrueba
+        };  
+    */
 
     jsonPersona = 
         {"idPost" : gIdPostActual,
@@ -1332,8 +1303,6 @@ function guardarPersona(indicadorCheckbox)
                 "direccion" : direccion
             }
         };
-
-    console.log(jsonPersona);
 
     $j.post("<?= mvc_public_url(array('controller' => 'users', 'action' => 'agregar_persona')) ?>", 
         jsonPersona, null, "json")          
@@ -1367,6 +1336,8 @@ function guardarPersona(indicadorCheckbox)
                 "</div>";
 
             $j("#mensajesUsuario30").html(mensajesUsuario);
+
+            console.log(response.mensaje);
 
             $j("#agregarPersonas110").addClass("noVer");
             $j("#cerrarAgregarPersona10").addClass("noVer");
@@ -1410,6 +1381,7 @@ function validarPersona(indicadorCheckbox)
 
     var posterior = "</strong></div>"; 
     var indicadorTildado = 0; 
+    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 
     $j("#mensajesUsuario30").html("");
     
@@ -1432,21 +1404,21 @@ function validarPersona(indicadorCheckbox)
         $j("#mensajesIdentificacion110").html(mensajeError);
     }
 
-    if ($j("#primerNombre110").val().length <= 0) 
+    if ($j("#primerNombre110").val() == "") 
     {   
         indicadorError = 1;
         mensajeError = anterior + "Escriba el primer nombre de la persona" + posterior;
         $j("#mensajesPrimerNombre110").html(mensajeError);
     }
 
-    if ($j("#primerApellido110").val().length <= 0)
+    if ($j("#primerApellido110").val() == "")
     {   
         indicadorError = 1;
         mensajeError = anterior + "Por favor escriba el primer apellido de la persona" + posterior;
         $j("#mensajesPrimerApellido110").html(mensajeError);
     }
 
-    if ($j("#celular110").val().length <= 0 && $j("#telefonoFijo110").val().length <= 0)
+    if ($j("#celular110").val() == "" && $j("#telefonoFijo110").val() == "")
     {   
         indicadorError = 1;
         mensajeError = anterior + "Por favor escriba al menos un número de teléfono de la persona" + posterior;
@@ -1454,11 +1426,20 @@ function validarPersona(indicadorCheckbox)
         $j("#mensajesTelefono110").html(mensajeError);
     }
 
-    if ($j("#email110").val().length <= 0)
+    if ($j("#email110").val() == "@")
     {   
         indicadorError = 1;
         mensajeError = anterior + "Por favor escriba el correo electrónico de la persona" + posterior;
         $j("#mensajesEmail110").html(mensajeError);
+    }
+    else
+    {
+        if (regex.test($j('#email110').val().trim()) == false) 
+        {
+            indicadorError = 1;
+            mensajeError = anterior + "La dirección de correo no es válida" + posterior;
+            $j("#mensajesEmail110").html(mensajeError);
+        }
     }
 
     if (indicadorCheckbox == 1)
@@ -1487,8 +1468,31 @@ function validarPersona(indicadorCheckbox)
     {
         mensajeError = anterior + "Estimado usuario uno o más datos contienen errores, por favor verifique" + posterior;
         $j("#mensajesUsuario30").html(mensajeError);
-        $j("#mensajesUsuario30").focus();    
+        window.scrollTo(0, 0);           
     }
+}
+
+function inicializarPersonas()
+{
+    $j("#tipoIdentificacion110").val("");
+    $j("#numeroIdentificacion110").val(0);
+    $j("#primerNombre110").val("");
+    $j("#segundoNombre110").val("");
+    $j("#primerApellido110").val("");
+    $j("#segundoApellido110").val("");
+
+	$j("#rolesCheckbox110").each(function (index) 
+	{ 
+		$j(this).attr('checked', false);
+		$j(this).prop('checked', false);
+	});
+
+    $j("#celular110").val("");
+    $j("#telefonoFijo110").val("");
+    $j("#email110").val("@");
+    $j("#direccion110").val("");
+
+    $j("#tituloAgregarPersonas110").html("Agregar personas a la propiedad " + gMatrizBienes[gIdPostActual].post_title);
 }
 
 // Eventos
@@ -1675,7 +1679,7 @@ $j(document).ready(function()
         $j("#personas100").addClass("noVer");
         $j("#cerrarPersonas10").addClass('noVer');
         $j("#agregarPersona10").addClass('noVer');
-        $j("#tituloAgregarPersonas110").html("Agregar personas a la propiedad " + gMatrizBienes[gIdPostActual].post_title);
+        inicializarPersonas();
         $j("#agregarPersonas110").removeClass("noVer");
         $j("#rolesCheckbox110").addClass('noVer');
         $j("#cerrarAgregarPersona10").removeClass('noVer');
