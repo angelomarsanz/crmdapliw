@@ -401,28 +401,28 @@
                     <div id="mensajesIdentificacion110" class="mensajes110"></div>    
 
                     <div class="form-group"> 
-                        <label for="nombres110">Nombre(s)*</label> 
-                        <input type="text" class="form-control" id="nombres110"> 
+                        <label for="primerNombre110">Primer nombre*</label> 
+                        <input type="text" class="form-control" id="primerNombre110"> 
                     </div>
-                    <div id="mensajesNombres110" class="mensajes110"></div>    
+                    <div id="mensajesPrimerNombre110" class="mensajes110"></div>    
 
                     <div class="form-group"> 
-                        <label for="apellidos110">Apellido(s)*</label> 
-                        <input type="text" class="form-control" id="apellidos110"> 
+                        <label for="segundoNombre110">Segundo nombre</label> 
+                        <input type="text" class="form-control" id="segundoNombre110"> 
                     </div>
-                    <div id="mensajesApellidos110" class="mensajes110"></div>    
+                    <div id="mensajesSegundoNombre110" class="mensajes110"></div>    
 
                     <div class="form-group"> 
-                        <label for="celular110">Teléfono celular*</label> 
-                        <input type="text" class="form-control" id="celular110"> 
+                        <label for="primerApellido110">Primer apellido*</label> 
+                        <input type="text" class="form-control" id="primerApellido110"> 
                     </div>
-                    <div id="mensajesCelular110" class="mensajes110"></div> 
+                    <div id="mensajesPrimerApellido110" class="mensajes110"></div>    
 
                     <div class="form-group"> 
-                        <label for="email110">Correo electrónico*</label> 
-                        <input type="email" class="form-control" id="celular110"> 
+                        <label for="segundoApellido110">Segundo apellido</label> 
+                        <input type="text" class="form-control" id="segundoApellido110"> 
                     </div>
-                    <div id="mensajesEmail110" class="mensajes110"></div> 
+                    <div id="mensajesSegundoApellido110" class="mensajes110"></div>    
 
                     <div id="rolesCheckbox110">
 
@@ -463,25 +463,29 @@
 
                     </div>
 
-                    <div class="input-group mb-3" id="rol110">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="rolesSelect110">Rol*</label> 
-                        </div>
-                        <select class="custom-select" id="rolesSelect110"> 
-                            <option selected></option> 
-                            <option value="Cliente">Cliente</option>
-                            <option value="Propietario">Propietario</option>
-                        </select> 
+                    <div class="form-group"> 
+                        <label for="rol110">Rol*</label> 
+                        <input type="text" class="form-control" id="rol110" value="Cliente" disabled> 
                     </div>
                     <div id="mensajesRol110" class="mensajes110"></div> 
 
-                    <p>Datos adicionales</p>
+                    <div class="form-group"> 
+                        <label for="celular110">Teléfono celular</label> 
+                        <input type="text" class="form-control" id="celular110"> 
+                    </div>
+                    <div id="mensajesCelular110" class="mensajes110"></div> 
 
                     <div class="form-group"> 
                         <label for="telefonoFijo110">Teléfono fijo</label> 
                         <input type="text" class="form-control" id="telefonoFijo110"> 
                     </div>
                     <div id="mensajesTelefono110" class="mensajes110"></div> 
+
+                    <div class="form-group"> 
+                        <label for="email110">Correo electrónico*</label> 
+                        <input type="email" class="form-control" id="email110"> 
+                    </div>
+                    <div id="mensajesEmail110" class="mensajes110"></div> 
 
                     <div class="form-group"> 
                         <label for="direccion110">Dirección</label> 
@@ -561,18 +565,17 @@ function refrescarMenu()
     }
 }
 
-function guardarCambiosAgenda()
+function guardarCambiosAgenda(idActividad)
 {
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
             "<strong>Por favor espere mientras se guardan los datos</strong>" +
         "</div>";
-    var idActividad = $j(this).attr('id').substring(17); 
     var arregloId = idActividad.split("-");
-    var idMensaje = "#mensajesUsuario80-" + $j(this).attr('id').substring(17);
-    var tarjeta = "#actividad80-" + $j(this).attr('id').substring(17);
-    var tarjetaInput = "#actividad80-" + $j(this).attr('id').substring(17) + " input";
+    var idMensaje = "#mensajesUsuario80-" + idActividad;
+    var tarjeta = "#actividad80-" + idActividad;
+    var tarjetaInput = "#actividad80-" + idActividad + " input";
     var idActividadObj = arregloId[1];
     var informacionAdicionalObj = "";
     var diaPlanificadoObj = "";
@@ -1202,15 +1205,203 @@ function personasBien(idBien)
     compradoresPotenciales(idBien);
 }
 
-function validarPersona()
+function guardarPersona(indicadorCheckbox)
 {
-    $j("#mensajesUsuario30").html("");
-    
-    $j(".mensajes110").each(function()
-    {   
-        $j(this).html("");
-    });
-    
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se guardan los datos</strong>" +
+        "</div>";
+
+    $j("#mensajesUsuario30").html(mensajesUsuario);
+    window.scrollTo(0, 0);
+
+    $j("#primerNombre110").val($j.trim($j("#primerNombre110").val().toUpperCase()));
+    $j("#segundoNombre110").val($j.trim($j("#segundoNombre110").val().toUpperCase()));
+    $j("#primerApellido110").val($j.trim($j("#primerApellido110").val().toUpperCase()));
+    $j("#segundoApellido110").val($j.trim($j("#segundoApellido110").val().toUpperCase()));
+    $j("#celular110").val($j.trim($j("#celular110").val().toUpperCase()));
+    $j("#telefonoFijo110").val($j.trim($j("#telefonoFijo110").val().toUpperCase()));
+    $j("#email110").val($j.trim($j("#email110").val().toLowerCase()));
+    $j("#direccion110").val($j.trim($j("#direccion110").val().toUpperCase())); 
+
+    primerNombre = $j("#primerNombre110").val(); 
+
+    if ($j("#segundoNombre110").val().length > 0)
+    {
+        segundoNombre = $j("#segundoNombre110").val();  
+    }    
+    else
+    {
+        segundoNombre = "";
+    }
+
+    primerApellido = $j("#primerApellido110").val();
+
+    if ($j("#segundoApellido110").val().length > 0)
+    {
+        segundoApellido = $j("#segundoApellido110").val();  
+    }    
+    else
+    {
+        segundoApellido = "";
+    }
+
+    if (indicadorCheckbox == 0)
+    {
+        roles = ["Cliente"];
+    }
+    else
+    {
+        roles = [];
+        $j("#rolesCheckbox110").each(function (index) 
+        {
+            if ($j(this).prop("checked") == true)
+            {
+                if ($j(this).attr("id") == "administrador110")
+                {
+                    roles.push("Administrador");
+                }
+                if ($j(this).attr("id") == "gestorNegocios110")
+                {
+                    roles.push("Gestor de negocios");
+                }
+                if ($j(this).attr("id") == "captador110")
+                {
+                    roles.push("Captador");
+                }
+                if ($j(this).attr("id") == "promotor110")
+                {
+                    roles.push("Promotor");
+                }
+                if ($j(this).attr("id") == "propietario110")
+                {
+                    roles.push("Propietario");
+                }
+                if ($j(this).attr("id") == "Cliente110")
+                {
+                    roles.push("Cliente");
+                }
+            }
+        });
+    } 
+
+    if ($j("#celular110").val().length > 0)
+    {
+        celular = $j("#celular110").val(); 
+    }    
+    else
+    {
+        celular = "";
+    }
+
+    if ($j("#telefonoFijo110").val().length > 0)
+    {
+        telefonoFijo = $j("#telefonoFijo110").val();
+    }    
+    else
+    {
+        telefonoFijo = "";
+    }
+
+    email = $j("#email110").val();
+
+    if ($j("#direccion110").val().length > 0)
+    {
+        direccion = $j("#direccion110").val();  
+    }    
+    else
+    {
+        direccion = "";
+    }
+
+    jsonPersona = 
+        {"idPost" : gIdPostActual,
+        "persona" :  
+            {
+                "tipoIdentificacion" : $j("#tipoIdentificacion110").val(),
+                "numeroIdentificacion" : $j("#numeroIdentificacion110").val(),
+                "primerNombre" : primerNombre,
+                "segundoNombre" : segundoNombre,
+                "primerApellido" : primerApellido,
+                "segundoApellido" : segundoApellido,
+                "roles" : roles,
+                "celular" : celular,
+                "telefonoFijo" : telefonoFijo,
+                "email" : email,
+                "direccion" : direccion
+            }
+        };
+
+    console.log(jsonPersona);
+
+    $j.post("<?= mvc_public_url(array('controller' => 'users', 'action' => 'agregar_persona')) ?>", 
+        jsonPersona, null, "json")          
+    .done(function(response) 
+    {
+        if (response.satisfactorio) 
+        {   
+            ultimaPosicion = 0;
+
+            $j.each(gDatosBienes[gIdPostActual].CRMdapliw_cliente, function(clave, datos)  
+            {
+                ultimaPosicion = clave;
+            });
+            ultimaPosicion++;
+
+            compradorPotencial = 
+                {
+                    "valor" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido,
+                    "id" : response.idPostmeta,
+                    "posicionOriginal" : ultimaPosicion,
+                    "idUser" : response.idUser,
+                    "activo" : "true"
+                }                 
+
+            gDatosBienes[gIdPostActual].CRMdapliw_cliente.push(compradorPotencial);
+
+            mensajesUsuario =
+                "<div class='alert alert-success alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" + response.mensaje + "</strong>" +
+                "</div>";
+
+            $j("#mensajesUsuario30").html(mensajesUsuario);
+
+            $j("#agregarPersonas110").addClass("noVer");
+            $j("#cerrarAgregarPersona10").addClass("noVer");
+            $j("#guardarPersona10").addClass("noVer");
+            personasBien(gIdPostActual);
+            $j("#personas100").removeClass("noVer");
+            $j("#cerrarPersonas10").removeClass('noVer');
+            $j("#agregarPersona10").removeClass("noVer");
+            window.scrollTo(0, 0);           
+        } 
+        else 
+        {
+            mensajesUsuario =
+                "<div class='alert alert-danger alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" + response.mensaje + "</strong>" +
+                "</div>"; 
+
+        	$j("#mensajesUsuario30").html(mensajesUsuario);
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) 
+    {
+        mensajesUsuario =
+            "<div class='alert alert-danger alert-dismissible'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                "<strong> Estimado usuario ocurrió una falla en el servidor y los datos no se pudieron guardar !</strong>" +
+            "</div>"; 
+
+        $j("#mensajesUsuario30").html(mensajesUsuario);
+    });  
+}
+
+function validarPersona(indicadorCheckbox)
+{
     var indicadorError = 0; 
     var anterior =
         "<div class='alert alert-danger alert-dismissible'>" +
@@ -1218,25 +1409,85 @@ function validarPersona()
             "<strong>";
 
     var posterior = "</strong></div>"; 
+    var indicadorTildado = 0; 
 
-    if ($j("#tipoIdentificacion110").val() == "")
+    $j("#mensajesUsuario30").html("");
+    
+    $j(".mensajes110").each(function()
+    {   
+        $j(this).html("");
+    });
+    
+    if ($j("#tipoIdentificacion110").val() == "")  
     {   
         indicadorError = 1;
-        mensajeError = anterior + "Por favor selecciones el tipo de identificación" + posterior;
+        mensajeError = anterior + "Seleccione el tipo de identificación" + posterior;
         $j("#mensajesTipo110").html(mensajeError);
     }
 
     if ($j("#numeroIdentificacion110").val() == 0)
     {   
         indicadorError = 1;
-        mensajeError = anterior + "Por favor escriba el número de identificacion" + posterior;
+        mensajeError = anterior + "Escriba el número de identificacion" + posterior;
         $j("#mensajesIdentificacion110").html(mensajeError);
     }
 
-    if (indicadorError == 1)
+    if ($j("#primerNombre110").val().length <= 0) 
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Escriba el primer nombre de la persona" + posterior;
+        $j("#mensajesPrimerNombre110").html(mensajeError);
+    }
+
+    if ($j("#primerApellido110").val().length <= 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Por favor escriba el primer apellido de la persona" + posterior;
+        $j("#mensajesPrimerApellido110").html(mensajeError);
+    }
+
+    if ($j("#celular110").val().length <= 0 && $j("#telefonoFijo110").val().length <= 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Por favor escriba al menos un número de teléfono de la persona" + posterior;
+        $j("#mensajesCelular110").html(mensajeError);
+        $j("#mensajesTelefono110").html(mensajeError);
+    }
+
+    if ($j("#email110").val().length <= 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Por favor escriba el correo electrónico de la persona" + posterior;
+        $j("#mensajesEmail110").html(mensajeError);
+    }
+
+    if (indicadorCheckbox == 1)
+    {
+        $j("#rolesCheckbox110").each(function (index) 
+        {
+            if ($j(this).prop("checked") == true)
+            {
+                indicadorTildado = 1;
+                return false;
+            }
+        });
+        if (indicadorTildado == 0)
+        {
+            indicadorError = 1;
+            mensajeError = anterior + "Por favor marque al menos un rol para la persona" + posterior;
+            $j("#mensajesRoles110").html(mensajeError);
+        }
+    }
+
+    if (indicadorError == 0)
+    {
+        guardarPersona(indicadorCheckbox);
+    }
+    else
     {
         mensajeError = anterior + "Estimado usuario uno o más datos contienen errores, por favor verifique" + posterior;
         $j("#mensajesUsuario30").html(mensajeError);
+        $j("#mensajesUsuario30").focus();    
     }
 }
 
@@ -1311,7 +1562,8 @@ $j(document).ready(function()
 
     $j("#agenda80").on("click", ".guardarCambios80", function()
     {
-        guardarCambiosAgenda();       
+        var idActividad = $j(this).attr('id').substring(17); 
+        guardarCambiosAgenda(idActividad);       
     });
 
     $j('#agregarActividad10').click(function()
@@ -1356,7 +1608,6 @@ $j(document).ready(function()
     $j('.buscarCaptador60').autocomplete(
     {
         source: <?= json_encode($captadoresAsc) ?>,
-        minLength: 3,
         select: function( event, ui ) 
         {   
             idBien = $j(this).attr("id").substring(17);
@@ -1399,7 +1650,6 @@ $j(document).ready(function()
     $j('#nombreCaptador100').autocomplete(
     {
         source: <?= json_encode($captadoresAsc) ?>,
-        minLength: 3,
         select: function( event, ui ) 
         {   
             idBien = gIdPostActual;
@@ -1412,19 +1662,9 @@ $j(document).ready(function()
         }
     });
 
-    $j('#nombrePropietario100').autocomplete(
-    {
-        source: <?= json_encode($propietariosAsc) ?>,
-        minLength: 3,
-        select: function( event, ui ) 
-        {   
-        }
-    });
-
     $j('#nombreCliente100').autocomplete(
     {
         source: <?= json_encode($clientesAsc) ?>,
-        minLength: 3,
         select: function( event, ui ) 
         {   
         }
@@ -1445,7 +1685,8 @@ $j(document).ready(function()
 
     $j("#guardarPersona10").click(function()
     {
-        validarPersona();
+        indicadorCheckbox = 0;
+        validarPersona(indicadorCheckbox);
     });       
 
 });
