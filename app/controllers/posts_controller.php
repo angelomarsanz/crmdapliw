@@ -11,7 +11,10 @@ class PostsController extends MvcPublicController
     {
         $usuarioConectado = wp_get_current_user();
         $idUsuario = $usuarioConectado->id;
-
+        
+        $indicadorCaptadorPropietario = 0;
+        $indicadorPromotorCliente = 0;
+        
         if ($usuarioConectado->id > 0)
         {        
             $this->load_model('Usermeta');
@@ -21,7 +24,7 @@ class PostsController extends MvcPublicController
                 'selects' => array('User.ID', 'User.user_email', 'Usermeta.user_id', 'Usermeta.meta_key', 'Usermeta.meta_value', 'Usermeta.umeta_id'),
                 'conditions' => array(
                     // 'User.ID' => array(32),
-                    'Usermeta.meta_key' => array("first_name", "last_name", "CRMdapliw_roles")),
+                    'Usermeta.meta_key' => array("first_name", "last_name", "CRMdapliw_roles", "CRMdapliw_promotor_cliente", "CRMdapliw_captador_propietario")),
                 'order' => 'User.ID ASC, Usermeta.meta_key ASC, Usermeta.umeta_id ASC')); 
 
             foreach ($userMetas as $userMeta)
@@ -33,8 +36,30 @@ class PostsController extends MvcPublicController
                         $roles = json_decode($userMeta->meta_value, true);
                     }
                 }
-            }           
+            }
 
+            $permiso = 0;
+
+            if (in_array("Promotor", $roles))
+            {
+                $permiso = $permiso + 1;    
+            }
+
+            if (in_array("Captador", $roles))
+            {
+                $permiso = $permiso + 2;    
+            }
+            
+            if (in_array("Gestor de negocios", $roles))
+            {
+                $permiso = $permiso + 4;
+            }
+            
+            if (in_array("Administrador", $roles))
+            {
+                $permiso = $permiso + 8;
+            }
+           
             $contadorUsuarios = 0;
             $idUsuarioActual = "";
             $usuarios = [];
@@ -72,13 +97,13 @@ class PostsController extends MvcPublicController
 
                 foreach ($usuario["CRMdapliw_roles"] as $rol)
                 {
-                    if ($rol == "Captador")
-                    { 
-                        $captadores[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
-                    }
-                    elseif ($rol == "Promotor")
+                    if ($rol == "Promotor")
                     {   
                         $promotores[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                    }
+                    elseif ($rol == "Captador")
+                    { 
+                        $captadores[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
                     }
                     elseif ($rol == "Gestor de negocios")
                     {   
@@ -86,27 +111,60 @@ class PostsController extends MvcPublicController
                     }
                     elseif ($rol == "Propietario")
                     {   
-                        $propietarios[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                        $indicadorCaptadorPropietario = 0;
+
+                        if ($permiso < 3 && $usuario["CRMdapliw_captador_propietario"] == $idUsuario)
+                        {
+                            $indicadorCaptadorPropietario = 1;
+                        } 
+
+                        if ($indicadorCaptadorPropietario == 1 || $permiso > 3)
+                        {
+                            $propietarios[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                        }
                     }                       
                     elseif ($rol == "Cliente")
-                    {
-                        $clientes[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                    {  
+                        $indicadorPromotorCliente = 0; 
+
+                        if ($permiso < 3 && $usuario["CRMdapliw_promotor_cliente"] == $idUsuario)
+                        {
+                            $indicadorPromotorCliente = 1;
+                        } 
+
+                        if ($indicadorPromotorCliente == 1 || $permiso > 3)
+                        {
+                            $clientes[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                        }
                     }
                 }
             }
-            $gestoresAsc = $this->array_orderby($gestores, 'label', SORT_ASC); 
-            $captadoresAsc = $this->array_orderby($captadores, 'label', SORT_ASC); 
             $promotoresAsc = $this->array_orderby($promotores, 'label', SORT_ASC); 
-            $propietariosAsc = $this->array_orderby($propietarios, 'label', SORT_ASC); 
-            $clientesAsc = $this->array_orderby($clientes, 'label', SORT_ASC); 
-
+            $captadoresAsc = $this->array_orderby($captadores, 'label', SORT_ASC); 
+            $gestoresAsc = $this->array_orderby($gestores, 'label', SORT_ASC); 
+            if (isset($propietarios[0]["label"]))
+            {
+                $propietariosAsc = $this->array_orderby($propietarios, 'label', SORT_ASC); 
+            }
+            else
+            {
+                $propietariosAsc = [];
+            }
+            if (isset($clientes[0]["label"]))
+            {
+                $clientesAsc = $this->array_orderby($clientes, 'label', SORT_ASC); 
+            }
+            else
+            {
+                $clientesAsc = [];
+            }
             $this->load_model('Postmeta');
 
             $posts = $this->Post->find(array('order' => 'ID ASC'));
 
             $bienes = $this->Post->find(array(
                 'conditions' => array(
-                // 'ID' => array(5297),
+                'ID' => array(5297),
                 'post_type' => 'property',
                 'post_status' => array('Publish', 'Pending')),
                 'order' => 'post_title ASC'));
@@ -115,7 +173,7 @@ class PostsController extends MvcPublicController
                 'joins' => array('Post'),
                 'includes' => array('Post'),
                 'conditions' => array(
-                // 'Post.ID' => array(5297),
+                'Post.ID' => array(5297),
                 'Post.post_type' => array('property', 'CRMdapliw'),
                 'Post.post_status' => array('Publish', 'Pending')),
                 'order' => 'Post.ID ASC, Postmeta.meta_key ASC, Postmeta.meta_id ASC'));            
@@ -156,8 +214,18 @@ class PostsController extends MvcPublicController
                 }
                 elseif ($propiedadesBien->meta_key == "CRMdapliw_propietario")
                 {
-                    $matrizBienes[$propiedadesBien->post_id]['propietario'] = 
-                        $usuarios[$propiedadesBien->meta_value]['first_name'] . ' ' . $usuarios[$propiedadesBien->meta_value]['last_name'];
+                    $indicadorCaptadorPropietario = 0;
+
+                    if ($permiso < 3 && $matrizBienes[$propiedadesBien->post_id]['post_author'] == $idUsuario)
+                    {
+                        $indicadorCaptadorPropietario = 1;
+                    }  
+                    
+                    if ($indicadorCaptadorPropietario == 1 || $permiso > 3)
+                    {
+                        $matrizBienes[$propiedadesBien->post_id]['propietario'] = 
+                            $usuarios[$propiedadesBien->meta_value]['first_name'] . ' ' . $usuarios[$propiedadesBien->meta_value]['last_name'];
+                    }
                 }
             }
             
@@ -221,9 +289,32 @@ class PostsController extends MvcPublicController
                 {
                     $arregloCliente = json_decode($propiedadesBien->meta_value, true);
 
-                    $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
-                        ["valor" => $usuarios[$arregloCliente["idUser"]]["first_name"] . ' ' . $usuarios[$arregloCliente["idUser"]]["last_name"], 
-                        "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion, "idUser" => $arregloCliente["idUser"], "activo" => $arregloCliente["activo"]];
+                    $indicadorPromotorCliente = 0;
+
+                    if ($permiso < 3 && $usuarios[$arregloCliente["idUser"]]["CRMdapliw_promotor_cliente"] == $idUsuario)
+                    {
+                        $indicadorPromotorCliente = 1;
+                    }
+
+                    if ($indicadorPromotorCliente == 1 || $permiso > 3)
+                    {                     
+                        $idPromotorCliente = $usuarios[$arregloCliente["idUser"]]["CRMdapliw_promotor_cliente"];
+                        $nombrePromotorCliente = $usuarios[$idPromotorCliente]["first_name"] . " " . $usuarios[$idPromotorCliente]["last_name"]; 
+
+                        $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
+                            ["valor" => $usuarios[$arregloCliente["idUser"]]["first_name"] . ' ' . $usuarios[$arregloCliente["idUser"]]["last_name"], 
+                            "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion, "idUser" => $arregloCliente["idUser"], 
+                            "activo" => $arregloCliente["activo"], "idPromotorCliente" => $idPromotorCliente,
+                            "nombrePromotorCliente" => $nombrePromotorCliente];
+                    }
+                    else
+                    {
+                        $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][$posicion] = 
+                            ["valor" => "", 
+                            "id" => $propiedadesBien->meta_id, "posicionOriginal" => $posicion, "idUser" => 0, 
+                            "activo" => "false", "idPromotorCliente" => 0,
+                            "nombrePromotorCliente" => ""];
+                    }
                 }
                 else
                 {
@@ -236,9 +327,10 @@ class PostsController extends MvcPublicController
 
             $this->set("idUsuario", $idUsuario);
             $this->set("roles", $roles);
-            $this->set("gestoresAsc", $gestoresAsc);
-            $this->set("captadoresAsc", $captadoresAsc);
+            $this->set("permiso", $permiso);
             $this->set("promotoresAsc", $promotoresAsc);
+            $this->set("captadoresAsc", $captadoresAsc);
+            $this->set("gestoresAsc", $gestoresAsc);
             $this->set("propietariosAsc", $propietariosAsc);
             $this->set("clientesAsc", $clientesAsc);
             $this->set("userMetas", $userMetas);

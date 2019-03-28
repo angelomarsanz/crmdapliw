@@ -309,58 +309,39 @@
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-md-8 mb-3">
-                <form>
                     
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group"> 
-                                <label for="nombrePropietario100">Propietario</label> 
-                                <input type="text" class="form-control" id="nombrePropietario100"> 
-                            </div>
-                            <div id="mensajesPropietario100"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group" id="grupoPropietario100"> 
+                            <label for="nombrePropietario100">Propietario</label> 
+                            <input type="text" class="form-control" id="nombrePropietario100" disabled>  
+                            <div id="mensajesPropietario100"></div> 
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group"> 
-                                <label for="nombreCaptador100">Captador</label> 
-                                <input type="text" class="form-control" id="nombreCaptador100"> 
-                            </div>
+                        <div class="form-group" id="grupoCaptador100"> 
+                            <label for="nombreCaptador100">Captador</label> 
+                            <input type="text" class="form-control" id="nombreCaptador100"> 
                             <div id="mensajesCaptador100"></div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group"> 
-                                <label for="nombreCliente100">Asignar de mi cartera de clientes un comprador potencial para esta propiedad</label> 
-                                <input type="text" class="form-control" id="nombreCliente100"> 
-                            </div>
+                        <div class="form-group" id="grupoAsignarCliente100"> 
+                            <label for="nombreCliente100">Asignar de mi cartera de clientes un comprador potencial para esta propiedad</label> 
+                            <input type="text" class="form-control" id="nombreCliente100"> 
                             <div id="mensajesCliente100"></div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group"> 
-                                <label for="nombrePromotor100">Promotor</label> 
-                                <input type="text" class="form-control" id="nombrePromotor100" disabled> 
-                            </div>
-                            <div id="mensajePromotor100"></div>
-                        </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-10">
-                            <h3 class="letraAzul">Compradores potenciales</h3>    
-                            <div id="compradoresPotenciales100"></div>
-                        </div>
+                <div class="row">
+                    <div class="col-md-2">
                     </div>
+                    <div class="col-md-10">
+                        <h3 class="letraAzul">Compradores potenciales</h3>    
+                        <div id="compradoresPotenciales100"></div>
+                    </div>
+                </div>
 
-                </form>
             </div>
 
         </div>
@@ -512,6 +493,10 @@
 var gBienes = <?= json_encode($bienes) ?>;
 var gMatrizBienes = <?= json_encode($matrizBienes) ?>;
 var gDatosBienes = <?= json_encode($datosBienes) ?>;
+var gIdUsuario = <?= $idUsuario ?>;
+var gRoles = <?= json_encode($roles) ?>;
+var gPermiso = <?= $permiso ?>;
+var gClientes = <?= json_encode($clientesAsc) ?>;
 var gIdPostActual = "";
 var gPosicionAnterior = "";
 
@@ -729,7 +714,7 @@ function guardarActividad()
                 ultimaPosicion++;
                 jsonActividad.actividad.posicionOriginal = ultimaPosicion;
             
-                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda.push(jsonActividad.actividad);
+                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda.selpush(jsonActividad.actividad);
             }
             else
             {
@@ -1144,17 +1129,19 @@ function compradoresPotenciales(idBien)
                             "<h4 class='card-title'>" + datos.valor + "</h4>" +
                             "<div class='card bg-light text-dark'>" +
                                 "<div class='card-body'>" +
-                                    "<div class='col-md-3'>" +
-                                        "<div class='form-check'>" +
-                                            "<input type='checkbox' class='form-check-input eliminarComprador100' id='eliminarComprador100-" + 
-                                                clave + "-" + datos.idUser + "-" + idBien + "'>" +
-                                            "<label class='form-check-label' for='eliminarComprador100-" + 
-                                                clave + "-" + datos.idUser + "-" + idBien + "'>&nbsp;&nbsp;Eliminar</label>" +
-                                        "</div>" +
-                                    "</div>"+
-
+                                    "<p> Promotor: " + datos.nombrePromotorCliente + "</p>"+
                                 "</div>" +
                             "</div>" +
+                            "<div class='card-footer'>" +
+                                "<p>" +                                                            
+                                    "<button class='btn btn-light eliminarComprador100'" + 
+                                        "id='eliminarComprador100-" + clave + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'" + 
+                                        "title='Eliminar comprador potencial'>" +
+                                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+                                        "crmdapliw/app/public/images/trash.svg alt='Eliminar comprador' class='icon'>" +
+                                    "</button>" +
+                                "</p>" +
+                            "</div>" +  
                         "</div>" +
                     "</div>" +
                     "<div class='row'>" +
@@ -1166,7 +1153,7 @@ function compradoresPotenciales(idBien)
                     "<br />";
             }
         });
-    } 
+    }
 
     compradoresPotenciales += "</div>";
 
@@ -1180,6 +1167,7 @@ function compradoresPotenciales(idBien)
 
 function personasBien(idBien)
 {
+    var indicadorCaptadorPropietario = 0;
 
     $j("#tituloPersonas100").html("Personas relacionadas con la propiedad " + gMatrizBienes[idBien].post_title);
 
@@ -1192,15 +1180,32 @@ function personasBien(idBien)
         $j("#imagen100").html("Foto de la propiedad");
     }
 
-    $j("#nombrePropietario100").val(gMatrizBienes[idBien].propietario);
-    $j("#mensajePropietario100").html("");
+    if (gPermiso < 3 && gMatrizBienes[idBien].post_author == gIdUsuario)
+    {
+        indicadorCaptadorPropietario = 1;                        
+    }
+
+    if (indicadorCaptadorPropietario == 1 || gPermiso > 3)
+    {
+        $j("#nombrePropietario100").val(gMatrizBienes[idBien].propietario);
+        $j("#mensajesPropietario100").html("");
+    }
+    else
+    {
+        $j("#grupoPropietario100").addClass("noVer");
+    }    
 
     $j("#nombreCaptador100").val(gMatrizBienes[idBien].nombre_autor);
-    $j("#mensajeCaptador100").html("");
+    $j("#mensajesCaptador100").html("");
 
-    $j("#mensajePromotor100").html("");
+    if (gPermiso < 4)
+    {
+        $j("#nombreCaptador100").attr("disabled", true);        
+    }
+    
+    $j("#mensajesCliente100").html("");
 
-    $j("#mensajeCliente100").html("");
+    $j("#mensajesComprador100").html("");
 
     compradoresPotenciales(idBien);
 }
@@ -1300,7 +1305,8 @@ function guardarPersona(indicadorCheckbox)
                 "celular" : celular,
                 "telefonoFijo" : telefonoFijo,
                 "email" : email,
-                "direccion" : direccion
+                "direccion" : direccion,
+                "idPromotor" : gIdUsuario
             }
         };
 
@@ -1327,8 +1333,15 @@ function guardarPersona(indicadorCheckbox)
                     "activo" : "true"
                 }                 
 
-            gDatosBienes[gIdPostActual].CRMdapliw_cliente.push(compradorPotencial);
-
+            if (gDatosBienes[gIdPostActual].CRMdapliw_cliente)
+            {
+                gDatosBienes[gIdPostActual].CRMdapliw_cliente.push(compradorPotencial);
+            }
+            else
+            {
+                gDatosBienes[gIdPostActual].CRMdapliw_cliente = [compradorPotencial];
+            }
+                
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -1336,8 +1349,6 @@ function guardarPersona(indicadorCheckbox)
                 "</div>";
 
             $j("#mensajesUsuario30").html(mensajesUsuario);
-
-            console.log(response.mensaje);
 
             $j("#agregarPersonas110").addClass("noVer");
             $j("#cerrarAgregarPersona10").addClass("noVer");
@@ -1668,7 +1679,7 @@ $j(document).ready(function()
 
     $j('#nombreCliente100').autocomplete(
     {
-        source: <?= json_encode($clientesAsc) ?>,
+        source: gClientes,
         select: function( event, ui ) 
         {   
         }
@@ -1691,7 +1702,16 @@ $j(document).ready(function()
     {
         indicadorCheckbox = 0;
         validarPersona(indicadorCheckbox);
-    });       
+    });
 
+    $j("#personas100").on("click", ".eliminarComprador100", function()
+    {
+        alert("idComprador: " + $j(this).attr("id").substring(21));
+        idCompradorPromotor = $j(this).attr("id").substring(21); 
+        var arregloId = idCompradorPromotor.split("-");
+        alert("idMeta: " + arregloId[3]);
+
+    });
+       
 });
 </script>
