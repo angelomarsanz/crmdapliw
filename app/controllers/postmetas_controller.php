@@ -4,43 +4,6 @@ class PostmetasController extends MvcPublicController
 {
     public function test_function()
     {
-        $contadorDatos = 0;
-
-        $propiedadesBienes = $this->Postmeta->find(array(
-            'joins' => array('Post'),
-            'includes' => array('Post'),
-            'conditions' => array(
-            // 'Post.ID' => array(5548),
-            'Post.post_type' => array('property', 'CRMdapliw'),
-            'Post.post_status' => array('Publish', 'Pending'),
-            'Postmeta.meta_key' => array('CRMdapliw_promotor_anterior')),
-            'order' => 'Post.ID ASC, Postmeta.meta_key ASC, Postmeta.meta_id ASC'));            
-            
-        foreach ($propiedadesBienes as $propiedadesBien)
-        {
-            if ($contadorDatos == 0)
-            {
-                $object = $this->Postmeta->find_by_id($propiedadesBien->meta_id);
-                $this->Postmeta->update($object->__id, array('meta_value' => 5));
-                $contadorRegistrosActualizados++;
-
-                $bienActual = $propiedadesBien->post_id;
-            }
-
-            if ($bienActual != $propiedadesBien->post_id)
-            {
-                $object = $this->Postmeta->find_by_id($propiedadesBien->meta_id);
-                $this->Postmeta->update($object->__id, array('meta_value' => 5));
-                $contadorRegistrosActualizados++;
-
-                $bienActual = $propiedadesBien->post_id;
-            }
-
-            $contadorDatos++;
-        }
-
-        echo "<br /><p>Total registros actualizados: " . $contadorRegistrosActualizados . "</p><br />"; 
-
     }
 
     public function agregar_actividad()
@@ -72,7 +35,7 @@ class PostmetasController extends MvcPublicController
 
         $jsondata = [];
 
-        /* Para pruebas
+        /* Descomentar solo para pruebas 
         $actividad = '{"actualizar":"Sí","idBien":"5297","idActividad":"5447","informacionAdicional":"ACTUALIZADA","diaPlanificado":"13","mesPlanificado":"11","anoPlanificado":"2019","estatus":"false"}';
         
         $_POST = json_decode($actividad, true);
@@ -168,6 +131,132 @@ class PostmetasController extends MvcPublicController
         }
 
         echo "<br /><p>Total registros actualizados: " . $contadorRegistrosActualizados . "</p><br />"; 
+    }
+    
+    public function agregar_comprador_bien()
+    {
+        $this->autoRender = false;
 
+        $this->load_model("Binnacle");
+
+        /* Descomentar solo para pruebas
+        $_POST['idBien'] = 5297;
+        $_POST['idComprador'] = 75;
+        */
+
+        if (isset($_POST['idBien']))
+        {
+            $jsondata = [];
+
+            $indicadorCompradorBien = 0;
+
+            $compradoresBienes = $this->Postmeta->find(array(
+                'conditions' => array(
+                'post_id' => array($_POST['idBien']),
+                'meta_key' => array('CRMdapliw_cliente'))));
+
+            if (isset($compradoresBienes))
+            {
+                foreach($compradoresBienes as $comprador)
+                {
+                    $objetoComprador = json_decode($comprador->meta_value);
+
+                    if ($objetoComprador->idUser == $_POST['idComprador'])
+                    {
+                        $objetoComprador->activo = "true";
+
+                        $jsonObjetoComprador = json_encode($objetoComprador);
+              
+                        $this->Postmeta->update($comprador->__id, array('meta_value' =>
+                            $jsonObjetoComprador));
+
+                            $jsondata["satisfactorio"] = true;
+                            $jsondata["mensaje"] = 
+                                "El comprador se agregó exitosamente a la propiedad"; 
+
+                        $indicadorCompradorBien = 1;
+                        break;                                                                  
+                    }
+                }
+            }
+
+            if ($indicadorCompradorBien == 0)
+            {                        
+                $metaValue = ["idUser" => $_POST['idComprador'], "activo" => "true"];
+                $postmeta = ['post_id' => $_POST['idBien'], 'meta_key' => 'CRMdapliw_cliente', 'meta_value' => json_encode($metaValue)];
+                $idPostmeta = $this->Postmeta->insert($postmeta);  
+
+                if ($idPostmeta == 0)
+                {
+                    $binnacle = 
+                        [
+                            "novedad" => "No se pudo asociar el cliente " . $_POST['idComprador'] . " a la propiedad " . $_POST['idBien'],
+                            "tipo_clase" => "controlador",
+                            "nombre_clase" => "Postmetas",
+                            "nombre_metodo" => "agregar_comprador_bien"                             
+                        ];
+
+                    $idBinnacle = $this->Binnacle->insert($binnacle);
+
+                    $jsondata["satisfactorio"] = false;
+                    $jsondata["mensaje"] = "No se pudo agregar el cliente a la propiedad";
+                }
+                else
+                {
+                    $jsondata["satisfactorio"] = true;
+                    $jsondata["mensaje"] = "El cliente se agregó exitosamente a la propiedad";
+                    $jsondata["idPostmeta"] = $idPostmeta;
+                }
+            }
+        }
+        else
+        {
+            $jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = "No se pudo agregar el cliente a la propiedad";
+        }
+        exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
+    }
+
+    public function eliminar_comprador()
+    {
+        $this->autoRender = false;
+
+        $jsondata = [];
+
+        /* Descomentar solo para pruebas 
+
+        $jsonPostmeta = '{"idPostmeta" : "5650"}';
+
+        echo "<p>jsonPostmeta: " . $jsonPostmeta . "</p>";
+        
+        $_POST = json_decode($jsonPostmeta, true);
+
+        var_dump($_POST);
+        echo "<br />";        
+
+        */
+
+        if (isset($_POST["idPostmeta"]))
+        {
+            $object = $this->Postmeta->find_by_id($_POST["idPostmeta"]);
+
+            $objetoComprador = json_decode($object->meta_value);
+    
+            $objetoComprador->activo = "false";
+
+            $jsonObjetoComprador = json_encode($objetoComprador);      
+            $this->Postmeta->update($object->__id, array('meta_value' =>
+                $jsonObjetoComprador));
+
+            $jsondata["satisfactorio"] = true;
+            $jsondata["mensaje"] = 
+                "El comprador se eliminó correctamente";        
+        } 
+        else
+        {
+            $jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = "No se pudo eliminar el comprador";
+        }    
+        exit(json_encode($jsondata, JSON_FORCE_OBJECT));
     }
 }

@@ -10,7 +10,9 @@ class PostsController extends MvcPublicController
     public function index() 
     {
         $usuarioConectado = wp_get_current_user();
+
         $idUsuario = $usuarioConectado->id;
+        $nombreUsuario = $usuarioConectado->display_name;
         
         $indicadorCaptadorPropietario = 0;
         $indicadorPromotorCliente = 0;
@@ -24,7 +26,8 @@ class PostsController extends MvcPublicController
                 'selects' => array('User.ID', 'User.user_email', 'Usermeta.user_id', 'Usermeta.meta_key', 'Usermeta.meta_value', 'Usermeta.umeta_id'),
                 'conditions' => array(
                     // 'User.ID' => array(32),
-                    'Usermeta.meta_key' => array("first_name", "last_name", "CRMdapliw_roles", "CRMdapliw_promotor_cliente", "CRMdapliw_captador_propietario")),
+                    'Usermeta.meta_key' => array("first_name", "last_name", "CRMdapliw_roles", "CRMdapliw_promotor_cliente", "CRMdapliw_captador_propietario", 
+                        "CRMdapliw_estatus")),
                 'order' => 'User.ID ASC, Usermeta.meta_key ASC, Usermeta.umeta_id ASC')); 
 
             foreach ($userMetas as $userMeta)
@@ -93,6 +96,8 @@ class PostsController extends MvcPublicController
 
             foreach ($usuarios as $clave => $usuario)
             {
+                if ($usuario["CRMdapliw_estatus"] == "ACTIVO")
+                {
                 $nombreCompleto = $usuario["first_name"] . ' ' . $usuario["last_name"];
 
                 foreach ($usuario["CRMdapliw_roles"] as $rol)
@@ -137,6 +142,7 @@ class PostsController extends MvcPublicController
                             $clientes[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
                         }
                     }
+                }
                 }
             }
             $promotoresAsc = $this->array_orderby($promotores, 'label', SORT_ASC); 
@@ -326,6 +332,7 @@ class PostsController extends MvcPublicController
             }
 
             $this->set("idUsuario", $idUsuario);
+            $this->set("nombreUsuario", $nombreUsuario);
             $this->set("roles", $roles);
             $this->set("permiso", $permiso);
             $this->set("promotoresAsc", $promotoresAsc);

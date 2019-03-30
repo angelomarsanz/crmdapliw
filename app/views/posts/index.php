@@ -334,9 +334,9 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-11">
                         <h3 class="letraAzul">Compradores potenciales</h3>    
                         <div id="compradoresPotenciales100"></div>
                     </div>
@@ -494,6 +494,7 @@ var gBienes = <?= json_encode($bienes) ?>;
 var gMatrizBienes = <?= json_encode($matrizBienes) ?>;
 var gDatosBienes = <?= json_encode($datosBienes) ?>;
 var gIdUsuario = <?= $idUsuario ?>;
+var gNombreUsuario = "<?= $nombreUsuario ?>";
 var gRoles = <?= json_encode($roles) ?>;
 var gPermiso = <?= $permiso ?>;
 var gClientes = <?= json_encode($clientesAsc) ?>;
@@ -853,7 +854,7 @@ function mostrarAgenda()
     $j.each(gBienes, function(clave, bien)  
     {
         agendaPrincipal += 
-            "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
+            "<div class='col-md-4 mb-3'>" +
                 "<div class='card detalleBienes60'>" +
                     "<a href=" + bien.guid + "title='Ver propiedad'>";
                                             
@@ -1110,11 +1111,13 @@ function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreN
 function compradoresPotenciales(idBien)
 {
     var compradoresPotenciales =
-            "<div class='col-12 col-sm-6 col-md-12 mb-3'>";
+            "<div class='col-md-12 mb-3'>";
 
     if (gDatosBienes[idBien].CRMdapliw_cliente)
     {
-        arregloCompradores = gDatosBienes[idBien].CRMdapliw_cliente.sort(function(a,b)
+        var arregloCompradores = gDatosBienes[idBien].CRMdapliw_cliente.slice();
+
+        arregloCompradores.sort(function(a,b)
         {
             return (b.posicionOriginal - a.posicionOriginal);
         });
@@ -1124,7 +1127,7 @@ function compradoresPotenciales(idBien)
             if (datos.activo == "true")
             {
                 compradoresPotenciales += 
-                    "<div class='card' id='comprador100-" + clave + "-" + datos.idUser + "-" + idBien + "'>" +
+                    "<div class='card' id='comprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "'>" +
                         "<div class='card-block'>" + 
                             "<h4 class='card-title'>" + datos.valor + "</h4>" +
                             "<div class='card bg-light text-dark'>" +
@@ -1135,7 +1138,7 @@ function compradoresPotenciales(idBien)
                             "<div class='card-footer'>" +
                                 "<p>" +                                                            
                                     "<button class='btn btn-light eliminarComprador100'" + 
-                                        "id='eliminarComprador100-" + clave + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'" + 
+                                        "id='eliminarComprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'" + 
                                         "title='Eliminar comprador potencial'>" +
                                         "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
                                         "crmdapliw/app/public/images/trash.svg alt='Eliminar comprador' class='icon'>" +
@@ -1146,7 +1149,7 @@ function compradoresPotenciales(idBien)
                     "</div>" +
                     "<div class='row'>" +
                         "<div class='col-md-12'>" +
-                            "<div id='mensajesComprador100-" + clave + "-" + datos.idUser + "-" + idBien + "'>" +
+                            "<div id='mensajesComprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'>" +
                             "</div>" +
                         "</div>" +
                     "</div>" + 
@@ -1203,6 +1206,7 @@ function personasBien(idBien)
         $j("#nombreCaptador100").attr("disabled", true);        
     }
     
+    $j("#nombreCliente100").val("");
     $j("#mensajesCliente100").html("");
 
     $j("#mensajesComprador100").html("");
@@ -1316,13 +1320,20 @@ function guardarPersona(indicadorCheckbox)
     {
         if (response.satisfactorio) 
         {   
-            ultimaPosicion = 0;
-
-            $j.each(gDatosBienes[gIdPostActual].CRMdapliw_cliente, function(clave, datos)  
+            if (gDatosBienes[gIdPostActual].CRMdapliw_cliente)
             {
-                ultimaPosicion = clave;
-            });
-            ultimaPosicion++;
+                ultimaPosicion = 0;
+
+                $j.each(gDatosBienes[gIdPostActual].CRMdapliw_cliente, function(clave, datos)  
+                {
+                    ultimaPosicion = clave;
+                });
+                ultimaPosicion++;
+            }
+            else
+            {
+                ultimaPosicion = 0;
+            }
 
             compradorPotencial = 
                 {
@@ -1330,8 +1341,10 @@ function guardarPersona(indicadorCheckbox)
                     "id" : response.idPostmeta,
                     "posicionOriginal" : ultimaPosicion,
                     "idUser" : response.idUser,
-                    "activo" : "true"
-                }                 
+                    "activo" : "true",
+                    "idPromotorCliente" : gIdUsuario,
+                    "nombrePromotorCliente" : gNombreUsuario
+                }    
 
             if (gDatosBienes[gIdPostActual].CRMdapliw_cliente)
             {
@@ -1341,6 +1354,19 @@ function guardarPersona(indicadorCheckbox)
             {
                 gDatosBienes[gIdPostActual].CRMdapliw_cliente = [compradorPotencial];
             }
+
+            nuevoCliente = 
+                {
+                    "label" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido,
+                    "value" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido,
+                    "id" : response.idUser
+                };              
+
+            gClientes.push(nuevoCliente);
+            gClientes.sort(function(a,b)
+            {
+                return (a.label - b.label);
+            });        
                 
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
@@ -1504,6 +1530,182 @@ function inicializarPersonas()
     $j("#direccion110").val("");
 
     $j("#tituloAgregarPersonas110").html("Agregar personas a la propiedad " + gMatrizBienes[gIdPostActual].post_title);
+}
+
+function eliminarComprador(idCompradorPromotor)
+{
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se elimina el comprador</strong>" +
+        "</div>";
+
+    var arregloId = idCompradorPromotor.split("-");
+    var idMensaje = "#mensajesComprador100-" + idCompradorPromotor;  
+    var idPostmeta = arregloId[3];
+
+    $j(idMensaje).html(mensajesUsuario);
+
+    var jsonPostmeta = 
+    {
+        "idPostmeta" : idPostmeta
+    }
+
+    $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'eliminar_comprador')) ?>", 
+        jsonPostmeta, null, "json")          
+    .done(function(response) 
+    {
+        if (response.satisfactorio) 
+        {
+            mensajesUsuario =
+                "<div class='alert alert-success alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" + response.mensaje + "</strong>" +
+                "</div>";
+
+            $j("#mensajesUsuario30").html(mensajesUsuario);
+
+            gDatosBienes[gIdPostActual].CRMdapliw_cliente[arregloId[0]].activo = "false";
+
+            compradoresPotenciales(gIdPostActual);
+            window.scrollTo(0, 0);
+        } 
+        else 
+        {
+            mensajesUsuario =
+            "<div class='alert alert-danger alert-dismissible'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                "<strong>" + response.mensaje + "</strong>" +
+            "</div>"; 
+
+        	$j(idMensaje).html(mensajesUsuario);
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) 
+    {
+        mensajesUsuario =
+            "<div class='alert alert-danger alert-dismissible'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                "<strong>Ocurrió un error en el servidor. Los datos no se pudieron guardar !</strong>" +
+            "</div>"; 
+
+	    $j(idMensaje).html(mensajesUsuario);
+    });
+}
+
+function agregarComprador(idBien, idComprador, nombreComprador)
+{
+    indicadorArregloComprador = 0;
+
+    if (gDatosBienes[idBien].CRMdapliw_cliente)
+    {
+        $j.each(gDatosBienes[idBien].CRMdapliw_cliente, function(clave, datos)  
+        {
+            if (datos.idUser == idComprador)
+            {
+                if (datos.activo == "true")
+                {
+                    mensajesUsuario =
+                        "<div class='alert alert-danger alert-dismissible'>" +
+                            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                            "<strong>Este comprador ya está asociado a esta propiedad</strong>" +
+                        "</div>"; 
+
+	                $j("#mensajesCliente100").html(mensajesUsuario);
+                    indicadorArregloComprador = 1;                
+                }
+            }
+        });
+    }
+    if (indicadorArregloComprador == 0)
+    {
+        jsonCompradorBien = 
+            {
+                "idBien" : idBien,
+                "idComprador" : idComprador
+            };
+
+        $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'agregar_comprador_bien')) ?>", 
+            jsonCompradorBien, null, "json")          
+        .done(function(response) 
+        {
+            if (response.satisfactorio) 
+            {
+                indicadorArregloActualizado = 0;
+                if (gDatosBienes[idBien].CRMdapliw_cliente)
+                {
+                    $j.each(gDatosBienes[idBien].CRMdapliw_cliente, function(clave, datos)  
+                    {
+                        if (datos.idUser == idComprador)
+                        {
+                            datos.activo = "true";
+                            indicadorArregloActualizado = 1;                
+                        }
+                    });
+                }
+
+                if (indicadorArregloActualizado == 0)
+                {
+                    ultimaPosicion = 0;
+
+                    $j.each(gDatosBienes[gIdPostActual].CRMdapliw_cliente, function(clave, datos)  
+                    {
+                        ultimaPosicion = clave;
+                    });
+                    ultimaPosicion++;
+
+                    compradorPotencial = 
+                        {
+                            "valor" : nombreComprador,
+                            "id" : response.idPostmeta,
+                            "posicionOriginal" : ultimaPosicion,
+                            "idUser" : idComprador,
+                            "activo" : "true",
+                            "idPromotorCliente" : gIdUsuario,
+                            "nombrePromotorCliente" : gNombreUsuario
+                        }    
+
+                    if (gDatosBienes[idBien].CRMdapliw_cliente)
+                    {
+                        gDatosBienes[idBien].CRMdapliw_cliente.push(compradorPotencial);
+                    }
+                    else
+                    {
+                        gDatosBienes[idBien].CRMdapliw_cliente = [compradorPotencial];
+                    }
+                }   
+                mensajesUsuario =
+                    "<div class='alert alert-success alert-dismissible'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "<strong>" + response.mensaje + "</strong>" +
+                    "</div>";
+
+                $j("#mensajesCliente100").html(mensajesUsuario);
+
+                compradoresPotenciales(idBien);
+            } 
+            else 
+            {
+                mensajesUsuario =
+                    "<div class='alert alert-danger alert-dismissible'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "<strong>" + response.mensaje + "</strong>" +
+                    "</div>"; 
+
+            	$j("#mensajesUsuario30").html(mensajesUsuario);
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) 
+        {
+            mensajesUsuario =
+                "<div class='alert alert-danger alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong> Estimado usuario ocurrió una falla en el servidor y los datos no se pudieron guardar !</strong>" +
+                "</div>"; 
+
+            $j("#mensajesUsuario30").html(mensajesUsuario);
+        });  
+    }        
 }
 
 // Eventos
@@ -1681,7 +1883,11 @@ $j(document).ready(function()
     {
         source: gClientes,
         select: function( event, ui ) 
-        {   
+        { 
+            idBien = gIdPostActual;  
+            idComprador = ui.item.id; 
+            nombreComprador = ui.item.value;
+            agregarComprador(idBien, idComprador, nombreComprador);
         }
     });
 
@@ -1706,11 +1912,8 @@ $j(document).ready(function()
 
     $j("#personas100").on("click", ".eliminarComprador100", function()
     {
-        alert("idComprador: " + $j(this).attr("id").substring(21));
         idCompradorPromotor = $j(this).attr("id").substring(21); 
-        var arregloId = idCompradorPromotor.split("-");
-        alert("idMeta: " + arregloId[3]);
-
+        eliminarComprador(idCompradorPromotor);
     });
        
 });

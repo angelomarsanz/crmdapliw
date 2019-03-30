@@ -146,7 +146,8 @@ class UsersController extends MvcPublicController
                         "tmbr_user_level" => 0,
                         "use_ssl" => 0,
                         "CRMdapliw_roles" => json_encode($_POST["persona"]["roles"]),
-                        "CRMdapliw_promotor_cliente" => $_POST["persona"]["idPromotor"]
+                        "CRMdapliw_promotor_cliente" => $_POST["persona"]["idPromotor"],
+                        "CRMdapliw_estatus" => "ACTIVO"
                     ];
                 
                 foreach ($camposMeta as $clave => $valor)
@@ -278,4 +279,38 @@ class UsersController extends MvcPublicController
         );     
         return $string;
     }
+    public function agregar_usermeta_masivo()
+    {
+        $this->load_model('Usermeta');
+
+        $indicadorError = 0;
+
+        $users = $this->User->find();
+
+        $camposMeta = 
+            [
+                "CRMdapliw_estatus" => "ACTIVO"
+            ];
+
+        foreach ($users as $user)
+        {                
+            foreach ($camposMeta as $clave => $valor)
+            {
+                $usermeta = ["user_id" => $user->ID, "meta_key" => $clave, "meta_value" => $valor];
+                $idUsermeta = $this->Usermeta->insert($usermeta);
+
+                if ($idUsermeta == 0)
+                {
+                    echo "<p>Error agregando el postmeta " . $clave . " al usuario " . $user->ID . "</p>";
+                    $indicadorError = 1;
+                    break;
+                }
+            }
+            if ($indicadorError == 1)
+            {
+                break;
+            }
+        }
+        echo "<p>Los registros usermeta se agregaron exitosamente</p>";
+    }   
 }
