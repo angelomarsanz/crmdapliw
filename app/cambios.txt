@@ -1,0 +1,4 @@
+controllers/usermetas_controller.php - ok
+public/css/misestilos.css - ok
+views/posts/index.php
+views/usermetas/actualizar_vista_preferida - ok

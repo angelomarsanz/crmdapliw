@@ -137,6 +137,8 @@ class PostmetasController extends MvcPublicController
     {
         $this->autoRender = false;
 
+        $this->load_model("User");
+
         $this->load_model("Binnacle");
 
         /* Descomentar solo para pruebas
@@ -203,6 +205,22 @@ class PostmetasController extends MvcPublicController
                 }
                 else
                 {
+
+                    $rolesComprador = $this->Usermeta->find_one(array(
+                        'conditions' => array(
+                        'user_id' => array($_POST['idComprador']),
+                        'meta_key' => array('CRMdapliw_roles'))));
+
+                    $arregloRoles = json_decode($rolesComprador->meta_value);
+
+                    if (!(in_array("Cliente", $arregloRoles)))
+                    {
+                        array_push($arregloRoles, "Cliente");
+
+                        $this->Usermeta->update($rolesComprador->umeta_id, array('meta_value' =>
+                            json_encode($arregloRoles)));
+                    }
+
                     $jsondata["satisfactorio"] = true;
                     $jsondata["mensaje"] = "El cliente se agregó exitosamente a la propiedad";
                     $jsondata["idPostmeta"] = $idPostmeta;

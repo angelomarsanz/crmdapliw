@@ -89,81 +89,91 @@ class PostsController extends MvcPublicController
                 $contadorUsuarios++;
             }
 
-            $captadores = [];
-            $promotores = [];
-            $propietarios = [];
-            $clientes = [];
+            $personas = [];
 
             foreach ($usuarios as $clave => $usuario)
             {
                 if ($usuario["CRMdapliw_estatus"] == "ACTIVO")
                 {
-                $nombreCompleto = $usuario["first_name"] . ' ' . $usuario["last_name"];
+                    $nombreCompleto = $usuario["first_name"] . ' ' . $usuario["last_name"];
 
-                foreach ($usuario["CRMdapliw_roles"] as $rol)
-                {
-                    if ($rol == "Promotor")
-                    {   
-                        $promotores[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
-                    }
-                    elseif ($rol == "Captador")
-                    { 
-                        $captadores[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
-                    }
-                    elseif ($rol == "Gestor de negocios")
-                    {   
-                        $gestores[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
-                    }
-                    elseif ($rol == "Propietario")
-                    {   
-                        $indicadorCaptadorPropietario = 0;
-
-                        if ($permiso < 3 && $usuario["CRMdapliw_captador_propietario"] == $idUsuario)
-                        {
-                            $indicadorCaptadorPropietario = 1;
-                        } 
-
-                        if ($indicadorCaptadorPropietario == 1 || $permiso > 3)
-                        {
-                            $propietarios[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                    foreach ($usuario["CRMdapliw_roles"] as $rol)
+                    {
+                        if ($rol == "Promotor")
+                        {   
+                            if ($permiso > 3)
+                            {
+                                $nombreRol = $nombreCompleto . " - ASESOR(A) DE INVERSIÓN INMOBILIARIA";
+                                $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            }
                         }
-                    }                       
-                    elseif ($rol == "Cliente")
-                    {  
-                        $indicadorPromotorCliente = 0; 
+                        elseif ($rol == "Captador")
+                        { 
+                            if ($permiso > 3)
+                            {
+                                $nombreRol = $nombreCompleto . " - CAPTADOR(A)";
+                                $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            }
 
-                        if ($permiso < 3 && $usuario["CRMdapliw_promotor_cliente"] == $idUsuario)
-                        {
-                            $indicadorPromotorCliente = 1;
-                        } 
+                        }
+                        elseif ($rol == "Gestor de negocios")
+                        {   
+                            if ($permiso > 7)
+                            {
+                                $nombreRol = $nombreCompleto . " - GESTOR DE NEGOCIOS";
+                                $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            }
+                        }
+                        elseif ($rol == "Administrador")
+                        {   
+                            if ($permiso > 7)
+                            {
+                                $nombreRol = $nombreCompleto . " - ADMINISTRADOR(A)";
+                                $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            }
+                        }
+                        elseif ($rol == "Propietario")
+                        {   
+                            $nombreRol = $nombreCompleto . " - PROPIETARIO(A)";
+                            $indicadorCaptadorPropietario = 0;
 
-                        if ($indicadorPromotorCliente == 1 || $permiso > 3)
-                        {
-                            $clientes[] = ["label" => $nombreCompleto, "value" => $nombreCompleto, "id" => $clave];
+                            if ($permiso < 3 && $usuario["CRMdapliw_captador_propietario"] == $idUsuario)
+                            {
+                                $indicadorCaptadorPropietario = 1;
+                            } 
+
+                            if ($indicadorCaptadorPropietario == 1 || $permiso > 3)
+                            {
+                                $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            }
+                        }                       
+                        elseif ($rol == "Cliente")
+                        {  
+                            $nombreRol = $nombreCompleto . " - COMPRADOR(A)";
+                            $indicadorPromotorCliente = 0; 
+
+                            if ($permiso < 3 && $usuario["CRMdapliw_promotor_cliente"] == $idUsuario)
+                            {
+                                $indicadorPromotorCliente = 1;
+                            } 
+
+                            if ($indicadorPromotorCliente == 1 || $permiso > 3)
+                            {
+                                $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            }
                         }
                     }
                 }
-                }
             }
-            $promotoresAsc = $this->array_orderby($promotores, 'label', SORT_ASC); 
-            $captadoresAsc = $this->array_orderby($captadores, 'label', SORT_ASC); 
-            $gestoresAsc = $this->array_orderby($gestores, 'label', SORT_ASC); 
-            if (isset($propietarios[0]["label"]))
+            if (isset($personas[0]["label"]))
             {
-                $propietariosAsc = $this->array_orderby($propietarios, 'label', SORT_ASC); 
+                $personasAsc = $this->array_orderby($propietarios, 'label', SORT_ASC); 
             }
             else
             {
-                $propietariosAsc = [];
+                $personasAsc = [];
             }
-            if (isset($clientes[0]["label"]))
-            {
-                $clientesAsc = $this->array_orderby($clientes, 'label', SORT_ASC); 
-            }
-            else
-            {
-                $clientesAsc = [];
-            }
+
             $this->load_model('Postmeta');
 
             $posts = $this->Post->find(array('order' => 'ID ASC'));
@@ -335,11 +345,7 @@ class PostsController extends MvcPublicController
             $this->set("nombreUsuario", $nombreUsuario);
             $this->set("roles", $roles);
             $this->set("permiso", $permiso);
-            $this->set("promotoresAsc", $promotoresAsc);
-            $this->set("captadoresAsc", $captadoresAsc);
-            $this->set("gestoresAsc", $gestoresAsc);
-            $this->set("propietariosAsc", $propietariosAsc);
-            $this->set("clientesAsc", $clientesAsc);
+            $this->set("personasAsc", $personasAsc);
             $this->set("userMetas", $userMetas);
             $this->set("usuarios", $usuarios);           
             $this->set('posts', $posts);

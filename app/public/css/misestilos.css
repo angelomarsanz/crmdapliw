@@ -1,14 +1,23 @@
-.icon 
+.iconoMenu 
+{
+  width: 300px;
+  height: 300px;
+  margin-left: 75px;
+  margin-right: 75px;
+}
+.icono 
 {
   width: 16px;
   height: 16px;
-  margin-right: 8px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
-.iconMenu 
+.iconoMenu 
 {
   width: 32px;
   height: 32px;
-  margin-right: 16px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 .noVer
 {

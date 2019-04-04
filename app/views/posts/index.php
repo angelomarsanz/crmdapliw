@@ -6,55 +6,31 @@
 
         <!-- div con sufijo 10 -->
         <div class="container" id="menuCrm10">
-            <nav class="fixed-bottom navbar-dark" style="text-align: center; background-color:#085b9e; opacity: 0.5;" id="opcionesMenu10">
-                <button title="Inicio CRM" class="btn btn-link" id="inicioCrm10" >
-                        <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?> 
-                        alt="Inicio CRM" class="iconMenu">
-                </button>
+            <nav class="fixed-bottom navbar-dark" style="text-align: center; background-color:#085b9e; opacity: 0.5;" id="opcionesMenu10">			
 
-                <button title="Buscar" class="btn btn-link" id="botonBuscar10">
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-                    alt="Buscar" class="iconMenu">
-                </button>
-          
-                <a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link" id="publicarPropiedad10" title="Publicar propiedad">
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
-                    alt="Publicar propiedad" class="iconMenu">
+                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="inicioCrm10" title="Inicio CRM">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?>
+                    alt="Inicio CRM" class="iconoMenu">
                 </a>
-                
-                <button title="Otras opciones" class="btn btn-link" id="otrasOpciones10">
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/grid-two-up.svg" ?>
-                    alt="Otras opciones" class="iconMenu">
-                </button>
-
-                <button title="Cerrar" class="btn btn-link noVer" id="cerrarBusqueda10">
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="Cerrar búsqueda" class="iconMenu">
-                </button>
-              
-                <button title="Ejecutar búsqueda" class="btn btn-link noVer" id="ejecutarBusqueda10">
-                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-                    alt="Ejecutar búsqueda" class="iconMenu">
-                </button>
-
+				
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgenda10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="Cerrar agenda" class="iconMenu">
+                    alt="Cerrar agenda" class="iconoMenu">
                 </button>
 
                 <button title="Agregar actividad" class="btn btn-link noVer" id="agregarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
-                    alt="Agregar actividad" class="iconMenu">
+                    alt="Agregar actividad" class="iconoMenu">
                 </button>          
 
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgregarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="Cerrar agregar actividad" class="iconMenu">
+                    alt="Cerrar agregar actividad" class="iconoMenu">
                 </button>
 
                 <button title="Guardar actividad" class="btn btn-link noVer" id="guardarActividad10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
-                    alt="Agregar actividad" class="iconMenu">
+                    alt="Agregar actividad" class="iconoMenu">
                 </button>
 
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarPersonas10">
@@ -76,105 +52,171 @@
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
                     alt="Guardar persona" class="iconMenu">
                 </button>
+				
+				<!-- Inicio grupo botone que ya no se estàn usando -->
+				          
+					<a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad">
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
+						alt="Publicar propiedad" class="iconoMenu">
+					</a>
+					
+					<button title="Otras opciones" class="btn btn-link noVer" id="otrasOpciones10">
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/grid-two-up.svg" ?>
+						alt="Otras opciones" class="iconoMenu">
+					</button>
+					
+					<button title="Buscar" class="btn btn-link noVer" id="botonBuscar10">
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
+						alt="Buscar" class="iconoMenu">
+					</button>
+					
+					<button title="Cerrar" class="btn btn-link noVer" id="cerrarBusqueda10">
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+						alt="Cerrar búsqueda" class="iconoMenu">
+					</button>
+				  
+					<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="ejecutarBusqueda10">
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
+						alt="Ejecutar búsqueda" class="iconoMenu">
+					</button>
+					
+				<!-- Fin botones que ya no se están usando -->
 
             </nav>
         </div>
 
         <!-- div con sufijo 20 -->
         <div class="container" id="tituloCrm20">
-            <h1 class="letraAzul">CRM</h1>
+			<div class="row">
+				<div class="col-md-4">
+					<h1 class="letraAzul">CRM</h1>
+				</div>
+				<div class="col-md-4">
+					<div class="input-group mb-3" id="grupoVista20>
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="vistas20">Vistas</label>
+						</div>
+						<select class="custom-select" id="vistas20">
+							<option selected value=""></option>
+							<option value="Lista con imágenes">Lista con imágenes</option>
+							<option value="Lista sin imágenes">Lista sin imágenes</option>
+							<option value="Mosaicos con imágenes">Mosaicos con imágenes</option>
+							<option value="Mosaicos sin imágenes">Mosaicos sin imágenes</option>
+						</select>
+						<div id="mensajesVistas20" class="mensajesUsuarios"></div>
+					</div>
+				</div>
+			</div>
         </div>
         
         <!-- div con sufijo 30 -->
-        <div class="container" id="mensajesUsuario30">
+        <div class="container mensajesUsuario" id="mensajesUsuario30">
         </div>
-        
-        <!-- div con sufijo 40 -->
-        <div class="container formulario noVer" id="busqueda40">
+ 
+		<!-- div con sufijo 40 -->
+        <div class="container formulario" id="principal40">
+			<div class="row">
+				<div class="col-md-4">
+					<button title="Propiedades" class="btn btn-link" id="propiedades40">
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?>
+							alt="Propiedades" class="iconoPrincipal">
+					</button>
+				</div>
+				<div class="col-md-4">
+					<button title="Agenda" class="btn btn-link" id="agenda40">
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/clock.svg" ?>
+							alt="Agenda" class="iconoPrincipal">
+					</button>
+				</div>
+				<div class="col-md-4">
+					<button title="Personas" class="btn btn-link" id="personas40">
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/people.svg" ?>
+							alt="Personas" class="iconoPrincipal">
+					</button>
+				</div>
+			</div>
+		</div>
+ 
+        <!-- div con sufijo 50 -->
+        <div class="container formulario noVer" id="busquedaPropiedades50">
+			<h2>Filtros Propiedades</h2>
             <div class="row">
-                <div class="col-md-12">
-                    <form id="formularioBusqueda">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <p class="letraAzul">Agenda</p>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text" for="busquedaActividadesAgenda">Actividades planificadas</label>
-                                    </div>
-                                    <select class="custom-select" id="busquedadActividadesAgenda">
-                                        <option value="Actividades atrasadas">Actividades atrasadas</option>
-                                        <option value="Actividades del mes">Actividades del mes</option>
-                                        <option value="Actividades para hoy">Actividades para hoy</option>
-                                        <option value="Actividades para mañana">Actividades para mañana</option>
-                                        <option value="Sin actividad planificada">Sin actividad planificada</option>
-                                        <option selected value="Todas">Todas</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="letraAzul">Personas</p>
-                                <div class="form-group">
-                                    <label for="busquedaCaptador">Captador</label>
-                                    <input type="text" class="form-control" id="busquedaCaptador">
-                                </div>
-                                <div class="form-group">
-                                    <label for="busquedaPromotor">Promotor</label>
-                                    <input type="text" class="form-control" id="busquedaPromotor">
-                                </div>
-                                <div class="form-group">
-                                    <label for="busquedaPropietario">Propietario</label>
-                                    <input type="text" class="form-control" id="busquedaPropietario">
-                                </div>
-                                <div class="form-group">
-                                    <label for="busquedaCompradorPotencial">Comprador potencial</label>
-                                    <input type="text" class="form-control" id="busquedaCompradorPotencial">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="letraAzul">Prestaciones</p>
-                                <div class="form-group">
-                                    <label for="busquedaHabitaciones">Habitaciones</label>
-                                    <input type="number" class="form-control" id="busquedaHabitaciones">
-                                </div>
-                                <div class="form-group">
-                                    <label for="busquedaBanos">Baños</label>
-                                    <input type="Number" class="form-control" id="busquedaBanos">
-                                </div>
-                                <div class="form-group">
-                                    <label for="busquedaGarajes">Garajes</label>
-                                    <input type="Number" class="form-control" id="busquedaGarajes">
-                                </div>
-                                <div class="form-group">
-                                    <label for="busquedaArea">Área M2 (igual o mayor a)</label>
-                                    <input type="Number" class="form-control" id="busquedaArea">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <p class="letraAzul">Otros</p>
-                                <div class="form-group">
-                                    <label for="busquedaCodigo">Código</label>
-                                    <input type="text" class="form-control" id="busquedaCodigo">
-                                </div>
-                                <div class="form-group">
-                                    <label for="busquedaNombre">Nombre</label>
-                                    <input type="text" class="form-control" id="busquedaNombre">
-                                </div>
-                                <div class="form-group">
-                                    <label for="busquedaUbicacion">Ubicación</label>
-                                    <input type="text" class="form-control" id="busquedaUbicacion">
-                                </div>
-                                <div class="form-group">
-                                    <label for="busquedaPrecioMaximo">Precio máximo</label>
-                                    <input type="number" class="form-control" id="busquedaPrecioMaximo">
-                                </div>
-                                <div class="form-group">
-                                    <label for="busquedaPrecioMinimo">Precio mínimo</label>
-                                    <input type="number" class="form-control" id="busquedaPrecioMinimo">
-                                </div>
-                            </div> 
-                        </div>
-                    </form>
-                </div>
+                <div class="col-md-4">
+					<p class="letraAzul">Prestaciones</p>
+					<div class="form-group">
+						<label for="busquedaHabitaciones">Habitaciones</label>
+						<input type="number" class="form-control" id="busquedaHabitaciones">
+					</div>
+					<div class="form-group">
+						<label for="busquedaBanos">Baños</label>
+						<input type="Number" class="form-control" id="busquedaBanos">
+					</div>
+					<div class="form-group">
+						<label for="busquedaGarajes">Garajes</label>
+						<input type="Number" class="form-control" id="busquedaGarajes">
+					</div>
+					<div class="form-group">
+						<label for="busquedaArea">Área M2 (igual o mayor a)</label>
+						<input type="Number" class="form-control" id="busquedaArea">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<p class="letraAzul">Otros</p>
+					<div class="form-group">
+						<label for="busquedaCodigo">Código</label>
+						<input type="text" class="form-control" id="busquedaCodigo">
+					</div>
+					<div class="form-group">
+						<label for="busquedaNombre">Nombre</label>
+						<input type="text" class="form-control" id="busquedaNombre">
+					</div>
+					<div class="form-group">
+						<label for="busquedaZona">Zona</label>
+						<input type="text" class="form-control" id="busquedaZona">
+					</div>
+					<div class="form-group">
+						<label for="busquedaPrecioMaximo">Precio máximo</label>
+						<input type="number" class="form-control" id="busquedaPrecioMaximo">
+					</div>
+					<div class="form-group">
+						<label for="busquedaPrecioMinimo">Precio mínimo</label>
+						<input type="number" class="form-control" id="busquedaPrecioMinimo">
+					</div>
+				</div> 
+            </div>
+            <?php
+                for ($i = 1; $i <= 100; $i++) 
+                {
+                    echo "<br />";
+                }
+            ?>
+        </div> 
+ 
+        <!-- div con sufijo 51 -->
+        <div class="container formulario noVer" id="busquedaAgenda51">
+            <div class="row">
+				<div class="col-md-4">
+					<p class="letraAzul">Agenda</p>
+					<button title="Bienes sin actividades" class="btn btn-link" id="bienesSinActividades51">
+						Propiedades sin actividades planificadas
+					</button>
+					<div class="form-group">
+						<label for="personaAgenda51">Persona responsable</label>
+						<input type="text" class="form-control" id="personaAgenda51">
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="busquedaAgenda51">Actividades planificadas</label>
+						</div>
+						<select class="custom-select" id="busquedadAgenda51">
+							<option value="Actividades atrasadas">Actividades atrasadas</option>
+							<option value="Actividades del mes">Actividades del mes</option>
+							<option value="Actividades para hoy">Actividades para hoy</option>
+							<option value="Actividades para mañana">Actividades para mañana</option>
+							<option selected value="Todas">Todas</option>
+						</select>
+					</div>
+				</div>
             </div>
             <?php
                 for ($i = 1; $i <= 100; $i++) 
@@ -183,12 +225,10 @@
                 }
             ?>
         </div>
-        <!-- div con sufijo 50 -->
-        <!-- Reservado para crear index de la agenda sin imágenes -->
-
+				 
         <!-- div con sufijo 60 -->
         <div class="container formulario" id="bienes60">
-            <h2 class="letraAzul">Actividades planificadas de la agenda</h2>
+            <h2 class="letraAzul">Propiedades</h2>
             <br />
             <div class="row" id="cicloBienes60">
             </div>
@@ -199,8 +239,281 @@
                 }
             ?>
         </div> 
+		
+		<!-- div con sufijo 80 -->
+		<div class="container formulario noVer" id="agenda80">
+		</div> 
+
+		<!-- div con sufijo 90 -->
+		<div class="container formulario noVer" id="agregarActividad90">
+			<div class="row">
+				<div class='col-md-6'> 
+					<h2 class="letraAzul" id="tituloAgregarActividad90"></h2>
+					<br />
+					<br /> 
+					<form>
+						<div class="row">
+							<div class="col-md-12">
+								<div class='input-group mb-3'>
+									<div class='input-group-prepend'>
+										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+									</div>
+									<select class='custom-select' id='actividadAgenda90'> 
+										<option selected></option> 
+										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
+										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
+										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
+										<option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
+										<option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
+										<option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
+										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
+										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
+										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
+										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
+										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
+										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
+										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
+										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
+										<option value="Firma documento de venta">Firma documento de venta</option> 
+										<option value="Firma opción compra-venta">Firma opción compra-venta</option> 
+										<option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
+										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
+										<option value="Llamar a propietario">Llamar a propietario</option>
+										<option value="Mostrar el inmueble a un cliente">Mostrar el inmueble a un cliente</option>
+										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
+										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
+										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
+										<option value="Publicar en las redes sociales">Publicar en las redes sociales</option>
+										<option value="Reunión con el propietario">Reunión con el propietario</option>
+										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
+										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>                   
+										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
+										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
+									</select> 
+								</div>
+							</div>
+						</div> 
+						
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group"> 
+									<label for="informacionAdicional90">Información adicional</label> 
+									<input type="text" class="form-control" id="informacionAdicional90"> 
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="fechaPlanificada90">Fecha</label>  
+									<input type="text" class="form-control" id="fechaPlanificada90"> 
+								</div>
+							</div>
+						</div>
+
+					</form>
+				<br />
+				<br />
+				</div> 
+			</div>
+			<?php
+				for ($i = 1; $i <= 100; $i++) 
+				{
+					echo "<br />";
+				}
+			?>
+		</div>
+
+		<!-- div con sufijo 100 -->
+		<div class="container formulario noVer" id="personas100">
+			<h2 class="letraAzul" id="tituloPersonas100"></h2>
+			<div class="row">
+				<div class="col-12 col-sm-6 col-md-4 mb-3">
+					<div class="card" id="imagen100">
+					</div>
+				</div>
+				<div class="col-12 col-sm-6 col-md-8 mb-3">
+						
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group" id="grupoPropietario100"> 
+								<label for="nombrePropietario100">Propietario</label> 
+								<input type="text" class="form-control" id="nombrePropietario100" disabled>  
+								<div class="mensajesUsuario" id="mensajesPropietario100"></div> 
+							</div>
+
+							<div class="form-group" id="grupoCaptador100"> 
+								<label for="nombreCaptador100">Captador</label> 
+								<input type="text" class="form-control" id="nombreCaptador100"> 
+								<div class="mensajesUsuario" id="mensajesCaptador100"></div>
+							</div>
+
+							<div class="form-group" id="grupoAsignarCliente100"> 
+								<label for="nombreCliente100">Asignar de mi cartera de clientes un comprador potencial para esta propiedad</label> 
+								<input type="text" class="form-control" id="nombreCliente100"> 
+								<div class="mensajesUsuario" id="mensajesCliente100"></div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-1">
+						</div>
+						<div class="col-md-11">
+							<h3 class="letraAzul">Compradores potenciales</h3>    
+							<div id="compradoresPotenciales100"></div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<?php
+				for ($i = 1; $i <= 100; $i++) 
+				{
+					echo "<br />";
+				}
+			?>
+		</div>
+
+		<!-- div con sufijo 110 -->
+		<div class="container formulario noVer" id="agregarPersonas110">
+			<h2 class="letraAzul" id="tituloAgregarPersonas110"></h2>
+			<br />
+			<div class="row">
+				<div class="col-12 col-sm-6 col-md-6 mb-3">
+					<form>
+						
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="tipoIdentificacion110">Tipo de identificación*</label> 
+							</div>
+							<select class="custom-select" id="tipoIdentificacion110"> 
+								<option selected></option> 
+								<option value="E">E - Extranjero</option>
+								<option value="G">G - Gobierno</option>
+								<option value="J">J - Jurídico</option> 
+								<option value="P">P - Pasaporte</option>
+								<option value="V">V - Venezolano</option>
+							</select> 
+						</div>
+						<div id="mensajesTipo110" class="mensajesUsuario"></div>    
+
+						<div class="form-group"> 
+							<label for="numeroIdentificacion110">Nro. de identificación*</label> 
+							<input type="number" class="form-control" id="numeroIdentificacion110"> 
+						</div>
+						<div id="mensajesIdentificacion110" class="mensajesUsuario"></div>    
+
+						<div class="form-group"> 
+							<label for="primerNombre110">Primer nombre*</label> 
+							<input type="text" class="form-control" id="primerNombre110"> 
+						</div>
+						<div id="mensajesPrimerNombre110" class="mensajesUsuario"></div>    
+
+						<div class="form-group"> 
+							<label for="segundoNombre110">Segundo nombre</label> 
+							<input type="text" class="form-control" id="segundoNombre110"> 
+						</div>
+						<div id="mensajesSegundoNombre110" class="mensajesUsuario"></div>    
+
+						<div class="form-group"> 
+							<label for="primerApellido110">Primer apellido*</label> 
+							<input type="text" class="form-control" id="primerApellido110"> 
+						</div>
+						<div id="mensajesPrimerApellido110" class="mensajesUsuario"></div>    
+
+						<div class="form-group"> 
+							<label for="segundoApellido110">Segundo apellido</label> 
+							<input type="text" class="form-control" id="segundoApellido110"> 
+						</div>
+						<div id="mensajesSegundoApellido110" class="mensajesUsuario"></div>    
+
+						<div id="rolesCheckbox110">
+
+							<p>Roles*</p>
+
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="administrador110"> 
+								<label class='form-check-label' for="administrador110">&nbsp;&nbsp;Administrador</label>
+							</div>
+
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="gestorNegocios110"> 
+								<label class='form-check-label' for="gestorNegocios110">&nbsp;&nbsp;Gestor de negocios</label>
+							</div>
+
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="captador110"> 
+								<label class='form-check-label' for="captador110">&nbsp;&nbsp;Captador</label>
+							</div>
+
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="promotor110"> 
+								<label class='form-check-label' for="promotor110">&nbsp;&nbsp;Asesor de inversión inmobiliaria</label>
+							</div>
+
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="propietario110"> 
+								<label class='form-check-label' for="propietario110">&nbsp;&nbsp;Propietario</label>
+							</div>
+
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="cliente110"> 
+								<label class='form-check-label' for="cliente110">&nbsp;&nbsp;Comprador potencial</label>
+							</div>
+							<div id="mensajesRoles110" class="mensajesUsuario"></div> 
+
+							<br />
+
+						</div>
+
+						<div class="form-group"> 
+							<label for="rol110">Rol*</label> 
+							<input type="text" class="form-control" id="rol110" value="Cliente" disabled> 
+						</div>
+						<div id="mensajesRol110" class="mensajesUsuario"></div> 
+
+						<div class="form-group"> 
+							<label for="celular110">Teléfono celular</label> 
+							<input type="text" class="form-control" id="celular110"> 
+						</div>
+						<div id="mensajesCelular110" class="mensajesUsuario"></div> 
+
+						<div class="form-group"> 
+							<label for="telefonoFijo110">Teléfono fijo</label> 
+							<input type="text" class="form-control" id="telefonoFijo110"> 
+						</div>
+						<div id="mensajesTelefono110" class="mensajesUsuario"></div> 
+
+						<div class="form-group"> 
+							<label for="email110">Correo electrónico*</label> 
+							<input type="email" class="form-control" id="email110"> 
+						</div>
+						<div id="mensajesEmail110" class="mensajesUsuario"></div> 
+
+						<div class="form-group"> 
+							<label for="direccion110">Dirección</label> 
+							<input type="text" class="form-control" id="direccion110"> 
+						</div>
+						<div id="mensajesDireccion110" class="mensajesUsuario"></div> 
+
+					</form>
+				</div>
+
+			</div>
+			<?php
+				for ($i = 1; $i <= 100; $i++) 
+				{
+					echo "<br />";
+				}
+			?>
+		</div>
     <?php else: ?>
-        <!-- div con sufijo 70 -->
+        <!-- div con sufijo 10000 -->
         <div class="container">
             <div class="row">
                 <br />
@@ -213,281 +526,8 @@
             <br />
         </div> 
     <?php endif; ?>
-    
-    <!-- div con sufijo 80 -->
-    <div class="container formulario noVer" id="agenda80">
-    </div> 
-
-    <!-- div con sufijo 90 -->
-    <div class="container formulario noVer" id="agregarActividad90">
-        <div class="row">
-            <div class='col-md-6'> 
-                <h2 class="letraAzul" id="tituloAgregarActividad90"></h2>
-                <br />
-                <br /> 
-                <form>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class='input-group mb-3'>
-                                <div class='input-group-prepend'>
-                                    <label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
-                                </div>
-                                <select class='custom-select' id='actividadAgenda90'> 
-                                    <option selected></option> 
-                                    <option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-                                    <option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
-                                    <option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
-                                    <option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
-                                    <option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
-                                    <option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
-                                    <option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
-                                    <option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
-                                    <option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
-                                    <option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
-                                    <option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
-                                    <option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
-                                    <option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
-                                    <option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
-                                    <option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
-                                    <option value="Firma documento de venta">Firma documento de venta</option> 
-                                    <option value="Firma opción compra-venta">Firma opción compra-venta</option> 
-                                    <option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
-                                    <option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
-                                    <option value="Llamar a propietario">Llamar a propietario</option>
-                                    <option value="Mostrar el inmueble a un cliente">Mostrar el inmueble a un cliente</option>
-                                    <option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
-                                    <option value="Preparación del documento de venta">Preparación del documento de venta</option>
-                                    <option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
-                                    <option value="Publicar en las redes sociales">Publicar en las redes sociales</option>
-                                    <option value="Reunión con el propietario">Reunión con el propietario</option>
-                                    <option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
-                                    <option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>                   
-                                    <option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
-                                    <option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
-                                </select> 
-                            </div>
-                        </div>
-                    </div> 
-                    
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group"> 
-                                <label for="informacionAdicional90">Información adicional</label> 
-                                <input type="text" class="form-control" id="informacionAdicional90"> 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="fechaPlanificada90">Fecha</label>  
-                                <input type="text" class="form-control" id="fechaPlanificada90"> 
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
-            <br />
-            <br />
-            </div> 
-        </div>
-        <?php
-            for ($i = 1; $i <= 100; $i++) 
-            {
-                echo "<br />";
-            }
-        ?>
-    </div>
-
-    <!-- div con sufijo 100 -->
-    <div class="container formulario noVer" id="personas100">
-        <h2 class="letraAzul" id="tituloPersonas100"></h2>
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 mb-3">
-                <div class="card" id="imagen100">
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-8 mb-3">
-                    
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group" id="grupoPropietario100"> 
-                            <label for="nombrePropietario100">Propietario</label> 
-                            <input type="text" class="form-control" id="nombrePropietario100" disabled>  
-                            <div id="mensajesPropietario100"></div> 
-                        </div>
-
-                        <div class="form-group" id="grupoCaptador100"> 
-                            <label for="nombreCaptador100">Captador</label> 
-                            <input type="text" class="form-control" id="nombreCaptador100"> 
-                            <div id="mensajesCaptador100"></div>
-                        </div>
-
-                        <div class="form-group" id="grupoAsignarCliente100"> 
-                            <label for="nombreCliente100">Asignar de mi cartera de clientes un comprador potencial para esta propiedad</label> 
-                            <input type="text" class="form-control" id="nombreCliente100"> 
-                            <div id="mensajesCliente100"></div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-1">
-                    </div>
-                    <div class="col-md-11">
-                        <h3 class="letraAzul">Compradores potenciales</h3>    
-                        <div id="compradoresPotenciales100"></div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <?php
-            for ($i = 1; $i <= 100; $i++) 
-            {
-                echo "<br />";
-            }
-        ?>
-    </div>
-
-    <!-- div con sufijo 110 -->
-    <div class="container formulario noVer" id="agregarPersonas110">
-        <h2 class="letraAzul" id="tituloAgregarPersonas110"></h2>
-        <br />
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-6 mb-3">
-                <form>
-                    
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="tipoIdentificacion110">Tipo de identificación*</label> 
-                        </div>
-                        <select class="custom-select" id="tipoIdentificacion110"> 
-                            <option selected></option> 
-                            <option value="E">E - Extranjero</option>
-                            <option value="G">G - Gobierno</option>
-                            <option value="J">J - Jurídico</option> 
-                            <option value="P">P - Pasaporte</option>
-                            <option value="V">V - Venezolano</option>
-                        </select> 
-                    </div>
-                    <div id="mensajesTipo110" class="mensajes110"></div>    
-
-                    <div class="form-group"> 
-                        <label for="numeroIdentificacion110">Nro. de identificación*</label> 
-                        <input type="number" class="form-control" id="numeroIdentificacion110"> 
-                    </div>
-                    <div id="mensajesIdentificacion110" class="mensajes110"></div>    
-
-                    <div class="form-group"> 
-                        <label for="primerNombre110">Primer nombre*</label> 
-                        <input type="text" class="form-control" id="primerNombre110"> 
-                    </div>
-                    <div id="mensajesPrimerNombre110" class="mensajes110"></div>    
-
-                    <div class="form-group"> 
-                        <label for="segundoNombre110">Segundo nombre</label> 
-                        <input type="text" class="form-control" id="segundoNombre110"> 
-                    </div>
-                    <div id="mensajesSegundoNombre110" class="mensajes110"></div>    
-
-                    <div class="form-group"> 
-                        <label for="primerApellido110">Primer apellido*</label> 
-                        <input type="text" class="form-control" id="primerApellido110"> 
-                    </div>
-                    <div id="mensajesPrimerApellido110" class="mensajes110"></div>    
-
-                    <div class="form-group"> 
-                        <label for="segundoApellido110">Segundo apellido</label> 
-                        <input type="text" class="form-control" id="segundoApellido110"> 
-                    </div>
-                    <div id="mensajesSegundoApellido110" class="mensajes110"></div>    
-
-                    <div id="rolesCheckbox110">
-
-                        <p>Roles*</p>
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="administrador110"> 
-                            <label class='form-check-label' for="administrador110">&nbsp;&nbsp;Administrador</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="gestorNegocios110"> 
-                            <label class='form-check-label' for="gestorNegocios110">&nbsp;&nbsp;Gestor de negocios</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="captador110"> 
-                            <label class='form-check-label' for="captador110">&nbsp;&nbsp;Captador</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="promotor110"> 
-                            <label class='form-check-label' for="promotor110">&nbsp;&nbsp;Asesor de inversión inmobiliaria</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="propietario110"> 
-                            <label class='form-check-label' for="propietario110">&nbsp;&nbsp;Propietario</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="cliente110"> 
-                            <label class='form-check-label' for="cliente110">&nbsp;&nbsp;Comprador potencial</label>
-                        </div>
-                        <div id="mensajesRoles110" class="mensajes110"></div> 
-
-                        <br />
-
-                    </div>
-
-                    <div class="form-group"> 
-                        <label for="rol110">Rol*</label> 
-                        <input type="text" class="form-control" id="rol110" value="Cliente" disabled> 
-                    </div>
-                    <div id="mensajesRol110" class="mensajes110"></div> 
-
-                    <div class="form-group"> 
-                        <label for="celular110">Teléfono celular</label> 
-                        <input type="text" class="form-control" id="celular110"> 
-                    </div>
-                    <div id="mensajesCelular110" class="mensajes110"></div> 
-
-                    <div class="form-group"> 
-                        <label for="telefonoFijo110">Teléfono fijo</label> 
-                        <input type="text" class="form-control" id="telefonoFijo110"> 
-                    </div>
-                    <div id="mensajesTelefono110" class="mensajes110"></div> 
-
-                    <div class="form-group"> 
-                        <label for="email110">Correo electrónico*</label> 
-                        <input type="email" class="form-control" id="email110"> 
-                    </div>
-                    <div id="mensajesEmail110" class="mensajes110"></div> 
-
-                    <div class="form-group"> 
-                        <label for="direccion110">Dirección</label> 
-                        <input type="text" class="form-control" id="direccion110"> 
-                    </div>
-                    <div id="mensajesDireccion110" class="mensajes110"></div> 
-
-                </form>
-            </div>
-
-        </div>
-        <?php
-            for ($i = 1; $i <= 100; $i++) 
-            {
-                echo "<br />";
-            }
-        ?>
-    </div>
-
 </div>
+
 <script>
 // Variables globales
 var gBienes = <?= json_encode($bienes) ?>;
@@ -497,9 +537,10 @@ var gIdUsuario = <?= $idUsuario ?>;
 var gNombreUsuario = "<?= $nombreUsuario ?>";
 var gRoles = <?= json_encode($roles) ?>;
 var gPermiso = <?= $permiso ?>;
-var gClientes = <?= json_encode($clientesAsc) ?>;
+var gPersonas = <?= json_encode($personasAsc) ?>;
 var gIdPostActual = "";
 var gPosicionAnterior = "";
+var gVistaPreferida = <?= $vistaPreferida ?>;
 
 // Funciones  
 function testFunction()
@@ -598,13 +639,13 @@ function guardarCambiosAgenda(idActividad)
         {
             if ($j(this).prop("checked") == true)
             {
-                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "true";
-                estatusObj = "true";
+                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "false";
+                estatusObj = "false";
             }
             else
             {
-                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "false";
-                estatusObj = "false";
+                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "true";
+                estatusObj = "true";
             }
         }
     });
@@ -629,7 +670,7 @@ function guardarCambiosAgenda(idActividad)
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                     "<strong>¡ Los datos se guardaron exitosamente ! " + response.mensaje + "</strong>" +
                 "</div>";
-            if (estatusObj == "true")
+            if (estatusObj == "false")
             {
                 $j(tarjeta).addClass("noVer");
             }
@@ -685,7 +726,7 @@ function guardarActividad()
                 "diaCierre" : $j("#fechaPlanificada90").val().substring(0, 2),
                 "mesCierre" : $j("#fechaPlanificada90").val().substring(3, 5),
                 "anoCierre" : $j("#fechaPlanificada90").val().substring(6, 10),
-                "estatus" : "false"
+                "estatus" : "true"
             }
         };
 
@@ -779,7 +820,7 @@ function primeraActividadPendiente(idBien)
 
         $j.each(arregloActividades, function(clave, datos)  
         {
-            if (datos.estatus == "false")
+            if (datos.estatus == "true")
             {
                 actividadMasAntigua = datos.nombreActividad;
                 fechaMasAntigua = 
@@ -847,77 +888,252 @@ function primeraActividadPendiente(idBien)
     $j("#primeraActividadPendiente" + idBien).html(datosActividadPendiente);
 }
 
-function mostrarAgenda()
+
+function alertaActividades(idBien)
 {
-    var agendaPrincipal = "";
+	fechaInvertidaAntigua = "";
 
-    $j.each(gBienes, function(clave, bien)  
+    if (gDatosBienes[idBien].CRMdapliw_actividad_agenda)
     {
-        agendaPrincipal += 
-            "<div class='col-md-4 mb-3'>" +
-                "<div class='card detalleBienes60'>" +
-                    "<a href=" + bien.guid + "title='Ver propiedad'>";
-                                            
-                    if (gDatosBienes[bien.ID]._thumbnail_id)
-                    {
-                        agendaPrincipal += 
-                            "<img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>";
-                    }
-                    else
-                    {
-                        agendaPrincipal += "Foto de la propiedad";
-                    }
-            
-                    agendaPrincipal +=                         
-                    "</a>" +    
-                    "<div class='card-block'>" +
-                        "<h4 class='card-title' id='nombreDelBien" + bien.ID + "'>" + bien.__name + "</h4>" +
+        arregloActividades = gDatosBienes[idBien].CRMdapliw_actividad_agenda.sort(function(a,b)
+        {
+            return (a.fechaInvertida - b.fechaInvertida);
+        });
 
-                        "<div class='card bg-light text-dark'>" +
-                            "<div class='card-body' id='primeraActividadPendiente" + bien.ID + "'>" + 
-                            "</div>" +
-                        "</div>" + 
+        $j.each(arregloActividades, function(clave, datos)  
+        {
+            if (datos.estatus == "true")
+            {
+                fechaInvertidaAntigua = datos.fechaInvertida;
+                return false;
+            }
+        });        
+    }
 
-                        "<div class='form-group'>" +
-                            "<label for='buscarCaptador60" + bien.ID + "'>Captador responsable: </label>" +
-                            "<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
-                                "value='" + gMatrizBienes[bien.ID].nombre_autor + "'>" +
-                        "</div>" +
-                        "<div id='mensajesUsuario60" + bien.ID + "'>" +
-                        "</div>" +
+    if (actividadMasAntigua != "")
+    {
+        var fechaActual = new Date();
 
-                        "<div class='card-footer'>" +
-                            "<p>" +                                                            
-                                "<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
-                                    " class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
-                                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-                                    "crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icon'>" +
-                                "</a>" +
+        var mes = fechaActual.getMonth()+1;
+        var dia = fechaActual.getDate();
 
-                                "<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
-                                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-                                    "crmdapliw/app/public/images/people.svg alt='Personas' class='icon'>" +
-                                "</button>" +
+        var fechaActualInvertida = fechaActual.getFullYear() + 
+            (mes<10 ? '0' : '') + mes + 
+        (dia<10 ? '0' : '') + dia;
 
-                                "<button class='btn btn-light documentos60' id='documentos60-" + bien.ID + "' title='Documentos'>" +
-                                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-                                    "crmdapliw/app/public/images/document.svg alt='Documentos' class='icon'>" +
-                                "</button>" +
+        if (fechaInvertidaAntigua < fechaActualInvertida)
+        {
+            colorAlerta = "Naranja";
+        }
+        else
+        {
+            colorAlerta = "Verde"; 
+        }
+    }
+    else
+    {
+        colorAlerta = "Rojo";
+    }
 
-                            "</p>" +
-                        "</div>" +  
+    return colorAlerta;
+}
 
-                    "</div>" +
-                "</div>" +
-            "</div>";
-    });
+function mostrarBienes()
+{
+	var colorAlerta = "";
+    var bienes = "";
+	
+	if (gVistaPreferida.substring(0, 5) == "Lista")
+	{
+		bienes += 
+			"<div class='table-responsive'>" +
+				"<table class='table table-striped table-hover'>" +
+					"<thead>"
+						"<tr>" +
+							"<th scope='col'>Foto</th>" +
+							"<th scope='col'>Propiedad</th>" +
+							"<th scope='col'></th>" +
+						"</tr>" +
+					"</thead>" +
+					"<tbody>";
+					
+		$j.each(gBienes, function(clave, bien)  
+		{				
+			bienes += "<tr>";
+						
+			if (gVistaPreferida == "Lista con imágenes")
+			{
+				if (gDatosBienes[bien.ID]._thumbnail_id)
+				{				
+					bienes += 
+						"<td><img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='icono img-thumbnail' alt='Foto de la propiedad'></td>";
+				}
+				else
+				{
+					bienes += "<td>Sin foto</td>";
+				}
+			}
+			else
+			{
+				if (gDatosBienes[bien.ID]._thumbnail_id)
+				{				
+					bienes += 
+						"<td>" +
+							"<a href=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " title='Ver foto'>" +
+							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera.svg' ?>" +
+							" alt='Ver foto' class='icono'>" +
+							"</a>" + 
+						"</td>";
+				}
+				else
+				{
+					bienes += "<td>Sin foto</td>";
+				}
+			}
+			
+			colorAlerta = alertaActividades(bien.ID);
+			if (colorAlerta == "Verde")
+			{
+				bienes += "<td class='letraVerde'>" + bien.__name + "</td>";
+			}
+			else if (colorAlerta == "Naranja")
+			{
+				bienes += "<td class='letraAmarilla'>" + bien.__name + "</td>";
+			}
+			else
+			{
+				bienes += "<td class='letraAmarilla'>" + bien.__name + "</td>";
+			}
+			
+			bienes += 
+				"<td>" + 				
+					"<a href=" + bien.guid + " title='Ver propiedad'>" +
+					"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+						"crmdapliw/app/public/images/eye.svg alt='Editar propiedad' class='icono'>" +
+					"</a>" +								
+							
+					"<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
+						" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
+						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+						"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
+					"</a>" +
+					
+					"<button class='btn btn-light agenda60' id='agenda60-" + bien.ID + "' title='Agenda'>" +
+						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+						"crmdapliw/app/public/images/clock.svg alt='Agenda' class='icono'>" +
+					"</button>" +
+					
+					"<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
+						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+						"crmdapliw/app/public/images/people.svg alt='Personas' class='icono'>" +
+					"</button>" +
 
-    $j("#cicloBienes60").html(agendaPrincipal);
+					"<button class='btn btn-light documentos60' id='documentos60-" + bien.ID + "' title='Documentos'>" +
+						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+						"crmdapliw/app/public/images/document.svg alt='Documentos' class='icono'>" +
+					"</button>" +
 
+			
+			
+				"</td>" +
+							"</tr>" +
+					"</tbody>" +
+				"</table>" +
+			"</div>";	
+		});
+	}
+	else
+	{
+		$j.each(gBienes, function(clave, bien)  
+		{
+			bienes += 
+				"<div class='col-md-4 mb-3'>" +
+					"<div class='card detalleBienes60'>" +
+										
+						if (gVistaPreferida == "Mosaicos con imágenes")
+						{
+							if (gDatosBienes[bien.ID]._thumbnail_id)
+							{
+								bienes += 
+									"<img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>";
+							}
+							else
+							{
+								bienes += "Sin foto";
+							}
+						}
+						else
+						{
+							if (gDatosBienes[bien.ID]._thumbnail_id)
+							{
+								bienes += 
+									"<a href=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " title='Ver foto'>" +
+									"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera.svg' ?>" +
+									" alt='Ver foto' class='icono'>" +
+									"</a>" + 
+							}
+							else
+							{
+								bienes += "Sin foto";
+							}
+						}
+				
+						bienes +=                         
+						   
+						"<div class='card-block'>" +
+							"<h4 class='card-title' id='nombreDelBien" + bien.ID + "'>" + bien.__name + "</h4>" +
+
+							"<div class='card bg-light text-dark'>" +
+								"<div class='card-body' id='primeraActividadPendiente" + bien.ID + "'>" + 
+								"</div>" +
+							"</div>" + 
+
+							"<div class='form-group'>" +
+								"<label for='buscarCaptador60" + bien.ID + "'>Captador responsable: </label>" +
+								"<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
+									"value='" + gMatrizBienes[bien.ID].nombre_autor + "'>" +
+							"</div>" +
+							"<div class='mensajesUsuario' id='mensajesUsuario60" + bien.ID + "'>" +
+							"</div>" +
+
+							"<div class='card-footer'>" +
+								"<p>" +  
+									"<a href=" + bien.guid + " title='Ver propiedad'>" +
+									"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+										"crmdapliw/app/public/images/eye.svg alt='Editar propiedad' class='icono'>" +
+									"</a>" +								
+											
+									"<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
+										" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
+										"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+										"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
+									"</a>" +
+
+									"<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
+										"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+										"crmdapliw/app/public/images/people.svg alt='Personas' class='icono'>" +
+									"</button>" +
+
+									"<button class='btn btn-light documentos60' id='documentos60-" + bien.ID + "' title='Documentos'>" +
+										"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+										"crmdapliw/app/public/images/document.svg alt='Documentos' class='icono'>" +
+									"</button>" +
+
+								"</p>" +
+							"</div>" +  
+
+						"</div>" +
+					"</div>" +
+				"</div>";
+		});
+	}
+
+    $j("#cicloBienes60").html(bienes);
+	
     $j.each(gBienes, function(clave, bien)  
     {
         primeraActividadPendiente(bien.ID);
-    });    
+    });   
 }
 
 function agenda(idPost)
@@ -959,7 +1175,7 @@ function agenda(idPost)
 
         $j.each(arregloActividades, function(clave, datos)  
         {
-            if (datos.estatus == "false")
+            if (datos.estatus == "true")
             {
                 idActividad = datos.id;
 
@@ -1008,7 +1224,7 @@ function agenda(idPost)
                                             "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + 
                                                 clave + "-" + idActividad + "-" + idPost + "'>" + 
                                                 "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
-                                                "crmdapliw/app/public/images/pencil.svg alt='Guardar cambios' class='icon'>" +
+                                                "crmdapliw/app/public/images/pencil.svg alt='Guardar cambios' class='icono'>" +
                                             "</button>" +
                                         "</div>"+
 
@@ -1020,7 +1236,7 @@ function agenda(idPost)
                     "</div>" +
                     "<div class='row'>" +
                         "<div class='col-md-12'>" +
-                            "<div id='mensajesUsuario80-" + clave + "-" + idActividad + "-" + idPost + "'>" +
+                            "<div class='mensajesUsuario' id='mensajesUsuario80-" + clave + "-" + idActividad + "-" + idPost + "'>" +
                             "</div>" +
                         "</div>" +
                     "</div>" + 
@@ -1141,7 +1357,7 @@ function compradoresPotenciales(idBien)
                                         "id='eliminarComprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'" + 
                                         "title='Eliminar comprador potencial'>" +
                                         "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-                                        "crmdapliw/app/public/images/trash.svg alt='Eliminar comprador' class='icon'>" +
+                                        "crmdapliw/app/public/images/trash.svg alt='Eliminar comprador' class='icono'>" +
                                     "</button>" +
                                 "</p>" +
                             "</div>" +  
@@ -1149,7 +1365,7 @@ function compradoresPotenciales(idBien)
                     "</div>" +
                     "<div class='row'>" +
                         "<div class='col-md-12'>" +
-                            "<div id='mensajesComprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'>" +
+                            "<div class='mensajesUsuario' id='mensajesComprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'>" +
                             "</div>" +
                         "</div>" +
                     "</div>" + 
@@ -1357,13 +1573,13 @@ function guardarPersona(indicadorCheckbox)
 
             nuevoCliente = 
                 {
-                    "label" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido,
-                    "value" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido,
+                    "label" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido + " - COMPRADOR(A)",
+                    "value" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido + " - COMPRADOR(A)",
                     "id" : response.idUser
                 };              
 
-            gClientes.push(nuevoCliente);
-            gClientes.sort(function(a,b)
+            gPersonas.push(nuevoCliente);
+            gPersonas.sort(function(a,b)
             {
                 return (a.label - b.label);
             });        
@@ -1422,7 +1638,7 @@ function validarPersona(indicadorCheckbox)
 
     $j("#mensajesUsuario30").html("");
     
-    $j(".mensajes110").each(function()
+    $j(".mensajesUsuario").each(function()
     {   
         $j(this).html("");
     });
@@ -1544,6 +1760,7 @@ function eliminarComprador(idCompradorPromotor)
     var idMensaje = "#mensajesComprador100-" + idCompradorPromotor;  
     var idPostmeta = arregloId[3];
 
+    borrarMensajesAnteriores();
     $j(idMensaje).html(mensajesUsuario);
 
     var jsonPostmeta = 
@@ -1563,6 +1780,7 @@ function eliminarComprador(idCompradorPromotor)
                     "<strong>" + response.mensaje + "</strong>" +
                 "</div>";
 
+            borrarMensajesAnteriores();
             $j("#mensajesUsuario30").html(mensajesUsuario);
 
             gDatosBienes[gIdPostActual].CRMdapliw_cliente[arregloId[0]].activo = "false";
@@ -1595,6 +1813,15 @@ function eliminarComprador(idCompradorPromotor)
 
 function agregarComprador(idBien, idComprador, nombreComprador)
 {
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se agrega el comprador</strong>" +
+        "</div>";
+
+    borrarMensajesAnteriores();
+    $j("#mensajesCliente100").html(mensajesUsuario);
+
     indicadorArregloComprador = 0;
 
     if (gDatosBienes[idBien].CRMdapliw_cliente)
@@ -1611,6 +1838,7 @@ function agregarComprador(idBien, idComprador, nombreComprador)
                             "<strong>Este comprador ya está asociado a esta propiedad</strong>" +
                         "</div>"; 
 
+                    borrarMensajesAnteriores();
 	                $j("#mensajesCliente100").html(mensajesUsuario);
                     indicadorArregloComprador = 1;                
                 }
@@ -1707,29 +1935,79 @@ function agregarComprador(idBien, idComprador, nombreComprador)
         });  
     }        
 }
+function borrarMensajesAnteriores()
+{
+    $j(".mensajesUsuario").each(function()
+    {   
+        $j(this).html("");
+    });
+}
+
+function actualizarVistaPreferida()
+{
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se actualiza la preferencia de vista</strong>" +
+        "</div>";
+
+    borrarMensajesAnteriores();
+    $j("#mensajesVistas20").html(mensajesUsuario);
+
+        jsonVistaPreferida = 
+            {
+                "vistaPreferida" : gVistaPreferida,
+				"idUsuario" : gIdUsuario
+            };
+
+        $j.post("<?= mvc_public_url(array('controller' => 'usermetas', 'action' => 'actualizar_vista_preferida')) ?>", 
+            jsonVistaPreferida, null, "json")          
+        .done(function(response) 
+        {
+            if (response.satisfactorio) 
+            {
+                mensajesUsuario =
+                    "<div class='alert alert-success alert-dismissible'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "<strong>" + response.mensaje + "</strong>" +
+                    "</div>";
+					
+				borrarMensajesAnteriores();
+                $j("#mensajesVistas20").html(mensajesUsuario);
+            } 
+            else 
+            {
+                mensajesUsuario =
+                    "<div class='alert alert-danger alert-dismissible'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "<strong>" + response.mensaje + "</strong>" +
+                    "</div>"; 
+
+				borrarMensajesAnteriores();
+                $j("#mensajesVistas20").html(mensajesUsuario);
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) 
+        {
+            mensajesUsuario =
+                "<div class='alert alert-danger alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong> Estimado usuario ocurrió una falla en el servidor y no se pudo actualizar la preferencia de vista !</strong>" +
+                "</div>"; 
+
+			borrarMensajesAnteriores();
+			$j("#mensajesVistas20").html(mensajesUsuario);
+        });  
+    }        
+}
 
 // Eventos
 $j(document).ready(function()
 {
-    mostrarAgenda();
-
-    $j('#inicioCrm10').click(function()
+    $j("#propiedades40").click(function()
     {
-        refrescarMenu();
-        $j("#inicioCrm10").removeClass('noVer');           
-        $j("#botonBuscar10").removeClass('noVer');
-        $j("#publicarPropiedad10").removeClass('noVer');
-        $j("#otrasOpciones10").removeClass('noVer');
-
-    });
-
-    $j("#botonBuscar10").click(function()
-    {
-        $j("#bienes60").addClass('noVer');
-        $j("#botonBuscar10").addClass('noVer');
-        $j("#publicarPropiedad10").addClass('noVer');
-        $j("#otrasOpciones10").addClass('noVer');
-        $j("#busqueda40").removeClass('noVer');
+        $j("#principal40").addClass('noVer');
+        $j("#busqueda50").removeClass('noVer');
         $j("#cerrarBusqueda10").removeClass('noVer');
         $j("#ejecutarBusqueda10").removeClass('noVer');
         window.scrollTo(0, 0);
@@ -1737,7 +2015,7 @@ $j(document).ready(function()
 
     $j('#cerrarBusqueda10').click(function()
     {
-        $j("#busqueda40").addClass('noVer');
+        $j("#busqueda50").addClass('noVer');
         $j("#cerrarBusqueda10").addClass('noVer');
         $j("#ejecutarBusqueda10").addClass('noVer');
         $j("#bienes60").removeClass('noVer');
@@ -1881,7 +2159,7 @@ $j(document).ready(function()
 
     $j('#nombreCliente100').autocomplete(
     {
-        source: gClientes,
+        source: gPersonas,
         select: function( event, ui ) 
         { 
             idBien = gIdPostActual;  
@@ -1915,6 +2193,11 @@ $j(document).ready(function()
         idCompradorPromotor = $j(this).attr("id").substring(21); 
         eliminarComprador(idCompradorPromotor);
     });
-       
+
+    $j("#vistas20").chanqe(function()
+    {
+        gVistaPreferida = $j("#vistas20").val();
+		actualizarVistaPreferida();
+    });       
 });
 </script>
