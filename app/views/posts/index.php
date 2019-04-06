@@ -190,7 +190,7 @@
 				</div> 
             </div>
             <?php
-                for ($i = 1; $i <= 100; $i++) 
+                for (i = 1; i <= 100; i++) 
                 {
                     echo "<br />";
                 }
@@ -233,7 +233,7 @@
 				</div>
             </div>
             <?php
-                for ($i = 1; $i <= 100; $i++) 
+                for (i = 1; i <= 100; i++) 
                 {
                     echo "<br />";
                 }
@@ -247,7 +247,7 @@
             <div class="row" id="cicloBienes60">
             </div>
             <?php
-                for ($i = 1; $i <= 100; $i++) 
+                for (i = 1; i <= 100; i++) 
                 {
                     echo "<br />";
                 }
@@ -287,6 +287,7 @@
 										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
 										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
 										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
+										<option value="Coordinar publicidad en las redes sociales">Coordinar publicidad en las redes sociales</option>
 										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
 										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
 										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
@@ -301,7 +302,6 @@
 										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
 										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
 										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
-										<option value="Publicar en las redes sociales">Publicar en las redes sociales</option>
 										<option value="Reunión con el propietario">Reunión con el propietario</option>
 										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
 										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option> 
@@ -330,6 +330,7 @@
 										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
 										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
 										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
+										<option value="Coordinar publicidad en las redes sociales">Coordinar publicidad en las redes sociales</option>
 										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
 										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
 										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
@@ -344,7 +345,6 @@
 										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
 										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
 										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
-										<option value="Publicar en las redes sociales">Publicar en las redes sociales</option>
 										<option value="Reunión con el propietario">Reunión con el propietario</option>
 										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
 										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>
@@ -354,7 +354,75 @@
 									</select> 
 								</div>
 
-								<div class='input-group mb-3 noVer' id='actividadesGestorNegocios90'>
+								<div class='input-group mb-3 noVer' id='actividadesGestorCaptador90'>
+									<div class='input-group-prepend'>
+										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+									</div>
+									<select class='custom-select' id='actividadAgenda90'> 
+										<option selected></option> 
+										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
+                                        <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
+										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
+										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
+										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
+										<option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
+										<option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
+										<option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
+										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
+										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
+										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
+										<option value="Coordinar publicidad en las redes sociales">Coordinar publicidad en las redes sociales</option>
+										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
+										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
+										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
+										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
+										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
+										<option value="Firma documento de venta">Firma documento de venta</option> 
+										<option value="Firma opción compra-venta">Firma opción compra-venta</option> 
+										<option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
+										<option value="Llamar a propietario">Llamar a propietario</option>
+										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
+										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
+										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
+										<option value="Reunión con el propietario">Reunión con el propietario</option>
+										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
+										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>
+										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
+									</select> 
+								</div>
+
+								<div class='input-group mb-3 noVer' id='actividadesGestorPromotor90'>
+									<div class='input-group-prepend'>
+										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+									</div>
+									<select class='custom-select' id='actividadAgenda90'> 
+										<option selected></option> 
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
+										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
+										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
+										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
+										<option value="Firma documento de venta">Firma documento de venta</option> 
+										<option value="Firma opción compra-venta">Firma opción compra-venta</option> 
+										<option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
+										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
+										<option value="Llamar a propietario">Llamar a propietario</option>
+										<option value="Mostrar el inmueble a un cliente">Mostrar el inmueble a un cliente</option>
+										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
+										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
+										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
+										<option value="Reunión con el propietario">Reunión con el propietario</option>
+										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
+										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>
+                                        <option value="Solicitar cita para mostrar inmueble">Solicitar cita para mostrar inmueble</option>                   
+										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
+										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
+									</select> 
+								</div>
+
+								<div class='input-group mb-3 noVer' id='actividadesGestor90'>
 									<div class='input-group-prepend'>
 										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
 									</div>
@@ -467,13 +535,31 @@
 						</div>
 
 						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="fechaPlanificada90">Fecha</label>  
-									<input type="text" class="form-control" id="fechaPlanificada90"> 
-								</div>
+							<div class="col-md-12">
+								<div class='input-group mb-3 noVer' id='anoActividad90'>
+                                </div>
+								<div class='input-group mb-3 noVer' id='mesActividad90'>
+                                </div>
+								<div class='input-group mb-3 noVer' id='diaActividad90'>
+                                </div>
+								<div class='input-group mb-3 noVer' id='horaActividad90'>
+                                </div>
+								<div class='input-group mb-3 noVer' id='minutoActividad90'>
+                                </div>
 							</div>
 						</div>
+
+						<div class='input-group mb-3 noVer' id='actividadesMeridiano90'>
+							<div class='input-group-prepend'>
+								<label class='input-group-text' for='actividadesMeridiano90'>Actividad</label> 
+							</div>
+							<select class='custom-select' id='actividadAgenda90'> 
+								<option selected></option> 
+								<option value="am">am</option> 
+                                <option value="pm">pm</option>
+							</select> 
+						</div>
+
 
 					</form>
 				<br />
@@ -481,7 +567,7 @@
 				</div> 
 			</div>
 			<?php
-				for ($i = 1; $i <= 100; $i++) 
+				for (i = 1; i <= 100; i++) 
 				{
 					echo "<br />";
 				}
@@ -534,7 +620,7 @@
 
 			</div>
 			<?php
-				for ($i = 1; $i <= 100; $i++) 
+				for (i = 1; i <= 100; i++) 
 				{
 					echo "<br />";
 				}
@@ -668,7 +754,7 @@
 
 			</div>
 			<?php
-				for ($i = 1; $i <= 100; $i++) 
+				for (i = 1; i <= 100; i++) 
 				{
 					echo "<br />";
 				}
@@ -1024,6 +1110,7 @@ function guardarActividad()
             $j("#mensajesUsuario30").html(mensajesUsuario);
 
             agenda(gIdPostActual); 
+            $j("#agregarActividad90").addClass("noVer");
             $j("#cerrarAgregarActividad10").addClass("noVer");
             $j("#guardarActividad10").addClass("noVer");
             $j("#agenda80").removeClass("noVer");
@@ -2253,6 +2340,178 @@ function actualizarVistaPreferida()
         });  
     }        
 }
+public function selectActividades();
+{
+    if (gPermiso == 8)
+    {
+        $j("#actividadesAdministrador90").removeClass('noVer');
+    }   
+    else if ((gPermiso == 7)
+    {
+         $j("#actividadesGestorCaptadorPromotor90").removeClass('noVer');
+    }    
+    else if ((gPermiso == 6)
+    {
+         $j("#actividadesGestorCaptador90").removeClass('noVer');
+    }    
+    else if ((gPermiso == 5)
+    {
+         $j("#actividadesGestorPromotor90").removeClass('noVer');
+    }    
+    else if ((gPermiso == 4)
+    {
+         $j("#actividadesGestor90").removeClass('noVer');
+    }    
+    else if ((gPermiso == 3)
+    {
+         $j("#actividadesCaptadorPromotor90").removeClass('noVer');
+    }    
+    else if ((gPermiso == 2)
+    {
+         $j("#actividadesCaptador90").removeClass('noVer');
+    }    
+    else 
+    {
+         $j("#actividadesPromotor90").removeClass('noVer');
+    }    
+}
+function inicializarFecha(idAno, idMes, idDia, idHora, idMinuto)
+{
+    var fechaActual = new Date();
+
+    console.log(fechaActual);
+
+    var anoActual = fechaActual.getFullYear(); 
+    var mesActual = fechaActual.getMonth()+1;
+    var dia = fechaActual.getDate();
+
+    var selectAno = "";
+    var selectMes = "";
+    var selectDia = "";
+    var selectHora = "";
+    var selectMinuto = "";
+
+    var contador = 0;
+
+    for (i = 1; i <= 10; i++) 
+    {
+        selectAno = 
+			"<div class='input-group-prepend'>" +
+			"<label class='input-group-text' for=" + idAno + ">Año</label>" + 
+			"</div>" +
+			"<select class='custom-select' id=" + idAno + ">";
+        if (contador == 0)
+        {
+            selectAno +=          
+				"<option selected></option>" +
+                "<option value=" + anoActual + ">" + anoActual + "</option>";
+        }
+        else
+        {
+            selectAno +=          
+				"<option value=" + anoActual + ">" + anoActual + "</option>";
+        }
+        anoActual++;
+        contador++;
+    }
+    selectAno += "</select>";
+
+    contador = 0;
+
+    for (i = 1; i <= 12; i++) 
+    {
+        selectMes = 
+			"<div class='input-group-prepend'>" +
+			"<label class='input-group-text' for=" + idMes + ">Mes</label>" + 
+			"</div>" +
+			"<select class='custom-select' id=" + idMes + ">";
+        if (contador == 0)
+        {
+            selectMes +=          
+				"<option selected></option>" +
+                "<option value=" + i + ">" + i + "</option>";
+        }
+        else
+        {
+            selectMes +=          
+				"<option value=" + i + ">" + i + "</option>";
+        }
+        contador++;
+    }
+    selectMes += "</select>";
+
+    contador = 0;
+
+    for (i = 1; i <= 31; i++) 
+    {
+        selectDia = 
+			"<div class='input-group-prepend'>" +
+			"<label class='input-group-text' for=" + idDia + ">Día</label>" + 
+			"</div>" +
+			"<select class='custom-select' id=" + idDia + ">";
+        if (contador == 0)
+        {
+            selectDia +=          
+				"<option selected></option>" +
+                "<option value=" + i + ">" + i + "</option>";
+        }
+        else
+        {
+            selectDia +=          
+				"<option value=" + i + ">" + i + "</option>";
+        }
+        contador++;
+    }
+    selectDia += "</select>";
+
+    contador = 0;
+
+    for (i = 1; i <= 12; i++) 
+    {
+        selectHora = 
+			"<div class='input-group-prepend'>" +
+			"<label class='input-group-text' for=" + idHora + ">Día</label>" + 
+			"</div>" +
+			"<select class='custom-select' id=" + idHora + ">";
+        if (contador == 0)
+        {
+            selectHora +=          
+				"<option selected></option>" +
+                "<option value=" + i + ">" + i + "</option>";
+        }
+        else
+        {
+            selectHora +=          
+				"<option value=" + i + ">" + i + "</option>";
+        }
+        contador++;
+    }
+    selectHora += "</select>";
+
+    contador = 0;
+
+    for (i = 1; i <= 60; i++) 
+    {
+        selectMinuto = 
+			"<div class='input-group-prepend'>" +
+			"<label class='input-group-text' for=" + idMinuto + ">Día</label>" + 
+			"</div>" +
+			"<select class='custom-select' id=" + idMinuto + ">";
+        if (contador == 0)
+        {
+            selectMinuto +=          
+				"<option selected></option>" +
+                "<option value=" + i + ">" + i + "</option>";
+        }
+        else
+        {
+            selectMinuto +=          
+				"<option value=" + i + ">" + i + "</option>";
+        }
+        contador++;
+    }
+    selectMinuto += "</select>";
+}
 
 // Eventos
 $j(document).ready(function()
@@ -2333,6 +2592,8 @@ $j(document).ready(function()
         $j('#actividadAgenda90').val("");
         $j('#informacionAdicional90').val("");
         $j('#fechaPlanificada90').val("");
+        selectActividades();
+        inicializarFecha(anoActividad90, mesActividad90, diaActividad90, horaActividad90, minutoActividad90):
         $j('#cerrarAgenda10').addClass('noVer');
         $j('#agregarActividad10').addClass('noVer');
         $j('#cerrarAgregarActividad10').removeClass('noVer');
