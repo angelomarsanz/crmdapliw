@@ -12,7 +12,22 @@
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?>
                     alt="Inicio CRM" class="iconoMenu">
                 </a>
-				
+
+                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="cerrarPropiedades10" title="Cerrar">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
+                    alt="Cerrar propiedades" class="iconoMenu">
+                </a>
+
+				<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="busquedaPropiedades10">
+					<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
+					alt="Ejecutar búsqueda" class="iconoMenu">
+				</button>
+
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarBusquedaPropiedades10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                    alt="Cerrar búsqueda propiedades" class="iconoMenu">
+                </button>
+
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgenda10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
                     alt="Cerrar agenda" class="iconoMenu">
@@ -64,22 +79,7 @@
 						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/grid-two-up.svg" ?>
 						alt="Otras opciones" class="iconoMenu">
 					</button>
-					
-					<button title="Buscar" class="btn btn-link noVer" id="botonBuscar10">
-						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-						alt="Buscar" class="iconoMenu">
-					</button>
-					
-					<button title="Cerrar" class="btn btn-link noVer" id="cerrarBusqueda10">
-						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-						alt="Cerrar búsqueda" class="iconoMenu">
-					</button>
-				  
-					<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="ejecutarBusqueda10">
-						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-						alt="Ejecutar búsqueda" class="iconoMenu">
-					</button>
-					
+										
 				<!-- Fin botones que ya no se están usando -->
 
             </nav>
@@ -142,45 +142,50 @@
 			<h2>Filtros Propiedades</h2>
             <div class="row">
                 <div class="col-md-4">
+					<p class="letraAzul">Individual</p>
+					<div class="form-group">
+						<label for="busquedaCodigo50">Código</label>
+						<input type="text" class="form-control" id="busquedaCodigo50">
+					</div>
+					<div class="form-group">
+						<label for="busquedaNombre50">Nombre</label>
+						<input type="text" class="form-control" id="busquedaNombre50">
+					</div>
+                </div>
+                <div class="col-md-4">
 					<p class="letraAzul">Prestaciones</p>
 					<div class="form-group">
-						<label for="busquedaHabitaciones">Habitaciones</label>
-						<input type="number" class="form-control" id="busquedaHabitaciones">
+						<label for="busquedaHabitaciones50">Habitaciones</label>
+						<input type="number" class="form-control" id="busquedaHabitaciones50">
 					</div>
 					<div class="form-group">
-						<label for="busquedaBanos">Baños</label>
-						<input type="Number" class="form-control" id="busquedaBanos">
+						<label for="busquedaBanos50">Baños</label>
+						<input type="Number" class="form-control" id="busquedaBanos50">
 					</div>
 					<div class="form-group">
-						<label for="busquedaGarajes">Garajes</label>
-						<input type="Number" class="form-control" id="busquedaGarajes">
+						<label for="busquedaGarajes50">Garajes</label>
+						<input type="Number" class="form-control" id="busquedaGarajes50">
 					</div>
 					<div class="form-group">
-						<label for="busquedaArea">Área M2 (igual o mayor a)</label>
-						<input type="Number" class="form-control" id="busquedaArea">
+						<label for="busquedaArea50">Área M2 (igual o mayor a)</label>
+						<input type="Number" class="form-control" id="busquedaArea50">
 					</div>
 				</div>
 				<div class="col-md-4">
 					<p class="letraAzul">Otros</p>
 					<div class="form-group">
-						<label for="busquedaCodigo">Código</label>
-						<input type="text" class="form-control" id="busquedaCodigo">
+						<label for="busquedaZona50">Zona</label>
+						<input type="text" class="form-control" id="busquedaZona50">
 					</div>
+					<p>Rango de precio</p>
 					<div class="form-group">
-						<label for="busquedaNombre">Nombre</label>
-						<input type="text" class="form-control" id="busquedaNombre">
+						<label for="busquedaPrecioMinimo50">Desde</label>
+						<input type="number" class="form-control" id="busquedaPrecioMinimo50">
 					</div>
+					
 					<div class="form-group">
-						<label for="busquedaZona">Zona</label>
-						<input type="text" class="form-control" id="busquedaZona">
-					</div>
-					<div class="form-group">
-						<label for="busquedaPrecioMaximo">Precio máximo</label>
-						<input type="number" class="form-control" id="busquedaPrecioMaximo">
-					</div>
-					<div class="form-group">
-						<label for="busquedaPrecioMinimo">Precio mínimo</label>
-						<input type="number" class="form-control" id="busquedaPrecioMinimo">
+						<label for="busquedaPrecioMaximo50">Hasta</label>
+						<input type="number" class="form-control" id="busquedaPrecioMaximo50">
 					</div>
 				</div> 
             </div>
@@ -200,6 +205,15 @@
 					<button title="Bienes sin actividades" class="btn btn-link" id="bienesSinActividades51">
 						Propiedades sin actividades planificadas
 					</button>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="tipoActividad51">Tipo de actividad</label>
+						</div>
+						<select class="custom-select" id="tipoActividad51">
+							<option value="Citas">Citas</option>
+							<option selected value="Todas">Todas</option>
+						</select>
+					</div>
 					<div class="form-group">
 						<label for="personaAgenda51">Persona responsable</label>
 						<input type="text" class="form-control" id="personaAgenda51">
@@ -593,6 +607,94 @@ function refrescarMenu()
     }
 }
 
+function marcarBienesVista()
+{
+   $j.each(gBienes, function(clave, datos)  
+    {
+        datos.ver = "true";   
+    }
+}
+
+function desmarcarBienesVista()
+{
+   $j.each(gBienes, function(clave, datos)  
+    {
+        datos.ver = "false";   
+    }
+}
+
+function filtrarPropiedades()
+{
+	$j.each(gBienes, function(clave1, datos1)  
+	{
+		var indicadorPrecio = 0;
+		
+		$j.each(gDatosBienes, function(clave2, datos2)  
+		{
+			if j$("#busquedaHabitaciones50").val() > 0)
+			{
+				if (datos2.REAL_HOMES_property_bedrooms[0] == j$("#busquedaHabitaciones50").val())
+				{
+					datos1.ver = "true"
+				}
+			}
+				
+			if j$("#busquedaBanos50").val() > 0)
+			{
+				if (datos2.REAL_HOMES_property_bathrooms[0] == j$("#busquedaBanos50").val())
+				{
+					datos1.ver = "true"
+				}
+			}
+					
+			if j$("#busquedaGarajes50").val() > 0)
+			{
+				if (datos2.REAL_HOMES_property_garage[0] == j$("#busquedaGarajes50").val())
+				{
+					datos1.ver = "true"
+				}
+			}
+
+			if j$("#busquedaArea50").val() > 0)
+			{
+				if (datos2.REAL_HOMES_property_garage[0] >= j$("#busquedaArea50").val())
+				{
+					datos1.ver = "true"
+				}
+			}
+			
+			indicadorPrecio = 0;
+			
+			if j$("#busquedaPrecioMinimo50").val() > 0)
+			{
+				if (datos2.REAL_HOMES_property_price[0] >= j$("#busquedaPrecioMinimo50").val())
+				{
+					if j$("#busquedaPrecioMaximo50").val() > 0)
+					{
+						if (datos2.REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
+						{
+							datos1.ver = "true";
+						}
+						indicadorPrecio = 1;
+					}
+					else
+					{
+						datos1.ver = "true";
+					}
+				}
+			}
+			
+			if j$("#busquedaPrecioMaximo50").val() > 0 && indicadorPrecio == 0)
+			{
+				if (datos2.REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
+				{
+					datos1.ver = "true";
+				}
+			}	
+		});
+	});
+}	
+
 function guardarCambiosAgenda(idActividad)
 {
     var mensajesUsuario = 
@@ -958,173 +1060,176 @@ function mostrarBienes()
 					"<tbody>";
 					
 		$j.each(gBienes, function(clave, bien)  
-		{				
-			bienes += "<tr>";
-						
-			if (gVistaPreferida == "Lista con imágenes")
+		{	
+			if (gBienes.ver == "true")
 			{
-				if (gDatosBienes[bien.ID]._thumbnail_id)
-				{				
-					bienes += 
-						"<td><img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='icono img-thumbnail' alt='Foto de la propiedad'></td>";
-				}
-				else
-				{
-					bienes += "<td>Sin foto</td>";
-				}
-			}
-			else
-			{
-				if (gDatosBienes[bien.ID]._thumbnail_id)
-				{				
-					bienes += 
-						"<td>" +
-							"<a href=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " title='Ver foto'>" +
-							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera.svg' ?>" +
-							" alt='Ver foto' class='icono'>" +
-							"</a>" + 
-						"</td>";
-				}
-				else
-				{
-					bienes += "<td>Sin foto</td>";
-				}
-			}
-			
-			colorAlerta = alertaActividades(bien.ID);
-			if (colorAlerta == "Verde")
-			{
-				bienes += "<td class='letraVerde'>" + bien.__name + "</td>";
-			}
-			else if (colorAlerta == "Naranja")
-			{
-				bienes += "<td class='letraAmarilla'>" + bien.__name + "</td>";
-			}
-			else
-			{
-				bienes += "<td class='letraAmarilla'>" + bien.__name + "</td>";
-			}
-			
-			bienes += 
-				"<td>" + 				
-					"<a href=" + bien.guid + " title='Ver propiedad'>" +
-					"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-						"crmdapliw/app/public/images/eye.svg alt='Editar propiedad' class='icono'>" +
-					"</a>" +								
+				bienes += "<tr>";
 							
-					"<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
-						" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
+				if (gVistaPreferida == "Lista con imágenes")
+				{
+					if (gDatosBienes[bien.ID]._thumbnail_id)
+					{				
+						bienes += 
+							"<td><img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='icono img-thumbnail' alt='Foto de la propiedad'></td>";
+					}
+					else
+					{
+						bienes += "<td>Sin foto</td>";
+					}
+				}
+				else
+				{
+					if (gDatosBienes[bien.ID]._thumbnail_id)
+					{				
+						bienes += 
+							"<td>" +
+								"<a href=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " title='Ver foto'>" +
+								"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera.svg' ?>" +
+								" alt='Ver foto' class='icono'>" +
+								"</a>" + 
+							"</td>";
+					}
+					else
+					{
+						bienes += "<td>Sin foto</td>";
+					}
+				}
+				
+				colorAlerta = alertaActividades(bien.ID);
+				if (colorAlerta == "Verde")
+				{
+					bienes += "<td class='letraVerde'>" + bien.__name + "</td>";
+				}
+				else if (colorAlerta == "Naranja")
+				{
+					bienes += "<td class='letraAmarilla'>" + bien.__name + "</td>";
+				}
+				else
+				{
+					bienes += "<td class='letraAmarilla'>" + bien.__name + "</td>";
+				}
+				
+				bienes += 
+					"<td>" + 				
+						"<a href=" + bien.guid + " title='Ver propiedad'>" +
 						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-						"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
-					"</a>" +
-					
-					"<button class='btn btn-light agenda60' id='agenda60-" + bien.ID + "' title='Agenda'>" +
-						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-						"crmdapliw/app/public/images/clock.svg alt='Agenda' class='icono'>" +
-					"</button>" +
-					
-					"<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
-						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-						"crmdapliw/app/public/images/people.svg alt='Personas' class='icono'>" +
-					"</button>" +
+							"crmdapliw/app/public/images/eye.svg alt='Editar propiedad' class='icono'>" +
+						"</a>" +								
+								
+						"<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
+							" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
+							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+							"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
+						"</a>" +
+						
+						"<button class='btn btn-light agenda60' id='agenda60-" + bien.ID + "' title='Agenda'>" +
+							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+							"crmdapliw/app/public/images/clock.svg alt='Agenda' class='icono'>" +
+						"</button>" +
+						
+						"<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
+							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+							"crmdapliw/app/public/images/people.svg alt='Personas' class='icono'>" +
+						"</button>" +
 
-					"<button class='btn btn-light documentos60' id='documentos60-" + bien.ID + "' title='Documentos'>" +
-						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-						"crmdapliw/app/public/images/document.svg alt='Documentos' class='icono'>" +
-					"</button>" +
-
-			
-			
-				"</td>" +
-							"</tr>" +
-					"</tbody>" +
+						"<button class='btn btn-light documentos60' id='documentos60-" + bien.ID + "' title='Documentos'>" +
+							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+							"crmdapliw/app/public/images/document.svg alt='Documentos' class='icono'>" +
+						"</button>" +			
+					"</td>" +
+				"</tr>" +
+				"</tbody>" +
 				"</table>" +
-			"</div>";	
+				"</div>";
+			}
 		});
 	}
 	else
 	{
 		$j.each(gBienes, function(clave, bien)  
 		{
-			bienes += 
-				"<div class='col-md-4 mb-3'>" +
-					"<div class='card detalleBienes60'>" +
-										
-						if (gVistaPreferida == "Mosaicos con imágenes")
-						{
-							if (gDatosBienes[bien.ID]._thumbnail_id)
-							{
-								bienes += 
-									"<img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>";
-							}
-							else
-							{
-								bienes += "Sin foto";
-							}
-						}
-						else
-						{
-							if (gDatosBienes[bien.ID]._thumbnail_id)
-							{
-								bienes += 
-									"<a href=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " title='Ver foto'>" +
-									"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera.svg' ?>" +
-									" alt='Ver foto' class='icono'>" +
-									"</a>" + 
-							}
-							else
-							{
-								bienes += "Sin foto";
-							}
-						}
-				
-						bienes +=                         
-						   
-						"<div class='card-block'>" +
-							"<h4 class='card-title' id='nombreDelBien" + bien.ID + "'>" + bien.__name + "</h4>" +
-
-							"<div class='card bg-light text-dark'>" +
-								"<div class='card-body' id='primeraActividadPendiente" + bien.ID + "'>" + 
-								"</div>" +
-							"</div>" + 
-
-							"<div class='form-group'>" +
-								"<label for='buscarCaptador60" + bien.ID + "'>Captador responsable: </label>" +
-								"<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
-									"value='" + gMatrizBienes[bien.ID].nombre_autor + "'>" +
-							"</div>" +
-							"<div class='mensajesUsuario' id='mensajesUsuario60" + bien.ID + "'>" +
-							"</div>" +
-
-							"<div class='card-footer'>" +
-								"<p>" +  
-									"<a href=" + bien.guid + " title='Ver propiedad'>" +
-									"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-										"crmdapliw/app/public/images/eye.svg alt='Editar propiedad' class='icono'>" +
-									"</a>" +								
+			if (gBienes.ver == "true")
+			{
+				bienes += 
+					"<div class='col-md-4 mb-3'>" +
+						"<div class='card detalleBienes60'>" +
 											
-									"<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
-										" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
+							if (gVistaPreferida == "Mosaicos con imágenes")
+							{
+								if (gDatosBienes[bien.ID]._thumbnail_id)
+								{
+									bienes += 
+										"<img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>";
+								}
+								else
+								{
+									bienes += "Sin foto";
+								}
+							}
+							else
+							{
+								if (gDatosBienes[bien.ID]._thumbnail_id)
+								{
+									bienes += 
+										"<a href=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " title='Ver foto'>" +
+										"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera.svg' ?>" +
+										" alt='Ver foto' class='icono'>" +
+										"</a>" + 
+								}
+								else
+								{
+									bienes += "Sin foto";
+								}
+							}
+					
+							bienes +=                         
+							   
+							"<div class='card-block'>" +
+								"<h4 class='card-title' id='nombreDelBien" + bien.ID + "'>" + bien.__name + "</h4>" +
+
+								"<div class='card bg-light text-dark'>" +
+									"<div class='card-body' id='primeraActividadPendiente" + bien.ID + "'>" + 
+									"</div>" +
+								"</div>" + 
+
+								"<div class='form-group'>" +
+									"<label for='buscarCaptador60" + bien.ID + "'>Captador responsable: </label>" +
+									"<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
+										"value='" + gMatrizBienes[bien.ID].nombre_autor + "'>" +
+								"</div>" +
+								"<div class='mensajesUsuario' id='mensajesUsuario60" + bien.ID + "'>" +
+								"</div>" +
+
+								"<div class='card-footer'>" +
+									"<p>" +  
+										"<a href=" + bien.guid + " title='Ver propiedad'>" +
 										"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-										"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
-									"</a>" +
+											"crmdapliw/app/public/images/eye.svg alt='Editar propiedad' class='icono'>" +
+										"</a>" +								
+												
+										"<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
+											" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
+											"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+											"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
+										"</a>" +
 
-									"<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
-										"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-										"crmdapliw/app/public/images/people.svg alt='Personas' class='icono'>" +
-									"</button>" +
+										"<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
+											"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+											"crmdapliw/app/public/images/people.svg alt='Personas' class='icono'>" +
+										"</button>" +
 
-									"<button class='btn btn-light documentos60' id='documentos60-" + bien.ID + "' title='Documentos'>" +
-										"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-										"crmdapliw/app/public/images/document.svg alt='Documentos' class='icono'>" +
-									"</button>" +
+										"<button class='btn btn-light documentos60' id='documentos60-" + bien.ID + "' title='Documentos'>" +
+											"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+											"crmdapliw/app/public/images/document.svg alt='Documentos' class='icono'>" +
+										"</button>" +
 
-								"</p>" +
-							"</div>" +  
+									"</p>" +
+								"</div>" +  
 
+							"</div>" +
 						"</div>" +
-					"</div>" +
-				"</div>";
+					"</div>";
+			}
 		});
 	}
 
@@ -2004,24 +2109,36 @@ function actualizarVistaPreferida()
 // Eventos
 $j(document).ready(function()
 {
+    marcarBienesVista()
+
     $j("#propiedades40").click(function()
     {
         $j("#principal40").addClass('noVer');
-        $j("#busqueda50").removeClass('noVer');
-        $j("#cerrarBusqueda10").removeClass('noVer');
-        $j("#ejecutarBusqueda10").removeClass('noVer');
+        $j("#busquedaPropiedades50").removeClass('noVer');
+        $j("#cerrarPropiedades10").removeClass('noVer');
+        $j("#busquedaPropiedades10").removeClass('noVer');
         window.scrollTo(0, 0);
     });
 
-    $j('#cerrarBusqueda10').click(function()
+    $j('#busquedaPropiedades10').click(function()
     {
-        $j("#busqueda50").addClass('noVer');
-        $j("#cerrarBusqueda10").addClass('noVer');
-        $j("#ejecutarBusqueda10").addClass('noVer');
+        $j("#busquedaPropiedades50").addClass('noVer');
+        $j("#cerrarPropiedades10").addClass('noVer');
+        $j("#busquedaPropiedades10").addClass('noVer');
+        desmarcarBienesVista();
+        filtrarPropiedades();
         $j("#bienes60").removeClass('noVer');
-        $j("#botonBuscar10").removeClass('noVer');
-        $j("#publicarPropiedad10").removeClass('noVer');
-        $j("#otrasOpciones10").removeClass('noVer');
+        $j("#cerrarBusquedaPropiedades10").removeClass('noVer');
+        window.scrollTo(0, 0);
+    });
+
+    $j('#cerrarBusquedaPropiedades10').click(function()
+    {
+        $j("#bienes60").addClass('noVer');
+        $j("#cerrarBusquedadPropiedades10").addClass('noVer');
+        $j("#busquedaPropiedades50").removeClass('noVer');
+        $j("#cerrarPropiedades10").removeClass('noVer');
+        $j("#busquedaPropiedades10").removeClass('noVer');
         window.scrollTo(0, 0);
     });
 
