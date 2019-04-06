@@ -268,13 +268,16 @@
 					<form>
 						<div class="row">
 							<div class="col-md-12">
-								<div class='input-group mb-3'>
+								<div class='input-group mb-3 noVer' id='actividadesAdministrador90'>
 									<div class='input-group-prepend'>
 										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
 									</div>
 									<select class='custom-select' id='actividadAgenda90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
+                                        <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
 										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
@@ -301,11 +304,156 @@
 										<option value="Publicar en las redes sociales">Publicar en las redes sociales</option>
 										<option value="Reunión con el propietario">Reunión con el propietario</option>
 										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
-										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>                   
+										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option> 
+                                        <option value="Solicitar cita para mostrar inmueble">Solicitar cita para mostrar inmueble</option>               
 										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
 										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
 									</select> 
 								</div>
+
+								<div class='input-group mb-3 noVer' id='actividadesGestorCaptadorPromotor90'>
+									<div class='input-group-prepend'>
+										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+									</div>
+									<select class='custom-select' id='actividadAgenda90'> 
+										<option selected></option> 
+										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
+                                        <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
+										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
+										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
+										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
+										<option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
+										<option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
+										<option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
+										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
+										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
+										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
+										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
+										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
+										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
+										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
+										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
+										<option value="Firma documento de venta">Firma documento de venta</option> 
+										<option value="Firma opción compra-venta">Firma opción compra-venta</option> 
+										<option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
+										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
+										<option value="Llamar a propietario">Llamar a propietario</option>
+										<option value="Mostrar el inmueble a un cliente">Mostrar el inmueble a un cliente</option>
+										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
+										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
+										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
+										<option value="Publicar en las redes sociales">Publicar en las redes sociales</option>
+										<option value="Reunión con el propietario">Reunión con el propietario</option>
+										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
+										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>
+                                        <option value="Solicitar cita para mostrar inmueble">Solicitar cita para mostrar inmueble</option>                   
+										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
+										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
+									</select> 
+								</div>
+
+								<div class='input-group mb-3 noVer' id='actividadesGestorNegocios90'>
+									<div class='input-group-prepend'>
+										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+									</div>
+									<select class='custom-select' id='actividadAgenda90'> 
+										<option selected></option> 
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
+                                        <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
+										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
+										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
+										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
+										<option value="Firma documento de venta">Firma documento de venta</option> 
+										<option value="Firma opción compra-venta">Firma opción compra-venta</option> 
+										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
+										<option value="Llamar a propietario">Llamar a propietario</option>
+										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
+										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
+										<option value="Reunión con el propietario">Reunión con el propietario</option>
+										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
+									</select> 
+								</div>
+
+								<div class='input-group mb-3 noVer' id='actividadesCaptadorPromotor90'>
+									<div class='input-group-prepend'>
+										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+									</div>
+									<select class='custom-select' id='actividadAgenda90'> 
+										<option selected></option> 
+										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
+										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
+										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
+										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
+										<option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
+										<option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
+										<option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
+										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
+										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
+										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
+										<option value="Coordinar publicidad en las redes sociales">Coordinar publicidad en las redes sociales</option>
+										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
+										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
+										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
+										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
+										<option value="Llamar a propietario">Llamar a propietario</option>
+										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
+										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
+										<option value="Reunión con el propietario">Reunión con el propietario</option>
+										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>                   
+										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>
+                                        <option value="Solicitar cita para mostrar propiedad">Solicitar cita para mostrar propiedad</option>
+										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
+									</select> 
+								</div>
+
+								<div class='input-group mb-3 noVer' id='actividadesCaptador90'>
+									<div class='input-group-prepend'>
+										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+									</div>
+									<select class='custom-select' id='actividadAgenda90'> 
+										<option selected></option> 
+										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
+										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
+										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
+										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
+										<option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
+										<option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
+										<option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
+										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
+										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
+										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
+										<option value="Coordinar publicidad en las redes sociales">Coordinar publicidad en las redes sociales</option>
+										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
+										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
+										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
+										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
+										<option value="Llamar a propietario">Llamar a propietario</option>
+										<option value="Reunión con el propietario">Reunión con el propietario</option>
+										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>                   
+										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
+									</select> 
+								</div>
+
+								<div class='input-group mb-3 noVer' id='actividadesPromotor90'>
+									<div class='input-group-prepend'>
+										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+									</div>
+									<select class='custom-select' id='actividadAgenda90'> 
+										<option selected></option> 
+										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
+										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
+                                        <option value="Solicitar cita para mostrar propiedad">Solicitar cita para mostrar propiedad</option>
+										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
+									</select> 
+								</div>
+
 							</div>
 						</div> 
 						
