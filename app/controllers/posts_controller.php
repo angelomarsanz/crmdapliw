@@ -62,6 +62,50 @@ class PostsController extends MvcPublicController
             {
                 $permiso = $permiso + 8;
             }
+
+			$cadenaRoles = "";
+			
+            if (in_array("Administrador", $roles))
+            {
+				$cadenaRoles = "Administrador";
+			}
+			elseif (in_array("Gestor de Negocios", $roles)) 
+			{
+				if (in_array("Captador", $roles))
+				{
+					if (in_array("Promotor", $roles))
+					{
+						$cadenaRoles = "GestorCaptadorPromotor";
+					}
+					else
+					{
+						$cadenaRoles = "GestorCaptador";
+					}
+				}
+				elseif (in_array("Promotor", $roles))
+				{
+					$cadenaRoles = "GestorPromotor";
+				}
+				else
+				{
+					$cadenaRoles = "Gestor";
+				}
+			}
+			elseif (in_array("Captador", $roles))
+			{
+				if (in_array("Promotor", $roles))
+				{
+					$cadenaRoles = "CaptadorPromotor";
+				}
+				else
+				{
+					$cadenaRoles = "Captador";
+				}
+			}
+			elseif (in_array("Promotor", $roles))
+			{
+				$cadenaRoles = "Promotor";
+			}
            
             $contadorUsuarios = 0;
             $idUsuarioActual = "";
@@ -345,6 +389,7 @@ class PostsController extends MvcPublicController
             $this->set("nombreUsuario", $nombreUsuario);
             $this->set("roles", $roles);
             $this->set("permiso", $permiso);
+            $this->set("cadenaRoles", $cadenaRoles);	
             $this->set("personasAsc", $personasAsc);
             $this->set("userMetas", $userMetas);
             $this->set("usuarios", $usuarios);           

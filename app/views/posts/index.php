@@ -270,9 +270,9 @@
 							<div class="col-md-12">
 								<div class='input-group mb-3 noVer' id='actividadesAdministrador90'>
 									<div class='input-group-prepend'>
-										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+										<label class='input-group-text' for='Administrador90'>Actividad</label> 
 									</div>
-									<select class='custom-select' id='actividadAgenda90'> 
+									<select class='custom-select' id='Administrador90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
                                         <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
@@ -313,9 +313,9 @@
 
 								<div class='input-group mb-3 noVer' id='actividadesGestorCaptadorPromotor90'>
 									<div class='input-group-prepend'>
-										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+										<label class='input-group-text' for='GestorCaptadorPromotor90'>Actividad</label> 
 									</div>
-									<select class='custom-select' id='actividadAgenda90'> 
+									<select class='custom-select' id='GestorCaptadorPromotor90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
                                         <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
@@ -356,9 +356,9 @@
 
 								<div class='input-group mb-3 noVer' id='actividadesGestorCaptador90'>
 									<div class='input-group-prepend'>
-										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+										<label class='input-group-text' for='GestorCaptador90'>Actividad</label> 
 									</div>
-									<select class='custom-select' id='actividadAgenda90'> 
+									<select class='custom-select' id='GestorCaptador90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
                                         <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
@@ -390,14 +390,14 @@
 										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
 										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>
 										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
-									</select> 
+									</select>
 								</div>
 
 								<div class='input-group mb-3 noVer' id='actividadesGestorPromotor90'>
 									<div class='input-group-prepend'>
-										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+										<label class='input-group-text' for='GestorPromotor90'>Actividad</label> 
 									</div>
-									<select class='custom-select' id='actividadAgenda90'> 
+									<select class='custom-select' id='GestorPromotor90'> 
 										<option selected></option> 
                                         <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
                                             Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
@@ -424,9 +424,9 @@
 
 								<div class='input-group mb-3 noVer' id='actividadesGestor90'>
 									<div class='input-group-prepend'>
-										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+										<label class='input-group-text' for='Gestor90'>Actividad</label> 
 									</div>
-									<select class='custom-select' id='actividadAgenda90'> 
+									<select class='custom-select' id='Gestor90'> 
 										<option selected></option> 
                                         <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
                                             Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
@@ -447,9 +447,9 @@
 
 								<div class='input-group mb-3 noVer' id='actividadesCaptadorPromotor90'>
 									<div class='input-group-prepend'>
-										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+										<label class='input-group-text' for='CaptadorPromotor90'>Actividad</label> 
 									</div>
-									<select class='custom-select' id='actividadAgenda90'> 
+									<select class='custom-select' id='CaptadorPromotor90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
                                         <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
@@ -481,9 +481,9 @@
 
 								<div class='input-group mb-3 noVer' id='actividadesCaptador90'>
 									<div class='input-group-prepend'>
-										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+										<label class='input-group-text' for='Captador90'>Actividad</label> 
 									</div>
-									<select class='custom-select' id='actividadAgenda90'> 
+									<select class='custom-select' id='Captador90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
                                         <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
@@ -511,9 +511,9 @@
 
 								<div class='input-group mb-3 noVer' id='actividadesPromotor90'>
 									<div class='input-group-prepend'>
-										<label class='input-group-text' for='actividadAgenda90'>Actividad</label> 
+										<label class='input-group-text' for='Promotor90'>Actividad</label> 
 									</div>
-									<select class='custom-select' id='actividadAgenda90'> 
+									<select class='custom-select' id='Promotor90'> 
 										<option selected></option> 
 										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
 										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
@@ -521,6 +521,8 @@
 										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
 									</select> 
 								</div>
+
+                                <div class="mensajesUsuario" id="mensajesActividad100"></div>
 
 							</div>
 						</div> 
@@ -531,36 +533,46 @@
 									<label for="informacionAdicional90">Información adicional</label> 
 									<input type="text" class="form-control" id="informacionAdicional90"> 
 								</div>
+                                <div class="mensajesUsuario" id="mensajesInformacion100"></div>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-md-12">
-								<div class='input-group mb-3 noVer' id='anoActividad90'>
+								<div class='input-group mb-3 noVer' id='actividadesAno90'>
                                 </div>
-								<div class='input-group mb-3 noVer' id='mesActividad90'>
+								<div class="mensajesUsuario" id="mensajesAno100"></div>
+								
+								<div class='input-group mb-3 noVer' id='actividadesMes90'>
                                 </div>
-								<div class='input-group mb-3 noVer' id='diaActividad90'>
+								<div class="mensajesUsuario" id="mensajesMes100"></div>
+								
+								<div class='input-group mb-3 noVer' id='actividadesDia90'>
                                 </div>
-								<div class='input-group mb-3 noVer' id='horaActividad90'>
+								<div class="mensajesUsuario" id="mensajesDia100"></div>
+								
+								<div class='input-group mb-3 noVer' id='ActividadesHora90'>
                                 </div>
-								<div class='input-group mb-3 noVer' id='minutoActividad90'>
+								<div class="mensajesUsuario" id="mensajesHora100"></div>
+								
+								<div class='input-group mb-3 noVer' id='ActividadesMinuto90'>
                                 </div>
+								<div class="mensajesUsuario" id="mensajesMinuto100"></div>
+								
+						        <div class='input-group mb-3 noVer' id='actividadesMeridiano90'>
+							        <div class='input-group-prepend'>
+								        <label class='input-group-text' for='Meridiano90'>Actividad</label> 
+							        </div>
+							        <select class='custom-select' id='meridiano90'> 
+								        <option selected></option> 
+								        <option value="am">am</option> 
+                                        <option value="pm">pm</option>
+							        </select> 
+						        </div>
+                                <div class="mensajesUsuario" id="mensajesMeridiano100"></div>
+								
 							</div>
 						</div>
-
-						<div class='input-group mb-3 noVer' id='actividadesMeridiano90'>
-							<div class='input-group-prepend'>
-								<label class='input-group-text' for='actividadesMeridiano90'>Actividad</label> 
-							</div>
-							<select class='custom-select' id='actividadAgenda90'> 
-								<option selected></option> 
-								<option value="am">am</option> 
-                                <option value="pm">pm</option>
-							</select> 
-						</div>
-
-
 					</form>
 				<br />
 				<br />
@@ -785,10 +797,22 @@ var gIdUsuario = <?= $idUsuario ?>;
 var gNombreUsuario = "<?= $nombreUsuario ?>";
 var gRoles = <?= json_encode($roles) ?>;
 var gPermiso = <?= $permiso ?>;
+var gCadenaRoles = <?= $cadenaRoles ?>;
 var gPersonas = <?= json_encode($personasAsc) ?>;
 var gIdPostActual = "";
 var gPosicionAnterior = "";
 var gVistaPreferida = <?= $vistaPreferida ?>;
+var gfechaActual = new Date();
+
+console.log(gFechaActual);
+
+var gAnoActual = gfechaActual.getFullYear(); 
+var gMesActual = gfechaActual.getMonth()+1;
+var gDiaActual = gfechaActual.getDate();
+var gFechaActualInvertida = 
+	gAnoActual + 
+	(gMesActual < 10 ? '0' : '') + gMesActual + 
+	(gDiaActual < 10 ? '0' : '') + gDiaActual;
 
 // Funciones  
 function testFunction()
@@ -1172,16 +1196,7 @@ function primeraActividadPendiente(idBien)
 
     if (actividadMasAntigua != "")
     {
-        var fechaActual = new Date();
-
-        var mes = fechaActual.getMonth()+1;
-        var dia = fechaActual.getDate();
-
-        var fechaActualInvertida = fechaActual.getFullYear() + 
-            (mes<10 ? '0' : '') + mes + 
-        (dia<10 ? '0' : '') + dia;
-
-        if (fechaInvertidaAntigua < fechaActualInvertida)
+        if (fechaInvertidaAntigua < gFechaActualInvertida)
         {
             datosActividadPendiente = 
                 "<p class='letraAmarilla'>" +
@@ -1249,16 +1264,7 @@ function alertaActividades(idBien)
 
     if (actividadMasAntigua != "")
     {
-        var fechaActual = new Date();
-
-        var mes = fechaActual.getMonth()+1;
-        var dia = fechaActual.getDate();
-
-        var fechaActualInvertida = fechaActual.getFullYear() + 
-            (mes<10 ? '0' : '') + mes + 
-        (dia<10 ? '0' : '') + dia;
-
-        if (fechaInvertidaAntigua < fechaActualInvertida)
+        if (fechaInvertidaAntigua < gFechaActualInvertida)
         {
             colorAlerta = "Naranja";
         }
@@ -1976,12 +1982,7 @@ function validarPersona(indicadorCheckbox)
     var indicadorTildado = 0; 
     var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 
-    $j("#mensajesUsuario30").html("");
-    
-    $j(".mensajesUsuario").each(function()
-    {   
-        $j(this).html("");
-    });
+    borrarMensajesAnteriores();
     
     if ($j("#tipoIdentificacion110").val() == "")  
     {   
@@ -2342,31 +2343,31 @@ function actualizarVistaPreferida()
 }
 public function selectActividades();
 {
-    if (gPermiso == 8)
+    if (gCadenaRoles == "Administrador")
     {
         $j("#actividadesAdministrador90").removeClass('noVer');
     }   
-    else if ((gPermiso == 7)
+    else if (gCadenaRoles == "GestorCaptadorPromotor")
     {
          $j("#actividadesGestorCaptadorPromotor90").removeClass('noVer');
     }    
-    else if ((gPermiso == 6)
+    else if (gCadenaRoles == "GestorCaptador")
     {
          $j("#actividadesGestorCaptador90").removeClass('noVer');
     }    
-    else if ((gPermiso == 5)
+    else if (gCadenaRoles == "GestorPromotor")
     {
          $j("#actividadesGestorPromotor90").removeClass('noVer');
     }    
-    else if ((gPermiso == 4)
+    else if (gCadenaRoles == "Gestor")
     {
          $j("#actividadesGestor90").removeClass('noVer');
     }    
-    else if ((gPermiso == 3)
+    else if (gCadenaRoles == "CaptadorPromotor")
     {
          $j("#actividadesCaptadorPromotor90").removeClass('noVer');
     }    
-    else if ((gPermiso == 2)
+    else if (gCadenaRoles == "Captador")
     {
          $j("#actividadesCaptador90").removeClass('noVer');
     }    
@@ -2375,16 +2376,13 @@ public function selectActividades();
          $j("#actividadesPromotor90").removeClass('noVer');
     }    
 }
-function inicializarFecha(idAno, idMes, idDia, idHora, idMinuto)
+function inicializarFecha(idFechas)
 {
-    var fechaActual = new Date();
-
-    console.log(fechaActual);
-
-    var anoActual = fechaActual.getFullYear(); 
-    var mesActual = fechaActual.getMonth()+1;
-    var dia = fechaActual.getDate();
-
+	var ano = gAnoActual;
+	var mes = "";
+	var dia = "";
+	var hora = "";
+	var minuto = "";
     var selectAno = "";
     var selectMes = "";
     var selectDia = "";
@@ -2393,124 +2391,235 @@ function inicializarFecha(idAno, idMes, idDia, idHora, idMinuto)
 
     var contador = 0;
 
+	selectAno = 
+		"<div class='input-group-prepend'>" +
+		"<label class='input-group-text' for=" + idFechas.idSelectAno + ">Año</label>" + 
+		"</div>" +
+		"<select class='custom-select' id=" + idFechas.idSelectAno + ">";
+
     for (i = 1; i <= 10; i++) 
     {
-        selectAno = 
-			"<div class='input-group-prepend'>" +
-			"<label class='input-group-text' for=" + idAno + ">Año</label>" + 
-			"</div>" +
-			"<select class='custom-select' id=" + idAno + ">";
         if (contador == 0)
         {
             selectAno +=          
 				"<option selected></option>" +
-                "<option value=" + anoActual + ">" + anoActual + "</option>";
+                "<option value=" + ano + ">" + ano + "</option>";
         }
         else
         {
             selectAno +=          
-				"<option value=" + anoActual + ">" + anoActual + "</option>";
+				"<option value=" + ano + ">" + ano + "</option>";
         }
         anoActual++;
         contador++;
     }
     selectAno += "</select>";
+	
+	$j("#" + idFechas.idAno).html(selectAno);
 
     contador = 0;
 
+	selectMes = 
+		"<div class='input-group-prepend'>" +
+		"<label class='input-group-text' for=" + idFechas.idSelectMes + ">Mes</label>" + 
+		"</div>" +
+		"<select class='custom-select' id=" + idFechas.idSelectMes + ">";
+
     for (i = 1; i <= 12; i++) 
     {
-        selectMes = 
-			"<div class='input-group-prepend'>" +
-			"<label class='input-group-text' for=" + idMes + ">Mes</label>" + 
-			"</div>" +
-			"<select class='custom-select' id=" + idMes + ">";
+		mes = (i < 10 ? '0' : '') + i;
         if (contador == 0)
         {
             selectMes +=          
 				"<option selected></option>" +
-                "<option value=" + i + ">" + i + "</option>";
+                "<option value=" + mes + ">" + mes + "</option>";
         }
         else
         {
             selectMes +=          
-				"<option value=" + i + ">" + i + "</option>";
+				"<option value=" + mes + ">" + mes + "</option>";
         }
         contador++;
     }
     selectMes += "</select>";
+	
+	$j("#" + idFechas.idMes).html(selectMes);
 
     contador = 0;
 
+	selectDia = 
+		"<div class='input-group-prepend'>" +
+		"<label class='input-group-text' for=" + idFechas.idSelectDia + ">Día</label>" + 
+		"</div>" +
+		"<select class='custom-select' id=" + idFechas.idSelectDia + ">";
+
     for (i = 1; i <= 31; i++) 
     {
-        selectDia = 
-			"<div class='input-group-prepend'>" +
-			"<label class='input-group-text' for=" + idDia + ">Día</label>" + 
-			"</div>" +
-			"<select class='custom-select' id=" + idDia + ">";
+		dia = (i < 10 ? '0' : '') + i;
+		
         if (contador == 0)
         {
             selectDia +=          
 				"<option selected></option>" +
-                "<option value=" + i + ">" + i + "</option>";
+                "<option value=" + dia + ">" + dia + "</option>";
         }
         else
         {
             selectDia +=          
-				"<option value=" + i + ">" + i + "</option>";
+				"<option value=" + dia + ">" + dia + "</option>";
         }
         contador++;
     }
     selectDia += "</select>";
+	
+	$j("#" + idFechas.idDia).html(selectDia);
 
     contador = 0;
 
+	selectHora = 
+		"<div class='input-group-prepend'>" +
+		"<label class='input-group-text' for=" + idFechas.idSelectHora + ">Día</label>" + 
+		"</div>" +
+		"<select class='custom-select' id=" + idFechas.idSelectHora + ">";
     for (i = 1; i <= 12; i++) 
     {
-        selectHora = 
-			"<div class='input-group-prepend'>" +
-			"<label class='input-group-text' for=" + idHora + ">Día</label>" + 
-			"</div>" +
-			"<select class='custom-select' id=" + idHora + ">";
+		hora = (i < 10 ? '0' : '') + i;
+		
         if (contador == 0)
         {
             selectHora +=          
 				"<option selected></option>" +
-                "<option value=" + i + ">" + i + "</option>";
+                "<option value=" + hora + ">" + hora + "</option>";
         }
         else
         {
             selectHora +=          
-				"<option value=" + i + ">" + i + "</option>";
+				"<option value=" + hora + ">" + hora + "</option>";
         }
         contador++;
     }
     selectHora += "</select>";
+	
+	$j("#" + idFechas.idHora).html(selectHora);
 
     contador = 0;
 
+	selectMinuto = 
+		"<div class='input-group-prepend'>" +
+		"<label class='input-group-text' for=" + idFechas.idSelectMinuto + ">Día</label>" + 
+		"</div>" +
+		"<select class='custom-select' id=" + idFechas.idSelectMinuto + ">";
     for (i = 1; i <= 60; i++) 
     {
-        selectMinuto = 
-			"<div class='input-group-prepend'>" +
-			"<label class='input-group-text' for=" + idMinuto + ">Día</label>" + 
-			"</div>" +
-			"<select class='custom-select' id=" + idMinuto + ">";
+		minuto = (i < 10 ? '0' : '') + i;
+		
         if (contador == 0)
         {
             selectMinuto +=          
 				"<option selected></option>" +
-                "<option value=" + i + ">" + i + "</option>";
+                "<option value=" + minuto + ">" + minuto + "</option>";
         }
         else
         {
             selectMinuto +=          
-				"<option value=" + i + ">" + i + "</option>";
+				"<option value=" + minuto + ">" + minuto + "</option>";
         }
         contador++;
     }
     selectMinuto += "</select>";
+	
+	$j("#" + idFechas.idMinuto).html(selectMinuto);
+}
+
+function validarActividad(tipoActividad)
+{
+    var indicadorError = 0;
+    var anterior =
+        "<div class='alert alert-danger alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>";
+
+    var posterior = "</strong></div>"; 
+
+    borrarMensajesAnteriores();
+
+    if (tipoActividad == "nueva")
+    {
+		idSelectActividad = "#" + cadenaRoles + "90";
+        if ($j(idSelectActividad).val() == "")  
+        {   
+            indicadorError = 1;
+            mensajeError = anterior + "Seleccione una actividad" + posterior;
+            $j("#mensajesActividad100").html(mensajeError);
+        }
+    }
+
+	if ($j("#ano90").val() == "")  
+	{ 
+		indicadorError = 1;
+		mensajeError = anterior + "Seleccione el año" + posterior;
+		$j("#mensajesActividad100").html(mensajeError);
+	}
+	
+	if ($j("#mes90").val() == "")  
+	{ 
+		indicadorError = 1;
+		mensajeError = anterior + "Seleccione el mes" + posterior;
+		$j("#mensajesActividad100").html(mensajeError);
+	}
+	
+	if ($j("#dia90").val() == "")  
+	{ 
+		indicadorError = 1;
+		mensajeError = anterior + "Seleccione el día" + posterior;
+		$j("#mensajesActividad100").html(mensajeError);
+	}
+
+	if ($j("#hora90").val() == "")  
+	{ 
+		indicadorError = 1;
+		mensajeError = anterior + "Seleccione la hora" + posterior;
+		$j("#mensajesActividad100").html(mensajeError);
+	}
+	
+	if ($j("#minuto90").val() == "")  
+	{ 
+		indicadorError = 1;
+		mensajeError = anterior + "Seleccione los minutos" + posterior;
+		$j("#mensajesActividad100").html(mensajeError);
+	}
+	
+	if ($j("#meridiano90").val() == "")  
+	{ 
+		indicadorError = 1;
+		mensajeError = anterior + "indique si es am o pm" + posterior;
+		$j("#mensajesActividad100").html(mensajeError);
+	}   
+	
+    if (indicadorError == 0)
+    {
+		fechaPlanificadaInvertida = 
+			$j("#ano90").val() +
+			$j("#mes90").val() +
+			$j("#dia90").val();
+
+		if (fechaPlanificadaInvertida >= gFechaActualInvertida)
+		{
+			guardarActividad();
+		}
+		else
+		{
+			mensajeError = anterior + "Estimado usuario la fecha planificada es menor a la fecha actual, por favor verifique" + posterior;
+			$j("#mensajesUsuario30").html(mensajeError);
+			window.scrollTo(0, 0); 
+		}
+    }
+    else
+    {
+        mensajeError = anterior + "Estimado usuario uno o más datos contienen errores, por favor verifique" + posterior;
+        $j("#mensajesUsuario30").html(mensajeError);
+        window.scrollTo(0, 0);           
+    }
 }
 
 // Eventos
@@ -2593,7 +2702,21 @@ $j(document).ready(function()
         $j('#informacionAdicional90').val("");
         $j('#fechaPlanificada90').val("");
         selectActividades();
-        inicializarFecha(anoActividad90, mesActividad90, diaActividad90, horaActividad90, minutoActividad90):
+		idFechas =
+			{
+				"idAno" : actividadesAno90,
+				"idSelectAno" : ano90,
+				"idMes" : actividadesMes90,
+				"idSelectMes" : mes90,
+				"idDia" : actividadesDia90,
+				"idSelectDia" : dia90,
+				"idHora" : actividadesHora90,
+				"idSelectHora" : hora90,
+				"idMinuto" : actividadesMinuto90,
+				"idSelectMinuto" : minuto90
+			};
+				
+        inicializarFecha(idFechas);
         $j('#cerrarAgenda10').addClass('noVer');
         $j('#agregarActividad10').addClass('noVer');
         $j('#cerrarAgregarActividad10').removeClass('noVer');
@@ -2623,7 +2746,8 @@ $j(document).ready(function()
 
     $j('#guardarActividad10').click(function()
     {
-        guardarActividad();
+        tipoActividad = "nueva";
+        validadActividad(tipoActividad);
     });
 
     $j('.buscarCaptador60').autocomplete(
