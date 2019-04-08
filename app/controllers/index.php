@@ -275,8 +275,8 @@
 									<select class='custom-select' id='Administrador90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-                                        <option value="Confirmar cita para mostrar propiedad">
-                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
                                         <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
@@ -318,8 +318,8 @@
 									<select class='custom-select' id='GestorCaptadorPromotor90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-                                        <option value="Confirmar cita para mostrar propiedad">
-                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
                                         <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
@@ -361,8 +361,8 @@
 									<select class='custom-select' id='GestorCaptador90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-                                        <option value="Confirmar cita para mostrar propiedad">
-                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
                                         <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
@@ -399,8 +399,8 @@
 									</div>
 									<select class='custom-select' id='GestorPromotor90'> 
 										<option selected></option> 
-                                        <option value="Confirmar cita para mostrar propiedad">
-                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
 										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
 										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
 										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
@@ -428,8 +428,8 @@
 									</div>
 									<select class='custom-select' id='Gestor90'> 
 										<option selected></option> 
-                                        <option value="Confirmar cita para mostrar propiedad">
-                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
                                         <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
 										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
 										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
@@ -452,8 +452,8 @@
 									<select class='custom-select' id='CaptadorPromotor90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-                                        <option value="Confirmar cita para mostrar propiedad">
-                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
 										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
@@ -486,8 +486,8 @@
 									<select class='custom-select' id='Captador90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-                                        <option value="Confirmar cita para mostrar propiedad">
-                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Confirmar cita solicitada por el asesor de inversión inmobiliaria">
+                                            Confirmar cita solicitada por el asesor de inversión inmobiliaria</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
 										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
@@ -798,7 +798,6 @@ var gNombreUsuario = "<?= $nombreUsuario ?>";
 var gRoles = <?= json_encode($roles) ?>;
 var gPermiso = <?= $permiso ?>;
 var gCadenaRoles = <?= $cadenaRoles ?>;
-var gUsuarios = <?= $usuarios ?>;
 var gPersonas = <?= json_encode($personasAsc) ?>;
 var gIdPostActual = "";
 var gPosicionAnterior = "";
@@ -1076,6 +1075,7 @@ function guardarActividad()
 
     jsonActividad = 
         {"idPost" : gIdPostActual,
+        "idCaptador" : gMatrizBienes[gIdPostActual].post_author,    
         'actividad' :  
             {
                 "nombreActividad" : $j("#actividadAgenda90").val(),
@@ -1086,34 +1086,12 @@ function guardarActividad()
                 "diaCierre" : $j("#dia90").val().substring(0, 2),
                 "mesCierre" : $j("#mes90").val().substring(3, 5),
                 "anoCierre" : $j("#ano90").val().substring(6, 10),
-                "idEjecutor" : gIdUsuario,
-                "idSolicitante" : gIdUsuario,
-                "idActividadPadre" : "",
+                "idUsuario" : gIdUsuario,
                 "notificacion" : "Vista",
-                "informacionAdicional" : "",
-                "HistorialDeCambios" : "",
+                "Historial" : "",
                 "estatus" : "abierta"
             }
         };
-    
-    if ($j("#actividadAgenda90").val() == "Solicitar cita para mostrar propiedad")
-    {
-        destinatarios = [gMatrizBienes[gIdPostActual].post_author];
-
-        $j.each(gUsuarios, function(clave, datos)  
-        {
-            if (datos.CRMdapliw_roles.includes("Gestor de negocios")
-            {
-                destinatarios.push(clave);
-            }
-        });                               
-
-        jsonActividad.actividad.informacionAdicional =
-            {
-                "solicitante" : gNombreUsuario,
-                "destinatarios" : destinatarios
-            };        
-    }
 
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'agregar_actividad')) ?>", 
         jsonActividad, null, "json")          

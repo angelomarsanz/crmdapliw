@@ -10,16 +10,68 @@ class PostmetasController extends MvcPublicController
     {
         $this->autoRender = false;
 
-        if (isset($_POST['idPost']))
+        $this->load_model("Binnacle");
+
+        if (isset($_POST["idPost"]))
         {
             $jsondata = [];
 
-            $postmeta = ['post_id' => $_POST['idPost'], 'meta_key' => 'CRMdapliw_actividad_agenda', 'meta_value' => json_encode($_POST['actividad'])];
+            $postmeta = ["post_id" => $_POST["idPost"], "meta_key" => "CRMdapliw_actividad_agenda", "meta_value" => json_encode($_POST["actividad"])];
             $id = $this->Postmeta->insert($postmeta);
 
-            $jsondata["satisfactorio"] = true;
-            $jsondata["mensaje"] = "La actividad se agregó correctamente";
-            $jsondata["id"] = $id;
+            if ($id > 0)
+            {
+                $actividad = $_POST["actividad"];
+
+                if ($actividad["nombreActividad"] == "Solicitar cita para mostrar propiedad")
+                {
+                    $actividad["nombreActividad"] = "Solicitud cita para mostrar propiedad";
+                    $actividad["informacionAdicional"] = "Solicitada por " . $actividad["informacionAdicional"]["solicitante"]; 
+                    $actividad["idSolicitante"] = $actividad["idEjecutor"];                    
+                    $actividad["notificacion"] = "No vista";
+                    $actividad["idActividadPadre"] = $id;
+
+                    $indicadorError = 0;
+
+                    foreach ($actividad["informacionAdicional"]["destinatarios"] as $destinatario)
+                    {
+                        $actividad["idEjecutor"] = $destinatario;
+                        $postmeta = ['post_id' => $_POST['idPost'], 'meta_key' => 'CRMdapliw_actividad_agenda', 'meta_value' => json_encode($actividad)];
+                        $idHijo = $this->Postmeta->insert($postmeta);
+
+                        if ($idHijo == 0)
+                        {
+                            $indicadorError = 1;
+                            $binnacle = 
+                                [
+                                    "novedad" => "No se pudo crear la actividad coordinar visita a la propiedad para el usuario " . $destinatario;
+                                    "tipo_clase" => "controlador",
+                                    "nombre_clase" => "Postmetas",
+                                    "nombre_metodo" => "agregar_actividad"                             
+                                ];
+                            $idBinnacle = $this->Binnacle->insert($binnacle);
+                            break;
+                        }
+                    }
+                    if ($indicadorError == 0)
+                    {
+                        $jsondata["satisfactorio"] = true;
+                        $jsondata["mensaje"] = "La actividad se agregó correctamente";
+                        $jsondata["id"] = $id;
+                    }
+                    else
+                    {
+                        $jsondata["satisfactorio"] = false;
+                        $jsondata["mensaje"] = "No se pudo crear la actividad coordinar visita a la propiedad para el usuario " . $destinatario;
+                    }
+                }
+                else
+                {
+                    $jsondata["satisfactorio"] = true;
+                    $jsondata["mensaje"] = "La actividad se agregó correctamente";
+                    $jsondata["id"] = $id;
+                }
+            }         
         }
         else
         {
