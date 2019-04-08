@@ -13,19 +13,39 @@
                     alt="Inicio CRM" class="iconoMenu">
                 </a>
 
-                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="cerrarPropiedades10" title="Cerrar">
+                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="cerrarBusquedaPropiedades10" title="Cerrar">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
-                    alt="Cerrar propiedades" class="iconoMenu">
+                    alt="Cerrar búsqueda propiedades" class="iconoMenu">
                 </a>
 
 				<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="busquedaPropiedades10">
 					<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-					alt="Ejecutar búsqueda" class="iconoMenu">
+					alt="Ejecutar búsqueda propiedades" class="iconoMenu">
 				</button>
 
-                <button title="Cerrar" class="btn btn-link noVer" id="cerrarBusquedaPropiedades10">
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarPropiedadesFiltradas10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="Cerrar búsqueda propiedades" class="iconoMenu">
+                    alt="Cerrar propiedades filtradas" class="iconoMenu">
+                </button>
+
+				<a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad">
+					<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
+					alt="Publicar propiedad" class="iconoMenu">
+				</a>
+
+                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="cerrarBusquedaAgenda10" title="Cerrar">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
+                    alt="Cerrar búsqueda agenda" class="iconoMenu">
+                </a>
+
+				<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="busquedaAgenda10">
+					<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
+					alt="Ejecutar búsqueda agenda" class="iconoMenu">
+				</button>
+
+                <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgendaFiltrada10">
+                    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                    alt="Cerrar agenda filtrada" class="iconoMenu">
                 </button>
 
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgenda10">
@@ -68,13 +88,8 @@
                     alt="Guardar persona" class="iconMenu">
                 </button>
 				
-				<!-- Inicio grupo botone que ya no se estàn usando -->
-				          
-					<a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad">
-						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
-						alt="Publicar propiedad" class="iconoMenu">
-					</a>
-					
+				<!-- Inicio grupo botones que ya no se estàn usando -->
+				          					
 					<button title="Otras opciones" class="btn btn-link noVer" id="otrasOpciones10">
 						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/grid-two-up.svg" ?>
 						alt="Otras opciones" class="iconoMenu">
@@ -202,7 +217,7 @@
             <div class="row">
 				<div class="col-md-4">
 					<p class="letraAzul">Agenda</p>
-					<button title="Bienes sin actividades" class="btn btn-link" id="bienesSinActividades51">
+					<button title="Bienes sin actividades" class="btn btn-link" id="bienesSinActividad51">
 						Propiedades sin actividades planificadas
 					</button>
 					<div class="input-group mb-3">
@@ -210,7 +225,7 @@
 							<label class="input-group-text" for="tipoActividad51">Tipo de actividad</label>
 						</div>
 						<select class="custom-select" id="tipoActividad51">
-							<option value="Citas">Citas</option>
+							<option value="Solicitud Citas">Solicitud de citas</option>
 							<option selected value="Todas">Todas</option>
 						</select>
 					</div>
@@ -220,9 +235,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="busquedaAgenda51">Actividades planificadas</label>
+							<label class="input-group-text" for="busquedaActividades51">Actividades planificadas</label>
 						</div>
-						<select class="custom-select" id="busquedadAgenda51">
+						<select class="custom-select" id="busquedaActividades51">
 							<option value="Actividades atrasadas">Actividades atrasadas</option>
 							<option value="Actividades del mes">Actividades del mes</option>
 							<option value="Actividades para hoy">Actividades para hoy</option>
@@ -804,6 +819,7 @@ var gIdPostActual = "";
 var gPosicionAnterior = "";
 var gVistaPreferida = <?= $vistaPreferida ?>;
 var gfechaActual = new Date();
+var gBotonCerrar = "";
 
 console.log(gFechaActual);
 
@@ -884,73 +900,70 @@ function desmarcarBienesVista()
 
 function filtrarPropiedades()
 {
-	$j.each(gBienes, function(clave1, datos1)  
-	{
-		var indicadorPrecio = 0;
-		
-		$j.each(gDatosBienes, function(clave2, datos2)  
-		{
-			if j$("#busquedaHabitaciones50").val() > 0)
-			{
-				if (datos2.REAL_HOMES_property_bedrooms[0] == j$("#busquedaHabitaciones50").val())
-				{
-					datos1.ver = "true"
-				}
-			}
-				
-			if j$("#busquedaBanos50").val() > 0)
-			{
-				if (datos2.REAL_HOMES_property_bathrooms[0] == j$("#busquedaBanos50").val())
-				{
-					datos1.ver = "true"
-				}
-			}
-					
-			if j$("#busquedaGarajes50").val() > 0)
-			{
-				if (datos2.REAL_HOMES_property_garage[0] == j$("#busquedaGarajes50").val())
-				{
-					datos1.ver = "true"
-				}
-			}
+    var indicadorPrecio = 0;
 
-			if j$("#busquedaArea50").val() > 0)
+	$j.each(gMatrizBienes, function(clave1, datos1)  
+	{
+		if j$("#busquedaHabitaciones50").val() > 0)
+		{
+			if (gDatosBienes[clave1].REAL_HOMES_property_bedrooms[0] == j$("#busquedaHabitaciones50").val())
 			{
-				if (datos2.REAL_HOMES_property_garage[0] >= j$("#busquedaArea50").val())
-				{
-					datos1.ver = "true"
-				}
+				datos1.ver = "true"
 			}
+		}
 			
-			indicadorPrecio = 0;
-			
-			if j$("#busquedaPrecioMinimo50").val() > 0)
+		if j$("#busquedaBanos50").val() > 0)
+		{
+			if (gDatosBienes[clave1].REAL_HOMES_property_bathrooms[0] == j$("#busquedaBanos50").val())
 			{
-				if (datos2.REAL_HOMES_property_price[0] >= j$("#busquedaPrecioMinimo50").val())
+				datos1.ver = "true"
+			}
+		}
+				
+		if j$("#busquedaGarajes50").val() > 0)
+		{
+			if (gDatosBienes[clave1].REAL_HOMES_property_garage[0] == j$("#busquedaGarajes50").val())
+			{
+				datos1.ver = "true"
+			}
+		}
+
+		if j$("#busquedaArea50").val() > 0)
+		{
+			if (gDatosBienes[clave1].REAL_HOMES_property_garage[0] >= j$("#busquedaArea50").val())
+			{
+				datos1.ver = "true"
+			}
+		}
+		
+		indicadorPrecio = 0;
+		
+		if j$("#busquedaPrecioMinimo50").val() > 0)
+		{
+			if (gDatosBienes[clave1].REAL_HOMES_property_price[0] >= j$("#busquedaPrecioMinimo50").val())
+			{
+				if j$("#busquedaPrecioMaximo50").val() > 0)
 				{
-					if j$("#busquedaPrecioMaximo50").val() > 0)
-					{
-						if (datos2.REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
-						{
-							datos1.ver = "true";
-						}
-						indicadorPrecio = 1;
-					}
-					else
+					if (gDatosBienes[clave1].REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
 					{
 						datos1.ver = "true";
 					}
+					indicadorPrecio = 1;
 				}
-			}
-			
-			if j$("#busquedaPrecioMaximo50").val() > 0 && indicadorPrecio == 0)
-			{
-				if (datos2.REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
+				else
 				{
 					datos1.ver = "true";
 				}
-			}	
-		});
+			}
+		}
+		
+		if j$("#busquedaPrecioMaximo50").val() > 0 && indicadorPrecio == 0)
+		{
+			if (gDatosBienes[clave1].REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
+			{
+				datos1.ver = "true";
+			}
+		}	
 	});
 }	
 
@@ -1000,8 +1013,8 @@ function guardarCambiosAgenda(idActividad)
         {
             if ($j(this).prop("checked") == true)
             {
-                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "Cerrada";
-                estatusObj = "Cerrada";
+                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "Cerrada por el usuario";
+                estatusObj = "Cerrada por el usuario";
             }
             else
             {
@@ -1031,7 +1044,7 @@ function guardarCambiosAgenda(idActividad)
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                     "<strong>¡ Los datos se guardaron exitosamente ! " + response.mensaje + "</strong>" +
                 "</div>";
-            if (estatusObj == "Cerrada")
+            if (estatusObj == "Cerrada por el usuario")
             {
                 $j(tarjeta).addClass("noVer");
             }
@@ -1158,12 +1171,12 @@ function guardarActividad()
 
             $j("#mensajesUsuario30").html(mensajesUsuario);
 
-            agenda(gIdPostActual); 
+            mostrarAgenda(gIdPostActual); 
             $j("#agregarActividad90").addClass("noVer");
             $j("#cerrarAgregarActividad10").addClass("noVer");
             $j("#guardarActividad10").addClass("noVer");
             $j("#agenda80").removeClass("noVer");
-            $j("#cerrarAgenda10").removeClass("noVer");
+            $j(gBotonCerrar).removeClass("noVer");
             $j("#agregarActividad10").removeClass("noVer");
             window.scrollTo(0, 0);           
         } 
@@ -1507,7 +1520,7 @@ function mostrarBienes()
     });   
 }
 
-function agenda(idPost)
+function mostrarAgenda(idPost)
 {
     var agenda =
         "<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + gMatrizBienes[idPost].post_title + "</h2>" +
@@ -2647,6 +2660,48 @@ function validarActividad(tipoActividad)
     }
 }
 
+function bienesSinActividad()
+{
+	$j.each(gMatrizBienes, function(clave1, datos1)  
+	{	
+        if (gDatosBienes[clave1].CRMdapliw_actividad_agenda[0])
+        {
+            indicadorActividadAbierta = 0;
+
+		    $j.each(gDatosBienes[clave1].CRMdapliw_actividad_agenda, function(clave2, datos2)  
+		    {
+                if (gPermiso < 4)
+                {
+                    if (datos2.idEjecutor == gIdUsuario)
+                    {
+                        if (datos2.estatus == "Abierta")
+                        {
+                            indicadorActividadAbierta = 1;
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    if (datos2.estatus == "Abierta")
+                    {
+                        indicadorActividadAbierta = 1;
+                        return false;
+                    }
+                }
+            });
+            if (indicadorActividadAbierta == 0)
+            {
+                datos1.ver = "true";
+            }
+        }
+        else
+        {
+            datos1.ver = "true";
+        }
+    });
+}
+
 // Eventos
 $j(document).ready(function()
 {
@@ -2656,7 +2711,7 @@ $j(document).ready(function()
     {
         $j("#principal40").addClass('noVer');
         $j("#busquedaPropiedades50").removeClass('noVer');
-        $j("#cerrarPropiedades10").removeClass('noVer');
+        $j("#cerrarBusquedaPropiedades10").removeClass('noVer');
         $j("#busquedaPropiedades10").removeClass('noVer');
         window.scrollTo(0, 0);
     });
@@ -2664,21 +2719,25 @@ $j(document).ready(function()
     $j('#busquedaPropiedades10').click(function()
     {
         $j("#busquedaPropiedades50").addClass('noVer');
-        $j("#cerrarPropiedades10").addClass('noVer');
+        $j("#cerrarBusquedaPropiedades10").addClass('noVer');
         $j("#busquedaPropiedades10").addClass('noVer');
         desmarcarBienesVista();
         filtrarPropiedades();
+        gBotonCerrar = "#cerrarPropiedadesFiltradas10";
+        mostrarBienes();
         $j("#bienes60").removeClass('noVer');
-        $j("#cerrarBusquedaPropiedades10").removeClass('noVer');
+        $j(gBotonCerrar).removeClass('noVer');
+        $j("#publicarPropiedad10").removeClass('noVer');
         window.scrollTo(0, 0);
     });
 
-    $j('#cerrarBusquedaPropiedades10').click(function()
+    $j('#cerrarPropiedadesFiltradas10').click(function()
     {
         $j("#bienes60").addClass('noVer');
-        $j("#cerrarBusquedadPropiedades10").addClass('noVer');
+        $j("#cerrarPropiedadesFiltradas10").addClass('noVer');
+        $j("#publicarPropiedad10").addClass('noVer');
         $j("#busquedaPropiedades50").removeClass('noVer');
-        $j("#cerrarPropiedades10").removeClass('noVer');
+        $j("#cerrarBusquedaPropiedades10").removeClass('noVer');
         $j("#busquedaPropiedades10").removeClass('noVer');
         window.scrollTo(0, 0);
     });
@@ -2691,9 +2750,10 @@ $j(document).ready(function()
         $j("#botonBuscar10").addClass('noVer');
         $j("#publicarPropiedad10").addClass('noVer');
         $j("#otrasOpciones10").addClass('noVer');
-        agenda(gIdPostActual);
+        gBotonCerrar = "#cerrarAgenda10"; 
+        mostrarAgenda(gIdPostActual);
         $j("#agenda80").removeClass("noVer");
-        $j("#cerrarAgenda10").removeClass('noVer');
+        $j(gBotonCerrar).removeClass('noVer');
         $j("#agregarActividad10").removeClass("noVer");
         window.scrollTo(0, 0);
         
@@ -2750,29 +2810,67 @@ $j(document).ready(function()
         window.scrollTo(0, 0);
     });
 
-    $j("#fechaPlanificada90").datepicker(
-        {
-            dateFormat: "dd/mm/yy", 
-            monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
-            dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ], 
-            changeMonth: true,
-            changeYear: true
-        });
-
     $j('#cerrarAgregarActividad10').click(function()
     {
         $j("#agregarActividad90").addClass("noVer");
         $j("#cerrarAgregarActividad10").addClass('noVer');
         $j("#guardarActividad10").addClass("noVer");
         $j('#agenda80').removeClass('noVer');
-        $j("#cerrarAgenda10").removeClass('noVer');
+        $j(gBotonCerrar).removeClass('noVer');
         $j("#agregarActividad10").removeClass('noVer');
     });
 
     $j('#guardarActividad10').click(function()
     {
         tipoActividad = "nueva";
-        validadActividad(tipoActividad);
+        validarActividad(tipoActividad);
+    });
+
+    $j("#agenda40").click(function()
+    {
+        $j("#principal40").addClass('noVer');
+        $j("#busquedaAgenda51").removeClass('noVer');
+        $j("#cerrarBusquedaAgenda10").removeClass('noVer');
+        $j("#busquedaAgenda10").removeClass('noVer');
+        window.scrollTo(0, 0);
+    });
+
+    $j('#busquedaAgenda10').click(function()
+    {
+        $j("#busquedaAgenda51").addClass('noVer');
+        $j("#cerrarBusquedaAgenda10").addClass('noVer');
+        $j("#busquedaAgenda10").addClass('noVer');
+        desmarcarAgendaVista()
+        filtrarAgenda();
+        gBotonCerrar = "#cerrarAgendaFiltrada10";
+        mostrarAgenda();
+        $j("#agenda80").removeClass('noVer');
+        $j(gBotonCerrar).removeClass('noVer');
+        $j("#agregarActividad10").removeClass("noVer");
+        window.scrollTo(0, 0);
+    });
+
+    $j('#cerrarAgendaFiltrada10').click(function()
+    {
+        $j("#agenda80").addClass('noVer');
+        $j("#cerrarAgendaFiltrada10").addClass('noVer');
+        $j("#agregarActividad10").addClass("noVer");
+        $j("#busquedaAgenda51").removeClass('noVer');
+        $j("#cerrarBusquedaAgenda10").removeClass('noVer');
+        $j("#busquedaAgenda10").removeClass('noVer');
+        window.scrollTo(0, 0);
+    });
+
+    $j('#bienesSinActividad51').click(function()
+    {
+        desmarcarBienesVista();
+        bienesSinActividad();
+        gBotonCerrar = "#cerrarAgendaFiltrada10";
+        mostrarBienes();
+        $j("#bienes60").removeClass('noVer');
+        $j(gBotonCerrar).removeClass('noVer');
+        $j("#publicarPropiedad10").removeClass('noVer');
+        window.scrollTo(0, 0);
     });
 
     $j('.buscarCaptador60').autocomplete(
