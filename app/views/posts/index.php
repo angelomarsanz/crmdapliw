@@ -158,49 +158,49 @@
             <div class="row">
                 <div class="col-md-4">
 					<p class="letraAzul">Individual</p>
-					<div class="form-group">
+					<div class="form-group noVer">
 						<label for="busquedaCodigo50">Código</label>
-						<input type="text" class="form-control" id="busquedaCodigo50">
+						<input type="text" class="form-control texto50" id="busquedaCodigo50">
 					</div>
 					<div class="form-group">
 						<label for="busquedaNombre50">Nombre</label>
-						<input type="text" class="form-control" id="busquedaNombre50">
+						<input type="text" class="form-control texto50" id="busquedaNombre50">
 					</div>
                 </div>
                 <div class="col-md-4">
 					<p class="letraAzul">Prestaciones</p>
 					<div class="form-group">
 						<label for="busquedaHabitaciones50">Habitaciones</label>
-						<input type="number" class="form-control" id="busquedaHabitaciones50">
+						<input type="number" class="form-control numero50" id="busquedaHabitaciones50">
 					</div>
 					<div class="form-group">
 						<label for="busquedaBanos50">Baños</label>
-						<input type="Number" class="form-control" id="busquedaBanos50">
+						<input type="Number" class="form-control numero50" id="busquedaBanos50">
 					</div>
 					<div class="form-group">
 						<label for="busquedaGarajes50">Garajes</label>
-						<input type="Number" class="form-control" id="busquedaGarajes50">
+						<input type="Number" class="form-control numero50" id="busquedaGarajes50">
 					</div>
 					<div class="form-group">
 						<label for="busquedaArea50">Área M2 (igual o mayor a)</label>
-						<input type="Number" class="form-control" id="busquedaArea50">
+						<input type="Number" class="form-control numero50" id="busquedaArea50">
 					</div>
 				</div>
 				<div class="col-md-4">
 					<p class="letraAzul">Otros</p>
-					<div class="form-group">
+					<div class="form-group noVer">
 						<label for="busquedaZona50">Zona</label>
-						<input type="text" class="form-control" id="busquedaZona50">
+						<input type="text" class="form-control texto50" id="busquedaZona50">
 					</div>
 					<p>Rango de precio</p>
 					<div class="form-group">
 						<label for="busquedaPrecioMinimo50">Desde</label>
-						<input type="number" class="form-control" id="busquedaPrecioMinimo50">
+						<input type="number" class="form-control numero50" id="busquedaPrecioMinimo50">
 					</div>
 					
 					<div class="form-group">
 						<label for="busquedaPrecioMaximo50">Hasta</label>
-						<input type="number" class="form-control" id="busquedaPrecioMaximo50">
+						<input type="number" class="form-control numero50" id="busquedaPrecioMaximo50">
 					</div>
 				</div> 
             </div>
@@ -220,16 +220,10 @@
 					<button title="Bienes sin actividades" class="btn btn-link" id="bienesSinActividad51">
 						Propiedades sin actividades planificadas
 					</button>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="tipoActividad51">Tipo de actividad</label>
-						</div>
-						<select class="custom-select" id="tipoActividad51">
-							<option value="Solicitud Citas">Solicitud de citas</option>
-							<option selected value="Todas">Todas</option>
-						</select>
-					</div>
-					<div class="form-group">
+					<button title="Solicitudes de cita" class="btn btn-link" id="solicitudesDeCita51">
+						Solicitudes de cita
+					</button>
+					<div class="form-group noVer" id="grupoPersonaAgenda51">
 						<label for="personaAgenda51">Persona responsable</label>
 						<input type="text" class="form-control" id="personaAgenda51">
 					</div>
@@ -241,7 +235,6 @@
 							<option value="Actividades atrasadas">Actividades atrasadas</option>
 							<option value="Actividades del mes">Actividades del mes</option>
 							<option value="Actividades para hoy">Actividades para hoy</option>
-							<option value="Actividades para mañana">Actividades para mañana</option>
 							<option selected value="Todas">Todas</option>
 						</select>
 					</div>
@@ -537,7 +530,7 @@
 									</select> 
 								</div>
 
-                                <div class="mensajesUsuario" id="mensajesActividad100"></div>
+                                <div class="mensajesUsuario" id="mensajesActividad90"></div>
 
 							</div>
 						</div> 
@@ -548,44 +541,12 @@
 									<label for="informacionAdicional90">Información adicional</label> 
 									<input type="text" class="form-control" id="informacionAdicional90"> 
 								</div>
-                                <div class="mensajesUsuario" id="mensajesInformacion100"></div>
+                                <div class="mensajesUsuario" id="mensajesInformacion90"></div>
 							</div>
 						</div>
 
 						<div class="row">
-							<div class="col-md-12">
-								<div class='input-group mb-3 noVer' id='actividadesAno90'>
-                                </div>
-								<div class="mensajesUsuario" id="mensajesAno100"></div>
-								
-								<div class='input-group mb-3 noVer' id='actividadesMes90'>
-                                </div>
-								<div class="mensajesUsuario" id="mensajesMes100"></div>
-								
-								<div class='input-group mb-3 noVer' id='actividadesDia90'>
-                                </div>
-								<div class="mensajesUsuario" id="mensajesDia100"></div>
-								
-								<div class='input-group mb-3 noVer' id='ActividadesHora90'>
-                                </div>
-								<div class="mensajesUsuario" id="mensajesHora100"></div>
-								
-								<div class='input-group mb-3 noVer' id='ActividadesMinuto90'>
-                                </div>
-								<div class="mensajesUsuario" id="mensajesMinuto100"></div>
-								
-						        <div class='input-group mb-3 noVer' id='actividadesMeridiano90'>
-							        <div class='input-group-prepend'>
-								        <label class='input-group-text' for='Meridiano90'>Actividad</label> 
-							        </div>
-							        <select class='custom-select' id='meridiano90'> 
-								        <option selected></option> 
-								        <option value="am">am</option> 
-                                        <option value="pm">pm</option>
-							        </select> 
-						        </div>
-                                <div class="mensajesUsuario" id="mensajesMeridiano100"></div>
-								
+							<div class="col-md-12" id="fechaPlanificada90">								
 							</div>
 						</div>
 					</form>
@@ -807,6 +768,7 @@
 // Variables globales
 var gBienes = <?= json_encode($bienes) ?>;
 var gMatrizBienes = <?= json_encode($matrizBienes) ?>;
+var gBienesAutocomplete = <?= json_encode($bienesAutocomplete) ?>;
 var gDatosBienes = <?= json_encode($datosBienes) ?>;
 var gIdUsuario = <?= $idUsuario ?>;
 var gNombreUsuario = "<?= $nombreUsuario ?>";
@@ -814,7 +776,7 @@ var gRoles = <?= json_encode($roles) ?>;
 var gPermiso = <?= $permiso ?>;
 var gCadenaRoles = <?= $cadenaRoles ?>;
 var gUsuarios = <?= $usuarios ?>;
-var gPersonas = <?= json_encode($personasAsc) ?>;
+var gPersonasAsc = <?= json_encode($personasAsc) ?>;
 var gIdPostActual = "";
 var gPosicionAnterior = "";
 var gVistaPreferida = <?= $vistaPreferida ?>;
@@ -898,73 +860,114 @@ function desmarcarBienesVista()
     }
 }
 
-function filtrarPropiedades()
+function filtrarPropiedades(idBienFiltro)
 {
+    var filtros = 0;
     var indicadorPrecio = 0;
 
-	$j.each(gMatrizBienes, function(clave1, datos1)  
-	{
-		if j$("#busquedaHabitaciones50").val() > 0)
-		{
-			if (gDatosBienes[clave1].REAL_HOMES_property_bedrooms[0] == j$("#busquedaHabitaciones50").val())
-			{
-				datos1.ver = "true"
-			}
-		}
-			
-		if j$("#busquedaBanos50").val() > 0)
-		{
-			if (gDatosBienes[clave1].REAL_HOMES_property_bathrooms[0] == j$("#busquedaBanos50").val())
-			{
-				datos1.ver = "true"
-			}
-		}
-				
-		if j$("#busquedaGarajes50").val() > 0)
-		{
-			if (gDatosBienes[clave1].REAL_HOMES_property_garage[0] == j$("#busquedaGarajes50").val())
-			{
-				datos1.ver = "true"
-			}
-		}
+    if (idBienFiltro > 0)
+    {
+        desmcarcarBienesVista();
+        $j.each(gBienes, function(clave1, datos1)  
+	    {
+            if (datos1.ID == idBienFiltro)
+            {
+                datos1.ver = "true";
+                return false;
+            }
+        });
+    }
+    else
+    {    
+        $j(".texto50").each(function()
+        {   
+            if ($j(this).val() > 0)
+            {
+                filtros = 1;
+            }           
+        });
 
-		if j$("#busquedaArea50").val() > 0)
-		{
-			if (gDatosBienes[clave1].REAL_HOMES_property_garage[0] >= j$("#busquedaArea50").val())
-			{
-				datos1.ver = "true"
-			}
-		}
+        $j(".numero50").each(function()
+        {   
+            if ($j(this).val() > 0)
+            {
+                filtros = 1;
+            }           
+        });
+
+        if (filtros == 0)
+        {
+            marcarBienesVista();
+        }
+        else
+        {
+            desmarcarBienesVista();
+
+	        $j.each(gBienes, function(clave1, datos1)  
+	        {
+		        if j$("#busquedaHabitaciones50").val() > 0)
+		        {
+			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_bedrooms[0] == j$("#busquedaHabitaciones50").val())
+			        {
+				        datos1.ver = "true"
+			        }
+		        }
+			
+		        if j$("#busquedaBanos50").val() > 0)
+		        {
+			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_bathrooms[0] == j$("#busquedaBanos50").val())
+			        {
+				        datos1.ver = "true"
+			        }
+		        }
+				
+		        if j$("#busquedaGarajes50").val() > 0)
+		        {
+			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_garage[0] == j$("#busquedaGarajes50").val())
+			        {
+				        datos1.ver = "true"
+			        }
+		        }
+
+		        if j$("#busquedaArea50").val() > 0)
+		        {
+			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_garage[0] >= j$("#busquedaArea50").val())
+			        {
+				        datos1.ver = "true"
+			        }
+		        }
 		
-		indicadorPrecio = 0;
+		        indicadorPrecio = 0;
 		
-		if j$("#busquedaPrecioMinimo50").val() > 0)
-		{
-			if (gDatosBienes[clave1].REAL_HOMES_property_price[0] >= j$("#busquedaPrecioMinimo50").val())
-			{
-				if j$("#busquedaPrecioMaximo50").val() > 0)
-				{
-					if (gDatosBienes[clave1].REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
-					{
-						datos1.ver = "true";
-					}
-					indicadorPrecio = 1;
-				}
-				else
-				{
-					datos1.ver = "true";
-				}
-			}
-		}
+		        if j$("#busquedaPrecioMinimo50").val() > 0)
+		        {
+			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_price[0] >= j$("#busquedaPrecioMinimo50").val())
+			        {
+				        if j$("#busquedaPrecioMaximo50").val() > 0)
+				        {
+					        if (gDatosBienes[datos1.ID].REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
+					        {
+						        datos1.ver = "true";
+					        }
+					        indicadorPrecio = 1;
+				        }
+				        else
+				        {
+					        datos1.ver = "true";
+				        }
+			        }
+		        }
 		
-		if j$("#busquedaPrecioMaximo50").val() > 0 && indicadorPrecio == 0)
-		{
-			if (gDatosBienes[clave1].REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
-			{
-				datos1.ver = "true";
-			}
-		}	
-	});
+		        if j$("#busquedaPrecioMaximo50").val() > 0 && indicadorPrecio == 0)
+		        {
+			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
+			        {
+				        datos1.ver = "true";
+			        }
+		        }	
+	        });
+        }
+    }
 }	
 
 function guardarCambiosAgenda(idActividad)
@@ -1099,6 +1102,7 @@ function guardarActividad()
                 "diaCierre" : $j("#dia90").val().substring(0, 2),
                 "mesCierre" : $j("#mes90").val().substring(3, 5),
                 "anoCierre" : $j("#ano90").val().substring(6, 10),
+				"idPropiedad" : gIdPostActual,
                 "idEjecutor" : gIdUsuario,
                 "idSolicitante" : gIdUsuario,
                 "idActividadPadre" : "",
@@ -1472,9 +1476,23 @@ function mostrarBienes()
 								"</div>" + 
 
 								"<div class='form-group'>" +
-									"<label for='buscarCaptador60" + bien.ID + "'>Captador responsable: </label>" +
-									"<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
-										"value='" + gMatrizBienes[bien.ID].nombre_autor + "'>" +
+									"<label for='buscarCaptador60" + bien.ID + "'>Captador responsable: </label>";
+
+                            if (gPermiso > 3)
+                            {
+                                bienes += 
+
+						            "<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
+							            " value=" + gMatrizBienes[bien.ID].nombre_autor + ">";
+                            }
+                            else
+                            {
+						        "<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
+							        " value=" + gMatrizBienes[bien.ID].nombre_autor + " disabled>";
+                            }
+                            
+                            bienes +=
+
 								"</div>" +
 								"<div class='mensajesUsuario' id='mensajesUsuario60" + bien.ID + "'>" +
 								"</div>" +
@@ -1520,7 +1538,246 @@ function mostrarBienes()
     });   
 }
 
-function mostrarAgenda(idPost)
+function generarLineaLista(clave, actividad, contador)
+{
+	idActividad = actividad.id;
+					
+	fechaPlanificada = 
+		actividad.diaPlanificado +
+		"/" +
+		actividad.mesPlanificado + 
+		"/" +
+		actividad.anoPlanificado;
+
+	fechaPlanificadaInvertida = 
+		actividad.anoPlanificado +
+		actividad.mesPlanificado + 
+		actividad.diaPlanificado;
+		
+	if (fechaPlanificadaInvertida < gFechaActualInvertida)
+	{
+		colorAlerta = "letraAmarilla";
+	}
+	else
+	{
+		colorAlerta = "letraVerde";
+	}
+	
+	lineaLista = 		
+		"<td>" + contador + "</td>" +
+		"<td>" + gMatrizBienes[actividad.idPropiedad].post_title + "</td>" +
+		"<td class=" + colorAlerta + ">" + actividad.nombreActividad + "</td>" +
+		"<td>" + fechaPlanificada + "</td>" +
+		"<td>" +
+		"<button class='btn btn-light actividad80' id='actividad80-" + clave + "-" + idActividad + "-" + actividad.idPropiedad + "' title='Ver actividad'>" +
+		"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+		"crmdapliw/app/public/images/eye.svg alt='Agenda' class='icono'>" +
+		"</button>" +
+		"<td>";
+	
+	return lineaLista;
+}
+
+function mostrarAgendaLista(tipoContenido, valor)
+{
+	var notificaciones = [];
+	var objetoNotificacion = new Object;
+	var notificacionesBien = [];
+	var colorAlerta = "";
+	var contador = 0;
+	var encabezadoTabla = 
+		"<div class='table-responsive'>" +
+			"<table class='table table-striped table-hover'>" +
+				"<thead>"
+					"<tr>" +
+						"<th scope='col'>No</th>" +
+						"<th scope='col'>Propiedad</th>" +
+						"<th scope='col'>Actividad</th>" +
+						"<th scope='col'>Fecha</th>" +
+						"<th scope='col'></th>" +
+					"</tr>" +
+				"</thead>" +
+				"<tbody>";
+				
+	var pieTabla = 
+				"</tbody>" +
+			"</table>" +
+		"</div> +
+	"</div>";
+	
+	if (tipoContenido == "propiedad")
+	{
+		var agenda =
+			"<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + gMatrizBienes[valor].post_title + "</h2>" +
+			"<h3 class='letraAzul'>Captador responsable: " + gMatrizBienes[valor].nombre_autor + "</h3>" +
+			"<br />" +
+			"<br />" +
+			"<div class='row'>" + encabezadoTabla;
+			
+		contador = 1;
+			
+		if (gDatosBienes[valor].CRMdapliw_actividad_agenda)
+		{
+			notificacionesBien = [];
+						
+			arregloActividades = gDatosBienes[valor].CRMdapliw_actividad_agenda.sort(function(a,b)
+			{
+				return (a.fechaInvertida - b.fechaInvertida);
+			});
+						
+			$j.each(arregloActividades, function(clave, datos)  
+			{
+				if (datos.estatus == "abierta")
+				{
+					if (datos.notificacion == "No vista" && datos.idEjecutor == gIdUsuario)						
+					{
+						notificacionesBien.push(datos.posicionOriginal);
+					}
+
+					lineaLista = generarLineaLista(clave, datos, contador);
+					
+					agenda += "<tr>" + lineaLista + "</tr>";
+					contador++;
+				}
+			});	
+			if (notificacionesBien[0])
+			{
+				objetoNotificacion =
+					{
+						"idBien" : datos1.ID,
+						"notificacionesBien" : notificacionesBien
+					};
+					
+				notificaciones.push(objetoNotificacion);
+			}			
+		}
+	}
+	else if (tipoContenido == "Notificaciones")
+	{
+		var agenda =
+			"<h2 class='letraAzul' id='tituloAgenda80'>" + valor + "</h2>" +
+			"<br />" +
+			"<br />" +
+			"<div class='row'>" + encabezadoTabla;
+			
+		contador = 1;
+
+		$j.each(gBienes, function(clave1, datos1) 
+		{		
+			notificacionesBien = [];
+			
+			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
+			{
+				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.sort(function(a,b)
+				{
+					return (a.fechaInvertida - b.fechaInvertida);
+				});
+				
+				$j.each(arregloActividades, function(clave2, datos2)  
+				{
+					if (datos2.estatus == "abierta")						
+					{
+						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
+						{
+							notificacionesBien.push(datos2.posicionOriginal);
+							
+							lineaLista = generarLineaLista(clave2, datos2, contador);
+							
+							agenda += "<tr>" + lineaLista + "</tr>";
+							contador++;
+						}
+					}
+				});	
+			}
+			if (notificacionesBien[0])
+			{
+				objetoNotificacion =
+					{
+						"idBien" : datos1.ID,
+						"notificacionesBien" : notificacionesBien
+					};
+					
+				notificaciones.push(objetoNotificacion);
+			}		
+		});
+	}
+	else 
+	{
+		if (tipoContenido == "Citas")
+		{
+			var agenda =
+				"<h2 class='letraAzul' id='tituloAgenda80'>Solicitudes de cita</h2>" +
+				"<br />" +
+				"<br />" +
+				"<div class='row'>" + encabezadoTabla;		
+		}
+		else if (tipoContenido == "Persona")
+		{
+			var agenda =
+				"<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + valor + "</h2>" +
+				"<br />" +
+				"<br />" +
+				"<div class='row'>" + encabezadoTabla;
+		}
+		else if (tipoContenido == "Fechas")
+		{
+			var agenda =
+				"<h2 class='letraAzul' id='tituloAgenda80'>" + valor + "</h2>" +
+				"<br />" +
+				"<br />" +
+				"<div class='row'>" + encabezadoTabla;
+
+		contador = 1;
+
+		$j.each(gBienes, function(clave1, datos1) 
+		{	
+			notificacionesBien = [];
+		
+			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
+			{
+				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.sort(function(a,b)
+				{
+					return (a.fechaInvertida - b.fechaInvertida);
+				});
+				
+				$j.each(arregloActividades, function(clave2, datos2)  
+				{
+					if (datos2.estatus == "abierta" && datos2.ver == "true")						
+					{
+						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
+						{
+							notificacionesBien.push(datos2.posicionOriginal);
+						}
+						
+						lineaLista = generarLineaLista(clave2, datos2, contador);
+						
+						agenda += "<tr>" + lineaLista + "</tr>";
+						contador++;
+					}
+				});
+				if (notificacionesBien[0])
+				{
+					objetoNotificacion =
+						{
+							"idBien" : datos1.ID,
+							"notificacionesBien" : notificacionesBien
+						};
+						
+					notificaciones.push(objetoNotificacion);
+				}				
+			}
+		});
+	}
+	agenda += pieTabla;
+	
+	for (i = 1; i <= 200; i++) 
+    {
+        agenda += "<br />";
+    }
+	return agenda;
+}
+
+function mostrarAgendaMosaicos(idPost)
 {
     var agenda =
         "<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + gMatrizBienes[idPost].post_title + "</h2>" +
@@ -1588,14 +1845,11 @@ function mostrarAgenda(idPost)
                                     "</div>" +
 
                                     "<div class='row'>" +
-                                        "<div class='col-md-6'>" +
-                                            "<div class='form-group'>" + 
-                                                "<label for='fechaPlanificada80'>Fecha</label>" +  
-                                                "<input type='text' class='form-control fechaPlanificada80' id='fechaPlanificada80-" + 
-                                                    clave + "-" + idActividad + "-" + idPost + "' value=" + fechaPlanificada + ">" + 
-                                            "</div>" +
+                                        "<div class='col-md-12' id='fechaPlanificada80'>" +
                                         "</div>" +
+                                    "</div>
                                         
+                                    "<div class='row'>" +
                                         "<div class='col-md-3'>" +
                                             "<div class='form-check'>" +
                                                 "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + 
@@ -1637,16 +1891,65 @@ function mostrarAgenda(idPost)
         agenda += "<br />";
     }
 
-    $j("#agenda80").html(agenda).contents().find(".fechaPlanificada80").datepicker(
-        {
-            dateFormat: "dd/mm/yy", 
-            monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
-            dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
-            changeMonth: true,
-            changeYear: true
-        });
+    $j("#agenda80").html(agenda);
+
+	idFechas =
+		{
+			"idAno" : "actividadesAno80",
+			"idSelectAno" : "ano80",
+            "idMensajesAno" : "mensajesAno80",
+
+			"idMes" : "actividadesMes80",
+			"idSelectMes" : "mes80",
+            "idMensajesMes" : "mensajesMes80",
+
+			"idDia" : "actividadesDia80",
+			"idSelectDia" : "dia80",
+            "idMensajesDia" : "mensajesDia80",
+
+			"idHora" : "actividadesHora80",
+			"idSelectHora" : "hora80",
+            "idMensajesHora" : "mensajesHora80",
+
+			"idMinuto" : "actividadesMinuto80",
+			"idSelectMinuto" : "minuto80",
+            "idMensajesAno" : "mensajesAno80",
+
+			"idMeridiano" : "actividadesMeridiano80",
+			"idSelectMeridiano" : "meridiano80",
+            "idMensajesMeridiano" : "mensajesMeridiano80",
+
+		};
+			
+    lineaFecha = inicializarFecha(idFechas);
+    $j("#fechaPlanifida80").html(lineaFecha);
+
 }
 
+function mostrarAgenda(tipoContenido, valor)
+{
+	var agenda = "";
+	
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se busca la información</strong>" +
+        "</div>";
+		
+	borrarMensajesAnteriores();
+
+  	$j("#mensajesUsuario30").html(mensajesUsuario);
+
+	if (gVistaPreferida.substring(0, 5) == "Lista")
+	{
+		agenda = mostrarAgendaLista(tipoContenido, valor);
+	}
+	else
+	{
+		agenda = mostrarAgendaMosaicos(tipoContenido, valor);
+	}
+}
+	
 function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje)
 {
     var mensajesUsuario = 
@@ -2416,6 +2719,7 @@ public function selectActividades();
 }
 function inicializarFecha(idFechas)
 {
+    lineaFecha = "";
 	var ano = gAnoActual;
 	var mes = "";
 	var dia = "";
@@ -2426,7 +2730,6 @@ function inicializarFecha(idFechas)
     var selectDia = "";
     var selectHora = "";
     var selectMinuto = "";
-
     var contador = 0;
 
 	selectAno = 
@@ -2452,6 +2755,10 @@ function inicializarFecha(idFechas)
         contador++;
     }
     selectAno += "</select>";
+
+    lineaFecha += 
+        "<div class='input-group mb-3 noVer' id=" + idFechas.idAno + ">" + selectAno + "</div>" +
+        "<div class='mensajesUsuario' id=" + idMensajesAno + "></div>";
 	
 	$j("#" + idFechas.idAno).html(selectAno);
 
@@ -2481,7 +2788,9 @@ function inicializarFecha(idFechas)
     }
     selectMes += "</select>";
 	
-	$j("#" + idFechas.idMes).html(selectMes);
+    lineaFecha += 
+        "<div class='input-group mb-3 noVer' id=" + idFechas.idMes + ">" + selectMes + "</div>" +
+        "<div class='mensajesUsuario' id=" + idMensajesMes + "></div>";
 
     contador = 0;
 
@@ -2510,7 +2819,9 @@ function inicializarFecha(idFechas)
     }
     selectDia += "</select>";
 	
-	$j("#" + idFechas.idDia).html(selectDia);
+    lineaFecha += 
+        "<div class='input-group mb-3 noVer' id=" + idFechas.idDia + ">" + selectDia + "</div>" +
+        "<div class='mensajesUsuario' id=" + idMensajesDia + "></div>";
 
     contador = 0;
 
@@ -2538,7 +2849,9 @@ function inicializarFecha(idFechas)
     }
     selectHora += "</select>";
 	
-	$j("#" + idFechas.idHora).html(selectHora);
+    lineaFecha += 
+        "<div class='input-group mb-3 noVer' id=" + idFechas.idHora + ">" + selectHora + "</div>" +
+        "<div class='mensajesUsuario' id=" + idMensajesHora + "></div>";
 
     contador = 0;
 
@@ -2566,7 +2879,24 @@ function inicializarFecha(idFechas)
     }
     selectMinuto += "</select>";
 	
-	$j("#" + idFechas.idMinuto).html(selectMinuto);
+    lineaFecha += 
+        "<div class='input-group mb-3 noVer' id=" + idFechas.idMinuto + ">" + selectMinuto + "</div>" +
+        "<div class='mensajesUsuario' id=" + idMensajesMinuto + "></div>";
+
+    lineaFecha += 
+        "<div class='input-group mb-3 noVer' id=" + idFechas.idMeridiano + ">" +
+	        "<div class='input-group-prepend'>" +
+		        "<label class='input-group-text' for=" + idFechas.idSelectMeridiano + ">Meridiano</label>" + 
+	        "</div>" +
+	        "<select class='custom-select' id=" + idFechas.idSelectMeridiano + ">" + 
+		        "<option selected></option>" + 
+		        "<option value='am'>am</option>" + 
+                "<option value='pm'>pm</option>" +
+	        "</select>" +  
+        "</div>"
+        "<div class='mensajesUsuario' id=" + idMensajesMeridiano + "></div>";
+    
+    return lineaFecha;
 }
 
 function validarActividad(tipoActividad)
@@ -2596,42 +2926,42 @@ function validarActividad(tipoActividad)
 	{ 
 		indicadorError = 1;
 		mensajeError = anterior + "Seleccione el año" + posterior;
-		$j("#mensajesActividad100").html(mensajeError);
+		$j("#mensajesAno90").html(mensajeError);
 	}
 	
 	if ($j("#mes90").val() == "")  
 	{ 
 		indicadorError = 1;
 		mensajeError = anterior + "Seleccione el mes" + posterior;
-		$j("#mensajesActividad100").html(mensajeError);
+		$j("#mensajesMes90").html(mensajeError);
 	}
 	
 	if ($j("#dia90").val() == "")  
 	{ 
 		indicadorError = 1;
 		mensajeError = anterior + "Seleccione el día" + posterior;
-		$j("#mensajesActividad100").html(mensajeError);
+		$j("#mensajesDia90").html(mensajeError);
 	}
 
 	if ($j("#hora90").val() == "")  
 	{ 
 		indicadorError = 1;
 		mensajeError = anterior + "Seleccione la hora" + posterior;
-		$j("#mensajesActividad100").html(mensajeError);
+		$j("#mensajesHora90").html(mensajeError);
 	}
 	
 	if ($j("#minuto90").val() == "")  
 	{ 
 		indicadorError = 1;
 		mensajeError = anterior + "Seleccione los minutos" + posterior;
-		$j("#mensajesActividad100").html(mensajeError);
+		$j("#mensajesMinuto90").html(mensajeError);
 	}
 	
 	if ($j("#meridiano90").val() == "")  
 	{ 
 		indicadorError = 1;
 		mensajeError = anterior + "indique si es am o pm" + posterior;
-		$j("#mensajesActividad100").html(mensajeError);
+		$j("#mensajesMeridiano90").html(mensajeError);
 	}   
 	
     if (indicadorError == 0)
@@ -2662,13 +2992,13 @@ function validarActividad(tipoActividad)
 
 function bienesSinActividad()
 {
-	$j.each(gMatrizBienes, function(clave1, datos1)  
+	$j.each(gBienes, function(clave1, datos1)  
 	{	
-        if (gDatosBienes[clave1].CRMdapliw_actividad_agenda[0])
+        if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda[0])
         {
             indicadorActividadAbierta = 0;
 
-		    $j.each(gDatosBienes[clave1].CRMdapliw_actividad_agenda, function(clave2, datos2)  
+		    $j.each(gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda, function(clave2, datos2)  
 		    {
                 if (gPermiso < 4)
                 {
@@ -2702,11 +3032,149 @@ function bienesSinActividad()
     });
 }
 
+function marcarAgendaVista()
+{
+    $j.each(gDatosBienes, function(clave1, datos1)  
+    {
+        if (datos1.CRMdapliw_actividad_agenda[0])
+        {
+            $j.each(datos1.CRMdapliw_actividad_agenda, function(clave2, datos2)  
+            {
+                datos2.ver = "true";
+            });
+        }
+    });
+}
+
+function desmarcarAgendaVista()
+{
+    $j.each(gDatosBienes, function(clave1, datos1)  
+    {
+        if (datos1.CRMdapliw_actividad_agenda[0])
+        {
+            $j.each(datos1.CRMdapliw_actividad_agenda, function(clave2, datos2)  
+            {
+                datos2.ver = "false";
+            });
+        }
+    });
+}
+
+function solicitudesDeCita()
+{
+    desmarcarAgendaVista();
+
+    $j.each(gDatosBienes, function(clave1, datos1)  
+    {
+        if (datos1.CRMdapliw_actividad_agenda[0])
+        {
+            $j.each(datos1.CRMdapliw_actividad_agenda, function(clave2, datos2)  
+            {
+                if (datos2.nombreActividad == "Solicitud de cita para mostrar propiedad")
+                {
+                    datos2.ver = "true";
+                }
+            });
+        }
+    });    
+}
+
+function verificarFechasActividades(actividad)
+{
+    indicadorVer = "false";
+
+    if ($j("#busquedaActividades51").val() == "Actividades atrasadas")
+    {
+        fechaPlanificadaInvertida = 
+            actividad.anoPlanificado + actividad.mesPlanificado + actividad.diaPlanificado;
+
+        if (fechaPlanificadaInvertida < gFechaActualInvertida)
+        {
+            indicadorVer = "true";
+        }
+    }
+    else if ($j("#busquedaActividades51").val() == "Actividades del mes")
+    {
+        if (actividad.mesPlanificado == gMesActual)
+        {
+            indicadorVer = "true";
+        }
+    }
+    else if ($j("#busquedaActividades51").val() == "Actividades para hoy")
+    {
+        if (actividad.diaPlanificado == gDiaActual)
+        {
+            indicadorVer = "true";
+        }
+    }
+    return indicadorVer;
+}
+
+function filtrarAgenda(idPersonaFiltro)
+{
+    var indicadorVer = "";
+
+    if (idPersonaFiltro > 0)
+    {
+        desmarcarAgendaVista();
+
+        $j.each(gDatosBienes, function(clave1, datos1)  
+        {
+            if (datos1.CRMdapliw_actividad_agenda[0])
+            {
+                $j.each(datos1.CRMdapliw_actividad_agenda, function(clave2, datos2)  
+                {
+                    if (datos2.idEjecutor == idPersonaFiltro)
+                    {
+                        datos2.ver = "true";
+                    }
+                });
+            }
+        });    
+    }
+    else
+    {
+        if ($j("#busquedaActividades51").val() != "Todas")
+        {
+            marcarAgendaVista();
+        }
+        else
+        {
+            desmarcarAgendaVista();
+
+            $j.each(gDatosBienes, function(clave1, datos1)  
+            {
+                if (datos1.CRMdapliw_actividad_agenda[0])
+                {
+                    $j.each(datos1.CRMdapliw_actividad_agenda, function(clave2, datos2)  
+                    {   
+                        indicadorVer = "false";
+
+                        if (gPermiso > 3)
+                        {    
+                            indicadorVer = verificarFechasActividades(datos2);
+                        }
+                        else
+                        {
+                            if (datos2.idEjecutor == gIdUsuario)
+                            {
+                                indicadorVer = verificarFechasActividades(datos2);
+                            }
+                        }
+                        if (indicadorVer == "true")
+                        {
+                            datos2.ver = indicadorVer;
+                        }                  
+                    });
+                }
+            });
+        }
+    }
+}	
+
 // Eventos
 $j(document).ready(function()
 {
-    marcarBienesVista()
-
     $j("#propiedades40").click(function()
     {
         $j("#principal40").addClass('noVer');
@@ -2716,13 +3184,32 @@ $j(document).ready(function()
         window.scrollTo(0, 0);
     });
 
+    $j("#busquedaNombre50").autocomplete(
+    {
+        source: gBienesAutocomplete,
+        select: function( event, ui ) 
+        {   
+            idBienFiltro = ui.item.id;          
+            $j("#busquedaPropiedades50").addClass('noVer');
+            $j("#cerrarBusquedaPropiedades10").addClass('noVer');
+            $j("#busquedaPropiedades10").addClass('noVer');
+            filtrarPropiedades(idBienFiltro);
+            gBotonCerrar = "#cerrarPropiedadesFiltradas10";
+            mostrarBienes();
+            $j("#bienes60").removeClass('noVer');
+            $j(gBotonCerrar).removeClass('noVer');
+            $j("#publicarPropiedad10").removeClass('noVer');
+            window.scrollTo(0, 0);
+        }
+    });
+
+
     $j('#busquedaPropiedades10').click(function()
     {
         $j("#busquedaPropiedades50").addClass('noVer');
         $j("#cerrarBusquedaPropiedades10").addClass('noVer');
         $j("#busquedaPropiedades10").addClass('noVer');
-        desmarcarBienesVista();
-        filtrarPropiedades();
+        filtrarPropiedades(0);
         gBotonCerrar = "#cerrarPropiedadesFiltradas10";
         mostrarBienes();
         $j("#bienes60").removeClass('noVer');
@@ -2789,19 +3276,34 @@ $j(document).ready(function()
         selectActividades();
 		idFechas =
 			{
-				"idAno" : actividadesAno90,
-				"idSelectAno" : ano90,
-				"idMes" : actividadesMes90,
-				"idSelectMes" : mes90,
-				"idDia" : actividadesDia90,
-				"idSelectDia" : dia90,
-				"idHora" : actividadesHora90,
-				"idSelectHora" : hora90,
-				"idMinuto" : actividadesMinuto90,
-				"idSelectMinuto" : minuto90
+				"idAno" : "actividadesAno90",
+				"idSelectAno" : "ano90",
+                "idMensajesAno" : "mensajesAno90",
+
+				"idMes" : "actividadesMes90",
+				"idSelectMes" : "mes90",
+                "idMensajesMes" : "mensajesMes90",
+
+				"idDia" : "actividadesDia90",
+				"idSelectDia" : "dia90",
+                "idMensajesDia" : "mensajesDia90",
+
+				"idHora" : "actividadesHora90",
+				"idSelectHora" : "hora90",
+                "idMensajesHora" : "mensajesHora90",
+
+				"idMinuto" : "actividadesMinuto90",
+				"idSelectMinuto" : "minuto90",
+                "idMensajesAno" : "mensajesAno90",
+
+				"idMeridiano" : "actividadesMeridiano90",
+				"idSelectMeridiano" : "meridiano90",
+                "idMensajesMeridiano" : "mensajesMeridiano90",
+
 			};
 				
-        inicializarFecha(idFechas);
+        lineaFecha = inicializarFecha(idFechas);
+        $j("#fechaPlanifida90").html(lineaFecha);
         $j('#cerrarAgenda10').addClass('noVer');
         $j('#agregarActividad10').addClass('noVer');
         $j('#cerrarAgregarActividad10').removeClass('noVer');
@@ -2830,9 +3332,65 @@ $j(document).ready(function()
     {
         $j("#principal40").addClass('noVer');
         $j("#busquedaAgenda51").removeClass('noVer');
+
+        if (gPermiso > 1 && $j("#solicitudesDeCita51").hasClass('noVer') === false)
+        {
+            $j("#grupoTipoActividad51").removeClass('noVer');
+        }
+
+        if (gPermiso > 3 && $j("#grupoPersonaAgenda51").hasClass('noVer') === false)
+        {
+            $j("#grupoPersonaAgenda51").removeClass('noVer');
+        }
+
         $j("#cerrarBusquedaAgenda10").removeClass('noVer');
         $j("#busquedaAgenda10").removeClass('noVer');
         window.scrollTo(0, 0);
+    });
+
+    $j('#bienesSinActividad51').click(function()
+    {
+        desmarcarBienesVista();
+        bienesSinActividad();
+        gBotonCerrar = "#cerrarAgendaFiltrada10";
+        mostrarBienes();
+        $j("#bienes60").removeClass('noVer');
+        $j(gBotonCerrar).removeClass('noVer');
+        $j("#publicarPropiedad10").removeClass('noVer');
+        window.scrollTo(0, 0);
+    });
+
+    $j('#solicitudesDeCita51').click(function()
+    {
+        $j("#busquedaAgenda51").addClass('noVer');
+        $j("#cerrarBusquedaAgenda10").addClass('noVer');
+        $j("#busquedaAgenda10").addClass('noVer');
+        solicitudesDeCita();  
+        gBotonCerrar = "#cerrarAgendaFiltrada10";
+        mostrarAgenda();
+        $j("#agenda80").removeClass('noVer');
+        $j(gBotonCerrar).removeClass('noVer');
+        $j("#agregarActividad10").removeClass("noVer");
+        window.scrollTo(0, 0);    
+    });
+
+    $j("#personaAgenda51").autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        {   
+            idPersonaFiltro = ui.item.id;    
+            $j("#busquedaAgenda51").addClass('noVer');
+            $j("#cerrarBusquedaAgenda10").addClass('noVer');
+            $j("#busquedaAgenda10").addClass('noVer');
+            filtrarAgenda(idBienFiltro);  
+            gBotonCerrar = "#cerrarAgendaFiltrada10";
+            mostrarAgenda();
+            $j("#agenda80").removeClass('noVer');
+            $j(gBotonCerrar).removeClass('noVer');
+            $j("#agregarActividad10").removeClass("noVer");
+            window.scrollTo(0, 0);    
+        }
     });
 
     $j('#busquedaAgenda10').click(function()
@@ -2840,7 +3398,6 @@ $j(document).ready(function()
         $j("#busquedaAgenda51").addClass('noVer');
         $j("#cerrarBusquedaAgenda10").addClass('noVer');
         $j("#busquedaAgenda10").addClass('noVer');
-        desmarcarAgendaVista()
         filtrarAgenda();
         gBotonCerrar = "#cerrarAgendaFiltrada10";
         mostrarAgenda();
@@ -2861,21 +3418,9 @@ $j(document).ready(function()
         window.scrollTo(0, 0);
     });
 
-    $j('#bienesSinActividad51').click(function()
-    {
-        desmarcarBienesVista();
-        bienesSinActividad();
-        gBotonCerrar = "#cerrarAgendaFiltrada10";
-        mostrarBienes();
-        $j("#bienes60").removeClass('noVer');
-        $j(gBotonCerrar).removeClass('noVer');
-        $j("#publicarPropiedad10").removeClass('noVer');
-        window.scrollTo(0, 0);
-    });
-
     $j('.buscarCaptador60').autocomplete(
     {
-        source: <?= json_encode($captadoresAsc) ?>,
+        source: gPersonasAsc,
         select: function( event, ui ) 
         {   
             idBien = $j(this).attr("id").substring(17);
@@ -2917,7 +3462,7 @@ $j(document).ready(function()
 
     $j('#nombreCaptador100').autocomplete(
     {
-        source: <?= json_encode($captadoresAsc) ?>,
+        source: gPersonasAsc,
         select: function( event, ui ) 
         {   
             idBien = gIdPostActual;

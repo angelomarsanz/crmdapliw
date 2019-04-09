@@ -239,6 +239,7 @@ class PostsController extends MvcPublicController
                 'order' => 'Post.ID ASC, Postmeta.meta_key ASC, Postmeta.meta_id ASC'));            
                 
             $matrizBienes = [];
+            $bienesAutocomplete = [];
             foreach ($bienes as $bien)
             {
                 $matrizBienes[$bien->ID]['post_title'] = $bien->post_title;
@@ -247,6 +248,7 @@ class PostsController extends MvcPublicController
 
                 $matrizBienes[$bien->ID]['guid'] = $bien->guid;
                 $matrizBienes[$bien->ID]['post_status'] = $bien->post_status;
+                $bienesAutocomplete[] = ["label" => $bien->post_title, "value" => $bien->post_title, "id" => $bien->ID];
             }
 
             $contadorDatos = 0;
@@ -397,6 +399,7 @@ class PostsController extends MvcPublicController
             $this->set('bienes', $bienes);
             $this->set('propiedadesBienes', $propiedadesBienes);
             $this->set('matrizBienes', $matrizBienes);
+            $this->set('bienesAutocomplete', $bienesAutocomplete);
             $this->set('datosBienes', $datosBienes);
         }
     }
