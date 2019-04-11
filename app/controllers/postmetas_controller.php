@@ -44,7 +44,7 @@ class PostmetasController extends MvcPublicController
                             $indicadorError = 1;
                             $binnacle = 
                                 [
-                                    "novedad" => "No se pudo crear la actividad coordinar visita a la propiedad para el usuario " . $destinatario;
+                                    "novedad" => "No se pudo crear la actividad coordinar visita a la propiedad para el usuario " . $destinatario,
                                     "tipo_clase" => "controlador",
                                     "nombre_clase" => "Postmetas",
                                     "nombre_metodo" => "agregar_actividad"                             
@@ -329,4 +329,33 @@ class PostmetasController extends MvcPublicController
         }    
         exit(json_encode($jsondata, JSON_FORCE_OBJECT));
     }
+	public function desmarcar_notificaciones()
+	{
+		$this->autoRender = false;
+
+        $this->load_model("Binnacle");
+
+        if (isset($_POST["notificaciones"]))
+        {
+			foreach ($_POST["notificaciones"] as $notificaciones)
+			{
+				$object = $this->Postmeta->find_by_id($notificacionesBien);
+
+				$objetoActividad = json_decode($object->meta_value);
+
+				$objetoActividad->notificacion = "Vista";
+
+                $jsonObjetoActividad = json_encode($objetoActividad);      
+                $this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
+			}	
+		    $jsondata["satisfactorio"] = true;
+            $jsondata["mensaje"] = "El estatus de la notificación se actualizó exitosamente"; 
+		}
+		else
+		{
+			$jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = "No se pudo actualizar el estatus de la notificación"; 
+		}
+		exit(json_encode($jsondata, JSON_FORCE_OBJECT));
+	}
 }

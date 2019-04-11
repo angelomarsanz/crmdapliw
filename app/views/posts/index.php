@@ -13,7 +13,7 @@
                     alt="Inicio CRM" class="iconoMenu">
                 </a>
 
-                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="cerrarBusquedaPropiedades10" title="Cerrar">
+                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link noVer" id="cerrarBusquedaPropiedades10" title="Cerrar">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
                     alt="Cerrar búsqueda propiedades" class="iconoMenu">
                 </a>
@@ -33,7 +33,7 @@
 					alt="Publicar propiedad" class="iconoMenu">
 				</a>
 
-                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="cerrarBusquedaAgenda10" title="Cerrar">
+                <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link noVer" id="cerrarBusquedaAgenda10" title="Cerrar">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
                     alt="Cerrar búsqueda agenda" class="iconoMenu">
                 </a>
@@ -107,7 +107,7 @@
 					<h1 class="letraAzul">CRM</h1>
 				</div>
 				<div class="col-md-4">
-					<div class="input-group mb-3" id="grupoVista20>
+					<div class="input-group mb-3" id="grupoVista20">
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="vistas20">Vistas</label>
 						</div>
@@ -121,6 +121,13 @@
 						<div id="mensajesVistas20" class="mensajesUsuarios"></div>
 					</div>
 				</div>
+                <div class="col-md-4 noVer" id="notificaciones20">
+					<button title="Notificaciones" class="btn btn-link noVer" id="verNotificaciones20">
+					    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/bell.svg" ?>
+					    alt="Ver notificaciones" class="icono">
+				    </button>
+                    <spam id="cantidadNotificaciones20"></spam>
+				</div>
 			</div>
         </div>
         
@@ -130,26 +137,35 @@
  
 		<!-- div con sufijo 40 -->
         <div class="container formulario" id="principal40">
+            <br />
+            <br />
+            <br />
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-4 col-md-4">
 					<button title="Propiedades" class="btn btn-link" id="propiedades40">
-						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?>
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/tmbr-soloicon.svg" ?>
 							alt="Propiedades" class="iconoPrincipal">
 					</button>
 				</div>
-				<div class="col-md-4">
+				<div class="col-4 col-md-4">
 					<button title="Agenda" class="btn btn-link" id="agenda40">
-						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/clock.svg" ?>
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/calendar.svg" ?>
 							alt="Agenda" class="iconoPrincipal">
 					</button>
 				</div>
-				<div class="col-md-4">
+				<div class="col-4 col-md-4">
 					<button title="Personas" class="btn btn-link" id="personas40">
 						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/people.svg" ?>
 							alt="Personas" class="iconoPrincipal">
 					</button>
 				</div>
 			</div>
+            <?php
+                for ($i = 1; $i <= 100; $i++) 
+                {
+                    echo "<br />";
+                }
+            ?>
 		</div>
  
         <!-- div con sufijo 50 -->
@@ -205,7 +221,7 @@
 				</div> 
             </div>
             <?php
-                for (i = 1; i <= 100; i++) 
+                for ($i = 1; $i <= 100; $i++) 
                 {
                     echo "<br />";
                 }
@@ -241,7 +257,7 @@
 				</div>
             </div>
             <?php
-                for (i = 1; i <= 100; i++) 
+                for ($i = 1; $i <= 100; $i++) 
                 {
                     echo "<br />";
                 }
@@ -249,13 +265,13 @@
         </div>
 				 
         <!-- div con sufijo 60 -->
-        <div class="container formulario" id="bienes60">
+        <div class="container formulario noVer" id="bienes60">
             <h2 class="letraAzul">Propiedades</h2>
             <br />
             <div class="row" id="cicloBienes60">
             </div>
             <?php
-                for (i = 1; i <= 100; i++) 
+                for ($i = 1; $i <= 100; $i++) 
                 {
                     echo "<br />";
                 }
@@ -555,7 +571,7 @@
 				</div> 
 			</div>
 			<?php
-				for (i = 1; i <= 100; i++) 
+				for ($i = 1; $i <= 100; $i++) 
 				{
 					echo "<br />";
 				}
@@ -608,7 +624,7 @@
 
 			</div>
 			<?php
-				for (i = 1; i <= 100; i++) 
+				for ($i = 1; $i <= 100; $i++) 
 				{
 					echo "<br />";
 				}
@@ -742,7 +758,7 @@
 
 			</div>
 			<?php
-				for (i = 1; i <= 100; i++) 
+				for ($i = 1; $i <= 100; $i++) 
 				{
 					echo "<br />";
 				}
@@ -774,24 +790,23 @@ var gIdUsuario = <?= $idUsuario ?>;
 var gNombreUsuario = "<?= $nombreUsuario ?>";
 var gRoles = <?= json_encode($roles) ?>;
 var gPermiso = <?= $permiso ?>;
-var gCadenaRoles = <?= $cadenaRoles ?>;
-var gUsuarios = <?= $usuarios ?>;
+var gCadenaRoles = "<?= $cadenaRoles ?>";
+var gUsuarios = <?= json_encode($usuarios) ?>;
 var gPersonasAsc = <?= json_encode($personasAsc) ?>;
 var gIdPostActual = "";
 var gPosicionAnterior = "";
-var gVistaPreferida = <?= $vistaPreferida ?>;
-var gfechaActual = new Date();
-var gBotonCerrar = "";
-
-console.log(gFechaActual);
-
-var gAnoActual = gfechaActual.getFullYear(); 
-var gMesActual = gfechaActual.getMonth()+1;
-var gDiaActual = gfechaActual.getDate();
+var gVistaPreferida = "<?= $vistaPreferida ?>";
+var gFechaActual = new Date();
+var gAnoActual = gFechaActual.getFullYear(); 
+var gMesActual = gFechaActual.getMonth()+1;
+var gDiaActual = gFechaActual.getDate();
 var gFechaActualInvertida = 
 	gAnoActual + 
 	(gMesActual < 10 ? '0' : '') + gMesActual + 
 	(gDiaActual < 10 ? '0' : '') + gDiaActual;
+
+var gBotonCerrar = "";
+var gNotificaciones = <?= $notificaciones ?>;
 
 // Funciones  
 function testFunction()
@@ -847,17 +862,17 @@ function refrescarMenu()
 function marcarBienesVista()
 {
    $j.each(gBienes, function(clave, datos)  
-    {
+   {
         gBienes[clave].ver = "true";
-    }
+   });
 }
 
 function desmarcarBienesVista()
 {
    $j.each(gBienes, function(clave, datos)  
-    {
+   {
         gBienes[clave].ver = "false";
-    }
+   });
 }
 
 function filtrarPropiedades(idBienFiltro)
@@ -905,7 +920,7 @@ function filtrarPropiedades(idBienFiltro)
 
 	        $j.each(gBienes, function(clave1, datos1)  
 	        {
-		        if j$("#busquedaHabitaciones50").val() > 0)
+		        if (j$("#busquedaHabitaciones50").val() > 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_bedrooms[0] == j$("#busquedaHabitaciones50").val())
 			        {
@@ -913,7 +928,7 @@ function filtrarPropiedades(idBienFiltro)
 			        }
 		        }
 			
-		        if j$("#busquedaBanos50").val() > 0)
+		        if (j$("#busquedaBanos50").val() > 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_bathrooms[0] == j$("#busquedaBanos50").val())
 			        {
@@ -921,7 +936,7 @@ function filtrarPropiedades(idBienFiltro)
 			        }
 		        }
 				
-		        if j$("#busquedaGarajes50").val() > 0)
+		        if (j$("#busquedaGarajes50").val() > 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_garage[0] == j$("#busquedaGarajes50").val())
 			        {
@@ -929,7 +944,7 @@ function filtrarPropiedades(idBienFiltro)
 			        }
 		        }
 
-		        if j$("#busquedaArea50").val() > 0)
+		        if (j$("#busquedaArea50").val() > 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_garage[0] >= j$("#busquedaArea50").val())
 			        {
@@ -939,11 +954,11 @@ function filtrarPropiedades(idBienFiltro)
 		
 		        indicadorPrecio = 0;
 		
-		        if j$("#busquedaPrecioMinimo50").val() > 0)
+		        if (j$("#busquedaPrecioMinimo50").val() > 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_price[0] >= j$("#busquedaPrecioMinimo50").val())
 			        {
-				        if j$("#busquedaPrecioMaximo50").val() > 0)
+				        if (j$("#busquedaPrecioMaximo50").val() > 0)
 				        {
 					        if (gDatosBienes[datos1.ID].REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
 					        {
@@ -958,7 +973,7 @@ function filtrarPropiedades(idBienFiltro)
 			        }
 		        }
 		
-		        if j$("#busquedaPrecioMaximo50").val() > 0 && indicadorPrecio == 0)
+		        if (j$("#busquedaPrecioMaximo50").val() > 0 && indicadorPrecio == 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_price[0] <= j$("#busquedaPrecioMaximo50").val())
 			        {
@@ -1119,7 +1134,7 @@ function guardarActividad()
 
         $j.each(gUsuarios, function(clave, datos)  
         {
-            if (datos.CRMdapliw_roles.includes("Gestor de negocios")
+            if (datos.CRMdapliw_roles.includes("Gestor de negocios"))
             {
                 destinatarios.push(clave);
             }
@@ -1363,7 +1378,7 @@ function mostrarBienes()
 						bienes += 
 							"<td>" +
 								"<a href=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " title='Ver foto'>" +
-								"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera.svg' ?>" +
+								"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera-slr.svg' ?>" +
 								" alt='Ver foto' class='icono'>" +
 								"</a>" + 
 							"</td>";
@@ -1431,7 +1446,7 @@ function mostrarBienes()
 			{
 				bienes += 
 					"<div class='col-md-4 mb-3'>" +
-						"<div class='card detalleBienes60'>" +
+						"<div class='card detalleBienes60'>";
 											
 							if (gVistaPreferida == "Mosaicos con imágenes")
 							{
@@ -1451,9 +1466,9 @@ function mostrarBienes()
 								{
 									bienes += 
 										"<a href=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " title='Ver foto'>" +
-										"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera.svg' ?>" +
+										"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera-slr.svg' ?>" +
 										" alt='Ver foto' class='icono'>" +
-										"</a>" + 
+										"</a>";
 								}
 								else
 								{
@@ -1577,7 +1592,6 @@ function generarLineaLista(clave, datos, contador)
 function mostrarAgendaLista(tipoContenido, valor)
 {
     var notificaciones = [];
-	var notificacionesBien = [];
 	var colorAlerta = "";
 	var contador = 0;
 	var encabezadoTabla = 
@@ -1597,7 +1611,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 	var pieTabla = 
 				"</tbody>" +
 			"</table>" +
-		"</div> +
+		"</div>" +
 	"</div>";
 	
 	if (tipoContenido == "propiedad")
@@ -1612,9 +1626,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 		contador = 1;
 			
 		if (gDatosBienes[valor].CRMdapliw_actividad_agenda)
-		{
-			notificacionesBien = [];
-						
+		{					
 			arregloActividades = gDatosBienes[valor].CRMdapliw_actividad_agenda.sort(function(a,b)
 			{
 				return (a.fechaInvertida - b.fechaInvertida);
@@ -1626,7 +1638,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 				{
 					if (datos.notificacion == "No vista" && datos.idEjecutor == gIdUsuario)						
 					{
-						notificacionesBien.push(datos.posicionOriginal);
+						notificaciones.push(datos.id);
 					}
 
                     if (gPermiso > 3)
@@ -1647,17 +1659,7 @@ function mostrarAgendaLista(tipoContenido, valor)
                         }
                     }                             
 				}
-			});	
-			if (notificacionesBien[0])
-			{
-				objetoNotificacion =
-					{
-						"idBien" : datos1.ID,
-						"notificacionesBien" : notificacionesBien
-					};
-					
-				notificaciones.push(objetoNotificacion);
-			}			
+			});			
 		}
 	}
 	else if (tipoContenido == "Notificaciones")
@@ -1672,8 +1674,6 @@ function mostrarAgendaLista(tipoContenido, valor)
 
 		$j.each(gBienes, function(clave1, datos1) 
 		{		
-			notificacionesBien = [];
-			
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
 			{
 				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.sort(function(a,b)
@@ -1687,7 +1687,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 					{
 						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
 						{
-							notificacionesBien.push(datos2.posicionOriginal);
+							notificaciones.push(datos2.id);
 							
 							lineaLista = generarLineaLista(clave2, datos2, contador);
 							
@@ -1697,16 +1697,6 @@ function mostrarAgendaLista(tipoContenido, valor)
 					}
 				});	
 			}
-			if (notificacionesBien[0])
-			{
-				objetoNotificacion =
-					{
-						"idBien" : datos1.ID,
-						"notificacionesBien" : notificacionesBien
-					};
-					
-				notificaciones.push(objetoNotificacion);
-			}		
 		});
 	}
 	else 
@@ -1746,9 +1736,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 		contador = 1;
 
 		$j.each(gBienes, function(clave1, datos1) 
-		{	
-			notificacionesBien = [];
-		
+		{		
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
 			{
 				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.sort(function(a,b)
@@ -1762,7 +1750,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 					{
 						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
 						{
-							notificacionesBien.push(datos2.posicionOriginal);
+							notificaciones.push(datos2.id);
 						}
 						
 						lineaLista = generarLineaLista(clave2, datos2, contador);
@@ -1771,16 +1759,6 @@ function mostrarAgendaLista(tipoContenido, valor)
 						contador++;
 					}
 				});
-				if (notificacionesBien[0])
-				{
-					objetoNotificacion =
-						{
-							"idBien" : datos1.ID,
-							"notificacionesBien" : notificacionesBien
-						};
-						
-					notificaciones.push(objetoNotificacion);
-				}				
 			}
 		});
 	}
@@ -1793,8 +1771,8 @@ function mostrarAgendaLista(tipoContenido, valor)
 
     resultado = 
         {
-            "agenda" = agenda,
-            "notificaciones" = notificaciones
+            "agenda" : agenda,
+            "notificaciones" : notificaciones
         }
 
 	return resultado;
@@ -1833,7 +1811,7 @@ function mostrarImagenCabecera(valor)
                 "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
                     "<div class='card'>" +
 						"<a href=" + gDatosBienes[valor]._thumbnail_id[0].valor + " title='Ver foto'>" +
-						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera.svg' ?>" +
+						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera-slr.svg' ?>" +
 						" alt='Ver foto' class='icono'>" +
 						"</a>" + 
                     "</div>" +
@@ -1918,7 +1896,7 @@ function crearMosaicos(clave, datos)
     mosaico += 
         lineaFecha + 
                             "</div>" +
-                        "</div>
+                        "</div>" +
                             
                         "<div class='row'>" +
                             "<div class='col-md-3'>" +
@@ -1958,7 +1936,6 @@ function crearMosaicos(clave, datos)
 function mostrarAgendaMosaicos(tipoContenido, valor)
 {
     var notificaciones = [];
-	var notificacionesBien = [];
 
 	if (tipoContenido == "propiedad")
 	{
@@ -1976,8 +1953,6 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 
         if (gDatosBienes[valor].CRMdapliw_actividad_agenda)
         {
-			notificacionesBien = [];
-
             arregloActividades = gDatosBienes[idPost].CRMdapliw_actividad_agenda.sort(function(a,b)
             {
                 return (a.fechaInvertida - b.fechaInvertida);
@@ -1989,7 +1964,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 				{
 					if (datos.notificacion == "No vista" && datos.idEjecutor == gIdUsuario)						
 					{
-						notificacionesBien.push(datos.posicionOriginal);
+						notificaciones.push(datos.id);
 					}
 
                     if (gPermiso > 3)
@@ -2005,17 +1980,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
                             agenda += mosaico;                        }
                     }                             
 				}
-            });
-			if (notificacionesBien[0])
-			{
-				objetoNotificacion =
-					{
-						"idBien" : datos1.ID,
-						"notificacionesBien" : notificacionesBien
-					};
-					
-				notificaciones.push(objetoNotificacion);
-			}				
+            });		
         }
     }
 	else if (tipoContenido == "Notificaciones")
@@ -2031,9 +1996,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
         agenda += imagenCabecera;
 
 		$j.each(gBienes, function(clave1, datos1) 
-		{		
-			notificacionesBien = [];
-			
+		{				
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
 			{
 				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.sort(function(a,b)
@@ -2047,22 +2010,12 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 					{
 						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
 						{
-							notificacionesBien.push(datos2.posicionOriginal);
+							notificaciones.push(datos2.id);
                         }
                         mosaico = crearMosaicos(clave, datos);
                         agenda += mosaico;
                     }
                 });
-			    if (notificacionesBien[0])
-			    {
-				    objetoNotificacion =
-					    {
-						    "idBien" : datos1.ID,
-						    "notificacionesBien" : notificacionesBien
-					    };
-					
-				    notificaciones.push(objetoNotificacion);
-			    }		
             }
         });    
     }
@@ -2106,9 +2059,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
         agenda += imagenCabecera;
 
 		$j.each(gBienes, function(clave1, datos1) 
-		{	
-			notificacionesBien = [];
-		
+		{			
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
 			{
 				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.sort(function(a,b)
@@ -2122,23 +2073,13 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 					{
 						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
 						{
-							notificacionesBien.push(datos2.posicionOriginal);
+							notificaciones.push(datos2.id);
 						}
 						
                         mosaico = crearMosaicos(clave, datos);
                         agenda += mosaico;
 					}
 				});
-				if (notificacionesBien[0])
-				{
-					objetoNotificacion =
-						{
-							"idBien" : datos1.ID,
-							"notificacionesBien" : notificacionesBien
-						};
-						
-					notificaciones.push(objetoNotificacion);
-				}				
 			}
 		});
     }
@@ -2152,8 +2093,8 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 
     resultado = 
         {
-            "agenda" = agenda,
-            "notificaciones" = notificaciones
+            "agenda" : agenda,
+            "notificaciones" : notificaciones
         }
 
 	return resultado;
@@ -2183,64 +2124,69 @@ function mostrarAgenda(tipoContenido, valor)
 		resultado = mostrarAgendaMosaicos(tipoContenido, valor);
 	}
 
-    jsonNotificaciones = resultado.notificaciones;
+	if (resultado.notificaciones[0])
+	{
+		jsonNotificaciones = resultado.notificaciones;
 
-    $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'desmarcar_notificaciones')) ?>", 
-        jsonNotificaciones, null, "json")          
-    .done(function(response) 
-    {
-        if (response.satisfactorio)
-        {
-			$j.each(jsonNotificaciones, function(clave1, datos1)  
+		$j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'desmarcar_notificaciones')) ?>", 
+			jsonNotificaciones, null, "json")          
+		.done(function(response) 
+		{
+			if (response.satisfactorio)
 			{
-    		    $j.each(gDatosBienes[dato1.idBien].CRMdapliw_actividad_agenda, function(clave2, datos2)  
-			    {
-                    if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
+				$j.each(jsonNotificaciones, function(clave1, datos1)  
+				{
+					$j.each(gDatosBienes[dato1.idBien].CRMdapliw_actividad_agenda, function(clave2, datos2)  
 					{
-                        gDatosBienes[dato1.idBien].CRMdapliw_actividad_agenda[clave2].notificacion = "Vista";
-                    }
-                });          
+						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
+						{
+							gDatosBienes[dato1.idBien].CRMdapliw_actividad_agenda[clave2].notificacion = "Vista";
+						}
+					});  
+                });        
+					
+				borrarMensajesAnteriores();
+				$j("#agenda80").removeClass("noVer");
+				$j(gBotonCerrar).removeClass("noVer");
+				$j("#agregarActividad10").removeClass("noVer");
+				window.scrollTo(0, 0);           
+			} 
+			else 
+			{
+				mensajesUsuario =
+				"<div class='alert alert-danger alert-dismissible'>" +
+					"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+					"<strong>No se pudo acceder a la información</strong>" +
+				"</div>"; 
 
-            mensajesUsuario =
-                "<div class='alert alert-success alert-dismissible'>" +
-                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>" + response.mensaje + "</strong>" +
-                "</div>";
+				borrarMensajesAnteriores();
 
-            borrarMensajesAnteriores();
+				$j("#mensajesUsuario30").html(mensajesUsuario);
+				window.scrollTo(0, 0);        
+            }
+		})
+		.fail(function(jqXHR, textStatus, errorThrown) 
+		{
+			mensajesUsuario =
+				"<div class='alert alert-danger alert-dismissible'>" +
+					"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+					"<strong>¡ Ocurrió un error en el servidor. No se pudo acceder a la información</strong>" +
+				"</div>"; 
 
-          	$j("#mensajesUsuario30").html(mensajesUsuario);
-            $j("#agenda80").removeClass("noVer");
-            $j(gBotonCerrar).removeClass("noVer");
-            $j("#agregarActividad10").removeClass("noVer");
-            window.scrollTo(0, 0);           
-        } 
-        else 
-        {
-            mensajesUsuario =
-            "<div class='alert alert-danger alert-dismissible'>" +
-                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong>" + response.mensaje + "</strong>" +
-            "</div>"; 
+				borrarMensajesAnteriores();
 
-            borrarMensajesAnteriores();
-
-          	$j("#mensajesUsuario30").html(mensajesUsuario);
-            window.scrollTo(0, 0);        }
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) 
-    {
-        mensajesUsuario =
-            "<div class='alert alert-danger alert-dismissible'>" +
-                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong>¡ Ocurrió un error en el servidor. Los datos no se pudieron guardar !</strong>" +
-            "</div>"; 
-
-            borrarMensajesAnteriores();
-
-          	$j("#mensajesUsuario30").html(mensajesUsuario);
-            window.scrollTo(0, 0);    
-    });
+				$j("#mensajesUsuario30").html(mensajesUsuario);
+				window.scrollTo(0, 0);    
+		});
+	}
+	else
+	{
+		borrarMensajesAnteriores();
+		$j("#agenda80").removeClass("noVer");
+		$j(gBotonCerrar).removeClass("noVer");
+		$j("#agregarActividad10").removeClass("noVer");
+		window.scrollTo(0, 0);  
+	}	
 }
 	
 function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje)
@@ -2558,8 +2504,8 @@ function guardarPersona(indicadorCheckbox)
                     "id" : response.idUser
                 };              
 
-            gPersonas.push(nuevoCliente);
-            gPersonas.sort(function(a,b)
+            gPersonasAsc.push(nuevoCliente);
+            gPersonasAsc.sort(function(a,b)
             {
                 return (a.label - b.label);
             });        
@@ -2975,7 +2921,8 @@ function actualizarVistaPreferida()
         });  
     }        
 }
-public function selectActividades();
+
+function selectActividades()
 {
     if (gCadenaRoles == "Administrador")
     {
@@ -3484,9 +3431,26 @@ function filtrarAgenda(idPersonaFiltro)
 	return filtro;
 }	
 
+function mostrarNotificaciones()
+{
+    if (gNotificaciones > 0) 
+    {
+        $j("#notificaciones20").removeClass('noVer');
+        $j("#cantidadNotificaciones20").html(gNotificaciones);
+    }
+}
+
 // Eventos
 $j(document).ready(function()
 {
+    mostrarNotificaciones();
+
+    $j("#verNotificaciones20").click(function()
+    {
+        $j("#principal40").addClass('noVer');
+        mostrarAgenda("Notificaciones", 0);
+    });
+
     $j("#propiedades40").click(function()
     {
         $j("#principal40").addClass('noVer');
@@ -3772,7 +3736,7 @@ $j(document).ready(function()
 
     $j('#nombreCliente100').autocomplete(
     {
-        source: gPersonas,
+        source: gPersonasAsc,
         select: function( event, ui ) 
         { 
             idBien = gIdPostActual;  
@@ -3807,7 +3771,7 @@ $j(document).ready(function()
         eliminarComprador(idCompradorPromotor);
     });
 
-    $j("#vistas20").chanqe(function()
+    $j("#vistas20").change(function()
     {
         gVistaPreferida = $j("#vistas20").val();
 		actualizarVistaPreferida();

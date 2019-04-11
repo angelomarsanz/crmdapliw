@@ -27,9 +27,10 @@ class PostsController extends MvcPublicController
                 'conditions' => array(
                     // 'User.ID' => array(32),
                     'Usermeta.meta_key' => array("first_name", "last_name", "CRMdapliw_roles", "CRMdapliw_promotor_cliente", "CRMdapliw_captador_propietario", 
-                        "CRMdapliw_estatus")),
+                        "CRMdapliw_estatus", "CRMdapliw_vista_preferida")),
                 'order' => 'User.ID ASC, Usermeta.meta_key ASC, Usermeta.umeta_id ASC')); 
 
+            $vistaPreferida = "Lista sin imágenes";
             foreach ($userMetas as $userMeta)
             {
                 if ($userMeta->ID == $usuarioConectado->id)
@@ -37,6 +38,10 @@ class PostsController extends MvcPublicController
                     if ($userMeta->meta_key == "CRMdapliw_roles")
                     {
                         $roles = json_decode($userMeta->meta_value, true);
+                    }
+                    elseif ($userMeta->meta_key == "CRMdapliw_roles")
+                    {
+                        $vistaPreferida = $userMeta->meta_value;
                     }
                 }
             }
@@ -211,7 +216,7 @@ class PostsController extends MvcPublicController
             }
             if (isset($personas[0]["label"]))
             {
-                $personasAsc = $this->array_orderby($propietarios, 'label', SORT_ASC); 
+                $personasAsc = $this->array_orderby($personas, 'label', SORT_ASC); 
             }
             else
             {
@@ -296,6 +301,7 @@ class PostsController extends MvcPublicController
             $keyActual = 0;
             $idPostAnterior = 0;
             $datosBienes = [];
+			$notificaciones = 0;
             foreach ($propiedadesBienes as $propiedadesBien)
             {
                 if ($contadorDatos == 0)
@@ -328,6 +334,11 @@ class PostsController extends MvcPublicController
                     $arregloActividad["posicionOriginal"] = $posicion;
                     $arregloActividad["fechaInvertida"] = 
                         $arregloActividad["anoPlanificado"] . $arregloActividad["mesPlanificado"] . $arregloActividad["diaPlanificado"];
+
+                    if ($arregloActividad["notificacion"] == "No vista")
+                    {
+                        $notificaciones++;
+                    }
                     
                     /* Para pruebas
                     var_dump($arregloActividad); 
@@ -390,17 +401,19 @@ class PostsController extends MvcPublicController
             $this->set("idUsuario", $idUsuario);
             $this->set("nombreUsuario", $nombreUsuario);
             $this->set("roles", $roles);
+            $this->set("vistaPreferida", $vistaPreferida);
             $this->set("permiso", $permiso);
             $this->set("cadenaRoles", $cadenaRoles);	
             $this->set("personasAsc", $personasAsc);
             $this->set("userMetas", $userMetas);
             $this->set("usuarios", $usuarios);           
-            $this->set('posts', $posts);
-            $this->set('bienes', $bienes);
-            $this->set('propiedadesBienes', $propiedadesBienes);
-            $this->set('matrizBienes', $matrizBienes);
-            $this->set('bienesAutocomplete', $bienesAutocomplete);
-            $this->set('datosBienes', $datosBienes);
+            $this->set("posts", $posts);
+            $this->set("bienes", $bienes);
+            $this->set("propiedadesBienes", $propiedadesBienes);
+            $this->set("matrizBienes", $matrizBienes);
+            $this->set("bienesAutocomplete", $bienesAutocomplete);
+            $this->set("datosBienes", $datosBienes);
+            $this->set("notificaciones", $notificaciones);
         }
     }
 

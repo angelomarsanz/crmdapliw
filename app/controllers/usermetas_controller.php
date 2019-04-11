@@ -32,7 +32,7 @@ class UsermetasController extends MvcPublicController
 			}
 			else
 			{
-				$usermeta = ['user_id' => $_POST['idUsuario'], 'meta_key' => 'CRMdapliw_vista_preferida', 'meta_value' => $_POST["vistaPreferida"])];
+				$usermeta = ['user_id' => $_POST['idUsuario'], 'meta_key' => 'CRMdapliw_vista_preferida', 'meta_value' => $_POST["vistaPreferida"]];
 				$idUsermeta = $this->Usermeta->insert($usermeta);
 
                 if ($idUsermeta == 0)
@@ -61,4 +61,4 @@ class UsermetasController extends MvcPublicController
 		}
 		exit(json_encode($jsondata, JSON_FORCE_OBJECT));	
 	}
-
+}
