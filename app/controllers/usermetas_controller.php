@@ -13,10 +13,10 @@ class UsermetasController extends MvcPublicController
 		
 		$jsondata = [];
 		
-		// Descomentar solo para pruebas
+		/* Descomentar solo para pruebas
 			$_POST["vistaPreferida"] = "Lista sin imágenes";
 			$_POST["idUsuario"] = 41;
-		//
+		*/
 		
 		if (isset($_POST["vistaPreferida"]))
 		{
@@ -27,8 +27,9 @@ class UsermetasController extends MvcPublicController
 			
 			if (isset($preferenciaVista))
 			{
-				$this->Usermeta->update($preferenciaVista->umeta_id, array('meta_value' =>
-					$_POST["vistaPreferida"]));
+				$this->Usermeta->update($preferenciaVista->umeta_id, array('meta_value' => $_POST["vistaPreferida"]));
+				$jsondata["satisfactorio"] = true;
+				$jsondata["mensaje"] = "La preferencia de vista se actualizó satisfactoriamente";	
 			}
 			else
 			{
@@ -46,6 +47,8 @@ class UsermetasController extends MvcPublicController
                         ];
 
                     $idBinnacle = $this->Binnacle->insert($binnacle);
+			        $jsondata["satisfactorio"] = false;
+                    $jsondata["mensaje"] = "No se pudo actualizar la preferencia de vista";
 				}
 				else
 				{
@@ -57,7 +60,7 @@ class UsermetasController extends MvcPublicController
 		else
 		{
 			$jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "No se pudo actualizar la preferencia de vista";
+            $jsondata["mensaje"] = "No se pudo actualizar la preferencia de vista. Datos recibidos incorrectos";
 		}
 		exit(json_encode($jsondata, JSON_FORCE_OBJECT));	
 	}

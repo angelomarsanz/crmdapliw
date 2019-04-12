@@ -1,20 +1,29 @@
 .iconoPrincipal
 {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
 }
+
 .icono 
 {
   width: 16px;
   height: 16px;
   margin-right: 4px;
 }
+
 .iconoMenu 
 {
   width: 32px;
   height: 32px;
   margin-right: 8px;
 }
+
+.fotoLista
+{
+  height: 100px;
+  margin-right: 4px;
+}
+
 .noVer
 {
   display: none;

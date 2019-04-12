@@ -339,7 +339,7 @@ class PostmetasController extends MvcPublicController
         {
 			foreach ($_POST["notificaciones"] as $notificaciones)
 			{
-				$object = $this->Postmeta->find_by_id($notificacionesBien);
+				$object = $this->Postmeta->find_by_id($notificaciones);
 
 				$objetoActividad = json_decode($object->meta_value);
 
