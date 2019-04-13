@@ -1,0 +1,124 @@
+Listo. 1) Agenda para equipo de trabajo CRM:
+Cada rol posee actividades específicas en el CRM, según el Rol que posea el usuario
+(Administrador, Supervisor, Gestor de Negocios, Captador, Asesor de Gestión Inmobiliaria), para lo
+cual el sistema debe presentar las herramientas para brindar a cada miembro según el rol que tenga
+y el caso que se presente. 
+
+Pendiente. La agenda, debe permitir organizar actividades propias de la captación del inmueble para aquellos
+asesores que sean captadores, es decir, que el captador llevará la agenda de actividades por
+inmueble captado, así mismo, la gestión de negocios, debe acceder a la agenda del inmueble y
+poder coordinar actividades legales y administrativas del mismo. Para lo cual se describen las
+actividades principales de cada rol de la agenda: (Trabajando en ello)
+
+Pendiente. 1.1 El Captador: es el asesor responsable de captar el inmueble, éste puede acceder a la
+publicación del inmueble, puede modificar los datos de dicha publicación y coordinar
+actividades de promoción del mismo a través de la agenda del inmueble, es decir, el captador
+es el único asesor que puede actualizar cambios propios del inmueble y datos del propietario,
+quedando cada actualización o publicación nueva del inmueble en estado de “Pendiente por
+aprobación”, para que el supervisor apruebe los cambios y estos queden actualizados.
+
+Este usuario No está autorizado para:
+
+Listo. a- Ver o modificar datos de clientes compradores de otros asesores.
+
+Listo. b- Coordinar y agregar actividades de ámbito legal o cargar documentos del inmueble en el
+CRM. 
+
+Pendiente. 1.2 Gestión de Negocios: es el equipo de administración y departamento legal que gestiona y
+actualiza cualquier documentación, planifica firmas de compra-venta, arrendamientos y
+acuerdos en una operación. Para ello, la Gestión de Negocios puede a través de su usuario,
+agendar actividades administrativas y legales de cada inmueble captado por todos los asesores
+captadores, actualizar datos del propietario del inmueble y precio.
+
+Este usuario No está autorizado para:
+
+Listo. a- Reasignar un inmueble a otro captador. 
+
+Pendiente. 1.3 Asesor de Gestión Inmobiliaria (vendedor): es el usuario encargado de promover todos los
+inmuebles disponibles en la empresa, hayan sido o no captados por el mismo. Para ello, la
+agenda debe poseer una sección para programar actividades y realizar seguimiento por cliente
+comprador/arrendador, como por ejemplo: llamar y completar datos de sus clientes, registrar,
+consultar y actualizar datos de sus clientes, agregar necesidades de sus clientes en cuanto
+a inmuebles, programar recordatorios y citas con sus clientes.
+
+NOTA: cuando hablamos de agregar necesidades de sus clientes en cuanto a inmuebles,
+hacemos referencia a poder guardar datos cómo:
+
+- Operación: Comprar / Alquilar o Vender.
+- Tipo de inmueble: Casa, Apartamento, Oficina, Local comercial, Galpón industrial, Terreno.
+- Características: N° de Habitaciones, Baños, Metraje, Ubicación.
+- Precio: hasta $60.000, entre: $30.000 y $60.000.
+
+Listo. El Asesor de Gestión Inmobiliaria puede acceder a búsquedas de todos los inmuebles
+disponibles en la empresa y que hayan sido captados o no por él, es decir, que éste usuario
+puede solicitar a través de un Botón o CTA, una cita para mostrar algún inmueble incluso si el
+mismo no ha sido captado por dicho asesor, para lo cual el CRM enviará una notificación a
+gestión de negocios y al captador para coordinar la cita solicitada y creará una actividad en la
+agenda del captador de coordinar cita para mostrar inmueble al asesor: Pedro Perez.
+(opcional), así como también consultar datos del inmueble y asesor captador.
+
+Este usuario No está autorizado para:
+
+Listo. a- Reasignar su cliente a otro asesor.
+
+Listo. b- Consultar o modificar datos del inmueble o propietarios de inmuebles que no han sido
+captados por el Usuario.
+
+Listo. IMPORTANTE: la información detallada anteriormente evidencia que el Rol de Captador y del
+Asesor de Gestión Inmobiliaria es el mismo usuario, sólo que éste podrá consultar, modificar y
+agregar datos sólo de los inmuebles captados por él mismo y con el resto de inmuebles
+captados por otros usuarios, sólo podrá consultar las características y precio de dichos
+inmuebles (excluyendo los datos del propietario), así como también, solicitar cita para
+mostrarlos a sus clientes.
+
+2) Generalidades:
+Pendiente. Los reportes del CRM deben incluir:
+Citas solicitadas para cada inmueble, no debe faltar los datos del asesor, cliente,
+propiedad y captador.
+
+Pendiente. Actividades en la agenda del asesor abiertas y cerradas, las cuales se deben poder
+filtrar por pendientes, atrasadas, cerradas y abiertas.
+
+Listo. El responsable de un inmueble es su captador.
+Cada asesor puede agendar actividades en un inmueble, las cuales serán las que podrá visualizar,
+modificar, cerrar o reprogramar.
+
+Pendiente. Todas las actividades de usuarios en la agenda deben ser registradas y estar disponibles para un
+reporte.
+
+Pendiente. El Asesor de Gestión Inmobiliaria que promueve no podrá modificar, eliminar o alterar la información
+de un inmueble captado por otro asesor.
+
+Pendiente. El sistema debe mantener en las consultas y/o reportes la relación: Asesor – Propiedad - Cliente.
+
+Pendiente. El captador y el usuario de Gestión de Negocios pueden establecer o modificar el precio del
+Inmueble, en caso de ser el captador, éste quedará pendiente por aprobación.
+
+Pendiente. 3) Agregar foto de perfil del usuario:
+Incorporar una foto tipo avatar en el CRM.
+
+Listo. 4) Agregar búsqueda con filtro por dependencia y características de un inmueble:
+El CRM debe realizar una consulta del inventario de inmuebles y mostrar una lista de inmuebles
+similares a los requerimientos del cliente del Asesor de Gestión Inmobiliaria.
+
+Pendiente. 5) Módulo para registro de proyectos en Pre-Venta:
+Se debe permitir cargar desde un archivo csv o Excell, los datos de los inmuebles disponibles en un
+proyecto de Pre-Venta, los cuales sólo tendrán los datos y fotografías de un protipo de cada tipo de
+inmueble disponible.
+
+Adicionales recordadas por Ángel de las reuniones:
+- Subir los documentos escaneados.
+- El captador es único y debe permanecer a lo largo del proceso de ventas. Solo puede ser reasignado en caso de renuncia o abandono del trabajo.
+- En la página principal quitar la palabra "promotor responsable" por "captador responsable"
+- Se debe mantener en archivo un histórico de todos los cambios en la agenda.
+- Se debe emitir un reporte histórico de la agenda.
+- En personas, desglosar:
+    - Propietario
+    - Captador
+    - Vendedor
+        - Clientes
+- Un cliente solo puede estar asociado a un vendedor.
+- Tener una vista para conexiones lentas y vistas para conexiones rápida.
+- Buscar otro calendario que incluya hora.
+- Ingresar al sistema sin necesidad de cargar el sitio.
+- Módulo agregar, modificar y eliminar inmuebles.
