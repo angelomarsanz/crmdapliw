@@ -1,8 +1,8 @@
 <div class="container">
     <?php if (isset($matrizBienes) && isset($datosBienes)): ?>
         <!-- div con sufijo 00 -->
-        <div class="container fixed-bottom" id="testFunction00">
-            <p>Ángel</p>
+        <div class="container" style="position: fixed;" id="testFunction00">
+        Angel
         </div>
 
         <!-- div con sufijo 10 -->
@@ -1334,7 +1334,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 				"<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas</h2>" +
 				"<br />" +
 				"<br />" +
-				"<div class='row'>" + encabezadoTabla;		
+				"<div class='row'>";		
 		}
 		if (tipoContenido == "Citas")
 		{
@@ -1352,10 +1352,10 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 				"<br />" +
 				"<div class='row'>";
 		}
-		else if (tipoContenido.substring(0, 11) == "Fechas")
+		else if (tipoContenido.substring(0, 11) == "Actividades")
 		{
 			var agenda =
-				"<h2 class='letraAzul' id='tituloAgenda80'>" + valor + "</h2>" +
+				"<h2 class='letraAzul' id='tituloAgenda80'>" + tipoContenido + "</h2>" +
 				"<br />" +
 				"<br />" +
 				"<div class='row'>";

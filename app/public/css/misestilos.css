@@ -1,3 +1,15 @@
+.menuPrincipal
+{
+    display:scroll;
+    position:fixed;
+    top: 30%;
+    right: 1%;
+    opacity: 0.3;
+    text-align: right;
+    z-index: 2000;
+    width: 50px;
+}
+
 .iconoPrincipal
 {
   width: 100px;
@@ -16,6 +28,7 @@
   width: 32px;
   height: 32px;
   margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 .fotoLista

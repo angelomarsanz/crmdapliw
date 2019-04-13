@@ -1,3 +1,26 @@
+<style>
+@media screen
+{
+    .menumenos
+    {
+        display:scroll;
+        position:fixed;
+        top: 30%;
+        right: 1%;
+        opacity: 0.5;
+        text-align: right;
+    }
+    .menumas 
+    {
+        display:scroll;
+        position:fixed;
+        top: 30%;
+        right: 1%;
+        opacity: 0.5;
+        text-align: right;
+    }
+}
+</style>
 <div class="container">
     <?php if (isset($matrizBienes) && isset($datosBienes)): ?>
         <!-- div con sufijo 00 -->
@@ -5,46 +28,41 @@
         </div>
 
         <!-- div con sufijo 10 -->
-        <div class="menuPrincipal" id="menuCrm10">
+        <div class="container noVer" id="menuCrm10">
 
             <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="inicioCrm10" title="Inicio CRM">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?>
                 alt="Inicio CRM" class="iconoMenu">
             </a>
 
-            <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link noVer" id="cerrarBusquedaPropiedades10" title="Cerrar">
-                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
-                alt="Cerrar búsqueda propiedades" class="iconoMenu">
-            </a>
-
-			<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="busquedaPropiedades10">
-				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-				alt="Ejecutar búsqueda propiedades" class="iconoMenu">
-			</button>
+			<a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad">
+				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
+				alt="Publicar propiedad" class="iconoMenu">
+			</a>
 
             <button title="Cerrar" class="btn btn-link noVer" id="cerrarPropiedadesFiltradas10">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
                 alt="Cerrar propiedades filtradas" class="iconoMenu">
             </button>
 
-			<a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad">
-				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
-				alt="Publicar propiedad" class="iconoMenu">
-			</a>
+			<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="busquedaAgenda10">
+				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
+				alt="Ejecutar búsqueda agenda" class="iconoMenu">
+			</button>
 
             <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link noVer" id="cerrarBusquedaAgenda10" title="Cerrar">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
                 alt="Cerrar búsqueda agenda" class="iconoMenu">
             </a>
 
-			<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="busquedaAgenda10">
-				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
-				alt="Ejecutar búsqueda agenda" class="iconoMenu">
-			</button>
-
             <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgendaFiltrada10">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
                 alt="Cerrar agenda filtrada" class="iconoMenu">
+            </button>
+
+            <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgenda10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                alt="Cerrar agenda" class="iconoMenu">
             </button>
 
             <button title="Agregar actividad" class="btn btn-link noVer" id="agregarActividad10">
@@ -81,21 +99,24 @@
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
                 alt="Guardar persona" class="iconoMenu">
             </button>
-
-            <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgenda10">
-                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                alt="Cerrar agenda" class="iconoMenu">
-            </button>
-
+			
+			<!-- Inicio grupo botones que ya no se estàn usando -->
+			          					
+				<button title="Otras opciones" class="btn btn-link noVer" id="otrasOpciones10">
+					<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/grid-two-up.svg" ?>
+					alt="Otras opciones" class="iconoMenu">
+				</button>
+									
+			<!-- Fin botones que ya no se están usando -->
         </div>
+        <br />
+        <br />
+        <br />
 
         <!-- div con sufijo 20 -->
         <div class="container" id="tituloCrm20">
 			<div class="row">
-				<div class="col-md-1">
-					<h1 class="letraAzul">CRM</h1>
-				</div>
-				<div class="col-md-3" id="grupoVista20">
+				<div class="col-md-4 text-left" id="grupoVista20">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="vistas20">Vistas</label>
@@ -110,14 +131,19 @@
 						<div id="mensajesVistas20" class="mensajesUsuarios"></div>
 					</div>
 				</div>
-                <div class="col-md-1 noVer" id="notificaciones20">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4 text-right noVer" id="notificaciones20">
 					<button title="Notificaciones" class="btn btn-link" id="verNotificaciones20">
 					    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/bell.svg" ?>
 					    alt="Ver notificaciones" class="icono">
 				    </button>
-                    <spam class="letraAzul" id="cantidadNotificaciones20"></spam>
+                    <spam class="letraRoja" id="cantidadNotificaciones20"></spam>
 				</div>
 			</div>
+            <br />
+            <br />
+            <br />
         </div>
         
         <!-- div con sufijo 30 -->
@@ -146,6 +172,9 @@
 					</button>
 				</div>
 			</div>
+            <br />
+            <br />
+            <br />
 		</div>
  
         <!-- div con sufijo 50 -->
@@ -200,13 +229,16 @@
 					</div>
 				</div> 
             </div>
+            <br />
+            <br />
+            <br />
         </div> 
  
         <!-- div con sufijo 51 -->
         <div class="container formulario noVer" id="busquedaAgenda51">
-   			<h2 class="letraAzul">Filtro Agenda</h2>
             <div class="row">
                 <div class="col-md-4">              
+					<p class="letraAzul">Agenda</p>
 					<p>
                         <button title="Bienes sin actividades" class="btn btn-info" id="bienesSinActividad51">
 						    Propiedades sin actividades planificadas
@@ -238,11 +270,15 @@
                     </p>
 				</div>
             </div>
+            <br />
+            <br />
+            <br />
         </div>
 				 
         <!-- div con sufijo 60 -->
         <div class="container formulario noVer" id="bienes60">
             <h2 class="letraAzul" id="titulo60"></h2>
+            <br />
             <div class="row" id="cicloBienes60">
             </div>
             <br />
@@ -256,9 +292,9 @@
 
 		<!-- div con sufijo 90 -->
 		<div class="container formulario noVer" id="agregarActividad90">
-			<h2 class="letraAzul" id="tituloAgregarActividad90"></h2>
 			<div class="row">
 				<div class='col-md-6'> 
+					<h2 class="letraAzul" id="tituloAgregarActividad90"></h2>
 					<br />
 					<br /> 
 					<form>
@@ -538,8 +574,13 @@
 							</div>
 						</div>
 					</form>
+				<br />
+				<br />
 				</div> 
 			</div>
+            <br />
+            <br />
+            <br />
 		</div>
 
 		<!-- div con sufijo 100 -->
@@ -587,6 +628,9 @@
 				</div>
 
 			</div>
+            <br />
+            <br />
+            <br />
 		</div>
 
 		<!-- div con sufijo 110 -->
@@ -715,10 +759,10 @@
 				</div>
 
 			</div>
+            <br />
+            <br />
+            <br />
 		</div>
-        <br />
-        <br />
-        <br />
     <?php else: ?>
         <!-- div con sufijo 10000 -->
         <div class="container">
@@ -728,11 +772,34 @@
                 <p><b>Estimado usuario para acceder al CRM debes </b><?php echo $this->html->link('iniciar sesión', array('controller' => 'ingresar-al-sistema'), 
                     array('style' => 'color: blue;')); ?></p>
             </div>
+            <br />
+            <br />
+            <br />
         </div> 
-        <br />
-        <br />
-        <br />
     <?php endif; ?>
+
+<div id="menu-menos" class="menumenos nover">
+	<p>
+	    <a href="#" id="mas" title="Más opciones" class='btn btn-link'><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> alt="Ejecutar búsqueda propiedades" class="iconoMenu"></a>
+	</p>
+</div>
+
+<div id="menu-mas" style="display:none;" class="menumas nover">
+	<p>
+        <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="inicioCrm10" title="Inicio CRM">
+            <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/home.svg" ?>
+            alt="Inicio CRM" class="iconoMenu">
+        </a>
+
+		<button title="Ejecutar búsqueda" class="btn btn-link" id="busquedaPropiedades10">
+			<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
+			alt="Ejecutar búsqueda propiedades" class="iconoMenu">
+		</button>
+
+		<a href='#' id="menos" title="Menos opciones" class='btn btn-link'><img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/minus.svg" ?>	alt="Ejecutar búsqueda propiedades" class="iconoMenu"></a>
+	</p>
+</div>
+
 </div>
 
 <script>
@@ -769,7 +836,7 @@ var gNotificaciones = <?= $notificaciones ?>;
 
 function testFunction()
 {
-
+    alert("Hola Ángel!");
 }
 
 function mostrarNotificaciones()
@@ -3069,6 +3136,18 @@ function eliminarComprador(idCompradorPromotor)
 // Eventos
 $j(document).ready(function()
 {
+	$j('#mas').on('click',function()
+	{
+		$j('#menu-menos').hide();
+		$j('#menu-mas').show();
+	});
+	
+	$j('#menos').on('click',function()
+	{
+		$j('#menu-mas').hide();
+		$j('#menu-menos').show();
+	});
+
     $j("#vistas20").val(gVistaPreferida);
 
     mostrarNotificaciones();
