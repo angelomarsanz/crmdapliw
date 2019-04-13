@@ -1,7 +1,7 @@
 <div class="container">
     <?php if (isset($matrizBienes) && isset($datosBienes)): ?>
         <!-- div con sufijo 00 -->
-        <div class="container noVer" id="testFunction00">
+        <div class="container" id="testFunction00">
         </div>
 
         <!-- div con sufijo 10 -->
@@ -70,22 +70,22 @@
 
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarPersonas10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="Cerrar personas" class="iconMenu">
+                    alt="Cerrar personas" class="iconoMenu">
                 </button>
 
                 <button title="Agregar persona" class="btn btn-link noVer" id="agregarPersona10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
-                    alt="Agregar persona" class="iconMenu">
+                    alt="Agregar persona" class="iconoMenu">
                 </button>          
 
                 <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgregarPersona10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
-                    alt="Cerrar agregar persona" class="iconMenu">
+                    alt="Cerrar agregar persona" class="iconoMenu">
                 </button>
 
                 <button title="Guardar persona" class="btn btn-link noVer" id="guardarPersona10">
                     <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
-                    alt="Guardar persona" class="iconMenu">
+                    alt="Guardar persona" class="iconoMenu">
                 </button>
 				
 				<!-- Inicio grupo botones que ya no se estàn usando -->
@@ -233,7 +233,7 @@
             <div class="row">
                 <div class="col-md-4">              
 					<p class="letraAzul">Agenda</p>
-					<p class="noVer">
+					<p>
                         <button title="Bienes sin actividades" class="btn btn-info" id="bienesSinActividad51">
 						    Propiedades sin actividades planificadas
 					    </button>
@@ -274,7 +274,7 @@
 				 
         <!-- div con sufijo 60 -->
         <div class="container formulario noVer" id="bienes60">
-            <h2 class="letraAzul">Propiedades</h2>
+            <h2 class="letraAzul" id="titulo60"></h2>
             <br />
             <div class="row" id="cicloBienes60">
             </div>
@@ -949,9 +949,6 @@ function mostrarAgenda(tipoContenido, valor)
 					
 				borrarMensajesAnteriores();
                 $j("#agenda80").html(resultado.agenda);
-                $j("#ano80").val(gAnoActual);
-                $j("#mes80").val(gMesActual);
-                $j("#dia80").val(gDiaActual);
 				$j("#agenda80").removeClass("noVer");
 				$j(gBotonCerrar).removeClass("noVer");
 				$j("#agregarActividad10").removeClass("noVer");
@@ -1010,11 +1007,11 @@ function mostrarAgendaLista(tipoContenido, valor)
             "<table class='table table-hover table-striped'>" +
 				"<thead>" +
 					"<tr>" +
-						"<th>No</th>" +
-						"<th>Propiedad</th>" +
-						"<th>Actividad</th>" +
-						"<th>Fecha</th>" +
-						"<th></th>" +
+						"<th scope='col' class='text-center' style='width:10%;'>No</th>" +
+						"<th scope='col' class='text-center' style='width:25%;'>Propiedad</th>" +
+						"<th scope='col' class='text-center' style='width:25%;'>Actividad</th>" +
+						"<th scope='col' class='text-center' style='width:20%;'>Fecha</th>" +
+						"<th scope='col' class='text-center' style='width:10%;'></th>" +
 					"</tr>" +
 				"</thead>" +
 				"<tbody>";
@@ -1044,7 +1041,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 						
 			$j.each(arregloActividades, function(clave, datos)  
 			{
-				if (datos.estatus == "abierta")
+				if (datos.estatus == "Abierta")
 				{
 					if (datos.notificacion == "No vista" && datos.idEjecutor == gIdUsuario)						
 					{
@@ -1094,7 +1091,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 				
 				$j.each(arregloActividades, function(clave2, datos2)  
 				{
-					if (datos2.estatus == "abierta")						
+					if (datos2.estatus == "Abierta")						
 					{
 						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
 						{
@@ -1127,7 +1124,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 				"<h2 class='letraAzul' id='tituloAgenda80'>Solicitudes de cita</h2>" +
 				"<br />" +
 				"<br />" +
-				+ encabezadoTabla;		
+				encabezadoTabla;		
 		}
 		else if (tipoContenido == "Persona")
 		{
@@ -1135,7 +1132,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 				"<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + valor + "</h2>" +
 				"<br />" +
 				"<br />" +
-				+ encabezadoTabla;
+				encabezadoTabla;
 		}
 		else if (tipoContenido.substring(0, 11) == "Actividades")
 		{
@@ -1143,7 +1140,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 				"<h2 class='letraAzul' id='tituloAgenda80'>" + tipoContenido + "</h2>" +
 				"<br />" +
 				"<br />" +
-				+ encabezadoTabla;
+				encabezadoTabla;
         }
 
 		contador = 1;
@@ -1159,7 +1156,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 				
 				$j.each(arregloActividades, function(clave2, datos2)  
 				{
-					if (datos2.estatus == "abierta" && datos2.ver == "true")						
+					if (datos2.estatus == "Abierta" && datos2.ver == "true")						
 					{
 						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
 						{
@@ -1219,11 +1216,11 @@ function generarLineaLista(clave, datos, contador)
 	}
 	
 	lineaLista = 		
-		"<td>" + contador + "</td>" +
-		"<td>" + gMatrizBienes[datos.idPropiedad].post_title + "</td>" +
-		"<td class=" + colorAlerta + ">" + datos.nombreActividad + "</td>" +
-		"<td>" + fechaPlanificada + "</td>" +
-		"<td>" +
+		"<td class='text-center align-middle'>" + contador + "</td>" +
+		"<td class='text-center align-middle'>" + gMatrizBienes[datos.idPropiedad].post_title + "</td>" +
+		"<td class='text-center align-middle" + colorAlerta + "'>" + datos.nombreActividad + "</td>" +
+		"<td class='text-center align-middle'>" + fechaPlanificada + "</td>" +
+		"<td class='text-center align-middle'>" +
 		    "<button class='btn btn-light actividad80' id='actividad80-" + clave + "-" + idActividad + "-" + datos.idPropiedad + "' title='Ver actividad'>" +
     		    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
     		    "crmdapliw/app/public/images/eye.svg alt='Agenda' class='icono'>" +
@@ -1264,7 +1261,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 
             $j.each(arregloActividades, function(clave, datos)  
             {
-				if (datos.estatus == "abierta")
+				if (datos.estatus == "Abierta")
 				{
 					if (datos.notificacion == "No vista" && datos.idEjecutor == gIdUsuario)						
 					{
@@ -1314,7 +1311,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 				
 				$j.each(arregloActividades, function(clave2, datos2)  
 				{
-					if (datos2.estatus == "abierta")						
+					if (datos2.estatus == "Abierta")						
 					{
 						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
 						{
@@ -1336,7 +1333,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 				"<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas</h2>" +
 				"<br />" +
 				"<br />" +
-				"<div class='row'>" + encabezadoTabla;		
+				"<div class='row'>";		
 		}
 		if (tipoContenido == "Citas")
 		{
@@ -1354,10 +1351,10 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 				"<br />" +
 				"<div class='row'>";
 		}
-		else if (tipoContenido.substring(0, 11) == "Fechas")
+		else if (tipoContenido.substring(0, 11) == "Actividades")
 		{
 			var agenda =
-				"<h2 class='letraAzul' id='tituloAgenda80'>" + valor + "</h2>" +
+				"<h2 class='letraAzul' id='tituloAgenda80'>" + tipoContenido + "</h2>" +
 				"<br />" +
 				"<br />" +
 				"<div class='row'>";
@@ -1381,7 +1378,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 				
 				$j.each(arregloActividades, function(clave2, datos2)  
 				{
-					if (datos2.estatus == "abierta" && datos2.ver == "true")						
+					if (datos2.estatus == "Abierta" && datos2.ver == "true")						
 					{
 						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
 						{
@@ -1502,26 +1499,32 @@ function crearMosaicos(clave, datos)
 		{
 			"idAno" : "actividadesAno80",
 			"idSelectAno" : "ano80",
+            "valorAno" : datos.anoPlanificado, 
             "idMensajesAno" : "mensajesAno80",
 
 			"idMes" : "actividadesMes80",
 			"idSelectMes" : "mes80",
+            "valorMes" : datos.mesPlanificado,
             "idMensajesMes" : "mensajesMes80",
 
 			"idDia" : "actividadesDia80",
 			"idSelectDia" : "dia80",
+            "valorDia" : datos.diaPlanificado, 
             "idMensajesDia" : "mensajesDia80",
 
 			"idHora" : "actividadesHora80",
 			"idSelectHora" : "hora80",
+            "valorHora" : datos.HoraPlanificado,
             "idMensajesHora" : "mensajesHora80",
 
 			"idMinuto" : "actividadesMinuto80",
 			"idSelectMinuto" : "minuto80",
+            "valorMinuto" : datos.minutoPlanificado,
             "idMensajesAno" : "mensajesAno80",
 
 			"idMeridiano" : "actividadesMeridiano80",
 			"idSelectMeridiano" : "meridiano80",
+            "valorMeridiano" : datos.meridianoPlanificado,
             "idMensajesMeridiano" : "mensajesMeridiano80"
 		};
 			
@@ -1587,21 +1590,35 @@ function inicializarFecha(idFechas)
 	    "</div>" +
 	    "<select class='custom-select' id=" + idFechas.idSelectAno + ">";
 
-    for (i = 1; i <= 10; i++) 
+    for (i = 0; i <= 10; i++) 
     {
-        if (contador == 0)
+        if (i == 0)
         {
-            selectAno +=          
-				"<option selected></option>" +
-                "<option value=" + ano + ">" + ano + "</option>";
+            if (idFechas.valorAno == "")
+            {                
+                selectAno +=          
+				    "<option selected value=''></option>";
+            }
+            else
+            {
+                selectAno +=          
+				    "<option value=''></option>";                
+            }     
         }
         else
         {
-            selectAno +=          
-				"<option value=" + ano + ">" + ano + "</option>";
+            if (idFechas.valorAno == ano)
+            {                
+                selectAno +=          
+				    "<option selected value=" + ano + ">" + ano + "</option>";
+            }
+            else
+            {
+                selectAno +=          
+				    "<option value=" + ano + ">" + ano + "</option>";
+            }
+            ano++;
         }
-        ano++;
-        contador++;
     }
     selectAno += 
         "</select>";
@@ -1622,21 +1639,35 @@ function inicializarFecha(idFechas)
 		"</div>" +
 		"<select class='custom-select' id=" + idFechas.idSelectMes + ">";
 
-    for (i = 1; i <= 12; i++) 
+    for (i = 0; i <= 12; i++) 
     {
-		mes = (i < 10 ? '0' : '') + i;
-        if (contador == 0)
+        if (i == 0)
         {
-            selectMes +=          
-				"<option selected></option>" +
-                "<option value=" + mes + ">" + mes + "</option>";
+            if (idFechas.valorMes == "")
+            {
+                selectMes +=          
+				    "<option selected value=''></option>";
+            }
+            else
+            {
+                selectMes +=          
+				    "<option value=''></option>";
+            }
         }
         else
         {
-            selectMes +=          
-    			"<option value=" + mes + ">" + mes + "</option>";
+    		mes = (i < 10 ? '0' : '') + i;
+            if (idFechas.valorMes == mes)
+            {
+                selectMes +=          
+        			"<option selected value=" + mes + ">" + mes + "</option>";
+            }
+            else
+            {
+                selectMes +=          
+        			"<option value=" + mes + ">" + mes + "</option>";
+            }
         }
-        contador++;
     }
     selectMes += 
         "</select>";
@@ -1655,22 +1686,35 @@ function inicializarFecha(idFechas)
 		"</div>" +
 		"<select class='custom-select' id=" + idFechas.idSelectDia + ">";
 
-    for (i = 1; i <= 31; i++) 
-    {
-		dia = (i < 10 ? '0' : '') + i;
-		
-        if (contador == 0)
+    for (i = 0; i <= 31; i++) 
+    {		
+        if (i == 0)
         {
-            selectDia +=          
-				"<option selected></option>" +
-                "<option value=" + dia + ">" + dia + "</option>";
+            if (idFechas.valorDia == "")
+            {
+                selectDia +=          
+				    "<option selected value=''></option>";
+            }
+            else
+            {
+                selectDia +=          
+				    "<option value=''></option>";
+            }
         }
         else
         {
-            selectDia +=          
-		    	"<option value=" + dia + ">" + dia + "</option>";
+    		dia = (i < 10 ? '0' : '') + i;
+            if (idFechas.valorDia == dia)
+            {
+                selectDia +=          
+		    	    "<option selected value=" + dia + ">" + dia + "</option>";
+            }
+            else 
+            {
+                selectDia +=          
+		    	    "<option value=" + dia + ">" + dia + "</option>";
+            }
         }
-        contador++;
     }
     selectDia += 
         "</select>";
@@ -1689,22 +1733,35 @@ function inicializarFecha(idFechas)
 		"</div>" +
 		"<select class='custom-select' id=" + idFechas.idSelectHora + ">";
 
-    for (i = 1; i <= 12; i++) 
-    {
-		hora = (i < 10 ? '0' : '') + i;
-		
-        if (contador == 0)
+    for (i = 0; i <= 12; i++) 
+    {		
+        if (i == 0)
         {
-            selectHora +=          
-				"<option selected></option>" +
-                "<option value=" + hora + ">" + hora + "</option>";
+            if (idFechas.valorHora == "")
+            {
+                selectHora +=          
+				    "<option selected value=''></option>";
+            }
+            else 
+            {
+                selectHora +=          
+				    "<option value=''></option>";
+            }
         }
         else
         {
-            selectHora +=          
-    			"<option value=" + hora + ">" + hora + "</option>";
+    		hora = (i < 10 ? '0' : '') + i;
+            if (idFechas.valorHora == hora)
+            {
+                selectHora +=          
+    			    "<option selected value=" + hora + ">" + hora + "</option>";
+            }
+            else
+            {
+                selectHora +=          
+    			    "<option value=" + hora + ">" + hora + "</option>";
+            }
         }
-        contador++;
     }
     selectHora += 
         "</select>";
@@ -1722,22 +1779,35 @@ function inicializarFecha(idFechas)
 		    "<label class='input-group-text' for=" + idFechas.idSelectMinuto + ">Minuto</label>" + 
 		"</div>" +
 		"<select class='custom-select' id=" + idFechas.idSelectMinuto + ">";
-    for (i = 1; i <= 60; i++) 
-    {
-		minuto = (i < 10 ? '0' : '') + i;
-		
-        if (contador == 0)
+    for (i = -1; i <= 59; i++) 
+    {	
+        if (i == -1)
         {
-            selectMinuto +=          
-				"<option selected></option>" +
-                "<option value=" + minuto + ">" + minuto + "</option>";
+            if (idFechas.valorMinuto == "")
+            {
+                selectMinuto +=          
+				    "<option selected value=''></option>";
+            }
+            else
+            {
+                selectMinuto +=          
+				    "<option value=''></option>";
+            }
         }
         else
         {
-            selectMinuto +=          
-		    	"<option value=" + minuto + ">" + minuto + "</option>";
+    		minuto = (i < 10 ? '0' : '') + i;
+            if (idFechas.valorMinuto == minuto)
+            {
+                selectMinuto +=          
+		    	    "<option selected value=" + minuto + ">" + minuto + "</option>";
+            }
+            else
+            {
+                selectMinuto +=          
+		    	    "<option value=" + minuto + ">" + minuto + "</option>";
+            }
         }
-        contador++;
     }
     selectMinuto += 
         "</select>";
@@ -1754,10 +1824,29 @@ function inicializarFecha(idFechas)
 	            "<div class='input-group-prepend'>" +
 		            "<label class='input-group-text' for=" + idFechas.idSelectMeridiano + ">Meridiano</label>" + 
 	            "</div>" +
-	            "<select class='custom-select' id=" + idFechas.idSelectMeridiano + ">" + 
-		            "<option selected></option>" + 
-		            "<option value='am'>am</option>" + 
-                    "<option value='pm'>pm</option>" +
+	            "<select class='custom-select' id=" + idFechas.idSelectMeridiano + ">";
+
+    if (idFechas.valorMeridiano == "")
+    {
+        lineaFecha += 
+            "<option selected value=''></option>" +
+            "<option value='am'>am</option>" + 
+            "<option value='pm'>pm</option>";
+    }
+    else if (idFechas.valorMeridiano == "am")
+    {
+        "<option value=''></option>" +
+        "<option selected value='am'>am</option>" + 
+        "<option value='pm'>pm</option>";
+    }
+    else
+    {
+        "<option value=''></option>" +
+        "<option selected value='am'>am</option>" + 
+        "<option value='pm'>pm</option>";
+    }
+        
+    lineaFecha +=
 	            "</select>" +  
             "</div>" +
             "<div class='mensajesUsuario' id=" + idFechas.idMensajesMeridiano + "></div>" +
@@ -1910,10 +1999,11 @@ function desmarcarBienesVista()
    });
 }
 
-function mostrarBienes()
+function mostrarBienes(tipoContenido, valor)
 {
 	var colorAlerta = "";
     var bienes = "";
+    var contador = 1;
 	
 	if (gVistaPreferida.substring(0, 5) == "Lista")
 	{
@@ -1922,9 +2012,10 @@ function mostrarBienes()
 				"<table class='table table-striped table-hover'>" +
 					"<thead>" +
 						"<tr>" +
-							"<th scope='col'>Foto</th>" +
-							"<th scope='col'>Propiedad</th>" +
-							"<th scope='col'></th>" +
+                            "<th scope='col' class='text-center' style='width:10%;'>No</th>" +
+							"<th scope='col' class='text-center' style='width:20%;'>Foto</th>" +
+							"<th scope='col' class='text-center' style='width:50%;'>Propiedad</th>" +
+							"<th scope='col' class='text-center' style='width:20%;'></th>" +
 						"</tr>" +
 					"</thead>" +
 					"<tbody>";
@@ -1933,18 +2024,20 @@ function mostrarBienes()
 		{	
 			if (bien.ver == "true")
 			{
-				bienes += "<tr>";
+				bienes += 
+                        "<tr>" +
+                            "<td class='text-center align-middle'>" + contador + "</td>";
 							
 				if (gVistaPreferida == "Lista con imágenes")
 				{
 					if (gDatosBienes[bien.ID]._thumbnail_id)
 					{				
 						bienes += 
-							"<td class='text-center'><img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='fotoLista img-thumbnail' alt='Foto de la propiedad'></td>";
+							"<td class='text-center align-middle'><img src=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " class='img-thumbnail' alt='Foto de la propiedad'></td>";
 					}
 					else
 					{
-						bienes += "<td class='text-center'>Sin foto</td>";
+						bienes += "<td class='text-center align-middle'>Sin foto</td>";
 					}
 				}
 				else
@@ -1952,7 +2045,7 @@ function mostrarBienes()
 					if (gDatosBienes[bien.ID]._thumbnail_id)
 					{				
 						bienes += 
-							"<td class='text-center'>" +
+							"<td class='text-center align-middle'>" +
 								"<a href=" + gDatosBienes[bien.ID]._thumbnail_id[0].valor + " title='Ver foto' target='_blank'>" +
 								"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera-slr.svg' ?>" +
 								" alt='Ver foto' class='icono'>" +
@@ -1961,7 +2054,7 @@ function mostrarBienes()
 					}
 					else
 					{
-						bienes += "<td class='text-center'>Sin foto</td>";
+						bienes += "<td class='text-center align-middle'>Sin foto</td>";
 					}
 				}
 				
@@ -2009,6 +2102,7 @@ function mostrarBienes()
 						"</button>" +			
 					"</td>" +
 				"</tr>";
+                contador++;
 			}
 		});
         bienes += 
@@ -2119,6 +2213,7 @@ function mostrarBienes()
 		});
 	}
 
+    $j("#titulo60").html(tipoContenido);
     $j("#cicloBienes60").html(bienes);
 	
     $j.each(gBienes, function(clave, bien)  
@@ -2143,7 +2238,7 @@ function primeraActividadPendiente(idBien)
 
         $j.each(arregloActividades, function(clave, datos)  
         {
-            if (datos.estatus == "abierta")
+            if (datos.estatus == "Abierta")
             {
                 actividadMasAntigua = datos.nombreActividad;
                 fechaMasAntigua = 
@@ -2215,7 +2310,7 @@ function alertaActividades(idBien)
 
         $j.each(arregloActividades, function(clave, datos)  
         {
-            if (datos.estatus == "abierta")
+            if (datos.estatus == "Abierta")
             {
                 fechaInvertidaAntigua = datos.fechaInvertida;
                 return false;
@@ -2254,6 +2349,7 @@ function bienesSinActividad()
 	        {
                 if (gPermiso < 4)
                 {
+                    console.log("datos2.idEjecutor " + datos2.idEjecutor + " gdIdUsuario " + gIdUsuario);
                     if (datos2.idEjecutor == gIdUsuario)
                     {
                         if (datos2.estatus == "Abierta")
@@ -2431,6 +2527,613 @@ function verificarFechasActividades(actividad)
     return indicadorVer;
 }
 
+function personasBien(idBien)
+{
+    var indicadorCaptadorPropietario = 0;
+
+    $j("#tituloPersonas100").html("Personas relacionadas con la propiedad " + gMatrizBienes[idBien].post_title);
+
+    if (gDatosBienes[idBien]._thumbnail_id)
+    {
+        $j("#imagen100").html("<img src=" + gDatosBienes[idBien]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>");
+    }
+    else
+    {
+        $j("#imagen100").html("Foto de la propiedad");
+    }
+
+    if (gPermiso < 3 && gMatrizBienes[idBien].post_author == gIdUsuario)
+    {
+        indicadorCaptadorPropietario = 1;                        
+    }
+
+    if (indicadorCaptadorPropietario == 1 || gPermiso > 3)
+    {
+        $j("#nombrePropietario100").val(gMatrizBienes[idBien].propietario);
+        $j("#mensajesPropietario100").html("");
+    }
+    else
+    {
+        $j("#grupoPropietario100").addClass("noVer");
+    }    
+
+    $j("#nombreCaptador100").val(gMatrizBienes[idBien].nombre_autor);
+    $j("#mensajesCaptador100").html("");
+
+    if (gPermiso < 4)
+    {
+        $j("#nombreCaptador100").attr("disabled", true);        
+    }
+    
+    $j("#nombreCliente100").val("");
+    $j("#mensajesCliente100").html("");
+
+    $j("#mensajesComprador100").html("");
+
+    compradoresPotenciales(idBien);
+}
+
+function compradoresPotenciales(idBien)
+{
+    var compradoresPotenciales =
+            "<div class='col-md-12 mb-3'>";
+
+    if (gDatosBienes[idBien].CRMdapliw_cliente)
+    {
+        var arregloCompradores = gDatosBienes[idBien].CRMdapliw_cliente.slice();
+
+        arregloCompradores.sort(function(a,b)
+        {
+            return (b.posicionOriginal - a.posicionOriginal);
+        });
+
+        $j.each(arregloCompradores, function(clave, datos)  
+        {
+            if (datos.activo == "true")
+            {
+                compradoresPotenciales += 
+                    "<div class='card' id='comprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "'>" +
+                        "<div class='card-block'>" + 
+                            "<h4 class='card-title'>" + datos.valor + "</h4>" +
+                            "<div class='card bg-light text-dark'>" +
+                                "<div class='card-body'>" +
+                                    "<p> Promotor: " + datos.nombrePromotorCliente + "</p>"+
+                                "</div>" +
+                            "</div>" +
+                            "<div class='card-footer'>" +
+                                "<p>" +                                                            
+                                    "<button class='btn btn-light eliminarComprador100'" + 
+                                        "id='eliminarComprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'" + 
+                                        "title='Eliminar comprador potencial'>" +
+                                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+                                        "crmdapliw/app/public/images/trash.svg alt='Eliminar comprador' class='icono'>" +
+                                    "</button>" +
+                                "</p>" +
+                            "</div>" +  
+                        "</div>" +
+                    "</div>" +
+                    "<div class='row'>" +
+                        "<div class='col-md-12'>" +
+                            "<div class='mensajesUsuario' id='mensajesComprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'>" +
+                            "</div>" +
+                        "</div>" +
+                    "</div>" + 
+                    "<br />";
+            }
+        });
+    }
+
+    compradoresPotenciales += "</div>";
+
+    for (i = 1; i <= 200; i++) 
+    {
+        compradoresPotenciales += "<br />";
+    }
+
+    $j("#compradoresPotenciales100").html(compradoresPotenciales);
+}
+
+function inicializarPersonas()
+{
+    $j("#tipoIdentificacion110").val("");
+    $j("#numeroIdentificacion110").val(0);
+    $j("#primerNombre110").val("");
+    $j("#segundoNombre110").val("");
+    $j("#primerApellido110").val("");
+    $j("#segundoApellido110").val("");
+
+	$j("#rolesCheckbox110").each(function (index) 
+	{ 
+		$j(this).attr('checked', false);
+		$j(this).prop('checked', false);
+	});
+
+    $j("#celular110").val("");
+    $j("#telefonoFijo110").val("");
+    $j("#email110").val("@");
+    $j("#direccion110").val("");
+
+    $j("#tituloAgregarPersonas110").html("Agregar personas a la propiedad " + gMatrizBienes[gIdPostActual].post_title);
+}
+
+function guardarPersona(indicadorCheckbox)
+{
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se guardan los datos</strong>" +
+        "</div>";
+
+    $j("#mensajesUsuario30").html(mensajesUsuario);
+    window.scrollTo(0, 0);
+
+    $j("#primerNombre110").val($j.trim($j("#primerNombre110").val().toUpperCase()));
+    $j("#segundoNombre110").val($j.trim($j("#segundoNombre110").val().toUpperCase()));
+    $j("#primerApellido110").val($j.trim($j("#primerApellido110").val().toUpperCase()));
+    $j("#segundoApellido110").val($j.trim($j("#segundoApellido110").val().toUpperCase()));
+    $j("#celular110").val($j.trim($j("#celular110").val().toUpperCase()));
+    $j("#telefonoFijo110").val($j.trim($j("#telefonoFijo110").val().toUpperCase()));
+    $j("#email110").val($j.trim($j("#email110").val().toLowerCase()));
+    $j("#direccion110").val($j.trim($j("#direccion110").val().toUpperCase())); 
+
+    primerNombre = $j("#primerNombre110").val(); 
+    segundoNombre = $j("#segundoNombre110").val();  
+
+    primerApellido = $j("#primerApellido110").val();
+    segundoApellido = $j("#segundoApellido110").val();  
+
+    if (indicadorCheckbox == 0)
+    {
+        roles = ["Cliente"];
+    }
+    else
+    {
+        roles = [];
+        $j("#rolesCheckbox110").each(function (index) 
+        {
+            if ($j(this).prop("checked") == true)
+            {
+                if ($j(this).attr("id") == "administrador110")
+                {
+                    roles.push("Administrador");
+                }
+                if ($j(this).attr("id") == "gestorNegocios110")
+                {
+                    roles.push("Gestor de negocios");
+                }
+                if ($j(this).attr("id") == "captador110")
+                {
+                    roles.push("Captador");
+                }
+                if ($j(this).attr("id") == "promotor110")
+                {
+                    roles.push("Promotor");
+                }
+                if ($j(this).attr("id") == "propietario110")
+                {
+                    roles.push("Propietario");
+                }
+                if ($j(this).attr("id") == "Cliente110")
+                {
+                    roles.push("Cliente");
+                }
+            }
+        });
+    } 
+
+    celular = $j("#celular110").val(); 
+    telefonoFijo = $j("#telefonoFijo110").val();
+
+    email = $j("#email110").val();
+    direccion = $j("#direccion110").val();  
+    
+    /* Descomentar solo para pruebas
+    arregloPrueba = [{"nombre" : "Ángel", "apellido" : "Sanz"}, {"nombre" : "Juan", "apellido" : "González"}];
+
+    pruebaJson = 
+        {
+            "idPost" : gIdPostActual,
+            "arregloPrueba" : arregloPrueba
+        };  
+    */
+
+    jsonPersona = 
+        {"idPost" : gIdPostActual,
+        "persona" :  
+            {
+                "tipoIdentificacion" : $j("#tipoIdentificacion110").val(),
+                "numeroIdentificacion" : $j("#numeroIdentificacion110").val(),
+                "primerNombre" : primerNombre,
+                "segundoNombre" : segundoNombre,
+                "primerApellido" : primerApellido,
+                "segundoApellido" : segundoApellido,
+                "roles" : roles,
+                "celular" : celular,
+                "telefonoFijo" : telefonoFijo,
+                "email" : email,
+                "direccion" : direccion,
+                "idPromotor" : gIdUsuario
+            }
+        };
+
+    $j.post("<?= mvc_public_url(array('controller' => 'users', 'action' => 'agregar_persona')) ?>", 
+        jsonPersona, null, "json")          
+    .done(function(response) 
+    {
+        if (response.satisfactorio) 
+        {   
+            if (gDatosBienes[gIdPostActual].CRMdapliw_cliente)
+            {
+                ultimaPosicion = 0;
+
+                $j.each(gDatosBienes[gIdPostActual].CRMdapliw_cliente, function(clave, datos)  
+                {
+                    ultimaPosicion = clave;
+                });
+                ultimaPosicion++;
+            }
+            else
+            {
+                ultimaPosicion = 0;
+            }
+
+            compradorPotencial = 
+                {
+                    "valor" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido,
+                    "id" : response.idPostmeta,
+                    "posicionOriginal" : ultimaPosicion,
+                    "idUser" : response.idUser,
+                    "activo" : "true",
+                    "idPromotorCliente" : gIdUsuario,
+                    "nombrePromotorCliente" : gNombreUsuario
+                }    
+
+            if (gDatosBienes[gIdPostActual].CRMdapliw_cliente)
+            {
+                gDatosBienes[gIdPostActual].CRMdapliw_cliente.push(compradorPotencial);
+            }
+            else
+            {
+                gDatosBienes[gIdPostActual].CRMdapliw_cliente = [compradorPotencial];
+            }
+
+            nuevoCliente = 
+                {
+                    "label" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido + " - COMPRADOR(A)",
+                    "value" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido + " - COMPRADOR(A)",
+                    "id" : response.idUser
+                };              
+
+            gPersonasAsc.push(nuevoCliente);
+            gPersonasAsc.sort(function(a,b)
+            {
+                return (a.label - b.label);
+            });        
+                
+            mensajesUsuario =
+                "<div class='alert alert-success alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" + response.mensaje + "</strong>" +
+                "</div>";
+
+            $j("#mensajesUsuario30").html(mensajesUsuario);
+
+            $j("#agregarPersonas110").addClass("noVer");
+            $j("#cerrarAgregarPersona10").addClass("noVer");
+            $j("#guardarPersona10").addClass("noVer");
+            personasBien(gIdPostActual);
+            $j("#personas100").removeClass("noVer");
+            $j("#cerrarPersonas10").removeClass('noVer');
+            $j("#agregarPersona10").removeClass("noVer");
+            window.scrollTo(0, 0);           
+        } 
+        else 
+        {
+            mensajesUsuario =
+                "<div class='alert alert-danger alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" + response.mensaje + "</strong>" +
+                "</div>"; 
+
+        	$j("#mensajesUsuario30").html(mensajesUsuario);
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) 
+    {
+        mensajesUsuario =
+            "<div class='alert alert-danger alert-dismissible'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                "<strong> Estimado usuario ocurrió una falla en el servidor y los datos no se pudieron guardar !</strong>" +
+            "</div>"; 
+
+        $j("#mensajesUsuario30").html(mensajesUsuario);
+    });  
+}
+
+function validarPersona(indicadorCheckbox)
+{
+    var indicadorError = 0; 
+    var anterior =
+        "<div class='alert alert-danger alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>";
+
+    var posterior = "</strong></div>"; 
+    var indicadorTildado = 0; 
+    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+
+    borrarMensajesAnteriores();
+    
+    if ($j("#tipoIdentificacion110").val() == "")  
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Seleccione el tipo de identificación" + posterior;
+        $j("#mensajesTipo110").html(mensajeError);
+    }
+
+    if ($j("#numeroIdentificacion110").val() == 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Escriba el número de identificacion" + posterior;
+        $j("#mensajesIdentificacion110").html(mensajeError);
+    }
+
+    if ($j("#primerNombre110").val() == "") 
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Escriba el primer nombre de la persona" + posterior;
+        $j("#mensajesPrimerNombre110").html(mensajeError);
+    }
+
+    if ($j("#primerApellido110").val() == "")
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Por favor escriba el primer apellido de la persona" + posterior;
+        $j("#mensajesPrimerApellido110").html(mensajeError);
+    }
+
+    if ($j("#celular110").val() == "" && $j("#telefonoFijo110").val() == "")
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Por favor escriba al menos un número de teléfono de la persona" + posterior;
+        $j("#mensajesCelular110").html(mensajeError);
+        $j("#mensajesTelefono110").html(mensajeError);
+    }
+
+    if ($j("#email110").val() == "@")
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Por favor escriba el correo electrónico de la persona" + posterior;
+        $j("#mensajesEmail110").html(mensajeError);
+    }
+    else
+    {
+        if (regex.test($j('#email110').val().trim()) == false) 
+        {
+            indicadorError = 1;
+            mensajeError = anterior + "La dirección de correo no es válida" + posterior;
+            $j("#mensajesEmail110").html(mensajeError);
+        }
+    }
+
+    if (indicadorCheckbox == 1)
+    {
+        $j("#rolesCheckbox110").each(function (index) 
+        {
+            if ($j(this).prop("checked") == true)
+            {
+                indicadorTildado = 1;
+                return false;
+            }
+        });
+        if (indicadorTildado == 0)
+        {
+            indicadorError = 1;
+            mensajeError = anterior + "Por favor marque al menos un rol para la persona" + posterior;
+            $j("#mensajesRoles110").html(mensajeError);
+        }
+    }
+
+    if (indicadorError == 0)
+    {
+        guardarPersona(indicadorCheckbox);
+    }
+    else
+    {
+        mensajeError = anterior + "Estimado usuario uno o más datos contienen errores, por favor verifique" + posterior;
+        $j("#mensajesUsuario30").html(mensajeError);
+        window.scrollTo(0, 0);           
+    }
+}
+
+function agregarComprador(idBien, idComprador, nombreComprador)
+{
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se agrega el comprador</strong>" +
+        "</div>";
+
+    borrarMensajesAnteriores();
+    $j("#mensajesCliente100").html(mensajesUsuario);
+
+    indicadorArregloComprador = 0;
+
+    if (gDatosBienes[idBien].CRMdapliw_cliente)
+    {
+        $j.each(gDatosBienes[idBien].CRMdapliw_cliente, function(clave, datos)  
+        {
+            if (datos.idUser == idComprador)
+            {
+                if (datos.activo == "true")
+                {
+                    mensajesUsuario =
+                        "<div class='alert alert-danger alert-dismissible'>" +
+                            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                            "<strong>Este comprador ya está asociado a esta propiedad</strong>" +
+                        "</div>"; 
+
+                    borrarMensajesAnteriores();
+	                $j("#mensajesCliente100").html(mensajesUsuario);
+                    indicadorArregloComprador = 1;                
+                }
+            }
+        });
+    }
+    if (indicadorArregloComprador == 0)
+    {
+        jsonCompradorBien = 
+            {
+                "idBien" : idBien,
+                "idComprador" : idComprador
+            };
+
+        $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'agregar_comprador_bien')) ?>", 
+            jsonCompradorBien, null, "json")          
+        .done(function(response) 
+        {
+            if (response.satisfactorio) 
+            {
+                indicadorArregloActualizado = 0;
+                if (gDatosBienes[idBien].CRMdapliw_cliente)
+                {
+                    $j.each(gDatosBienes[idBien].CRMdapliw_cliente, function(clave, datos)  
+                    {
+                        if (datos.idUser == idComprador)
+                        {
+                            datos.activo = "true";
+                            indicadorArregloActualizado = 1;                
+                        }
+                    });
+                }
+
+                if (indicadorArregloActualizado == 0)
+                {
+                    ultimaPosicion = 0;
+
+                    $j.each(gDatosBienes[gIdPostActual].CRMdapliw_cliente, function(clave, datos)  
+                    {
+                        ultimaPosicion = clave;
+                    });
+                    ultimaPosicion++;
+
+                    compradorPotencial = 
+                        {
+                            "valor" : nombreComprador,
+                            "id" : response.idPostmeta,
+                            "posicionOriginal" : ultimaPosicion,
+                            "idUser" : idComprador,
+                            "activo" : "true",
+                            "idPromotorCliente" : gIdUsuario,
+                            "nombrePromotorCliente" : gNombreUsuario
+                        }    
+
+                    if (gDatosBienes[idBien].CRMdapliw_cliente)
+                    {
+                        gDatosBienes[idBien].CRMdapliw_cliente.push(compradorPotencial);
+                    }
+                    else
+                    {
+                        gDatosBienes[idBien].CRMdapliw_cliente = [compradorPotencial];
+                    }
+                }   
+                mensajesUsuario =
+                    "<div class='alert alert-success alert-dismissible'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "<strong>" + response.mensaje + "</strong>" +
+                    "</div>";
+
+                $j("#mensajesCliente100").html(mensajesUsuario);
+
+                compradoresPotenciales(idBien);
+            } 
+            else 
+            {
+                mensajesUsuario =
+                    "<div class='alert alert-danger alert-dismissible'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "<strong>" + response.mensaje + "</strong>" +
+                    "</div>"; 
+
+            	$j("#mensajesUsuario30").html(mensajesUsuario);
+            }
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) 
+        {
+            mensajesUsuario =
+                "<div class='alert alert-danger alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong> Estimado usuario ocurrió una falla en el servidor y los datos no se pudieron guardar !</strong>" +
+                "</div>"; 
+
+            $j("#mensajesUsuario30").html(mensajesUsuario);
+        });  
+    }        
+}
+
+function eliminarComprador(idCompradorPromotor)
+{
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se elimina el comprador</strong>" +
+        "</div>";
+
+    var arregloId = idCompradorPromotor.split("-");
+    var idMensaje = "#mensajesComprador100-" + idCompradorPromotor;  
+    var idPostmeta = arregloId[3];
+
+    borrarMensajesAnteriores();
+    $j(idMensaje).html(mensajesUsuario);
+
+    var jsonPostmeta = 
+    {
+        "idPostmeta" : idPostmeta
+    }
+
+    $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'eliminar_comprador')) ?>", 
+        jsonPostmeta, null, "json")          
+    .done(function(response) 
+    {
+        if (response.satisfactorio) 
+        {
+            mensajesUsuario =
+                "<div class='alert alert-success alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" + response.mensaje + "</strong>" +
+                "</div>";
+
+            borrarMensajesAnteriores();
+            $j("#mensajesUsuario30").html(mensajesUsuario);
+
+            gDatosBienes[gIdPostActual].CRMdapliw_cliente[arregloId[0]].activo = "false";
+
+            compradoresPotenciales(gIdPostActual);
+            window.scrollTo(0, 0);
+        } 
+        else 
+        {
+            mensajesUsuario =
+            "<div class='alert alert-danger alert-dismissible'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                "<strong>" + response.mensaje + "</strong>" +
+            "</div>"; 
+
+        	$j(idMensaje).html(mensajesUsuario);
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) 
+    {
+        mensajesUsuario =
+            "<div class='alert alert-danger alert-dismissible'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                "<strong>Ocurrió un error en el servidor. Los datos no se pudieron guardar !</strong>" +
+            "</div>"; 
+
+	    $j(idMensaje).html(mensajesUsuario);
+    });
+}
+
 // Eventos
 $j(document).ready(function()
 {
@@ -2502,7 +3205,7 @@ $j(document).ready(function()
         $j("#busquedaPropiedades10").addClass('noVer');
         filtrarPropiedades(0);
         gBotonCerrar = "#cerrarPropiedadesFiltradas10";
-        mostrarBienes();
+        mostrarBienes("Propiedades", "");
         $j("#bienes60").removeClass('noVer');
         $j(gBotonCerrar).removeClass('noVer');
         $j("#publicarPropiedad10").removeClass('noVer');
@@ -2550,13 +3253,15 @@ $j(document).ready(function()
 
     $j('#bienesSinActividad51').click(function()
     {
+        $j("#busquedaAgenda51").addClass('noVer'); 
+        $j("#cerrarBusquedaAgenda10").addClass('noVer');
+        $j("#busquedaAgenda10").addClass('noVer');
         desmarcarBienesVista();
         bienesSinActividad();
         gBotonCerrar = "#cerrarAgendaFiltrada10";
-        mostrarBienes();
+        mostrarBienes("Propiedades sin Actividades Planificadas", "");
         $j("#bienes60").removeClass('noVer');
         $j(gBotonCerrar).removeClass('noVer');
-        $j("#publicarPropiedad10").removeClass('noVer');
         window.scrollTo(0, 0);
     });
 
@@ -2573,12 +3278,67 @@ $j(document).ready(function()
     $j('#cerrarAgendaFiltrada10').click(function()
     {
         $j("#agenda80").addClass('noVer');
+        if ($j("#bienes60").hasClass('noVer') === false)
+        {
+            $j("#bienes60").addClass('noVer');
+        } 
         $j("#cerrarAgendaFiltrada10").addClass('noVer');
         $j("#agregarActividad10").addClass("noVer");
         $j("#busquedaAgenda51").removeClass('noVer');
         $j("#cerrarBusquedaAgenda10").removeClass('noVer');
         $j("#busquedaAgenda10").removeClass('noVer');
         window.scrollTo(0, 0);
+    });
+
+    $j("#cicloBienes60").on("click", ".personas60", function()
+    {       
+        gPosicionAnterior = $j(this).attr('id');
+        gIdPostActual = $j(this).attr('id').substring(11);
+        $j('#bienes60').addClass('noVer');
+        $j("#cerrarPropiedadesFiltradas10").addClass('noVer');
+        $j("#publicarPropiedad10").addClass('noVer');
+        personasBien(gIdPostActual);
+        $j("#personas100").removeClass("noVer");
+        $j("#cerrarPersonas10").removeClass('noVer');
+        $j("#agregarPersona10").removeClass("noVer");
+        window.scrollTo(0, 0);
+    });
+
+    $j("#agregarPersona10").click(function()
+    {       
+        $j("#personas100").addClass("noVer");
+        $j("#cerrarPersonas10").addClass('noVer');
+        $j("#agregarPersona10").addClass('noVer');
+        inicializarPersonas();
+        $j("#agregarPersonas110").removeClass("noVer");
+        $j("#rolesCheckbox110").addClass('noVer');
+        $j("#cerrarAgregarPersona10").removeClass('noVer');
+        $j("#guardarPersona10").removeClass("noVer");
+        window.scrollTo(0, 0);
+    });
+
+    $j("#guardarPersona10").click(function()
+    {
+        indicadorCheckbox = 0;
+        validarPersona(indicadorCheckbox);
+    });
+
+    $j('#nombreCliente100').autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        { 
+            idBien = gIdPostActual;  
+            idComprador = ui.item.id; 
+            nombreComprador = ui.item.value;
+            agregarComprador(idBien, idComprador, nombreComprador);
+        }
+    });
+
+    $j("#personas100").on("click", ".eliminarComprador100", function()
+    {
+        idCompradorPromotor = $j(this).attr("id").substring(21); 
+        eliminarComprador(idCompradorPromotor);
     });
 
 });

@@ -343,7 +343,7 @@ class PostmetasController extends MvcPublicController
 
 				$objetoActividad = json_decode($object->meta_value);
 
-				$objetoActividad->notificacion = "Vista";
+				// $objetoActividad->notificacion = "Vista";
 
                 $jsonObjetoActividad = json_encode($objetoActividad);      
                 $this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
