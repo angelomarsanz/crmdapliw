@@ -1267,9 +1267,9 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 						{
                             bienesNotificaciones.push(datos2.idPropiedad);
 							notificaciones.push(datos2.id);
+                            mosaico = crearMosaicos(clave2, datos2);
+                            agenda += mosaico;
                         }
-                        mosaico = crearMosaicos(clave2, datos2);
-                        agenda += mosaico;
                     }
                 });
             }
