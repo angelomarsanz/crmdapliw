@@ -1427,8 +1427,9 @@ function crearMosaicos(clave, datos)
     mosaico += 
             "<div class='card' id='actividad80-" + clave + "-" + idActividad + "-" + datos.idPropiedad + "'>" +
                 "<div class='card-block'>" + 
-                    "<h4 class='card-title'>" + datos.nombreActividad + "</h4>" +
+                    "<h3 class='card-title'>" + gMatrizBienes[datos.idPropiedad].post_title + "</h3>" +
                     "<div class='card bg-light text-dark'>" +
+                        "<h4 class='card-title'>" + datos.nombreActividad + "</h4>" +
                         "<div class='card-body'>" +
 
                             "<div class='row'>" +
@@ -1963,10 +1964,11 @@ function mostrarBienes(tipoContenido, valor)
 				"<table class='table table-striped table-hover'>" +
 					"<thead>" +
 						"<tr>" +
-                            "<th scope='col' class='text-center' style='width:10%;'>No</th>" +
-							"<th scope='col' class='text-center' style='width:20%;'>Foto</th>" +
-							"<th scope='col' class='text-center' style='width:50%;'>Propiedad</th>" +
-							"<th scope='col' class='text-center' style='width:20%;'></th>" +
+                            "<th scope='col' class='text-center' style='width:5%;'>No</th>" +
+							"<th scope='col' class='text-center' style='width:10%;'>Foto</th>" +
+							"<th scope='col' class='text-center' style='width:30%;'>Propiedad</th>" +
+                            "<th scope='col' class='text-center' style='width:30%;'>Captador</th>" +
+							"<th scope='col' class='text-center' style='width:25%;'></th>" +
 						"</tr>" +
 					"</thead>" +
 					"<tbody>";
@@ -2023,6 +2025,23 @@ function mostrarBienes(tipoContenido, valor)
 				{
 					bienes += "<td class='text-center align-middle letraRoja'>" + bien.__name + "</td>";
 				}
+
+                if (gPermiso > 7)
+                {
+                    bienes += 
+			            "<td class='text-center align-middle'><input type='text' id='buscarCaptador60-" + bien.ID + 
+                        "' class='form-control buscarCaptador60'" + 
+				        " value='" + gMatrizBienes[bien.ID].nombre_autor + "'>" +
+                        "<spam class='mensajesUsuario' id='mensajesUsuario60-" + bien.ID + "'></spam></td>";
+                }
+                else
+                {
+					bienes += 
+						"<td class='text-center align-middle'><input type='text' id='buscarCaptador60-" + bien.ID + 
+                        "' class='form-control buscarCaptador60'" + 
+						" value='" + gMatrizBienes[bien.ID].nombre_autor + "' disabled>" +
+                        "<spam class='mensajesUsuario' id='mensajesUsuario60-" + bien.ID + "'></spam></td>";
+                }
 				
 				bienes += 
 					"<td class='text-center align-middle'>" + 				
@@ -2039,7 +2058,7 @@ function mostrarBienes(tipoContenido, valor)
 						
 						"<button class='btn btn-light agenda60' id='agenda60-" + bien.ID + "' title='Agenda'>" +
 							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-							"crmdapliw/app/public/images/clock.svg alt='Agenda' class='icono'>" +
+							"crmdapliw/app/public/images/calendar.svg alt='Agenda' class='icono'>" +
 						"</button>" +
 						
 						"<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
@@ -2112,7 +2131,7 @@ function mostrarBienes(tipoContenido, valor)
 								"<div class='form-group'>" +
 									"<label for='buscarCaptador60" + bien.ID + "'>Captador responsable: </label>";
 
-                            if (gPermiso > 3)
+                            if (gPermiso > 7)
                             {
                                 bienes += 
 						            "<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
@@ -2128,7 +2147,7 @@ function mostrarBienes(tipoContenido, valor)
                             bienes +=
 
 								"</div>" +
-								"<div class='mensajesUsuario' id='mensajesUsuario60" + bien.ID + "'>" +
+								"<div class='mensajesUsuario' id='mensajesUsuario60-" + bien.ID + "'>" +
 								"</div>" +
 
 								"<div class='card-footer'>" +
@@ -2165,7 +2184,21 @@ function mostrarBienes(tipoContenido, valor)
 	}
 
     $j("#titulo60").html(tipoContenido);
-    $j("#cicloBienes60").html(bienes);
+
+    $j("#cicloBienes60").html(bienes).find(".buscarCaptador60").autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        {
+            idBien = $j(this).attr("id").substring(17);
+            idCaptadorAnterior = gMatrizBienes[idBien].post_author;
+            idNuevoCaptador = ui.item.id;
+            nombreNuevoCaptador = ui.item.value;
+            indicadorCaptador = 0;
+            idMensaje = "#mensajesUsuario60-" + idBien; 
+            actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje);
+        }
+    });
 	
     $j.each(gBienes, function(clave, bien)  
     {
@@ -3096,6 +3129,67 @@ function eliminarComprador(idCompradorPromotor)
             "</div>"; 
 
 	    $j(idMensaje).html(mensajesUsuario);
+    });
+}
+
+function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje)
+{
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se guardan los datos</strong>" +
+        "</div>";
+
+  	$j(idMensaje).html(mensajesUsuario);
+
+    var jsonActualizarCaptador = 
+    {
+        "idBien" : idBien,
+        "idCaptadorAnterior" : idCaptadorAnterior,
+        "idNuevoCaptador" : idNuevoCaptador
+    }
+
+    $j.post("<?= mvc_public_url(array('controller' => 'posts', 'action' => 'actualizar_captador')) ?>", 
+        jsonActualizarCaptador, null, "json")          
+    .done(function(response) 
+    {
+        if (response.satisfactorio) 
+        {
+            gMatrizBienes[idBien].post_author = idNuevoCaptador;
+            gMatrizBienes[idBien].nombre_autor = nombreNuevoCaptador;
+
+            if (indicadorCaptador == 1)
+            {
+                $j("#buscarCaptador60-" + idBien).val(gMatrizBienes[idBien].nombre_autor);
+            }
+
+            mensajesUsuario =
+                "<div class='alert alert-success alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" + response.mensaje + "</strong>" +
+                "</div>";
+            $j(idMensaje).html(mensajesUsuario);
+        } 
+        else 
+        {
+            mensajesUsuario =
+            "<div class='alert alert-danger alert-dismissible'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                "<strong>" + response.mensaje + "</strong>" +
+            "</div>"; 
+
+        	$j(idMensaje).html(mensajesUsuario);
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) 
+    {
+        mensajesUsuario =
+            "<div class='alert alert-danger alert-dismissible'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                "<strong>¡ Ocurrió un error en el servidor. Los datos no se pudieron guardar !</strong>" +
+            "</div>"; 
+
+    	$j(idMensaje).html(mensajesUsuario);
     });
 }
 
