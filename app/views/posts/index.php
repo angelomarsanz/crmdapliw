@@ -32,7 +32,7 @@
                 alt="Cerrar propiedades filtradas" class="iconoMenu">
             </button>
 
-			<a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad">
+			<a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad" target="_blank">
 				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
 				alt="Publicar propiedad" class="iconoMenu">
 			</a>
@@ -552,7 +552,7 @@
 			<h2 class="letraAzul" id="tituloPersonas100"></h2>
 			<div class="row">
 				<div class="col-12 col-sm-6 col-md-4 mb-3">
-					<div class="card" id="imagen100">
+					<div class="card text-center" id="imagen100">
 					</div>
 				</div>
 				<div class="col-12 col-sm-6 col-md-8 mb-3">
@@ -2536,16 +2536,36 @@ function personasBien(idBien)
 
     $j("#tituloPersonas100").html("Personas relacionadas con la propiedad " + gMatrizBienes[idBien].post_title);
 
-    if (gDatosBienes[idBien]._thumbnail_id)
-    {
-        $j("#imagen100").html("<img src=" + gDatosBienes[idBien]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>");
+   	if (gVistaPreferida == "Lista con imágenes" || gVistaPreferida == "Mosaico con imágenes")
+	{
+        if (gDatosBienes[idBien]._thumbnail_id)
+        {
+            $j("#imagen100").html("<img src=" + gDatosBienes[idBien]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>");
+        }
+        else
+        {
+            $j("#imagen100").html("Foto de la propiedad");
+        }
     }
     else
     {
-        $j("#imagen100").html("Foto de la propiedad");
+		if (gDatosBienes[idBien]._thumbnail_id)
+		{				
+			referenciaImagen = 
+				"<a href=" + gDatosBienes[idBien]._thumbnail_id[0].valor + " title='Ver foto' target='_blank'>" +
+					"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera-slr.svg' ?>" +
+					" alt='Ver foto' class='icono'>" +
+				"</a>"; 
+
+            $j("#imagen100").html(referenciaImagen);
+		}
+		else
+		{
+			$j("#imagen100").html("Sin foto");
+		}
     }
 
-    if (gPermiso < 3 && gMatrizBienes[idBien].post_author == gIdUsuario)
+    if (gPermiso < 4 && gMatrizBienes[idBien].post_author == gIdUsuario)
     {
         indicadorCaptadorPropietario = 1;                        
     }
@@ -2563,7 +2583,7 @@ function personasBien(idBien)
     $j("#nombreCaptador100").val(gMatrizBienes[idBien].nombre_autor);
     $j("#mensajesCaptador100").html("");
 
-    if (gPermiso < 4)
+    if (gPermiso < 8)
     {
         $j("#nombreCaptador100").attr("disabled", true);        
     }
@@ -3404,6 +3424,46 @@ $j(document).ready(function()
     {
         idCompradorPromotor = $j(this).attr("id").substring(21); 
         eliminarComprador(idCompradorPromotor);
+    });
+
+    $j('#cerrarPersonas10').click(function()
+    {
+        $j("#personas100").addClass("noVer");
+        $j("#cerrarPersonas10").addClass('noVer');
+        $j("#agregarPersona10").addClass("noVer");
+        $j('#bienes60').removeClass('noVer');
+        gBotonCerrar = "#cerrarPropiedadesFiltradas10";
+        $j(gBotonCerrar).removeClass('noVer');
+        $j("#publicarPropiedad10").removeClass('noVer');
+        $j("#" + gPosicionAnterior).focus();
+    });
+
+    $j('#nombreCaptador100').autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        {   
+            idBien = gIdPostActual;
+            idCaptadorAnterior = gMatrizBienes[idBien].post_author;
+            idNuevoCaptador = ui.item.id;
+            nombreNuevoCaptador = ui.item.value;
+            indicadorCaptador = 1;
+            idMensaje = "#mensajesCaptador100"; 
+            actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje);
+        }
+    });
+
+    $j("#cerrarAgregarPersona10").click(function()
+    {       
+        $j("#agregarPersonas110").addClass("noVer");
+        $j("#cerrarAgregarPersona10").addClass('noVer');
+        $j("#guardarPersona10").addClass("noVer");
+        gBotonCerrar = "#cerrarPersonas10";
+        personasBien(gIdPostActual);
+        $j("#personas100").removeClass("noVer");
+        $j(gBotonCerrar).removeClass('noVer');
+        $j("#agregarPersona10").removeClass("noVer");
+        window.scrollTo(0, 0);
     });
 
 });
