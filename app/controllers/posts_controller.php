@@ -74,7 +74,7 @@ class PostsController extends MvcPublicController
             {
 				$cadenaRoles = "Administrador";
 			}
-			elseif (in_array("Gestor de Negocios", $roles)) 
+			elseif (in_array("Gestor de negocios", $roles)) 
 			{
 				if (in_array("Captador", $roles))
 				{

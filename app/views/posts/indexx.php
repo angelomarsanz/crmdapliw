@@ -268,7 +268,7 @@
 		<div class="container formulario noVer" id="agregarActividad90">
 			<h2 class="letraAzul" id="tituloAgregarActividad90"></h2>
 			<div class="row">
-				<div class='col-md-12'> 
+				<div class='col-md-6'> 
 					<br />
 					<br /> 
 					<form>
@@ -281,6 +281,9 @@
 									<select class='custom-select' id='Administrador90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                        <option value="Confirmar cita para mostrar propiedad">
+                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
 										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
@@ -321,6 +324,9 @@
 									<select class='custom-select' id='GestorCaptadorPromotor90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                        <option value="Confirmar cita para mostrar propiedad">
+                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
 										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
@@ -361,6 +367,9 @@
 									<select class='custom-select' id='GestorCaptador90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                        <option value="Confirmar cita para mostrar propiedad">
+                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
 										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
@@ -396,6 +405,8 @@
 									</div>
 									<select class='custom-select' id='GestorPromotor90'> 
 										<option selected></option> 
+                                        <option value="Confirmar cita para mostrar propiedad">
+                                            Confirmar cita para mostrar propiedad</option>
 										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
 										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
 										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
@@ -423,6 +434,9 @@
 									</div>
 									<select class='custom-select' id='Gestor90'> 
 										<option selected></option> 
+                                        <option value="Confirmar cita para mostrar propiedad">
+                                            Confirmar cita para mostrar propiedad</option>
+                                        <option value="Coordinar actividades para mostrar propiedad">Coordinar actividades para mostrar propiedad</option>
 										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
 										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
 										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
@@ -444,6 +458,8 @@
 									<select class='custom-select' id='CaptadorPromotor90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                        <option value="Confirmar cita para mostrar propiedad">
+                                            Confirmar cita para mostrar propiedad</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
 										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
@@ -476,6 +492,8 @@
 									<select class='custom-select' id='Captador90'> 
 										<option selected></option> 
 										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
+                                        <option value="Confirmar cita para mostrar propiedad">
+                                            Confirmar cita para mostrar propiedad</option>
 										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
 										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
 										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
@@ -518,14 +536,16 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group"> 
-									<label for="notas90">Notas</label> 
-									<input type="text" class="form-control" id="notas90"> 
+									<label for="informacionAdicional90">Información adicional</label> 
+									<input type="text" class="form-control" id="informacionAdicional90"> 
 								</div>
-                                <div class="mensajesUsuario" id="mensajesNotas90"></div>
+                                <div class="mensajesUsuario" id="mensajesInformacion90"></div>
 							</div>
 						</div>
 
-						<div class="row" id="fechaPlanificada90">
+						<div class="row">
+							<div class="col-md-12" id="fechaPlanificada90">								
+							</div>
 						</div>
 					</form>
 				</div> 
@@ -723,12 +743,6 @@
         <br />
         <br />
     <?php endif; ?>
-    <?php
-        for ($i = 1; $i <= 17; $i++) 
-        {
-            echo "<br />";
-        }
-    ?>
 </div>
 
 <script>
@@ -760,7 +774,6 @@ var gFechaActualInvertida =
 
 var gBotonCerrarLlamador = "";
 var gNotificaciones = <?= $notificaciones ?>;
-var gIndicadorAdicional = 0;
 
 // Funciones
 
@@ -1413,10 +1426,8 @@ function crearMosaicos(clave, datos)
         "/" +
         datos.anoPlanificado;
 
-    complementoId = clave + "-" + idActividad + "-" + datos.idPropiedad;   
-
     mosaico += 
-            "<div class='card' id='actividad80-" + complementoId + "'>" +
+            "<div class='card' id='actividad80-" + clave + "-" + idActividad + "-" + datos.idPropiedad + "'>" +
                 "<div class='card-block'>" + 
                     "<h3 class='card-title'>" + gMatrizBienes[datos.idPropiedad].post_title + "</h3>" +
                     "<div class='card bg-light text-dark'>" +
@@ -1428,13 +1439,14 @@ function crearMosaicos(clave, datos)
                                     "<div class='form-group'>" + 
                                         "<label for='notas80'>Notas</label>" +  
                                         "<input type='text' class='form-control' id='notas80-" + 
-                                            complementoId + "' value='" + datos.notas + "'>" + 
+                                            clave + "-" + idActividad + "-" + datos.idPropiedad + "' value='" + datos.notas + "'>" + 
                                     "</div>" +
                                 "</div>" + 
                             "</div>" +
 
-                            "<div class='row' id='fechaPlanificada80" + complementoId + "'>";
-             
+                            "<div class='row' id='fechaPlanificada80'>";
+    
+    complementoId = clave + "-" + idActividad + "-" + datos.idPropiedad;            
 	idFechas =
 		{
 			"idAno" : "actividadesAno80-" + complementoId,
@@ -1454,7 +1466,7 @@ function crearMosaicos(clave, datos)
 
 			"idHora" : "actividadesHora80-" + complementoId,
 			"idSelectHora" : "hora80-" + complementoId,
-            "valorHora" : datos.horaPlanificado,
+            "valorHora" : datos.HoraPlanificado,
             "idMensajesHora" : "mensajesHora80-" + complementoId,
 
 			"idMinuto" : "actividadesMinuto80-" + complementoId,
@@ -1481,14 +1493,14 @@ function crearMosaicos(clave, datos)
                             "<div class='col-md-3'>" +
                                 "<div class='form-check'>" +
                                     "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + 
-                                        complementoId + "'>" +
+                                        clave + "-" + idActividad + "-" + datos.idPropiedad + "'>" +
                                     "<label class='form-check-label' for='cerrarActividad80'>&nbsp;&nbsp;Cerrar</label>" +
                                 "</div>" +
                             "</div>"+
 
                             "<div class='col-md-3'>" +
                                 "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + 
-                                    complementoId + "'>" + 
+                                    clave + "-" + idActividad + "-" + datos.idPropiedad + "'>" + 
                                     "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
                                     "crmdapliw/app/public/images/pencil.svg alt='Guardar cambios' class='icono'>" +
                                 "</button>" +
@@ -1502,61 +1514,50 @@ function crearMosaicos(clave, datos)
         "</div>" +
         "<div class='row'>" +
             "<div class='col-md-12'>" +
-                "<div class='mensajesUsuario' id='mensajesUsuario80-" + complementoId + "'>" +
+                "<div class='mensajesUsuario' id='mensajesUsuario80-" + clave + "-" + idActividad + "-" + datos.idPropiedad + "'>" +
                 "</div>" +
             "</div>" +
         "</div>" + 
-
-	    "<div class='row noVer' id='adicionalGrupoNotas80-" + complementoId + "'>" +
-		    "<div class='col-md-12'>" +
-			    "<div class='form-group'>" + 
-				    "<label for='adicionalNotas80'>Notas</label>" +  
-				    "<input type='text' class='form-control' id='adicionalNotas80-" + 
-					    complementoId + "'>" + 
-			    "</div>" +
-		    "</div>" + 
-	    "</div>" +		
-
-        "<div class='row noVer' id='adicionalFechaPlanificada80-" + complementoId + "'>";
+        "<div class='row' id='adicionalFechaPlanificada80'>";
                 
 	idFechas =
 		{			
-			"idAno" : "adicionalActividadesAno80-" + complementoId,
-			"idSelectAno" : "adicionalAno80-" + complementoId,
+			"idAno" : "actividadesAno80-" + complementoId,
+			"idSelectAno" : "ano80-" + complementoId,
             "valorAno" : gAnoActual, 
-            "idMensajesAno" : "adicionalMensajesAno80-" + complementoId,
+            "idMensajesAno" : "mensajesAno80-" + complementoId,
 
-			"idMes" : "adicionalActividadesMes80-" + complementoId,
-			"idSelectMes" : "adicionalMes80-" + complementoId,
+			"idMes" : "actividadesMes80-" + complementoId,
+			"idSelectMes" : "mes80-" + complementoId,
             "valorMes" : gMesActual,
-            "idMensajesMes" : "adicionalMensajesMes80-" + complementoId,
+            "idMensajesMes" : "mensajesMes80-" + complementoId,
 
-			"idDia" : "adicionalActividadesDia80-" + complementoId,
-			"idSelectDia" : "adicionalDia80-" + complementoId,
+			"idDia" : "actividadesDia80-" + complementoId,
+			"idSelectDia" : "dia80-" + complementoId,
             "valorDia" : gDiaActual, 
-            "idMensajesDia" : "adicionalMensajesDia80-" + complementoId,
+            "idMensajesDia" : "mensajesDia80-" + complementoId,
 
-			"idHora" : "adicionalActividadesHora80-" + complementoId,
-			"idSelectHora" : "adicionalHora80-" + complementoId,
+			"idHora" : "actividadesHora80-" + complementoId,
+			"idSelectHora" : "hora80-" + complementoId,
             "valorHora" : "",
-            "idMensajesHora" : "adicionalMensajesHora80-" + complementoId,
+            "idMensajesHora" : "mensajesHora80-" + complementoId,
 
-			"idMinuto" : "adicionalActividadesMinuto80-" + complementoId,
-			"idSelectMinuto" : "adicionalMinuto80-" + complementoId,
+			"idMinuto" : "actividadesMinuto80-" + complementoId,
+			"idSelectMinuto" : "minuto80-" + complementoId,
             "valorMinuto" : "",
-            "idMensajesMinuto" : "adicionalMensajesMinuto80-" + complementoId,
+            "idMensajesAno" : "mensajesMinuto80-" + complementoId,
 
-			"idMeridiano" : "adicionalActividadesMeridiano80-" + complementoId,
-			"idSelectMeridiano" : "adicionalMeridiano80-" + complementoId,
+			"idMeridiano" : "actividadesMeridiano80-" + complementoId,
+			"idSelectMeridiano" : "meridiano80-" + complementoId,
             "valorMeridiano" : "",
-            "idMensajesMeridiano" : "adicionalMensajesMeridiano80-" + complementoId
+            "idMensajesMeridiano" : "mensajesMeridiano80-" + complementoId				
 		};
 			
     lineaFecha = inicializarFecha(idFechas);
 
     mosaico += 
-        lineaFecha + 
-            "</div>" + 
+        lineaFecha + 		
+		"</div>" + 
         "<br />" +
         "<br />";
 
@@ -1829,17 +1830,15 @@ function inicializarFecha(idFechas)
     }
     else if (idFechas.valorMeridiano == "am")
     {
-        lineaFecha += 
-            "<option value=''></option>" +
-            "<option selected value='am'>am</option>" + 
-            "<option value='pm'>pm</option>";
+        "<option value=''></option>" +
+        "<option selected value='am'>am</option>" + 
+        "<option value='pm'>pm</option>";
     }
     else
     {
-        lineaFecha += 
-            "<option value=''></option>" +
-            "<option value='am'>am</option>" + 
-            "<option selected value='pm'>pm</option>";
+        "<option value=''></option>" +
+        "<option selected value='am'>am</option>" + 
+        "<option value='pm'>pm</option>";
     }
         
     lineaFecha +=
@@ -2377,6 +2376,7 @@ function bienesSinActividad()
 	        {
                 if (gPermiso < 4)
                 {
+                    console.log("datos2.idEjecutor " + datos2.idEjecutor + " gdIdUsuario " + gIdUsuario);
                     if (datos2.idEjecutor == gIdUsuario)
                     {
                         if (datos2.estatus == "Abierta")
@@ -3256,6 +3256,168 @@ function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreN
     });
 }
 
+function mostrarActividadIndividual(clave, datos)
+{
+    var mosaico = "";
+
+    idActividad = datos.id;
+
+    fechaPlanificada = 
+        datos.diaPlanificado +
+        "/" +
+        datos.mesPlanificado + 
+        "/" +
+        datos.anoPlanificado;
+
+    mosaico += 
+            "<div class='card' id='actividad80-" + clave + "-" + idActividad + "-" + datos.idPropiedad + "'>" +
+                "<div class='card-block'>" + 
+                    "<h3 class='card-title'>" + gMatrizBienes[datos.idPropiedad].post_title + "</h3>" +
+                    "<div class='card bg-light text-dark'>" +
+                        "<h4 class='card-title'>" + datos.nombreActividad + "</h4>" +
+                        "<div class='card-body'>" +
+
+                            "<div class='row'>" +
+                                "<div class='col-md-12'>" +
+                                    "<div class='form-group'>" + 
+                                        "<label for='notas80'>Notas</label>" +  
+                                        "<input type='text' class='form-control' id='notas80-" + 
+                                            clave + "-" + idActividad + "-" + datos.idPropiedad + "' value='" + datos.notas + "'>" + 
+                                    "</div>" +
+                                "</div>" + 
+                            "</div>" +
+
+                            "<div class='row' id='fechaPlanificada80'>";
+                
+	idFechas =
+		{
+			"idAno" : "actividadesAno80-" + complementoId,
+			"idSelectAno" : "ano80-" + complementoId,
+            "valorAno" : gAnoActual, 
+            "idMensajesAno" : "mensajesAno80-" + complementoId,
+
+			"idMes" : "actividadesMes80-" + complementoId,
+			"idSelectMes" : "mes80-" + complementoId,
+            "valorMes" : gMesActual,
+            "idMensajesMes" : "mensajesMes80-" + complementoId,
+
+			"idDia" : "actividadesDia80-" + complementoId,
+			"idSelectDia" : "dia80-" + complementoId,
+            "valorDia" : gDiaActual, 
+            "idMensajesDia" : "mensajesDia80-" + complementoId,
+
+			"idHora" : "actividadesHora80-" + complementoId,
+			"idSelectHora" : "hora80-" + complementoId,
+            "valorHora" : "",
+            "idMensajesHora" : "mensajesHora80-" + complementoId,
+
+			"idMinuto" : "actividadesMinuto80-" + complementoId,
+			"idSelectMinuto" : "minuto80-" + complementoId,
+            "valorMinuto" : "",
+            "idMensajesMinuto" : "mensajesMinuto80-" + complementoId,
+
+			"idMeridiano" : "actividadesMeridiano80-" + complementoId,
+			"idSelectMeridiano" : "meridiano80-" + complementoId,
+            "valorMeridiano" : "",
+            "idMensajesMeridiano" : "mensajesMeridiano80-" + complementoId				
+
+		};
+			
+    lineaFecha = inicializarFecha(idFechas);
+
+    mosaico += 
+        lineaFecha + 
+                        "</div>" +
+                            
+                        "<div class='row'>" +
+                            "<div class='col-md-6'>" +
+                                "<p>Responsable: " + gUsuarios[datos.idEjecutor].first_name + " " + gUsuarios[datos.idEjecutor].last_name  + "</p>" + 
+                            "</div>" + 
+                            "<div class='col-md-3'>" +
+                                "<div class='form-check'>" +
+                                    "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + 
+                                        clave + "-" + idActividad + "-" + datos.idPropiedad + "'>" +
+                                    "<label class='form-check-label' for='cerrarActividad80'>&nbsp;&nbsp;Cerrar</label>" +
+                                "</div>" +
+                            "</div>"+
+
+                            "<div class='col-md-3'>" +
+                                "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + 
+                                    clave + "-" + idActividad + "-" + datos.idPropiedad + "'>" + 
+                                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
+                                    "crmdapliw/app/public/images/pencil.svg alt='Guardar cambios' class='icono'>" +
+                                "</button>" +
+                            "</div>"+
+
+                        "</div>" +
+
+                    "</div>" +
+                "</div>" +
+            "</div>" +
+        "</div>" +
+        "<div class='row'>" +
+            "<div class='col-md-12'>" +
+                "<div class='mensajesUsuario' id='mensajesUsuario80-" + clave + "-" + idActividad + "-" + datos.idPropiedad + "'>" +
+                "</div>" +
+            "</div>" +
+        "</div>" + 
+		
+		"<div class='row'>" +
+			"<div class='col-md-12'>" +
+				"<div class='form-group'>" + 
+					"<label for='adicionalNotas80'>Notas</label>" +  
+					"<input type='text' class='form-control' id='adicionalNotas80-" + 
+						clave + "-" + idActividad + "-" + datos.idPropiedad + "'>" + 
+				"</div>" +
+			"</div>" + 
+		"</div>" +		
+
+        "<div class='row' id='adicionalFechaPlanificada80'>";
+                
+	idFechas =
+		{			
+			"idAno" : "adicionalActividadesAno80-" + complementoId,
+			"idSelectAno" : "adicionalAno80-" + complementoId,
+            "valorAno" : datos.anoPlanificado, 
+            "idMensajesAno" : "adicionalMensajesAno80-" + complementoId,
+
+			"idMes" : "adicionalActividadesMes80-" + complementoId,
+			"idSelectMes" : "adicionalMes80-" + complementoId,
+            "valorMes" : datos.mesPlanificado,
+            "idMensajesMes" : "adicionalMensajesMes80-" + complementoId,
+
+			"idDia" : "adicionalActividadesDia80-" + complementoId,
+			"idSelectDia" : "adicionalDia80-" + complementoId,
+            "valorDia" : datos.diaPlanificado, 
+            "idMensajesDia" : "adicionalMensajesDia80-" + complementoId,
+
+			"idHora" : "adicionalActividadesHora80-" + complementoId,
+			"idSelectHora" : "adicionalHora80-" + complementoId,
+            "valorHora" : datos.HoraPlanificado,
+            "idMensajesHora" : "adicionalMensajesHora80-" + complementoId,
+
+			"idMinuto" : "adicionalActividadesMinuto80-" + complementoId,
+			"idSelectMinuto" : "adicionalMinuto80-" + complementoId,
+            "valorMinuto" : datos.minutoPlanificado,
+            "idMensajesMinuto" : "adicionalMensajesMinuto80-" + complementoId,
+
+			"idMeridiano" : "adicionalActividadesMeridiano80-" + complementoId,
+			"idSelectMeridiano" : "adicionalMeridiano80-" + complementoId,
+            "valorMeridiano" : datos.meridianoPlanificado,
+            "idMensajesMeridiano" : "adicionalMensajesMeridiano80-" + complementoId
+		};
+			
+    lineaFecha = inicializarFecha(idFechas);
+
+    mosaico += 
+        lineaFecha + 
+		"</div>" +
+        "<br />" +
+        "<br />";
+
+    $j("#agenda80").html(mosaico);
+}
+
 function guardarCambiosAgenda(idActividad)
 {
     var mensajesUsuario = 
@@ -3266,6 +3428,7 @@ function guardarCambiosAgenda(idActividad)
     var arregloId = idActividad.split("-");
     var idMensaje = "#mensajesUsuario80-" + idActividad;
     var tarjeta = "#actividad80-" + idActividad;
+    var tarjetaInput = "#actividad80-" + idActividad + " input";
     var idActividadObj = arregloId[1];
     var notasObj = "";
     var anoPlanificadoObj = "";
@@ -3274,88 +3437,87 @@ function guardarCambiosAgenda(idActividad)
     var horaPlanificadoObj = "";
     var minutoPlanificadoObj = "";
     var meridianoPlanificadoObj = "";
-
-    var adicionalAnoPlanificadoObj = "";
-    var adicionalMesPlanificadoObj = "";
-    var adicionalDiaPlanificadoObj = "";
-    var adicionalHoraPlanificadoObj = "";
-    var adicionalMinutoPlanificadoObj = "";
-    var adicionalMeridianoPlanificadoObj = "";
-    var adicionalNotasObj = "";
-
     var estatusObj = "";
 
-    var informacionAdicional = "";
+    $j(idMensaje).html(mensajesUsuario);
 
-    $j("#notas80-" + idActividad).val($j.trim($j("#notas80-" + idActividad).val().toUpperCase()));
+    $j(tarjetaInput).each(function (index) 
+    {
+        if ($j(this).attr('id').substring(0, 7) == "notas80")
+        {
+            console.log("Entré a notas");
 
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].notas = $j("#notas80-" + idActividad).val();
-    notasObj = $j("#notas80-" + idActividad).val();
+            $j(this).val($j.trim($j(this).val().toUpperCase()));
+            gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].notas = $j(this).val();
+            notasObj = $j(this).val();
+        }
 
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].anoPlanificado = $j("#ano80-" + idActividad).val();
-    anoPlanificadoObj = $j("#ano80-" + idActividad).val();
+        if ($j(this).attr('id').substring(0, 5) == "ano80")
+        {
+            console.log("Entré a ano");
 
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].mesPlanificado = $j("#mes80-" + idActividad).val();
-    mesPlanificadoObj = $j("#mes80-" + idActividad).val();
+            gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].anoPlanificado = $j(this).val();
+            anoPlanificadoObj = $j(this).val();
+        }
 
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].diaPlanificado = $j("#dia80-" + idActividad).val();
-    diaPlanificadoObj = $j("#dia80-" + idActividad).val();
+        if ($j(this).attr('id').substring(0, 5) == "mes80")
+        {
+            console.log("Entré a mes");
 
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].horaPlanificado = $j("#hora80-" + idActividad).val();
-    horaPlanificadoObj = $j("#hora80-" + idActividad).val();
+            gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].mesPlanificado = $j(this).val();
+            mesPlanificadoObj = $j(this).val();
+        }
 
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].horaPlanificado = $j("#minuto80-" + idActividad).val();
-    minutoPlanificadoObj = $j("#minuto80-" + idActividad).val();
+        if ($j(this).attr('id').substring(0, 5) == "dia80")
+        {
+            console.log("Entré a dia");
 
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].horaPlanificado = $j("#meridiano80-" + idActividad).val();
-    meridianoPlanificadoObj = $j("#meridiano80-" + idActividad).val();
+            gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].diaPlanificado = $j(this).val();
+            diaPlanificadoObj = $j(this).val();
+        }
+
+        if ($j(this).attr('id').substring(0, 6) == "hora80")
+        {
+            console.log("Entré a hora");
+
+            gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].horaPlanificado = $j(this).val();
+            horaPlanificadoObj = $j(this).val();
+        }
+
+        if ($j(this).attr('id').substring(0, 8) == "minuto80")
+        {
+            console.log("Entré a minuto");
+
+            gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].horaPlanificado = $j(this).val();
+            minutoPlanificadoObj = $j(this).val();
+        }
+
+        if ($j(this).attr('id').substring(0, 11) == "meridiano80")
+        {
+            console.log("Entré a meridiano");
+
+            gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].horaPlanificado = $j(this).val();
+            meridianoPlanificadoObj = $j(this).val();
+        }
+                               
+        }
+        if ($j(this).attr('id').substring(0, 17) == "cerrarActividad80")
+        {
+            if ($j(this).prop("checked") == true)
+            {
+                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "Cerrada por el usuario";
+                estatusObj = "Cerrada por el usuario";
+            }
+            else
+            {
+                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "abierta";
+                estatusObj = "abierta";
+            }
+        }
+    });
 
     gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].fechaInvertida = 
             anoPlanificadoObj + mesPlanificadoObj + diaPlanificadoObj;
-
-    if ($j("#cerrarActividad80-" + idActividad).prop("checked") == true)
-    {
-        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "Cerrada por el usuario";
-        estatusObj = "Cerrada por el usuario";
-    }
-    else
-    {
-        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "abierta";
-        estatusObj = "abierta";
-    }
-
-    if (gIndicadorAdicional == 1)
-    {
-        $j("#adicionalNotas80-" + idActividad).val($j.trim($j("#adicionalNotas80-" + idActividad).val().toUpperCase()));
-        adicionalNotasObj = $j("#adicionalNotas80-" + idActividad).val();
-
-        adicionalAnoPlanificadoObj = $j("#adicionalAno80-" + idActividad).val();
-
-        adicionalMesPlanificadoObj = $j("#adicionalMes80-" + idActividad).val();
-
-        adicionalDiaPlanificadoObj = $j("#adicionalDia80-" + idActividad).val();
-
-        adicionalHoraPlanificadoObj = $j("#adicionalHora80-" + idActividad).val();
-
-        adicionalMinutoPlanificadoObj = $j("#adicionalMinuto80-" + idActividad).val();
-
-        adicionalMeridianoPlanificadoObj = $j("#adicionalMeridiano80-" + idActividad).val();
-
-        informacionAdicional =
-            {
-                "nombreActividad" : "Confirmación solicitud de cita para mostrar propiedad",
-                "notas" : adicionalNotasObj,
-                "anoPlanificado" : adicionalAnoPlanificadoObj,
-                "mesPlanificado" : adicionalMesPlanificadoObj,
-                "diaPlanificado" : adicionalDiaPlanificadoObj,
-                "horaPlanificado" : adicionalHoraPlanificadoObj,
-                "minutoPlanificado" : adicionalMinutoPlanificadoObj,
-                "meridianoPlanificado" : adicionalMeridianoPlanificadoObj
-            };
-
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].informacionAdicional = informacionAdicional;
-
-    }
 
     var jsonActividad = 
     {
@@ -3367,11 +3529,9 @@ function guardarCambiosAgenda(idActividad)
         "horaPlanificado" : horaPlanificadoObj,
         "minutoPlanificado" : minutoPlanificadoObj,
         "meridianoPlanificado" : meridianoPlanificadoObj,
-        "informacionAdicional" : informacionAdicional,
+        "informacionAdicional" : "",
         "estatus" : estatusObj
     }
-
-    console.log(jsonActividad);
 
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'editar_actividad')) ?>", 
         jsonActividad, null, "json")          
@@ -3427,13 +3587,12 @@ function validarActividad(tipoActividad, idActividad)
 
     if (tipoActividad == "Nueva")
     {
-		idSelectActividad = "#" + gCadenaRoles + "90";
-
+		idSelectActividad = "#" + cadenaRoles + "90";
         if ($j(idSelectActividad).val() == "")  
         {   
             indicadorError = 1;
             mensajeError = anterior + "Seleccione una actividad" + posterior;
-            $j("#mensajesActividad90").html(mensajeError);
+            $j("#mensajesActividad100").html(mensajeError);
         }
         else
         {
@@ -3457,8 +3616,8 @@ function validarActividad(tipoActividad, idActividad)
 			    "idSelectMeridiano" : "#meridiano90",
                 "idMensajesMeridiano" : "#mensajesMeridiano90"
             }
-           
-            indicadorError = validarFecha(idFechas);
+            
+            indicadorError = validarFechas(idFechas);
     
             if (indicadorError == 0)
 		    {
@@ -3468,7 +3627,7 @@ function validarActividad(tipoActividad, idActividad)
 	}	
 	else
 	{	
-		complementoId = idActividad;           
+		complementoId = idActividad.substring(17);           
 		idFechas =
 		{
 			"idSelectAno" : "#ano80-" + complementoId,
@@ -3490,34 +3649,32 @@ function validarActividad(tipoActividad, idActividad)
             "idMensajesMeridiano" : "#mensajesMeridiano80-" + complementoId		
         };	
 	
-	    indicadorError = validarFecha(idFechas);
+	    indicadorError = validarFechas(idFechas);
 
         if (indicadorError == 0)
         {
-            if (gIndicadorAdicional == 1)
-            {
-		        idFechas =
-		        {
-			        "idSelectAno" : "#adicionalAno80-" + complementoId,
-                    "idMensajesAno" : "#adicionalMensajesAno80-" + complementoId,
+		    complementoId = idActividad.substring(17);           
+		    idFechas =
+		    {
+			    "idSelectAno" : "#adicionalAno80-" + complementoId,
+                "idMensajesAno" : "#adicionalMensajesAno80-" + complementoId,
 
-			        "idSelectMes" : "#adicionalMes80-" + complementoId,
-                    "idMensajesMes" : "#adicionalMensajesMes80-" + complementoId,
+			    "idSelectMes" : "#adicionalMes80-" + complementoId,
+                "idMensajesMes" : "#adicionalMensajesMes80-" + complementoId,
 
-			        "idSelectDia" : "#adicionalDia80-" + complementoId,
-                    "idMensajesDia" : "#adicionalMensajesDia80-" + complementoId,
+			    "idSelectDia" : "#adicionalDia80-" + complementoId,
+                "idMensajesDia" : "#adicionalMensajesDia80-" + complementoId,
 
-			        "idSelectHora" : "#adicionalHora80-" + complementoId,
-                    "idMensajesHora" : "#adicionalMensajesHora80-" + complementoId,
+			    "idSelectHora" : "#adicionalhHora80-" + complementoId,
+                "idMensajesHora" : "#adicionalMensajesHora80-" + complementoId,
 
-			        "idSelectMinuto" : "#adicionalMinuto80-" + complementoId,
-                    "idMensajesMinuto" : "#adicionalMensajesMinuto80-" + complementoId,
+			    "idSelectMinuto" : "#adicionalMinuto80-" + complementoId,
+                "idMensajesMinuto" : "#adicionalMensajesMinuto80-" + complementoId,
 
-			        "idSelectMeridiano" : "#adicionalMeridiano80-" + complementoId,
-                    "idMensajesMeridiano" : "#adicionalMensajesMeridiano80-" + complementoId		
-                };
-                indicadorError = validarFecha(idFechas);
-            }
+			    "idSelectMeridiano" : "#adicionalMeridiano80-" + complementoId,
+                "idMensajesMeridiano" : "#adicionalMensajesMeridiano80-" + complementoId		
+            };
+            indicadorError = validarFechas(idFechas);
         }
         if (indicadorError == 0)
 	    {
@@ -3602,247 +3759,6 @@ function validarFecha(idFechas)
     }
 
     return indicadorError;
-}
-
-function verificarAdicional(idActividad)
-{
-    var complementoId = idActividad.substring(18);
-    var arregloId = idActividad.split("-");       
-    clave = arregloId[1];
-
-    if (datos.nombreActividad == "Solicitud de cita para mostrar propiedad")
-    {
-        gIndicadorAdicional = 1;
-
-        var mensajesUsuario = 
-            "<div class='alert alert-info alert-dismissible'>" +
-                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong>Estimado usuario por favor escriba los datos referentes a la confirmación de la cita</strong>" +
-            "</div>";
-
-        borrarMensajesAnteriores();
-
-        idMensaje = "#mensajesUsuario80-" + complementoId; 
-
-        $j(idMensaje).html(mensajesUsuario);
-
-        $j("#adicionalFechaPlanificada80-" + complementoId).removeClass("noVer");
-        $j("#adicionalGrupoNotas80-" + complementoId).removeClass("noVer");
-    }
-}
-
-function inicializarFormularioActividad()
-{
-    $j('#tituloAgregarActividad90').html("Planificar actividades para " + gMatrizBienes[gIdPostActual].post_title); 
-    $j('#actividadAgenda90').val("");
-    $j('#notas90').val("");
-    selectActividades();
-	idFechas =
-		{
-			"idAno" : "actividadesAno90",
-			"idSelectAno" : "ano90",
-            "valorAno" : gAnoActual, 
-            "idMensajesAno" : "mensajesAno90",
-
-			"idMes" : "actividadesMes90",
-			"idSelectMes" : "mes90",
-            "valorMes" : gMesActual,
-            "idMensajesMes" : "mensajesMes90",
-
-			"idDia" : "actividadesDia90",
-			"idSelectDia" : "dia90",
-            "valorDia" : gDiaActual,
-            "idMensajesDia" : "mensajesDia90",
-
-			"idHora" : "actividadesHora90",
-			"idSelectHora" : "hora90",
-            "valorHora" : "",
-            "idMensajesHora" : "mensajesHora90",
-
-			"idMinuto" : "actividadesMinuto90",
-			"idSelectMinuto" : "minuto90",
-            "valorMinuto" : "",
-            "idMensajesMinuto" : "mensajesMinuto90",
-
-			"idMeridiano" : "actividadesMeridiano90",
-            "valorMeridiano" : "",
-			"idSelectMeridiano" : "meridiano90",
-            "idMensajesMeridiano" : "mensajesMeridiano90"
-		};
-				
-    lineaFecha = inicializarFecha(idFechas);
-    $j("#fechaPlanificada90").html(lineaFecha);
-}
-
-function selectActividades()
-{
-    if (gCadenaRoles == "Administrador")
-    {
-        $j("#actividadesAdministrador90").removeClass('noVer');
-    }   
-    else if (gCadenaRoles == "GestorCaptadorPromotor")
-    {
-         $j("#actividadesGestorCaptadorPromotor90").removeClass('noVer');
-    }    
-    else if (gCadenaRoles == "GestorCaptador")
-    {
-         $j("#actividadesGestorCaptador90").removeClass('noVer');
-    }    
-    else if (gCadenaRoles == "GestorPromotor")
-    {
-         $j("#actividadesGestorPromotor90").removeClass('noVer');
-    }    
-    else if (gCadenaRoles == "Gestor")
-    {
-         $j("#actividadesGestor90").removeClass('noVer');
-    }    
-    else if (gCadenaRoles == "CaptadorPromotor")
-    {
-         $j("#actividadesCaptadorPromotor90").removeClass('noVer');
-    }    
-    else if (gCadenaRoles == "Captador")
-    {
-         $j("#actividadesCaptador90").removeClass('noVer');
-    }    
-    else 
-    {
-         $j("#actividadesPromotor90").removeClass('noVer');
-    }    
-}
-
-function guardarActividad()
-{
-    var mensajesUsuario = 
-        "<div class='alert alert-info alert-dismissible'>" +
-            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-            "<strong>Por favor espere mientras se guardan los datos</strong>" +
-        "</div>";
-
-    borrarMensajesAnteriores();
-
-    $j("#mensajesUsuario30").html(mensajesUsuario);
-
-    $j("#notas90").val($j.trim($j("#notas90").val().toUpperCase()));
-
-    idSelectActividad = "#" + gCadenaRoles + "90"
-
-    jsonActividad = 
-        {"idPost" : gIdPostActual,
-        "actividad" :  
-            {
-                "nombreActividad" : $j(idSelectActividad).val(),
-                "notas" : $j("#notas90").val(),
-                "anoPlanificado" : $j("#ano90").val(),
-                "mesPlanificado" : $j("#mes90").val(),
-                "diaPlanificado" : $j("#dia90").val(),
-                "horaPlanificado" : $j("#hora90").val(),
-                "minutoPlanificado" : $j("#minuto90").val(),
-                "meridianoPlanificado" : $j("#meridiano90").val(),
-                "anoCierre" : $j("#ano90").val(),
-                "mesCierre" : $j("#mes90").val(),
-                "diaCierre" : $j("#dia90").val(),
-                "horaCierre" : $j("#hora90").val(),
-                "minutoCierre" : $j("#minuto90").val(),
-                "meridianoCierre" : $j("#meridiano90").val(),
-				"idPropiedad" : gIdPostActual,
-                "idEjecutor" : gIdUsuario,
-                "idSolicitante" : gIdUsuario,
-                "idActividadPadre" : "",
-                "notificacion" : "Vista",
-                "informacionAdicional" : "",
-                "historialDeCambios" : "",
-                "estatus" : "Abierta"
-            }
-        };
-    
-    if ($j(idSelectActividad).val() == "Solicitar cita para mostrar propiedad")
-    {
-        destinatarios = [gMatrizBienes[gIdPostActual].post_author];
-
-        $j.each(gUsuarios, function(clave, datos)  
-        {
-            if (datos.CRMdapliw_roles.includes("Gestor de negocios"))
-            {
-                destinatarios.push(clave);
-            }
-        });                               
-
-        jsonActividad.actividad.informacionAdicional =
-            {
-                "solicitante" : gNombreUsuario,
-                "destinatarios" : destinatarios
-            };        
-    }
-
-    $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'agregar_actividad')) ?>", 
-        jsonActividad, null, "json")          
-    .done(function(response) 
-    {
-        if (response.satisfactorio) 
-        {
-            fechaInvertida = 
-                $j("#ano90").val() +
-                $j("#mes90").val() +
-                $j("#dia90").val();
-
-            jsonActividad.actividad.id = response.id;
-            jsonActividad.actividad.fechaInvertida = fechaInvertida;
-
-            if (gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda)
-            {
-                ultimaPosicion = 0;
-
-                $j.each(gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda, function(clave, datos)  
-                {
-                    ultimaPosicion = clave;
-                });
-
-                ultimaPosicion++;
-                jsonActividad.actividad.posicionOriginal = ultimaPosicion;
-            
-                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda.push(jsonActividad.actividad);
-            }
-            else
-            {
-                jsonActividad.actividad.posicionOriginal = 0;
-
-                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda = [jsonActividad.actividad];
-            }
-
-            mensajesUsuario =
-                "<div class='alert alert-success alert-dismissible'>" +
-                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>¡ Los datos se guardaron exitosamente ! </strong>" +
-                "</div>";
-
-            $j("#mensajesUsuario30").html(mensajesUsuario);
-
-            $j("#agregarActividad90").addClass("noVer");
-            $j("#cerrarAgregarActividad10").addClass("noVer");
-            $j("#guardarActividad10").addClass("noVer");
-            mostrarAgenda("Propiedad", gIdPostActual); 
-        } 
-        else 
-        {
-            mensajesUsuario =
-                "<div class='alert alert-danger alert-dismissible'>" +
-                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>" + response.mensaje + "</strong>" +
-                "</div>"; 
-
-        	$j("#mensajesUsuario30").html(mensajesUsuario);
-        }
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) 
-    {
-        mensajesUsuario =
-            "<div class='alert alert-danger alert-dismissible'>" +
-                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong>¡ Los datos no se pudieron guardar !</strong>" +
-            "</div>"; 
-
-        $j("#mensajesUsuario30").html(mensajesUsuario);
-    });  
 }
 
 // Eventos
@@ -4125,8 +4041,7 @@ $j(document).ready(function()
         clave = arregloId[1];
         gIdPostActual = arregloId[3];
         datos = gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[clave]
-        mosaico = crearMosaicos(clave, datos);
-        $j("#agenda80").html(mosaico);
+        mostrarActividadIndividual(clave, datos);
         $j("#cerrarAgenda10").addClass('noVer');
         $j("#agregarActividad10").addClass('noVer');
         $j("#cerrarActividadIndividual10").removeClass("noVer");
@@ -4141,45 +4056,10 @@ $j(document).ready(function()
         mostrarAgenda("Propiedad", gIdPostActual);    
     });
 
-    $j("#agenda80").on("click", ".cerrarActividad80", function()
-    {
-        var idActividad = $j(this).attr('id');
-        verificarAdicional(idActividad);
-    })
-
     $j("#agenda80").on("click", ".guardarCambios80", function()
     {
-        var idActividad = $j(this).attr('id').substring(17);
+        var idActividad = $j(this).attr('id'); 
 		validarActividad("Existente", idActividad);
-    });
-
-    $j('#agregarActividad10').click(function()
-    {
-        $j('#agenda80').addClass('noVer');
-        $j('#cerrarAgenda10').addClass('noVer');
-        $j('#agregarActividad10').addClass('noVer');
-        inicializarFormularioActividad();
-        $j('#agregarActividad90').removeClass('noVer');       
-        $j('#cerrarAgregarActividad10').removeClass('noVer');
-        $j('#guardarActividad10').removeClass('noVer');
-        window.scrollTo(0, 0);
-    });
-
-    $j('#cerrarAgregarActividad10').click(function()
-    {
-        borrarMensajesAnteriores();
-        $j("#agregarActividad90").addClass("noVer");
-        $j("#cerrarAgregarActividad10").addClass('noVer');
-        $j("#guardarActividad10").addClass("noVer");
-        $j('#agenda80').removeClass('noVer');
-        $j(gBotonCerrarLlamador).removeClass('noVer');
-        $j("#agregarActividad10").removeClass('noVer');
-    });
-
-    $j('#guardarActividad10').click(function()
-    {
-        tipoActividad = "Nueva";
-        validarActividad(tipoActividad, "");
     });
 
 });

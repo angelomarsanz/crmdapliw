@@ -1169,15 +1169,15 @@ function guardarActividad()
             {
                 "nombreActividad" : $j("#actividadAgenda90").val(),
                 "notas" : $j("#notas90").val(),
-                "diaPlanificado" : $j("#dia90").val(),
-                "mesPlanificado" : $j("#mes90").val(),
                 "anoPlanificado" : $j("#ano90").val(),
+                "mesPlanificado" : $j("#mes90").val(),
+                "diaPlanificado" : $j("#dia90").val(),
                 "horaPlanificado" : $j("#hora90").val(),
                 "minutoPlanificado" : $j("#minuto90").val(),
                 "meridianoPlanificado" : $j("#meridiano90").val(),
-                "diaCierre" : $j("#dia90").val(),
-                "mesCierre" : $j("#mes90").val(),
                 "anoCierre" : $j("#ano90").val(),
+                "mesCierre" : $j("#mes90").val(),
+                "diaCierre" : $j("#dia90").val(),
                 "horaCierre" : $j("#hora90").val(),
                 "minutoCierre" : $j("#minuto90").val(),
                 "meridianoCierre" : $j("#meridiano90").val(),
@@ -1187,7 +1187,7 @@ function guardarActividad()
                 "idActividadPadre" : "",
                 "notificacion" : "Vista",
                 "informacionAdicional" : "",
-                "HistorialDeCambios" : "",
+                "historialDeCambios" : "",
                 "estatus" : "Abierta"
             }
         };
@@ -1321,7 +1321,7 @@ function primeraActividadPendiente(idBien)
                     " <b>Fecha: </b>" + fechaMasAntigua +
                 "</p>" +
                 "<p>" +
-                    "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60" + idBien + "'>" +
+                    "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60-" + idBien + "'>" +
                         "Ver más..." +
                     "</button>" +
                 "</p>";
@@ -1334,7 +1334,7 @@ function primeraActividadPendiente(idBien)
                     " <b>Fecha: </b>" + fechaMasAntigua +
                 "</p>" +
                 "<p>" +
-                    "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60" + idBien + "'>" +
+                    "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60-" + idBien + "'>" +
                         "Ver más..." +
                     "</button>" +
                 "</p>";
@@ -1348,7 +1348,7 @@ function primeraActividadPendiente(idBien)
                 "Esta propiedad no tiene actividades planificadas en la agenda." +
             "</p>" +
             "<p>" +
-                "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60" + idBien + "'>" +
+                "<button class='btn btn-link fondoAzul ultimaActividad60' id='ultimaActividad60-" + idBien + "'>" +
                     "Ver más..." +
                 "</button>" +
             "</p>";
@@ -1479,7 +1479,7 @@ function mostrarBienes()
 							"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
 						"</a>" +
 						
-						"<button class='btn btn-light agenda60' id='agenda60-" + bien.ID + "' title='Agenda'>" +
+						"<button class='btn btn-light ultimaActividad60' id='ultimaActividad60-" + bien.ID + "' title='Agenda'>" +
 							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
 							"crmdapliw/app/public/images/clock.svg alt='Agenda' class='icono'>" +
 						"</button>" +
@@ -3531,12 +3531,12 @@ $j(document).ready(function()
         $j("#agenda80").addClass("noVer");
         $j("#cerrarAgenda10").addClass('noVer');
         $j("#agregarActividad10").addClass("noVer");
-        $j("#mensajesUsuario30").html("");
+        borrarMensajesAnteriores();
         $j('#bienes60').removeClass('noVer');
         primeraActividadPendiente(gIdPostActual);
-        $j("#botonBuscar10").removeClass('noVer');
+        gBotonCerrar = "#cerrarPropiedadesFiltradas";
+        $j(gBotonCerrar).removeClass('noVer');
         $j("#publicarPropiedad10").removeClass('noVer');
-        $j("#otrasOpciones10").removeClass('noVer');
         $j("#" + gPosicionAnterior).focus();
     });
 
