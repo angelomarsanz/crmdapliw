@@ -4,6 +4,7 @@ class PostmetasController extends MvcPublicController
 {
     public function test_function()
     {
+        return "Hola mundo";
     }
 
     public function agregar_actividad()
@@ -66,30 +67,44 @@ class PostmetasController extends MvcPublicController
                             break;
                         }
                     }
+                    require_once("posts_controller.php");
+                    $postsController = new PostsController();
+                    $vectorGeneral = $postsController->cargar_vectores();
+
                     if ($indicadorError == 0)
                     {
                         $jsondata["satisfactorio"] = true;
                         $jsondata["mensaje"] = "La actividad se agregó correctamente";
-                        $jsondata["id"] = $id;
+                        $vectorGeneral = $postsController->cargar_vectores();
                     }
                     else
                     {
                         $jsondata["satisfactorio"] = false;
                         $jsondata["mensaje"] = "No se pudo crear la actividad Solicitud de cita para el usuario " . $destinatario;
+                        $vectorGeneral = $postsController->cargar_vectores();
                     }
                 }
                 else
                 {
+                    require_once("posts_controller.php");
+                    $postsController = new PostsController();
+                    $vectorGeneral = $postsController->cargar_vectores();
+
                     $jsondata["satisfactorio"] = true;
                     $jsondata["mensaje"] = "La actividad se agregó correctamente";
-                    $jsondata["id"] = $id;
+                    $jsondata["vectorGeneral"] = $vectorGeneral;
                 }
             }         
         }
         else
         {
+            require_once("posts_controller.php");
+            $postsController = new PostsController();
+            $vectorGeneral = $postsController->cargar_vectores();
+
             $jsondata["satisfactorio"] = false;
             $jsondata["mensaje"] = "No se pudo agregar la actividad";
+            $vectorGeneral = $postsController->cargar_vectores();
         }
         exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
     }
@@ -358,21 +373,33 @@ class PostmetasController extends MvcPublicController
                     }
                 }
             }
+            require_once("posts_controller.php");
+
+            $postsController = new PostsController();
+            $vectorGeneral = $postsController->cargar_vectores();
+
             if ($indicadorError == 0)
-            {
+            {              
 			    $jsondata["satisfactorio"] = true;
 			    $jsondata["mensaje"] = "Los cambios se guardaron correctamente";
+                $jsondata["vectorGeneral"] = $vectorGeneral;
             }
             else
             {
 			    $jsondata["satisfactorio"] = false;
 			    $jsondata["mensaje"] = "No se pudieron guardar los cambios. Error al crear actividades de confirmación";
+                $jsondata["vectorGeneral"] = $vectorGeneral;
             }
         } 
         else
         {
+            require_once("posts_controller.php");
+            $postsController = new PostsController();
+            $vectorGeneral = $postsConstroller->cargarVectores();
+
             $jsondata["satisfactorio"] = false;
             $jsondata["mensaje"] = "No se pudieron guardar los cambios";
+            $jsondata["vectorGeneral"] = $vectorGeneral;
         }    
         exit(json_encode($jsondata, JSON_FORCE_OBJECT));
     }

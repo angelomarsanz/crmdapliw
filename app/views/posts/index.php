@@ -1,5 +1,5 @@
 <div class="container">
-    <?php if (isset($matrizBienes) && isset($datosBienes)): ?>
+    <?php if (isset($vectorGeneral["matrizBienes"]) && isset($vectorGeneral["datosBienes"])): ?>
         <!-- div con sufijo 00 -->
         <div class="container" id="testFunction00">
         </div>
@@ -17,10 +17,10 @@
                 alt="Cerrar Notificaciones" class="iconoMenu">
             </a>
 
-            <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link noVer" id="cerrarBusquedaPropiedades10" title="Cerrar">
-                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
-                alt="Cerrar búsqueda propiedades" class="iconoMenu">
-            </a>
+			<button title="Cerrar" class="btn btn-link noVer" id="cerrarBusquedaPropiedades10">
+				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
+				alt="Cerrar búsqueda propiedades" class="iconoMenu">
+			</button>
 
 			<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="busquedaPropiedades10">
 				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
@@ -47,10 +47,10 @@
                 alt="Cerrar actividad individual" class="iconoMenu">
             </button>
 
-            <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link noVer" id="cerrarBusquedaAgenda10" title="Cerrar">
-                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
-                alt="Cerrar búsqueda agenda" class="iconoMenu">
-            </a>
+			<button title="Cerrar" class="btn btn-link noVer" id="cerrarBusquedaAgenda10">
+				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
+				alt="Cerrar búsqueda agenda" class="iconoMenu">
+			</button>
 
 			<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="busquedaAgenda10">
 				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
@@ -274,244 +274,14 @@
 					<form>
 						<div class="row">
 							<div class="col-md-12">
-								<div class='input-group mb-3 noVer' id='actividadesAdministrador90'>
+								<div class='input-group mb-3' id='actividades90'>
 									<div class='input-group-prepend'>
 										<label class='input-group-text' for='Administrador90'>Actividad</label> 
 									</div>
-									<select class='custom-select' id='Administrador90'> 
-										<option selected></option> 
-										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
-										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
-										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
-										<option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
-										<option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
-										<option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
-										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
-										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
-										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
-										<option value="Coordinar publicidad en las redes sociales">Coordinar publicidad en las redes sociales</option>
-										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
-										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
-										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
-										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
-										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
-										<option value="Firma documento de venta">Firma documento de venta</option> 
-										<option value="Firma opción compra-venta">Firma opción compra-venta</option> 
-										<option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
-										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
-										<option value="Llamar a propietario">Llamar a propietario</option>
-										<option value="Mostrar el inmueble a un cliente">Mostrar el inmueble a un cliente</option>
-										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
-										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
-										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
-										<option value="Reunión con el propietario">Reunión con el propietario</option>
-										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
-										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option> 
-                                        <option value="Solicitar cita para mostrar propiedad">Solicitar cita para mostrar propiedad</option>               
-										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
-										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
+									<select class='custom-select' id='selectOpciones90'> 
 									</select> 
 								</div>
-
-								<div class='input-group mb-3 noVer' id='actividadesGestorCaptadorPromotor90'>
-									<div class='input-group-prepend'>
-										<label class='input-group-text' for='GestorCaptadorPromotor90'>Actividad</label> 
-									</div>
-									<select class='custom-select' id='GestorCaptadorPromotor90'> 
-										<option selected></option> 
-										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
-										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
-										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
-										<option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
-										<option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
-										<option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
-										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
-										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
-										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
-										<option value="Coordinar publicidad en las redes sociales">Coordinar publicidad en las redes sociales</option>
-										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
-										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
-										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
-										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
-										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
-										<option value="Firma documento de venta">Firma documento de venta</option> 
-										<option value="Firma opción compra-venta">Firma opción compra-venta</option> 
-										<option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
-										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
-										<option value="Llamar a propietario">Llamar a propietario</option>
-										<option value="Mostrar el inmueble a un cliente">Mostrar el inmueble a un cliente</option>
-										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
-										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
-										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
-										<option value="Reunión con el propietario">Reunión con el propietario</option>
-										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
-										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>
-                                        <option value="Solicitar cita para mostrar propiedad">Solicitar cita para mostrar propiedad</option>                   
-										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
-										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
-									</select> 
-								</div>
-
-								<div class='input-group mb-3 noVer' id='actividadesGestorCaptador90'>
-									<div class='input-group-prepend'>
-										<label class='input-group-text' for='GestorCaptador90'>Actividad</label> 
-									</div>
-									<select class='custom-select' id='GestorCaptador90'> 
-										<option selected></option> 
-										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
-										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
-										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
-										<option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
-										<option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
-										<option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
-										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
-										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
-										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
-										<option value="Coordinar publicidad en las redes sociales">Coordinar publicidad en las redes sociales</option>
-										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
-										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
-										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
-										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
-										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
-										<option value="Firma documento de venta">Firma documento de venta</option> 
-										<option value="Firma opción compra-venta">Firma opción compra-venta</option> 
-										<option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
-										<option value="Llamar a propietario">Llamar a propietario</option>
-										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
-										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
-										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
-										<option value="Reunión con el propietario">Reunión con el propietario</option>
-										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
-										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>
-										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
-									</select>
-								</div>
-
-								<div class='input-group mb-3 noVer' id='actividadesGestorPromotor90'>
-									<div class='input-group-prepend'>
-										<label class='input-group-text' for='GestorPromotor90'>Actividad</label> 
-									</div>
-									<select class='custom-select' id='GestorPromotor90'> 
-										<option selected></option> 
-										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
-										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
-										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
-										<option value="Firma documento de venta">Firma documento de venta</option> 
-										<option value="Firma opción compra-venta">Firma opción compra-venta</option> 
-										<option value="Instalación del cartel de venta">Instalación del cartel de venta</option>
-										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
-										<option value="Llamar a propietario">Llamar a propietario</option>
-										<option value="Mostrar el inmueble a un cliente">Mostrar el inmueble a un cliente</option>
-										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
-										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
-										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
-										<option value="Reunión con el propietario">Reunión con el propietario</option>
-										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
-										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>
-                                        <option value="Solicitar cita para mostrar propiedad">Solicitar cita para mostrar propiedad</option>                   
-										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
-										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
-									</select> 
-								</div>
-
-								<div class='input-group mb-3 noVer' id='actividadesGestor90'>
-									<div class='input-group-prepend'>
-										<label class='input-group-text' for='Gestor90'>Actividad</label> 
-									</div>
-									<select class='custom-select' id='Gestor90'> 
-										<option selected></option> 
-										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
-										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
-										<option value="Firma compromiso de negocio con el propietario">Firma compromiso de negocio con el propietario</option> 
-										<option value="Firma documento de venta">Firma documento de venta</option> 
-										<option value="Firma opción compra-venta">Firma opción compra-venta</option> 
-										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
-										<option value="Llamar a propietario">Llamar a propietario</option>
-										<option value="Preparación del documento de venta">Preparación del documento de venta</option>
-										<option value="Preparación de la opción compra-venta">Preparación de la opción compra-venta</option>
-										<option value="Reunión con el propietario">Reunión con el propietario</option>
-										<option value="Se firmó la opción compra-venta">Se firmó la opción compra-venta</option>
-									</select> 
-								</div>
-
-								<div class='input-group mb-3 noVer' id='actividadesCaptadorPromotor90'>
-									<div class='input-group-prepend'>
-										<label class='input-group-text' for='CaptadorPromotor90'>Actividad</label> 
-									</div>
-									<select class='custom-select' id='CaptadorPromotor90'> 
-										<option selected></option> 
-										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
-										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
-										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
-										<option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
-										<option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
-										<option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
-										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
-										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
-										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
-										<option value="Coordinar publicidad en las redes sociales">Coordinar publicidad en las redes sociales</option>
-										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
-										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
-										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
-										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
-										<option value="Llamar a propietario">Llamar a propietario</option>
-										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
-										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
-										<option value="Reunión con el propietario">Reunión con el propietario</option>
-										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>                   
-										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>
-                                        <option value="Solicitar cita para mostrar propiedad">Solicitar cita para mostrar propiedad</option>
-										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
-									</select> 
-								</div>
-
-								<div class='input-group mb-3 noVer' id='actividadesCaptador90'>
-									<div class='input-group-prepend'>
-										<label class='input-group-text' for='Captador90'>Actividad</label> 
-									</div>
-									<select class='custom-select' id='Captador90'> 
-										<option selected></option> 
-										<option value="Agregar datos del propietario">Agregar datos del propietario</option> 
-										<option value="Coordinar elaboración de cartel de venta">Coordinar elaboración de cartel de venta</option>
-										<option value="Coordinar elaboración de pendón">Coordinar elaboración de pendón</option>
-										<option value="Coordinar elaboración de valla">Coordinar elaboración de valla</option>
-										<option value="Coordinar labores de limpieza del inmueble">Coordinar labores de limpieza del inmueble</option>
-										<option value="Coordinar pago de condominio">Coordinar pago de condominio</option>
-										<option value="Coordinar pago de servicios público">Coordinar pago de servicios públicos</option>
-										<option value="Coordinar publicidad en la prensa">Coordinar publicidad en la prensa</option>
-										<option value="Coordinar publicidad en la radio">Coordinar publicidad en la radio</option>
-										<option value="Coordinar publicidad en la tv">Coordinar publicidad en la tv</option>
-										<option value="Coordinar publicidad en las redes sociales">Coordinar publicidad en las redes sociales</option>
-										<option value="Coordinar reparaciones del inmueble">Coordinar reparaciones del inmueble</option>
-										<option value="Desinstalar cartel de venta">Desinstalar cartel de venta</option>
-										<option value="El propietario desistió de la venta">El propietario desistió de la venta</option>
-										<option value="El propietario vendió el inmueble">El propietario vendió el inmueble</option>
-										<option value="Llamar a propietario">Llamar a propietario</option>
-										<option value="Reunión con el propietario">Reunión con el propietario</option>
-										<option value="Solicitar documentos al propietario">Solicitar documentos al propietario</option>                   
-										<option value="Subir documentos escaneados al servidor">Subir documentos escaneados al servidor</option>                   
-									</select> 
-								</div>
-
-								<div class='input-group mb-3 noVer' id='actividadesPromotor90'>
-									<div class='input-group-prepend'>
-										<label class='input-group-text' for='Promotor90'>Actividad</label> 
-									</div>
-									<select class='custom-select' id='Promotor90'> 
-										<option selected></option> 
-										<option value="Llamar a cliente potencial">Llamar a cliente potencial</option>
-										<option value="Ofrecer inmueble a clientes potenciales">Ofrecer inmueble a clientes potenciales</option>
-                                        <option value="Solicitar cita para mostrar propiedad">Solicitar cita para mostrar propiedad</option>
-										<option value="Visitar a cliente potencial">Visitar a cliente potencial</option>
-									</select> 
-								</div>
-
                                 <div class="mensajesUsuario" id="mensajesActividad90"></div>
-
 							</div>
 						</div> 
 						
@@ -733,20 +503,24 @@
 
 <script>
 // Variables globales
-var gBienes = <?= json_encode($bienes) ?>;
-var gMatrizBienes = <?= json_encode($matrizBienes) ?>;
-var gBienesAutocomplete = <?= json_encode($bienesAutocomplete) ?>;
-var gDatosBienes = <?= json_encode($datosBienes) ?>;
-var gIdUsuario = <?= $idUsuario ?>;
-var gNombreUsuario = "<?= $nombreUsuario ?>";
-var gRoles = <?= json_encode($roles) ?>;
-var gPermiso = <?= $permiso ?>;
-var gCadenaRoles = "<?= $cadenaRoles ?>";
-var gUsuarios = <?= json_encode($usuarios) ?>;
-var gPersonasAsc = <?= json_encode($personasAsc) ?>;
+
+var gVectorGeneral = <?= json_encode($vectorGeneral) ?>;
+var gBienes = gVectorGeneral.bienes;
+var gMatrizBienes = gVectorGeneral.matrizBienes;
+var gBienesAutocomplete = gVectorGeneral.bienesAutocomplete;
+var gDatosBienes = gVectorGeneral.datosBienes;
+var gIdUsuario = gVectorGeneral.idUsuario;
+var gNombreUsuario = gVectorGeneral.nombreUsuario;
+var gRoles = gVectorGeneral.roles;
+var gUsuarios = gVectorGeneral.usuarios;
+var gPersonasAsc = gVectorGeneral.personasAsc;
+var gNotificaciones = gVectorGeneral.notificaciones;
+var gVistaPreferida = gVectorGeneral.vistaPreferida;
+var gOpcionesSelectActividades = gVectorGeneral.opcionesSelectActividades;
+gVectorGeneral = "";
+
 var gIdPostActual = "";
 var gPosicionAnterior = "";
-var gVistaPreferida = "<?= $vistaPreferida ?>";
 var gFechaActual = new Date();
 var gAnoActual = gFechaActual.getFullYear(); 
 var gMes = gFechaActual.getMonth()+1;
@@ -758,9 +532,23 @@ var gFechaActualInvertida =
 	gMesActual + 
 	gDiaActual;
 
+var gAnoActualEntero = parseInt(gAnoActual);
+var gMesActualEntero = parseInt(gMesActual);
+var gMesActualMenosUno = gMesActualEntero - 1;
+var gDiaActualEntero = gDiaActual;
+
 var gBotonCerrarLlamador = "";
-var gNotificaciones = <?= $notificaciones ?>;
 var gIndicadorAdicional = 0;
+
+Date.prototype.getWeekNumber = function () {
+    var d = new Date(+this);  //Creamos un nuevo Date con la fecha de "this".
+    d.setHours(0, 0, 0, 0);   //Nos aseguramos de limpiar la hora.
+    d.setDate(d.getDate() + 4 - (d.getDay() || 7)); // Recorremos los días para asegurarnos de estar "dentro de la semana"
+    //Finalmente, calculamos redondeando y ajustando por la naturaleza de los números en JS:
+    return Math.ceil((((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7) + 1) / 7);
+};
+
+var gSemanaActual = new Date(gAnoActualEntero, gMesActualMenosUno, gDiaActualEntero).getWeekNumber(); 
 
 // Funciones
 
@@ -827,7 +615,14 @@ function actualizarVistaPreferida()
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong> Estimado usuario ocurrió una falla en el servidor y no se pudo actualizar la preferencia de vista !</strong>" +
+                "<strong>" +
+                    "Estimado usuario el servidor tardó mucho en responder, " +
+                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
+                "</strong>" +
+                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                    " alt='Refrescar' class='icono'>" +
+                "</a>" + 
             "</div>"; 
 
 		borrarMensajesAnteriores();
@@ -846,6 +641,8 @@ function borrarMensajesAnteriores()
 function mostrarAgenda(tipoContenido, valor)
 {
 	var agenda = "";
+
+    gIndicadorAdicional = 0;
 	
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
@@ -917,8 +714,15 @@ function mostrarAgenda(tipoContenido, valor)
 			mensajesUsuario =
 				"<div class='alert alert-danger alert-dismissible'>" +
 					"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-					"<strong>¡ Ocurrió un error en el servidor. No se pudo acceder a la información</strong>" +
-				"</div>"; 
+                    "<strong>" +
+                        "Estimado usuario el servidor tardó mucho en responder, " +
+                        "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
+                    "</strong>" +
+                    "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                        " alt='Refrescar' class='icono'>" +
+                    "</a>" + 
+                "</div>"; 
 
 				borrarMensajesAnteriores();
 
@@ -976,10 +780,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 			
 		if (gDatosBienes[valor].CRMdapliw_actividad_agenda)
 		{					
-			arregloActividades = gDatosBienes[valor].CRMdapliw_actividad_agenda.sort(function(a,b)
-			{
-				return (a.fechaInvertida - b.fechaInvertida);
-			});
+			arregloActividades = gDatosBienes[valor].CRMdapliw_actividad_agenda.slice();
 						
 			$j.each(arregloActividades, function(clave, datos)  
 			{
@@ -991,8 +792,8 @@ function mostrarAgendaLista(tipoContenido, valor)
 						notificaciones.push(datos.id);
 					}
 
-                    if (gPermiso > 3)
-                    {    
+                    if (gRoles.includes("Gestor de negocios") || gRoles.includes("Administrador"))
+                    {
          				lineaLista = generarLineaLista(clave, datos, contador);
 					
 					    agenda += "<tr>" + lineaLista + "</tr>";
@@ -1026,10 +827,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 		{		
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
 			{
-				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.sort(function(a,b)
-				{
-					return (a.fechaInvertida - b.fechaInvertida);
-				});
+				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.slice();
 				
 				$j.each(arregloActividades, function(clave2, datos2)  
 				{
@@ -1091,10 +889,7 @@ function mostrarAgendaLista(tipoContenido, valor)
 		{		
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
 			{
-				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.sort(function(a,b)
-				{
-					return (a.fechaInvertida - b.fechaInvertida);
-				});
+				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.slice();
 				
 				$j.each(arregloActividades, function(clave2, datos2)  
 				{
@@ -1192,10 +987,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 
         if (gDatosBienes[valor].CRMdapliw_actividad_agenda)
         {
-            arregloActividades = gDatosBienes[idPost].CRMdapliw_actividad_agenda.sort(function(a,b)
-            {
-                return (a.fechaInvertida - b.fechaInvertida);
-            });
+            arregloActividades = gDatosBienes[idPost].CRMdapliw_actividad_agenda.slice();
 
             $j.each(arregloActividades, function(clave, datos)  
             {
@@ -1207,8 +999,8 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 						notificaciones.push(datos.id);
 					}
 
-                    if (gPermiso > 3)
-                    {    
+                    if (gRoles.includes("Gestor de negocios") || gRoles.includes("Administrador"))
+                    {
                         mosaico = crearMosaicos(clave, datos);
                         agenda += mosaico;
                     }
@@ -1243,10 +1035,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 		{				
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
 			{
-				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.sort(function(a,b)
-				{
-					return (a.fechaInvertida - b.fechaInvertida);
-				});
+				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.slice();
 				
 				$j.each(arregloActividades, function(clave2, datos2)  
 				{
@@ -1314,10 +1103,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 		{			
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
 			{
-				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.sort(function(a,b)
-				{
-					return (a.fechaInvertida - b.fechaInvertida);
-				});
+				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.slice();
 				
 				$j.each(arregloActividades, function(clave2, datos2)  
 				{
@@ -2070,7 +1856,7 @@ function mostrarBienes(tipoContenido, valor)
 					bienes += "<td class='text-center align-middle letraRoja'>" + bien.__name + "</td>";
 				}
 
-                if (gPermiso > 7)
+                if (gRoles.includes("Administrador"))
                 {
                     bienes += 
 			            "<td class='text-center align-middle'><input type='text' id='buscarCaptador60-" + bien.ID + 
@@ -2175,7 +1961,7 @@ function mostrarBienes(tipoContenido, valor)
 								"<div class='form-group'>" +
 									"<label for='buscarCaptador60" + bien.ID + "'>Captador responsable: </label>";
 
-                            if (gPermiso > 7)
+                            if (gRoles.includes("Administrador"))
                             {
                                 bienes += 
 						            "<input type='text' id='buscarCaptador60-" + bien.ID + "' class='form-control buscarCaptador60'" + 
@@ -2259,10 +2045,7 @@ function primeraActividadPendiente(idBien)
 
     if (gDatosBienes[idBien].CRMdapliw_actividad_agenda)
     {
-        arregloActividades = gDatosBienes[idBien].CRMdapliw_actividad_agenda.sort(function(a,b)
-        {
-            return (a.fechaInvertida - b.fechaInvertida);
-        });
+        arregloActividades = gDatosBienes[idBien].CRMdapliw_actividad_agenda.slice();
 
         $j.each(arregloActividades, function(clave, datos)  
         {
@@ -2331,10 +2114,7 @@ function alertaActividades(idBien)
 
     if (gDatosBienes[idBien].CRMdapliw_actividad_agenda)
     {
-        arregloActividades = gDatosBienes[idBien].CRMdapliw_actividad_agenda.sort(function(a,b)
-        {
-            return (a.fechaInvertida - b.fechaInvertida);
-        });
+        arregloActividades = gDatosBienes[idBien].CRMdapliw_actividad_agenda.slice();
 
         $j.each(arregloActividades, function(clave, datos)  
         {
@@ -2375,7 +2155,7 @@ function bienesSinActividad()
 
 	        $j.each(gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda, function(clave2, datos2)  
 	        {
-                if (gPermiso < 4)
+                if (gRoles.includes("Promotor") || gRoles.includes("Captador"))
                 {
                     if (datos2.idEjecutor == gIdUsuario)
                     {
@@ -2445,8 +2225,8 @@ function filtrarAgenda(idPersonaFiltro)
 				{
 					$j.each(datos1.CRMdapliw_actividad_agenda, function(clave2, datos2)  
 					{
-						if (gPermiso > 3)
-						{
+                        if (gRoles.includes("Gestor de negocios") || gRoles.includes("Administrador"))
+                        {
 							gDatosBienes[clave1].CRMdapliw_actividad_agenda[clave2].ver = "true";
 						}
 						else
@@ -2485,8 +2265,8 @@ function filtrarAgenda(idPersonaFiltro)
                     {   
                         indicadorVer = "false";
 
-                        if (gPermiso > 3)
-                        {    
+                        if (gRoles.includes("Gestor de negocios") || gRoles.includes("Administrador"))
+                        {
                             indicadorVer = verificarFechasActividades(datos2);
                         }
                         else
@@ -2608,12 +2388,15 @@ function personasBien(idBien)
 		}
     }
 
-    if (gPermiso < 4 && gMatrizBienes[idBien].post_author == gIdUsuario)
+    if (gRoles.includes("Promotor") || gRoles.includes("Captador"))
     {
-        indicadorCaptadorPropietario = 1;                        
+        if (gMatrizBienes[idBien].post_author == gIdUsuario)
+        {
+            indicadorCaptadorPropietario = 1;                        
+        }
     }
 
-    if (indicadorCaptadorPropietario == 1 || gPermiso > 3)
+    if (indicadorCaptadorPropietario == 1 || gRoles.includes("Gestor de negocios") || gRoles.includes("A"))
     {
         $j("#nombrePropietario100").val(gMatrizBienes[idBien].propietario);
         $j("#mensajesPropietario100").html("");
@@ -2626,7 +2409,7 @@ function personasBien(idBien)
     $j("#nombreCaptador100").val(gMatrizBienes[idBien].nombre_autor);
     $j("#mensajesCaptador100").html("");
 
-    if (gPermiso < 8)
+    if (gRoles.includes("Administrador") == false)
     {
         $j("#nombreCaptador100").attr("disabled", true);        
     }
@@ -2647,11 +2430,6 @@ function compradoresPotenciales(idBien)
     if (gDatosBienes[idBien].CRMdapliw_cliente)
     {
         var arregloCompradores = gDatosBienes[idBien].CRMdapliw_cliente.slice();
-
-        arregloCompradores.sort(function(a,b)
-        {
-            return (b.posicionOriginal - a.posicionOriginal);
-        });
 
         $j.each(arregloCompradores, function(clave, datos)  
         {
@@ -2866,10 +2644,6 @@ function guardarPersona(indicadorCheckbox)
                 };              
 
             gPersonasAsc.push(nuevoCliente);
-            gPersonasAsc.sort(function(a,b)
-            {
-                return (a.label - b.label);
-            });        
                 
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
@@ -2904,7 +2678,14 @@ function guardarPersona(indicadorCheckbox)
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong> Estimado usuario ocurrió una falla en el servidor y los datos no se pudieron guardar !</strong>" +
+                "<strong>" +
+                    "Estimado usuario el servidor tardó mucho en responder, " +
+                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
+                "</strong>" +
+                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                    " alt='Refrescar' class='icono'>" +
+                "</a>" + 
             "</div>"; 
 
         $j("#mensajesUsuario30").html(mensajesUsuario);
@@ -3082,7 +2863,6 @@ function agregarComprador(idBien, idComprador, nombreComprador)
                         {
                             "valor" : nombreComprador,
                             "id" : response.idPostmeta,
-                            "posicionOriginal" : ultimaPosicion,
                             "idUser" : idComprador,
                             "activo" : "true",
                             "idPromotorCliente" : gIdUsuario,
@@ -3124,7 +2904,14 @@ function agregarComprador(idBien, idComprador, nombreComprador)
             mensajesUsuario =
                 "<div class='alert alert-danger alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong> Estimado usuario ocurrió una falla en el servidor y los datos no se pudieron guardar !</strong>" +
+                    "<strong>" +
+                        "Estimado usuario el servidor tardó mucho en responder, " +
+                        "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
+                    "</strong>" +
+                    "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                        " alt='Refrescar' class='icono'>" +
+                    "</a>" + 
                 "</div>"; 
 
             $j("#mensajesUsuario30").html(mensajesUsuario);
@@ -3188,7 +2975,14 @@ function eliminarComprador(idCompradorPromotor)
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong>Ocurrió un error en el servidor. Los datos no se pudieron guardar !</strong>" +
+                "<strong>" +
+                    "Estimado usuario el servidor tardó mucho en responder, " +
+                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
+                "</strong>" +
+                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                    " alt='Refrescar' class='icono'>" +
+                "</a>" + 
             "</div>"; 
 
 	    $j(idMensaje).html(mensajesUsuario);
@@ -3249,7 +3043,14 @@ function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreN
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong>¡ Ocurrió un error en el servidor. Los datos no se pudieron guardar !</strong>" +
+                "<strong>" +
+                    "Estimado usuario el servidor tardó mucho en responder, " +
+                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
+                "</strong>" +
+                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                    " alt='Refrescar' class='icono'>" +
+                "</a>" + 
             "</div>"; 
 
     	$j(idMensaje).html(mensajesUsuario);
@@ -3289,56 +3090,33 @@ function guardarCambiosAgenda(idActividad)
 
     $j("#notas80-" + idActividad).val($j.trim($j("#notas80-" + idActividad).val().toUpperCase()));
 
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].notas = $j("#notas80-" + idActividad).val();
     notasObj = $j("#notas80-" + idActividad).val();
-
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].anoPlanificado = $j("#ano80-" + idActividad).val();
     anoPlanificadoObj = $j("#ano80-" + idActividad).val();
-
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].mesPlanificado = $j("#mes80-" + idActividad).val();
     mesPlanificadoObj = $j("#mes80-" + idActividad).val();
-
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].diaPlanificado = $j("#dia80-" + idActividad).val();
     diaPlanificadoObj = $j("#dia80-" + idActividad).val();
-
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].horaPlanificado = $j("#hora80-" + idActividad).val();
     horaPlanificadoObj = $j("#hora80-" + idActividad).val();
-
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].horaPlanificado = $j("#minuto80-" + idActividad).val();
     minutoPlanificadoObj = $j("#minuto80-" + idActividad).val();
-
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].horaPlanificado = $j("#meridiano80-" + idActividad).val();
     meridianoPlanificadoObj = $j("#meridiano80-" + idActividad).val();
-
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].fechaInvertida = 
-            anoPlanificadoObj + mesPlanificadoObj + diaPlanificadoObj;
 
     if ($j("#cerrarActividad80-" + idActividad).prop("checked") == true)
     {
-        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "Cerrada por el usuario";
         estatusObj = "Cerrada por el usuario";
     }
     else
     {
-        gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].estatus = "abierta";
         estatusObj = "abierta";
     }
 
     if (gIndicadorAdicional == 1)
     {
         $j("#adicionalNotas80-" + idActividad).val($j.trim($j("#adicionalNotas80-" + idActividad).val().toUpperCase()));
+
         adicionalNotasObj = $j("#adicionalNotas80-" + idActividad).val();
-
         adicionalAnoPlanificadoObj = $j("#adicionalAno80-" + idActividad).val();
-
         adicionalMesPlanificadoObj = $j("#adicionalMes80-" + idActividad).val();
-
         adicionalDiaPlanificadoObj = $j("#adicionalDia80-" + idActividad).val();
-
         adicionalHoraPlanificadoObj = $j("#adicionalHora80-" + idActividad).val();
-
         adicionalMinutoPlanificadoObj = $j("#adicionalMinuto80-" + idActividad).val();
-
         adicionalMeridianoPlanificadoObj = $j("#adicionalMeridiano80-" + idActividad).val();
 
         informacionAdicional =
@@ -3352,9 +3130,6 @@ function guardarCambiosAgenda(idActividad)
                 "minutoPlanificado" : adicionalMinutoPlanificadoObj,
                 "meridianoPlanificado" : adicionalMeridianoPlanificadoObj
             };
-
-    gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[arregloId[0]].informacionAdicional = informacionAdicional;
-
     }
 
     var jsonActividad = 
@@ -3371,7 +3146,10 @@ function guardarCambiosAgenda(idActividad)
         "estatus" : estatusObj
     }
 
-    console.log(jsonActividad);
+    $j("#guardarCambios80-" + idActividad).attr("disabled", true);    
+
+    borrarMensajesAnteriores();
+    $j(idMensaje).html(mensajesUsuario);
 
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'editar_actividad')) ?>", 
         jsonActividad, null, "json")          
@@ -3382,12 +3160,24 @@ function guardarCambiosAgenda(idActividad)
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>¡ Los datos se guardaron exitosamente ! " + response.mensaje + "</strong>" +
+                    "<strong>" + response.mensaje + "</strong>" +
                 "</div>";
             if (estatusObj == "Cerrada por el usuario")
             {
                 $j(tarjeta).addClass("noVer");
             }
+
+            if (gIndicadorAdicional == 1)
+            {
+                $j("#adicionalFechaPlanificada80-" + idActividad).addClass("noVer");
+                $j("#adicionalGrupoNotas80-" + idActividad).addClass("noVer");
+            }
+        
+            vectorGeneralActualizado = response.vectorGeneral;
+
+            actualizarVectores(vectorGeneralActualizado);
+
+            borrarMensajesAnteriores();
             $j(idMensaje).html(mensajesUsuario);
         } 
         else 
@@ -3395,8 +3185,12 @@ function guardarCambiosAgenda(idActividad)
             mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong>¡ Los datos no se pudieron guardar ! " + response.mensaje + "</strong>" +
+                "<strong>" + response.mensaje + "</strong>" +
             "</div>"; 
+
+            vectorGeneralActualizado = response.vectorGeneral;
+
+            actualizarVectores(vectorGeneralActualizado);
 
         	$j(idMensaje).html(mensajesUsuario);
         }
@@ -3406,7 +3200,14 @@ function guardarCambiosAgenda(idActividad)
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong>¡ Ocurrió un error en el servidor. Los datos no se pudieron guardar !</strong>" +
+                "<strong>" +
+                    "Estimado usuario el servidor tardó mucho en responder, " +
+                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
+                "</strong>" +
+                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                    " alt='Refrescar' class='icono'>" +
+                "</a>" + 
             "</div>"; 
 
 	    $j(idMensaje).html(mensajesUsuario);
@@ -3427,9 +3228,7 @@ function validarActividad(tipoActividad, idActividad)
 
     if (tipoActividad == "Nueva")
     {
-		idSelectActividad = "#" + gCadenaRoles + "90";
-
-        if ($j(idSelectActividad).val() == "")  
+        if ($j("#selectOpciones90").val() == "")  
         {   
             indicadorError = 1;
             mensajeError = anterior + "Seleccione una actividad" + posterior;
@@ -3636,7 +3435,8 @@ function inicializarFormularioActividad()
     $j('#tituloAgregarActividad90').html("Planificar actividades para " + gMatrizBienes[gIdPostActual].post_title); 
     $j('#actividadAgenda90').val("");
     $j('#notas90').val("");
-    selectActividades();
+
+    $j('#selectOpciones90').html(gOpcionesSelectActividades);
 	idFechas =
 		{
 			"idAno" : "actividadesAno90",
@@ -3674,41 +3474,6 @@ function inicializarFormularioActividad()
     $j("#fechaPlanificada90").html(lineaFecha);
 }
 
-function selectActividades()
-{
-    if (gCadenaRoles == "Administrador")
-    {
-        $j("#actividadesAdministrador90").removeClass('noVer');
-    }   
-    else if (gCadenaRoles == "GestorCaptadorPromotor")
-    {
-         $j("#actividadesGestorCaptadorPromotor90").removeClass('noVer');
-    }    
-    else if (gCadenaRoles == "GestorCaptador")
-    {
-         $j("#actividadesGestorCaptador90").removeClass('noVer');
-    }    
-    else if (gCadenaRoles == "GestorPromotor")
-    {
-         $j("#actividadesGestorPromotor90").removeClass('noVer');
-    }    
-    else if (gCadenaRoles == "Gestor")
-    {
-         $j("#actividadesGestor90").removeClass('noVer');
-    }    
-    else if (gCadenaRoles == "CaptadorPromotor")
-    {
-         $j("#actividadesCaptadorPromotor90").removeClass('noVer');
-    }    
-    else if (gCadenaRoles == "Captador")
-    {
-         $j("#actividadesCaptador90").removeClass('noVer');
-    }    
-    else 
-    {
-         $j("#actividadesPromotor90").removeClass('noVer');
-    }    
-}
 
 function guardarActividad()
 {
@@ -3724,13 +3489,11 @@ function guardarActividad()
 
     $j("#notas90").val($j.trim($j("#notas90").val().toUpperCase()));
 
-    idSelectActividad = "#" + gCadenaRoles + "90"
-
     jsonActividad = 
         {"idPost" : gIdPostActual,
         "actividad" :  
             {
-                "nombreActividad" : $j(idSelectActividad).val(),
+                "nombreActividad" : $j("#selectOpciones90").val(),
                 "notas" : $j("#notas90").val(),
                 "anoPlanificado" : $j("#ano90").val(),
                 "mesPlanificado" : $j("#mes90").val(),
@@ -3755,7 +3518,7 @@ function guardarActividad()
             }
         };
     
-    if ($j(idSelectActividad).val() == "Solicitar cita para mostrar propiedad")
+    if ($j("#selectOpciones90").val() == "Solicitar cita para mostrar propiedad")
     {
         destinatarios = [gMatrizBienes[gIdPostActual].post_author];
 
@@ -3780,34 +3543,6 @@ function guardarActividad()
     {
         if (response.satisfactorio) 
         {
-            fechaInvertida = 
-                $j("#ano90").val() +
-                $j("#mes90").val() +
-                $j("#dia90").val();
-
-            jsonActividad.actividad.id = response.id;
-            jsonActividad.actividad.fechaInvertida = fechaInvertida;
-
-            if (gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda)
-            {
-                ultimaPosicion = 0;
-
-                $j.each(gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda, function(clave, datos)  
-                {
-                    ultimaPosicion = clave;
-                });
-
-                ultimaPosicion++;
-                jsonActividad.actividad.posicionOriginal = ultimaPosicion;
-            
-                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda.push(jsonActividad.actividad);
-            }
-            else
-            {
-                jsonActividad.actividad.posicionOriginal = 0;
-
-                gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda = [jsonActividad.actividad];
-            }
 
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
@@ -3815,6 +3550,11 @@ function guardarActividad()
                     "<strong>¡ Los datos se guardaron exitosamente ! </strong>" +
                 "</div>";
 
+            vectorGeneralActualizado = response.vectorGeneral;
+
+            actualizarVectores(vectorGeneralActualizado);
+
+            borrarMensajesAnteriores();
             $j("#mensajesUsuario30").html(mensajesUsuario);
 
             $j("#agregarActividad90").addClass("noVer");
@@ -3830,6 +3570,11 @@ function guardarActividad()
                     "<strong>" + response.mensaje + "</strong>" +
                 "</div>"; 
 
+            vectorGeneralActualizado = response.vectorGeneral;
+
+            actualizarVectores(vectorGeneralActualizado);
+
+            borrarMensajesAnteriores();
         	$j("#mensajesUsuario30").html(mensajesUsuario);
         }
     })
@@ -3838,16 +3583,47 @@ function guardarActividad()
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong>¡ Los datos no se pudieron guardar !</strong>" +
+                "<strong>" +
+                    "Estimado usuario el servidor tardó mucho en responder, " +
+                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
+                "</strong>" +
+                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                    " alt='Refrescar' class='icono'>" +
+                "</a>" + 
             "</div>"; 
 
         $j("#mensajesUsuario30").html(mensajesUsuario);
     });  
 }
 
+function actualizarVectores(vectorGeneralActualizado)
+{
+    gVectorGeneral = vectorGeneralActualizado;
+    vectorGeneralActualizado = "";
+    gBienes = gVectorGeneral.bienes;
+    gMatrizBienes = gVectorGeneral.matrizBienes;
+    gBienesAutocomplete = gVectorGeneral.bienesAutocomplete;
+    gDatosBienes = gVectorGeneral.datosBienes;
+    gIdUsuario = gVectorGeneral.idUsuario;
+    gNombreUsuario = gVectorGeneral.nombreUsuario;
+    gRoles = gVectorGeneral.roles;
+    gUsuarios = gVectorGeneral.usuarios;
+    gPersonasAsc = gVectorGeneral.personasAsc;
+    gNotificaciones = gVectorGeneral.notificaciones;
+    gVistaPreferida = gVectorGeneral.vistaPreferida;
+    gOpcionesSelectActividades = gVectorGeneral.opcionesSelectActividades;
+    gVectorGeneral = "";
+}
+
+
 // Eventos
 $j(document).ready(function()
 {
+    semanaPrueba = new Date(2019, 0, 1).getWeekNumber();
+
+    alert("gSemanaActual " + gSemanaActual + " semanaPrueba " + semanaPrueba);
+
     $j("#vistas20").val(gVistaPreferida);
 
     mostrarNotificaciones();
@@ -3890,6 +3666,23 @@ $j(document).ready(function()
         $j("#busquedaPropiedades50").removeClass('noVer');
         $j("#cerrarBusquedaPropiedades10").removeClass('noVer');
         $j("#busquedaPropiedades10").removeClass('noVer');
+        window.scrollTo(0, 0);
+    });
+
+    $j("#cerrarBusquedaPropiedades10").click(function()
+    {
+        $j("#busquedaPropiedades50").addClass('noVer');
+        $j("#cerrarBusquedaPropiedades10").addClass('noVer');
+        $j("#busquedaPropiedades10").addClass('noVer');
+        if ($j("#grupoVista20").hasClass('noVer'))
+        {
+            $j("#grupoVista20").removeClass('noVer');
+        }  
+        if ($j("#notificaciones20").hasClass('noVer'))
+        {
+            $j("#notificaciones20").removeClass('noVer');
+        }   
+        $j("#principal40").removeClass('noVer');
         window.scrollTo(0, 0);
     });
 
@@ -3951,18 +3744,41 @@ $j(document).ready(function()
 
         $j("#busquedaAgenda51").removeClass('noVer');
 
-        if (gPermiso > 1 && $j("#solicitudesDeCita51").hasClass('noVer') === true)
+        if (gRoles.includes("Captador") || gRoles.includes("Gestor de negocios") || gRoles.includes("Administrador"))
         {
-            $j("#solicitudesDeCita51").removeClass('noVer');
+            if ($j("#solicitudesDeCita51").hasClass('noVer') === true)
+            {
+                $j("#solicitudesDeCita51").removeClass('noVer');
+            }
         }
 
-        if (gPermiso > 3 && $j("#grupoPersonaAgenda51").hasClass('noVer') === true)
+        if (gRoles.includes("Gestor de negocios") || gRoles.includes("Administrador"))
         {
-            $j("#grupoPersonaAgenda51").removeClass('noVer');
+            if ($j("#grupoPersonaAgenda51").hasClass('noVer') === true)
+            {
+                $j("#grupoPersonaAgenda51").removeClass('noVer');
+            }
         }
 
         $j("#cerrarBusquedaAgenda10").removeClass('noVer');
         $j("#busquedaAgenda10").removeClass('noVer');
+        window.scrollTo(0, 0);
+    });
+
+    $j("#cerrarBusquedaAgenda10").click(function()
+    {
+        $j("#busquedaAgenda51").addClass('noVer');
+        $j("#cerrarBusquedaAgenda10").addClass('noVer');
+        $j("#busquedaAgenda10").addClass('noVer');
+        if ($j("#grupoVista20").hasClass('noVer'))
+        {
+            $j("#grupoVista20").removeClass('noVer');
+        }  
+        if ($j("#notificaciones20").hasClass('noVer'))
+        {
+            $j("#notificaciones20").removeClass('noVer');
+        }   
+        $j("#principal40").removeClass('noVer');
         window.scrollTo(0, 0);
     });
 
