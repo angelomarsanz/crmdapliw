@@ -298,6 +298,7 @@
 						<div class="row" id="fechaPlanificada90">
 						</div>
 					</form>
+					<div class="mensajesUsuario" id="mensajesAgregarActividad90"></div>
 				</div> 
 			</div>
 		</div>
@@ -550,6 +551,8 @@ Date.prototype.getWeekNumber = function () {
 
 var gSemanaActual = new Date(gAnoActualEntero, gMesActualEnteroMenosUno, gDiaActualEntero).getWeekNumber(); 
 
+var gMensajePendientePorMostrar = "";
+
 // Funciones
 
 function testFunction()
@@ -677,18 +680,16 @@ function mostrarAgenda(tipoContenido, valor)
 		{
 			if (response.satisfactorio)
 			{
-				$j.each(resultado.bienesNotificaciones, function(clave1, datos1)  
-				{
-					$j.each(gDatosBienes[datos1].CRMdapliw_actividad_agenda, function(clave2, datos2)  
-					{
-						if (datos2.notificacion == "No vista" && datos2.idEjecutor == gIdUsuario)						
-						{
-							gDatosBienes[datos1].CRMdapliw_actividad_agenda[clave2].notificacion = "Vista";
-						}
-					});  
-                });        
-					
 				borrarMensajesAnteriores();
+				if (gMensajePendientePorMostrar != "")
+				{
+					$j("#mensajesUsuario30").html(gMensajePendientePorMostrar);
+					gMensajePendientePorMostrar = "";
+				}
+
+				vectorGeneralActualizado = response.vectorGeneral;
+				actualizarVectores(vectorGeneralActualizado);
+					
                 $j("#agenda80").html(resultado.agenda);
 				$j("#agenda80").removeClass("noVer");
 				$j(gBotonCerrarLlamador).removeClass("noVer");
@@ -700,11 +701,13 @@ function mostrarAgenda(tipoContenido, valor)
 				mensajesUsuario =
 				"<div class='alert alert-danger alert-dismissible'>" +
 					"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-					"<strong>No se pudo acceder a la información</strong>" +
+					"<strong>" + response.mensaje + "</strong>" +
 				"</div>"; 
 
-				borrarMensajesAnteriores();
+				vectorGeneralActualizado = response.vectorGeneral;
+				actualizarVectores(vectorGeneralActualizado);
 
+				borrarMensajesAnteriores();
 				$j("#mensajesUsuario30").html(mensajesUsuario);
 				window.scrollTo(0, 0);        
             }
@@ -733,6 +736,12 @@ function mostrarAgenda(tipoContenido, valor)
 	else
 	{
 		borrarMensajesAnteriores();
+		if (gMensajePendientePorMostrar != "")
+		{
+			$j("#mensajesUsuario30").html(gMensajePendientePorMostrar);
+			gMensajePendientePorMostrar = "";
+		}
+
         $j("#agenda80").html(resultado.agenda);
 		$j("#agenda80").removeClass("noVer");
 		$j(gBotonCerrarLlamador).removeClass("noVer");
@@ -1247,51 +1256,29 @@ function crearMosaicos(clave, datos)
     mosaico += 
         lineaFecha + 
                         "</div>" +
-                            
-                        "<div class='row'>" +
-                            "<div class='col-md-6'>" +
-                                "<p>Responsable: " + gUsuarios[datos.idEjecutor].first_name + " " + gUsuarios[datos.idEjecutor].last_name  + "</p>" + 
-                            "</div>" + 
-                            "<div class='col-md-3'>" +
-                                "<div class='form-check'>" +
-                                    "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + 
-                                        complementoId + "'>" +
-                                    "<label class='form-check-label' for='cerrarActividad80'>&nbsp;&nbsp;Cerrar</label>" +
-                                "</div>" +
-                            "</div>"+
+						
+						"<div class='row'>" +
+							"<div class='col-md-12'>" +
+								"<div class='mensajesUsuario' id='mensajesUsuario80-" + complementoId + "'>" +
+								"</div>" +
+							"</div>" +
+						"</div>" + 	
 
-                            "<div class='col-md-3'>" +
-                                "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + 
-                                    complementoId + "'>" + 
-                                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
-                                    "crmdapliw/app/public/images/pencil.svg alt='Guardar cambios' class='icono'>" +
-                                "</button>" +
-                            "</div>"+
+						"<div class='row noVer' id='adicionalTitulo80-" + complementoId + "'>" +
+							"<h3>Datos para la confirmación de la cita</h3>" +
+						"</div>" +
 
-                        "</div>" +
+						"<div class='row noVer' id='adicionalGrupoNotas80-" + complementoId + "'>" +
+							"<div class='col-md-12'>" +
+								"<div class='form-group'>" + 
+									"<label for='adicionalNotas80'>Notas</label>" +  
+									"<input type='text' class='form-control' id='adicionalNotas80-" + 
+										complementoId + "'>" + 
+								"</div>" +
+							"</div>" + 
+						"</div>" +		
 
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-        "</div>" +
-        "<div class='row'>" +
-            "<div class='col-md-12'>" +
-                "<div class='mensajesUsuario' id='mensajesUsuario80-" + complementoId + "'>" +
-                "</div>" +
-            "</div>" +
-        "</div>" + 
-
-	    "<div class='row noVer' id='adicionalGrupoNotas80-" + complementoId + "'>" +
-		    "<div class='col-md-12'>" +
-			    "<div class='form-group'>" + 
-				    "<label for='adicionalNotas80'>Notas</label>" +  
-				    "<input type='text' class='form-control' id='adicionalNotas80-" + 
-					    complementoId + "'>" + 
-			    "</div>" +
-		    "</div>" + 
-	    "</div>" +		
-
-        "<div class='row noVer' id='adicionalFechaPlanificada80-" + complementoId + "'>";
+						"<div class='row noVer' id='adicionalFechaPlanificada80-" + complementoId + "'>";
                 
 	idFechas =
 		{			
@@ -1330,7 +1317,34 @@ function crearMosaicos(clave, datos)
 
     mosaico += 
         lineaFecha + 
-            "</div>" + 
+						"</div>" + 
+                            
+                        "<div class='row'>" +
+                            "<div class='col-md-6'>" +
+                                "<p>Responsable: " + gUsuarios[datos.idEjecutor].first_name + " " + gUsuarios[datos.idEjecutor].last_name  + "</p>" + 
+                            "</div>" + 
+                            "<div class='col-md-3'>" +
+                                "<div class='form-check'>" +
+                                    "<input type='checkbox' class='form-check-input cerrarActividad80' id='cerrarActividad80-" + 
+                                        complementoId + "'>" +
+                                    "<label class='form-check-label' for='cerrarActividad80'>&nbsp;&nbsp;Cerrar</label>" +
+                                "</div>" +
+                            "</div>"+
+
+                            "<div class='col-md-3'>" +
+                                "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + 
+                                    complementoId + "'>" + 
+                                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
+                                    "crmdapliw/app/public/images/pencil.svg alt='Guardar cambios' class='icono'>" +
+                                "</button>" +
+                            "</div>"+
+
+                        "</div>" +
+
+                    "</div>" +
+                "</div>" +
+            "</div>" +
+        "</div>" +
         "<br />" +
         "<br />";
 
@@ -3144,23 +3158,30 @@ function guardarCambiosAgenda(idActividad)
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                     "<strong>" + response.mensaje + "</strong>" +
                 "</div>";
+				
+			borrarMensajesAnteriores();
+			
             if (estatusObj == "Cerrada por el usuario")
             {
                 $j(tarjeta).addClass("noVer");
+				$j("#mensajesUsuario30").html(mensajesUsuario);
+				window.scrollTo(0, 0);
             }
-
+			else
+			{
+				$j(idMensaje).html(mensajesUsuario);
+			}
+			
             if (gIndicadorAdicional == 1)
             {
                 $j("#adicionalFechaPlanificada80-" + idActividad).addClass("noVer");
                 $j("#adicionalGrupoNotas80-" + idActividad).addClass("noVer");
             }
         
+		    $j("#guardarCambios80-" + idActividad).attr("disabled", false);
+			
             vectorGeneralActualizado = response.vectorGeneral;
-
             actualizarVectores(vectorGeneralActualizado);
-
-            borrarMensajesAnteriores();
-            $j(idMensaje).html(mensajesUsuario);
         } 
         else 
         {
@@ -3171,7 +3192,6 @@ function guardarCambiosAgenda(idActividad)
             "</div>"; 
 
             vectorGeneralActualizado = response.vectorGeneral;
-
             actualizarVectores(vectorGeneralActualizado);
 
         	$j(idMensaje).html(mensajesUsuario);
@@ -3396,17 +3416,16 @@ function verificarAdicional(idActividad)
         gIndicadorAdicional = 1;
 
         var mensajesUsuario = 
-            "<div class='alert alert-info alert-dismissible'>" +
+            "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>Estimado usuario por favor escriba los datos referentes a la confirmación de la cita</strong>" +
             "</div>";
 
         borrarMensajesAnteriores();
-
         idMensaje = "#mensajesUsuario80-" + complementoId; 
-
         $j(idMensaje).html(mensajesUsuario);
 
+		$j("#adicionalTitulo80-" + complementoId).removeClass("noVer");
         $j("#adicionalFechaPlanificada80-" + complementoId).removeClass("noVer");
         $j("#adicionalGrupoNotas80-" + complementoId).removeClass("noVer");
     }
@@ -3414,6 +3433,11 @@ function verificarAdicional(idActividad)
 
 function inicializarFormularioActividad()
 {
+	borrarMensajesAnteriores();
+	if ($j("#guardarActividad10").attr("disabled"))
+	{
+		$j("#guardarActividad10").attr("disabled", false);
+	}
     $j('#tituloAgregarActividad90').html("Planificar actividades para " + gMatrizBienes[gIdPostActual].post_title); 
     $j('#actividadAgenda90').val("");
     $j('#notas90').val("");
@@ -3465,9 +3489,10 @@ function guardarActividad()
             "<strong>Por favor espere mientras se guardan los datos</strong>" +
         "</div>";
 
-    borrarMensajesAnteriores();
+    $j("#guardarActividad10").attr("disabled", true); 
 
-    $j("#mensajesUsuario30").html(mensajesUsuario);
+    borrarMensajesAnteriores();
+    $j("#mensajesAgregarActividad90").html(mensajesUsuario);
 
     $j("#notas90").val($j.trim($j("#notas90").val().toUpperCase()));
 
@@ -3533,18 +3558,14 @@ function guardarActividad()
     {
         if (response.satisfactorio) 
         {
-            mensajesUsuario =
+            gMensajePendientePorMostrar =
                 "<div class='alert alert-success alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                     "<strong>" + response.mensaje + "</strong>" +
                 "</div>";
 
             vectorGeneralActualizado = response.vectorGeneral;
-
             actualizarVectores(vectorGeneralActualizado);
-
-            borrarMensajesAnteriores();
-            $j("#mensajesUsuario30").html(mensajesUsuario);
 
             $j("#agregarActividad90").addClass("noVer");
             $j("#cerrarAgregarActividad10").addClass("noVer");
@@ -3560,7 +3581,6 @@ function guardarActividad()
                 "</div>"; 
 
             vectorGeneralActualizado = response.vectorGeneral;
-
             actualizarVectores(vectorGeneralActualizado);
 
             borrarMensajesAnteriores();
@@ -3599,7 +3619,7 @@ function actualizarVectores(vectorGeneralActualizado)
     gRoles = gVectorGeneral.roles;
     gUsuarios = gVectorGeneral.usuarios;
     gPersonasAsc = gVectorGeneral.personasAsc;
-    gNotificaciones = gVectorGeneral.notificaciones;
+    gNotificaciones = gVectorGeneral.notificaciones;	
     gVistaPreferida = gVectorGeneral.vistaPreferida;
     gOpcionesSelectActividades = gVectorGeneral.opcionesSelectActividades;
     gVectorGeneral = "";
@@ -3662,7 +3682,7 @@ $j(document).ready(function()
         {
             $j("#grupoVista20").removeClass('noVer');
         }  
-        if ($j("#notificaciones20").hasClass('noVer'))
+        if (gNotificaciones > 0)
         {
             $j("#notificaciones20").removeClass('noVer');
         }   
@@ -3758,7 +3778,7 @@ $j(document).ready(function()
         {
             $j("#grupoVista20").removeClass('noVer');
         }  
-        if ($j("#notificaciones20").hasClass('noVer'))
+        if (gNotificaciones > 0)
         {
             $j("#notificaciones20").removeClass('noVer');
         }   
@@ -3925,6 +3945,7 @@ $j(document).ready(function()
         clave = arregloId[1];
         gIdPostActual = arregloId[3];
         datos = gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[clave]
+		borrarMensajesAnteriores();
         mosaico = crearMosaicos(clave, datos);
         $j("#agenda80").html(mosaico);
         $j("#cerrarAgenda10").addClass('noVer');
@@ -3950,7 +3971,18 @@ $j(document).ready(function()
     $j("#agenda80").on("click", ".guardarCambios80", function()
     {
         var idActividad = $j(this).attr('id').substring(17);
-		validarActividad("Existente", idActividad);
+        var arregloId = idActividad.split("-");       
+        clave = arregloId[0];
+		gIdPostActual = arregloId[2];
+        datos = gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[clave]		
+		if (datos.idEjecutor == gIdUsuario)
+		{
+			validarActividad("Existente", idActividad);
+		}
+		else
+		{
+			alert("No puede realizar cambios porque esta actividad pertenece a otro usuario");
+		}
     });
 
     $j('#agregarActividad10').click(function()
@@ -3978,7 +4010,6 @@ $j(document).ready(function()
 
     $j('#guardarActividad10').click(function()
     {
-        $j("#guardarActividad10").attr("disabled", true); 
         tipoActividad = "Nueva";
         validarActividad(tipoActividad, "");
     });

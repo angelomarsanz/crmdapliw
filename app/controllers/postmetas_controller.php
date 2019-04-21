@@ -86,13 +86,13 @@ class PostmetasController extends MvcPublicController
                         {
                             $jsondata["satisfactorio"] = true;
                             $jsondata["mensaje"] = "La actividad se agregó correctamente";
-                            $vectorGeneral = $postsController->cargar_vectores();
+                            $jsondata["vectorGeneral"] = $vectorGeneral;
                         }
                         else
                         {
                             $jsondata["satisfactorio"] = false;
                             $jsondata["mensaje"] = "No se pudo crear la actividad Solicitud de cita para el usuario " . $destinatario;
-                            $vectorGeneral = $postsController->cargar_vectores();
+                            $jsondata["vectorGeneral"] = $vectorGeneral;
                         }
                     }
                     else
@@ -115,7 +115,7 @@ class PostmetasController extends MvcPublicController
 
                 $jsondata["satisfactorio"] = false;
                 $jsondata["mensaje"] = "No se pudo agregar la actividad";
-                $vectorGeneral = $postsController->cargar_vectores();
+                $jsondata["vectorGeneral"] = $vectorGeneral;
             }
         }
         else
@@ -130,295 +130,312 @@ class PostmetasController extends MvcPublicController
     public function editar_actividad()
     {
         $this->autoRender = false;
-
-        $this->load_model("Binnacle");
-
-        $indicadorCambios = 0;
-        $indicadorError = 0;
-
-		setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
-		date_default_timezone_set('America/Caracas');
-
-		$fechaHoy = new DateTime(); 
-		$fechaFormato = $fechaHoy->format('d-m-Y');  
-        $fechaVector = explode('-', $fechaFormato);
-
+		
         $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Captador",
+                "Gestor de negocios",
+                "Administrador"
+            ];
 
-        /* Descomentar solo para pruebas 
+        $accesoPermitido = $this->verificarPermisos($rolesAutorizados);
 
-		$actividad = 
-			'{
-				"idActividad" : "5679",
-				"notas" : "Prueba",
-				"anoPlanificado" : "2019",
-				"mesPlanificado" : "04",
-				"diaPlanificado" : "15",
-				"horaPlanificado" : "10",
-				"minutoPlanificado" : "33",
-				"meridianoPlanificado" : "am",
-                "informacionAdicional" : 
-                    {
-                        "nombreActividad" : "Confirmación solicitud de cita para mostrar propiedad",
-                        "notas" : "Prueba",
-				        "anoPlanificado" : "2019",
-				        "mesPlanificado" : "04",
-				        "diaPlanificado" : "16",
-				        "horaPlanificado" : "10",
-				        "minutoPlanificado" : "33",
-				        "meridianoPlanificado" : "am"
-                    },
-				"estatus" : "Cerrada por el usuario"
-			}';
-        
-        $_POST = json_decode($actividad, true);
-
-        */
-
-        if (isset($_POST["idActividad"]))
+        if ($accesoPermitido == "true")
         {
-            $object = $this->Postmeta->find_by_id($_POST["idActividad"]);
+			$this->load_model("Binnacle");
 
-            $objetoActividad = json_decode($object->meta_value);
+			$indicadorCambios = 0;
+			$indicadorError = 0;
 
-            if ($objetoActividad->notas != $_POST["notas"])
-            {
-                $notasAnterior = $objetoActividad->notas;
+			setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
+			date_default_timezone_set('America/Caracas');
 
-				$objetoActividad->notas = $_POST["notas"];
-                $indicadorCambios = 1;
-            }
+			$fechaHoy = new DateTime(); 
+			$fechaFormato = $fechaHoy->format('d-m-Y');  
+			$fechaVector = explode('-', $fechaFormato);
+
+			/* Descomentar solo para pruebas 
+
+			$actividad = 
+				'{
+					"idActividad" : "5679",
+					"notas" : "Prueba",
+					"anoPlanificado" : "2019",
+					"mesPlanificado" : "04",
+					"diaPlanificado" : "15",
+					"horaPlanificado" : "10",
+					"minutoPlanificado" : "33",
+					"meridianoPlanificado" : "am",
+					"informacionAdicional" : 
+						{
+							"nombreActividad" : "Confirmación solicitud de cita para mostrar propiedad",
+							"notas" : "Prueba",
+							"anoPlanificado" : "2019",
+							"mesPlanificado" : "04",
+							"diaPlanificado" : "16",
+							"horaPlanificado" : "10",
+							"minutoPlanificado" : "33",
+							"meridianoPlanificado" : "am"
+						},
+					"estatus" : "Cerrada por el usuario"
+				}';
 			
-			$fechaPlanificadaGuardada = 
-				$objetoActividad->anoPlanificado .
-				$objetoActividad->mesPlanificado .
-				$objetoActividad->diaPlanificado .
-				$objetoActividad->horaPlanificado . 
-				$objetoActividad->minutoPlanificado .
-				$objetoActividad->meridianoPlanificado;
-				
-			$fechaPlanificadaRecibida =
-				$_POST["anoPlanificado"] .
-				$_POST["mesPlanificado"] .
-				$_POST["diaPlanificado"] .
-				$_POST["horaPlanificado"] .
-				$_POST["minutoPlanificado"] .
-				$_POST["meridianoPlanificado"];
+			$_POST = json_decode($actividad, true);
 
-			if ($fechaPlanificadaGuardada != $fechaPlanificadaRecibida)
+			*/
+
+			if (isset($_POST["idActividad"]))
 			{
-                $objetoActividad->anoPlanificado = $_POST["anoPlanificado"];
-                $objetoActividad->mesPlanificado = $_POST["mesPlanificado"];
-                $objetoActividad->diaPlanificado = $_POST["diaPlanificado"];
-                $objetoActividad->horaPlanificado = $_POST["horaPlanificado"];
-                $objetoActividad->minutoPlanificado = $_POST["minutoPlanificado"];
-                $objetoActividad->meridianoPlanificado = $_POST["meridianoPlanificado"];
-				$indicadorCambios = 1;
-			}
-    
-            $jsonInformacionAdicional = json_encode($_POST["informacionAdicional"]);
+				$object = $this->Postmeta->find_by_id($_POST["idActividad"]);
 
-            if ($objetoActividad->informacionAdicional != $jsonInformacionAdicional)
-            {
-                $informacionAdicionalAnterior = $objetoActividad->informacionAdicional;
+				$objetoActividad = json_decode($object->meta_value);
 
-				$objetoActividad->informacionAdicional = $jsonInformacionAdicional;
-                $indicadorCambios = 1;
-            }
+				if ($objetoActividad->notas != $_POST["notas"])
+				{
+					$notasAnterior = $objetoActividad->notas;
+
+					$objetoActividad->notas = $_POST["notas"];
+					$indicadorCambios = 1;
+				}
 				
-			if ($indicadorCambios == 1)
+				$fechaPlanificadaGuardada = 
+					$objetoActividad->anoPlanificado .
+					$objetoActividad->mesPlanificado .
+					$objetoActividad->diaPlanificado .
+					$objetoActividad->horaPlanificado . 
+					$objetoActividad->minutoPlanificado .
+					$objetoActividad->meridianoPlanificado;
+					
+				$fechaPlanificadaRecibida =
+					$_POST["anoPlanificado"] .
+					$_POST["mesPlanificado"] .
+					$_POST["diaPlanificado"] .
+					$_POST["horaPlanificado"] .
+					$_POST["minutoPlanificado"] .
+					$_POST["meridianoPlanificado"];
+
+				if ($fechaPlanificadaGuardada != $fechaPlanificadaRecibida)
+				{
+					$objetoActividad->anoPlanificado = $_POST["anoPlanificado"];
+					$objetoActividad->mesPlanificado = $_POST["mesPlanificado"];
+					$objetoActividad->diaPlanificado = $_POST["diaPlanificado"];
+					$objetoActividad->horaPlanificado = $_POST["horaPlanificado"];
+					$objetoActividad->minutoPlanificado = $_POST["minutoPlanificado"];
+					$objetoActividad->meridianoPlanificado = $_POST["meridianoPlanificado"];
+					$indicadorCambios = 1;
+				}
+		
+				$jsonInformacionAdicional = json_encode($_POST["informacionAdicional"]);
+
+				if ($objetoActividad->informacionAdicional != $jsonInformacionAdicional)
+				{
+					$informacionAdicionalAnterior = $objetoActividad->informacionAdicional;
+
+					$objetoActividad->informacionAdicional = $jsonInformacionAdicional;
+					$indicadorCambios = 1;
+				}
+					
+				if ($indicadorCambios == 1)
+				{
+					$arregloHistorial = json_decode($objetoActividad->historialDeCambios, true);
+					
+					$cambioActividad =
+						[
+							"fechaCambio" => $fechaFormato,
+							"notas" => $notasAnterior,
+							"fechaPlanificada" => $fechaPlanificadaGuardada,
+							"informacionAdicional" => $informacionAdicionalAnterior
+						]; 
+									
+					$arregloHistorial[] = $cambioActividad;
+					
+					$jsonHistorial = json_encode($arregloHistorial);
+					
+					$objetoActividad->historialDeCambios = $jsonHistorial;
+				}
+					
+				if ($_POST["estatus"] == "Cerrada por el usuario")
+				{        
+					$objetoActividad->anoCierre = $fechaVector[2];
+					$objetoActividad->mesCierre = $fechaVector[1];
+					$objetoActividad->diaCierre = $fechaVector[0];
+					$objetoActividad->horaCierre = "";
+					$objetoActividad->minutoCierre = "";
+					$objetoActividad->meridianoCierre = "";
+					$objetoActividad->estatus = "Cerrada por el usuario";  
+				}
+
+				$jsonObjetoActividad = json_encode($objetoActividad);      
+				$this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
+
+				if ($_POST["estatus"] == "Cerrada por el usuario")
+				{   
+					if ($objetoActividad->nombreActividad == "Solicitud de cita para mostrar propiedad")
+					{
+						$actividades = $this->Postmeta->find(array(
+							'conditions' => array(
+							'post_id' => array($objetoActividad->idPropiedad),
+							'meta_key' => array('CRMdapliw_actividad_agenda'))));           
+
+						foreach ($actividades as $actividad)
+						{
+							$arregloActividad = json_decode($actividad->meta_value);
+
+							if ($arregloActividad->idActividadPadre == $objetoActividad->idActividadPadre)
+							{
+								if ($actividad->__id != $_POST["idActividad"])
+								{
+									$arregloActividad->anoCierre = $fechaVector[2];
+									$arregloActividad->mesCierre = $fechaVector[1];
+									$arregloActividad->diaCierre = $fechaVector[0];
+									$arregloActividad->horaCierre = "";
+									$arregloActividad->minutoCierre = "";
+									$arregloActividad->meridianoCierre = "";
+									$arregloActividad->estatus = "Cerrada por el sistema"; 
+
+									$jsonArregloActividad = json_encode($arregloActividad);      
+									$this->Postmeta->update($actividad->__id, array('meta_value' => $jsonArregloActividad));
+								}
+
+								$arregloAdicional = $_POST["informacionAdicional"]; 
+
+								$arregloActividad->nombreActividad = $arregloAdicional["nombreActividad"];
+								$arregloActividad->notas = $arregloAdicional["notas"];
+								$arregloActividad->anoPlanificado = $arregloAdicional["anoPlanificado"];
+								$arregloActividad->mesPlanificado = $arregloAdicional["mesPlanificado"];
+								$arregloActividad->diaPlanificado = $arregloAdicional["diaPlanificado"];
+								$arregloActividad->horaPlanificado = $arregloAdicional["horaPlanificado"];
+								$arregloActividad->minutoPlanificado = $arregloAdicional["minutoPlanificado"];
+								$arregloActividad->meridianoPlanificado = $arregloAdicional["meridianoPlanificado"];
+
+								$arregloActividad->anoCierre = $arregloAdicional["anoPlanificado"];
+								$arregloActividad->mesCierre = $arregloAdicional["mesPlanificado"];
+								$arregloActividad->diaCierre = $arregloAdicional["diaPlanificado"];
+								$arregloActividad->horaCierre = $arregloAdicional["horaPlanificado"];
+								$arregloActividad->minutoCierre = $arregloAdicional["minutoPlanificado"];
+								$arregloActividad->meridianoCierre = $arregloAdicional["meridianoPlanificado"];
+
+								$arregloActividad->idSolicitante = $objetoActividad->idEjecutor;
+								$arregloActividad->idActividadPadre = $objetoActividad->$_POST["idActividad"];
+								$arregloActividad->notificacion = "No vista";
+								$arregloActividad->informacionAdicional = "";
+								$arregloActividad->historialDeCambios = "";
+								$arregloActividad->estatus = "Abierta";
+
+								$jsonArregloActividad = json_encode($arregloActividad);
+
+								$postmeta = 
+									[
+										'post_id' => $arregloActividad->idPropiedad, 
+										'meta_key' => 'CRMdapliw_actividad_agenda', 
+										'meta_value' => $jsonArregloActividad
+									];
+
+								$idPostmeta = $this->Postmeta->insert($postmeta);  
+
+								if ($idPostmeta == 0)
+								{
+									$binnacle = 
+										[
+											"novedad" => "No se pudo crear la actividad hijo de " . $arregloActividad->idActividadPadre . 
+												" para el usuario " . $arregloActividad->idEjecutor,
+											"tipo_clase" => "controlador",
+											"nombre_clase" => "Postmetas",
+											"nombre_metodo" => "editar_actividad"                             
+										];
+
+									$idBinnacle = $this->Binnacle->insert($binnacle);
+
+									$indicadorError = 1;
+									break;
+								}
+							}                       
+						}
+
+						if ($indicadorError == 0)
+						{
+							$actividadPadre = $this->Postmeta->find_by_id($objetoActividad->idActividadPadre);
+
+							$arregloPadre = json_decode($actividadPadre->meta_value);
+
+							$arregloPadre->anoCierre = $fechaVector[2];
+							$arregloPadre->mesCierre = $fechaVector[1];
+							$arregloPadre->diaCierre = $fechaVector[0];
+							$arregloPadre->horaCierre = "";
+							$arregloPadre->minutoCierre = "";
+							$arregloPadre->meridianoCierre = "";
+							$arregloPadre->estatus = "Cerrada por el sistema"; 
+
+							$jsonArregloPadre = json_encode($arregloPadre);      
+							$this->Postmeta->update($actividadPadre->__id, array('meta_value' => $jsonArregloPadre));
+
+							$arregloActividad->idEjecutor = $arregloPadre->idEjecutor;
+
+							$jsonArregloActividad = json_encode($arregloActividad);
+
+							$postmeta = 
+								[
+									'post_id' => $arregloActividad->idPropiedad, 
+									'meta_key' => 'CRMdapliw_actividad_agenda', 
+									'meta_value' => $jsonArregloActividad
+								];
+
+							$idPostmeta = $this->Postmeta->insert($postmeta);  
+
+							if ($idPostmeta == 0)
+							{
+								$binnacle = 
+									[
+										"novedad" => "No se pudo crear la actividad hijo de " . $arregloActividad->idActividadPadre . 
+											" para el usuario " . $arregloActividad->idEjecutor,
+										"tipo_clase" => "controlador",
+										"nombre_clase" => "Postmetas",
+										"nombre_metodo" => "editar_actividad"                             
+									];
+
+								$idBinnacle = $this->Binnacle->insert($binnacle);
+
+								$indicadorError = 1;
+							}
+						}
+					}
+				}
+				require_once("posts_controller.php");
+				$postsController = new PostsController();
+				$vectorGeneral = $postsController->cargar_vectores();
+
+				if ($indicadorError == 0)
+				{              
+					$jsondata["satisfactorio"] = true;
+					$jsondata["mensaje"] = "Los cambios se guardaron correctamente";
+					$jsondata["vectorGeneral"] = $vectorGeneral;
+				}
+				else
+				{
+					$jsondata["satisfactorio"] = false;
+					$jsondata["mensaje"] = "No se pudieron guardar los cambios. Error al crear actividades de confirmación";
+					$jsondata["vectorGeneral"] = $vectorGeneral;
+				}
+			} 
+			else
 			{
-				$arregloHistorial = json_decode($objetoActividad->historialDeCambios, true);
-				
-				$cambioActividad =
-					[
-						"fechaCambio" => $fechaFormato,
-						"notas" => $notasAnterior,
-						"fechaPlanificada" => $fechaPlanificadaGuardada,
-                        "informacionAdicional" => $informacionAdicionalAnterior
-					]; 
-								
-				$arregloHistorial[] = $cambioActividad;
-				
-				$jsonHistorial = json_encode($arregloHistorial);
-				
-				$objetoActividad->historialDeCambios = $jsonHistorial;
+				require_once("posts_controller.php");
+				$postsController = new PostsController();
+				$vectorGeneral = $postsConstroller->cargarVectores();
+
+				$jsondata["satisfactorio"] = false;
+				$jsondata["mensaje"] = "No se pudieron guardar los cambios";
+				$jsondata["vectorGeneral"] = $vectorGeneral;
 			}
-				
-            if ($_POST["estatus"] == "Cerrada por el usuario")
-            {        
-                $objetoActividad->anoCierre = $fechaVector[2];
-                $objetoActividad->mesCierre = $fechaVector[1];
-                $objetoActividad->diaCierre = $fechaVector[0];
-                $objetoActividad->horaCierre = "";
-                $objetoActividad->minutoCierre = "";
-                $objetoActividad->meridianoCierre = "";
-                $objetoActividad->estatus = "Cerrada por el usuario";  
-			}
-
-			$jsonObjetoActividad = json_encode($objetoActividad);      
-			$this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
-
-            if ($_POST["estatus"] == "Cerrada por el usuario")
-            {   
-                if ($objetoActividad->nombreActividad == "Solicitud de cita para mostrar propiedad")
-                {
-                    $actividades = $this->Postmeta->find(array(
-                        'conditions' => array(
-                        'post_id' => array($objetoActividad->idPropiedad),
-                        'meta_key' => array('CRMdapliw_actividad_agenda'))));           
-
-                    foreach ($actividades as $actividad)
-                    {
-                        $arregloActividad = json_decode($actividad->meta_value);
-
-                        if ($arregloActividad->idActividadPadre == $objetoActividad->idActividadPadre)
-                        {
-                            if ($actividad->__id != $_POST["idActividad"])
-                            {
-                                $arregloActividad->anoCierre = $fechaVector[2];
-                                $arregloActividad->mesCierre = $fechaVector[1];
-                                $arregloActividad->diaCierre = $fechaVector[0];
-                                $arregloActividad->horaCierre = "";
-                                $arregloActividad->minutoCierre = "";
-                                $arregloActividad->meridianoCierre = "";
-                                $arregloActividad->estatus = "Cerrada por el sistema"; 
-
-		                        $jsonArregloActividad = json_encode($arregloActividad);      
-		                        $this->Postmeta->update($actividad->__id, array('meta_value' => $jsonArregloActividad));
-                            }
-
-                            $arregloAdicional = $_POST["informacionAdicional"]; 
-
-                            $arregloActividad->nombreActividad = $arregloAdicional["nombreActividad"];
-                            $arregloActividad->notas = $arregloAdicional["notas"];
-                            $arregloActividad->anoPlanificado = $arregloAdicional["anoPlanificado"];
-                            $arregloActividad->mesPlanificado = $arregloAdicional["mesPlanificado"];
-                            $arregloActividad->diaPlanificado = $arregloAdicional["diaPlanificado"];
-                            $arregloActividad->horaPlanificado = $arregloAdicional["horaPlanificado"];
-                            $arregloActividad->minutoPlanificado = $arregloAdicional["minutoPlanificado"];
-                            $arregloActividad->meridianoPlanificado = $arregloAdicional["meridianoPlanificado"];
-
-                            $arregloActividad->anoCierre = $arregloAdicional["anoPlanificado"];
-                            $arregloActividad->mesCierre = $arregloAdicional["mesPlanificado"];
-                            $arregloActividad->diaCierre = $arregloAdicional["diaPlanificado"];
-                            $arregloActividad->horaCierre = $arregloAdicional["horaPlanificado"];
-                            $arregloActividad->minutoCierre = $arregloAdicional["minutoPlanificado"];
-                            $arregloActividad->meridianoCierre = $arregloAdicional["meridianoPlanificado"];
-
-                            $arregloActividad->idSolicitante = $objetoActividad->idEjecutor;
-                            $arregloActividad->idActividadPadre = $objetoActividad->$_POST["idActividad"];
-                            $arregloActividad->notificacion = "No vista";
-                            $arregloActividad->informacionAdicional = "";
-                            $arregloActividad->historialDeCambios = "";
-                            $arregloActividad->estatus = "Abierta";
-
-                            $jsonArregloActividad = json_encode($arregloActividad);
-
-                            $postmeta = 
-                                [
-                                    'post_id' => $arregloActividad->idPropiedad, 
-                                    'meta_key' => 'CRMdapliw_actividad_agenda', 
-                                    'meta_value' => $jsonArregloActividad
-                                ];
-
-                            $idPostmeta = $this->Postmeta->insert($postmeta);  
-
-                            if ($idPostmeta == 0)
-                            {
-                                $binnacle = 
-                                    [
-                                        "novedad" => "No se pudo crear la actividad hijo de " . $arregloActividad->idActividadPadre . 
-                                            " para el usuario " . $arregloActividad->idEjecutor,
-                                        "tipo_clase" => "controlador",
-                                        "nombre_clase" => "Postmetas",
-                                        "nombre_metodo" => "editar_actividad"                             
-                                    ];
-
-                                $idBinnacle = $this->Binnacle->insert($binnacle);
-
-                                $indicadorError = 1;
-                                break;
-                            }
-                        }                       
-                    }
-
-                    if ($indicadorError == 0)
-                    {
-                        $actividadPadre = $this->Postmeta->find_by_id($objetoActividad->idActividadPadre);
-
-                        $arregloPadre = json_decode($actividadPadre->meta_value);
-
-                        $arregloPadre->anoCierre = $fechaVector[2];
-                        $arregloPadre->mesCierre = $fechaVector[1];
-                        $arregloPadre->diaCierre = $fechaVector[0];
-                        $arregloPadre->horaCierre = "";
-                        $arregloPadre->minutoCierre = "";
-                        $arregloPadre->meridianoCierre = "";
-                        $arregloPadre->estatus = "Cerrada por el sistema"; 
-
-	                    $jsonArregloPadre = json_encode($arregloPadre);      
-	                    $this->Postmeta->update($actividadPadre->__id, array('meta_value' => $jsonArregloPadre));
-
-                        $arregloActividad->idEjecutor = $arregloPadre->idEjecutor;
-
-                        $jsonArregloActividad = json_encode($arregloActividad);
-
-                        $postmeta = 
-                            [
-                                'post_id' => $arregloActividad->idPropiedad, 
-                                'meta_key' => 'CRMdapliw_actividad_agenda', 
-                                'meta_value' => $jsonArregloActividad
-                            ];
-
-                        $idPostmeta = $this->Postmeta->insert($postmeta);  
-
-                        if ($idPostmeta == 0)
-                        {
-                            $binnacle = 
-                                [
-                                    "novedad" => "No se pudo crear la actividad hijo de " . $arregloActividad->idActividadPadre . 
-                                        " para el usuario " . $arregloActividad->idEjecutor,
-                                    "tipo_clase" => "controlador",
-                                    "nombre_clase" => "Postmetas",
-                                    "nombre_metodo" => "editar_actividad"                             
-                                ];
-
-                            $idBinnacle = $this->Binnacle->insert($binnacle);
-
-                            $indicadorError = 1;
-                        }
-                    }
-                }
-            }
-            require_once("posts_controller.php");
-
-            $postsController = new PostsController();
-            $vectorGeneral = $postsController->cargar_vectores();
-
-            if ($indicadorError == 0)
-            {              
-			    $jsondata["satisfactorio"] = true;
-			    $jsondata["mensaje"] = "Los cambios se guardaron correctamente";
-                $jsondata["vectorGeneral"] = $vectorGeneral;
-            }
-            else
-            {
-			    $jsondata["satisfactorio"] = false;
-			    $jsondata["mensaje"] = "No se pudieron guardar los cambios. Error al crear actividades de confirmación";
-                $jsondata["vectorGeneral"] = $vectorGeneral;
-            }
-        } 
-        else
-        {
-            require_once("posts_controller.php");
-            $postsController = new PostsController();
-            $vectorGeneral = $postsConstroller->cargarVectores();
-
-            $jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "No se pudieron guardar los cambios";
-            $jsondata["vectorGeneral"] = $vectorGeneral;
-        }    
+		}
+		else
+		{
+			$jsondata["satisfactorio"] = false;
+			$jsondata["mensaje"] = "Usuario no autorizado"; 
+			$jsondata["vectorGeneral"] = "";			
+		}
         exit(json_encode($jsondata));
     }
 
@@ -610,29 +627,59 @@ class PostmetasController extends MvcPublicController
 	public function desmarcar_notificaciones()
 	{
 		$this->autoRender = false;
+		
+        $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Captador",
+                "Gestor de negocios",
+                "Administrador"
+            ];
 
-        $this->load_model("Binnacle");
+        $accesoPermitido = $this->verificarPermisos($rolesAutorizados);
 
-        if (isset($_POST["notificaciones"]))
-        {
-			foreach ($_POST["notificaciones"] as $notificaciones)
+        if ($accesoPermitido == "true")
+        {		
+			$this->load_model("Binnacle");
+
+			if (isset($_POST["notificaciones"]))
 			{
-				$object = $this->Postmeta->find_by_id($notificaciones);
+				foreach ($_POST["notificaciones"] as $notificaciones)
+				{
+					$object = $this->Postmeta->find_by_id($notificaciones);
 
-				$objetoActividad = json_decode($object->meta_value);
+					$objetoActividad = json_decode($object->meta_value);
 
-				$objetoActividad->notificacion = "Vista";
+					$objetoActividad->notificacion = "Vista";
 
-                $jsonObjetoActividad = json_encode($objetoActividad);      
-                $this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
-			}	
-		    $jsondata["satisfactorio"] = true;
-            $jsondata["mensaje"] = "El estatus de la notificación se actualizó exitosamente"; 
+					$jsonObjetoActividad = json_encode($objetoActividad);      
+					$this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
+				}
+				require_once("posts_controller.php");
+				$postsController = new PostsController();
+				$vectorGeneral = $postsController->cargar_vectores();	
+				
+				$jsondata["satisfactorio"] = true;
+				$jsondata["mensaje"] = "El estatus de la notificación se actualizó exitosamente";
+				$jsondata["vectorGeneral"] = $vectorGeneral;
+			}
+			else
+			{
+				require_once("posts_controller.php");
+				$postsController = new PostsController();
+				$vectorGeneral = $postsController->cargar_vectores();
+				
+				$jsondata["satisfactorio"] = false;
+				$jsondata["mensaje"] = "No se pudo actualizar el estatus de la notificación"; 
+				$jsondata["vectorGeneral"] = $vectorGeneral;
+			}
 		}
 		else
 		{
 			$jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "No se pudo actualizar el estatus de la notificación"; 
+			$jsondata["mensaje"] = "Usuario no autorizado"; 
+			$jsondata["vectorGeneral"] = "";
 		}
 		exit(json_encode($jsondata));
 	}
