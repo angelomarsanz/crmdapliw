@@ -15,7 +15,6 @@ class PostsController extends MvcPublicController
 
     public function index() 
     {
-        $jsondata = [];
         $rolesAutorizados = 
             [
                 "Promotor",
@@ -30,12 +29,6 @@ class PostsController extends MvcPublicController
         {
             $vectorGeneral = $this->cargar_vectores();
             $this->set("vectorGeneral", $vectorGeneral);                   
-        }
-        else
-        {
-            $jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "Usuario no autorizado";  
-            echo json_encode($jsondata, JSON_FORCE_OBJECT);           
         }
     }
 
@@ -511,7 +504,7 @@ class PostsController extends MvcPublicController
             $jsondata["satisfactorio"] = false;
             $jsondata["mensaje"] = "El captador no se pudo actualizar";
         }
-        exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
+        exit(json_encode($jsondata)); 
     }
 
     public function crear_opciones_actividades()

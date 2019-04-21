@@ -236,7 +236,7 @@ class UsersController extends MvcPublicController
             $jsondata["satisfactorio"] = false;
             $jsondata["mensaje"] = "La Persona no se pudo agregar. Motivo: No existe la variable idPost";
         }
-        exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
+        exit(json_encode($jsondata)); 
     }
 
     function sanear_string($string)

@@ -11,102 +11,120 @@ class PostmetasController extends MvcPublicController
     {
         $this->autoRender = false;
 
-        $this->load_model("Binnacle");
+        $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Captador",
+                "Gestor de negocios",
+                "Administrador"
+            ];
 
-        /* Descomentar solo para pruebas
+        $accesoPermitido = $this->verificarPermisos($rolesAutorizados);
 
-            $datosActividad = 
-                '{"idPost" : "5297",
-                "actividad" :  {"nombreActividad":"Solicitar cita para mostrar propiedad","notas":"","anoPlanificado":"2019","mesPlanificado":"04","diaPlanificado":"17","horaPlanificado":"11","minutoPlanificado":"10","meridianoPlanificado":"am","anoCierre":"2019","mesCierre":"04","diaCierre":"17","horaCierre":"11","minutoCierre":"10","meridianoCierre":"am","idPropiedad":"5297","idEjecutor":"41","idSolicitante":"41","idActividadPadre":"","notificacion":"Vista","informacionAdicional":{"solicitante":"Rub\u00e9n Montero","destinatarios":["5","38"]},"historialDeCambios":"","estatus":"Abierta"}}';
-
-        $_POST = json_decode($datosActividad, true);
-
-        */
-
-        if (isset($_POST["idPost"]))
+        if ($accesoPermitido == "true")
         {
-            $jsondata = [];
+            $this->load_model("Binnacle");
 
-            $postmeta = ["post_id" => $_POST["idPost"], "meta_key" => "CRMdapliw_actividad_agenda", "meta_value" => json_encode($_POST["actividad"])];
-            $id = $this->Postmeta->insert($postmeta);
+            /* Descomentar solo para pruebas
 
-            if ($id > 0)
+                $datosActividad = 
+                    '{"idPost" : "5297",
+                    "actividad" :  {"nombreActividad":"Solicitar cita para mostrar propiedad","notas":"","anoPlanificado":"2019","mesPlanificado":"04","diaPlanificado":"17","horaPlanificado":"11","minutoPlanificado":"10","meridianoPlanificado":"am","anoCierre":"2019","mesCierre":"04","diaCierre":"17","horaCierre":"11","minutoCierre":"10","meridianoCierre":"am","idPropiedad":"5297","idEjecutor":"41","idSolicitante":"41","idActividadPadre":"","notificacion":"Vista","informacionAdicional":{"solicitante":"Rub\u00e9n Montero","destinatarios":["5","38"]},"historialDeCambios":"","estatus":"Abierta"}}';
+
+            $_POST = json_decode($datosActividad, true);
+
+            */
+
+            if (isset($_POST["idPost"]))
             {
-                $actividad = $_POST["actividad"];
+                $postmeta = ["post_id" => $_POST["idPost"], "meta_key" => "CRMdapliw_actividad_agenda", "meta_value" => json_encode($_POST["actividad"])];
+                $id = $this->Postmeta->insert($postmeta);
 
-                if ($actividad["nombreActividad"] == "Solicitar cita para mostrar propiedad")
+                if ($id > 0)
                 {
-                    $destinatarios = $actividad["informacionAdicional"]["destinatarios"];
-                    
-                    $actividad["nombreActividad"] = "Solicitud de cita para mostrar propiedad";
-                    $actividad["notas"] = "Solicitada por " . $actividad["informacionAdicional"]["solicitante"]; 
-                    $actividad["idSolicitante"] = $actividad["idEjecutor"];                    
-                    $actividad["notificacion"] = "No vista";
-                    $actividad["informacionAdicional"] = "";
-                    $actividad["idActividadPadre"] = $id;
+                    $actividad = $_POST["actividad"];
 
-                    $indicadorError = 0;
-
-                    foreach ($destinatarios as $destinatario)
+                    if ($actividad["nombreActividad"] == "Solicitar cita para mostrar propiedad")
                     {
-                        $actividad["idEjecutor"] = $destinatario;
-                        $postmeta = ['post_id' => $_POST['idPost'], 'meta_key' => 'CRMdapliw_actividad_agenda', 'meta_value' => json_encode($actividad)];
-                        $idHijo = $this->Postmeta->insert($postmeta);
+                        $destinatarios = $actividad["informacionAdicional"]["destinatarios"];
+                        
+                        $actividad["nombreActividad"] = "Solicitud de cita para mostrar propiedad";
+                        $actividad["notas"] = "Solicitada por " . $actividad["informacionAdicional"]["solicitante"]; 
+                        $actividad["idSolicitante"] = $actividad["idEjecutor"];                    
+                        $actividad["notificacion"] = "No vista";
+                        $actividad["informacionAdicional"] = "";
+                        $actividad["idActividadPadre"] = $id;
 
-                        if ($idHijo == 0)
+                        $indicadorError = 0;
+
+                        foreach ($destinatarios as $destinatario)
                         {
-                            $indicadorError = 1;
-                            $binnacle = 
-                                [
-                                    "novedad" => "No se pudo crear la actividad solicitud de cita para el usuario " . $destinatario,
-                                    "tipo_clase" => "controlador",
-                                    "nombre_clase" => "Postmetas",
-                                    "nombre_metodo" => "agregar_actividad"                             
-                                ];
-                            $idBinnacle = $this->Binnacle->insert($binnacle);
-                            break;
-                        }
-                    }
-                    require_once("posts_controller.php");
-                    $postsController = new PostsController();
-                    $vectorGeneral = $postsController->cargar_vectores();
+                            $actividad["idEjecutor"] = $destinatario;
+                            $postmeta = ['post_id' => $_POST['idPost'], 'meta_key' => 'CRMdapliw_actividad_agenda', 'meta_value' => json_encode($actividad)];
+                            $idHijo = $this->Postmeta->insert($postmeta);
 
-                    if ($indicadorError == 0)
-                    {
-                        $jsondata["satisfactorio"] = true;
-                        $jsondata["mensaje"] = "La actividad se agregó correctamente";
+                            if ($idHijo == 0)
+                            {
+                                $indicadorError = 1;
+                                $binnacle = 
+                                    [
+                                        "novedad" => "No se pudo crear la actividad solicitud de cita para el usuario " . $destinatario,
+                                        "tipo_clase" => "controlador",
+                                        "nombre_clase" => "Postmetas",
+                                        "nombre_metodo" => "agregar_actividad"                             
+                                    ];
+                                $idBinnacle = $this->Binnacle->insert($binnacle);
+                                break;
+                            }
+                        }
+                        require_once("posts_controller.php");
+                        $postsController = new PostsController();
                         $vectorGeneral = $postsController->cargar_vectores();
+
+                        if ($indicadorError == 0)
+                        {
+                            $jsondata["satisfactorio"] = true;
+                            $jsondata["mensaje"] = "La actividad se agregó correctamente";
+                            $vectorGeneral = $postsController->cargar_vectores();
+                        }
+                        else
+                        {
+                            $jsondata["satisfactorio"] = false;
+                            $jsondata["mensaje"] = "No se pudo crear la actividad Solicitud de cita para el usuario " . $destinatario;
+                            $vectorGeneral = $postsController->cargar_vectores();
+                        }
                     }
                     else
                     {
-                        $jsondata["satisfactorio"] = false;
-                        $jsondata["mensaje"] = "No se pudo crear la actividad Solicitud de cita para el usuario " . $destinatario;
+                        require_once("posts_controller.php");
+                        $postsController = new PostsController();
                         $vectorGeneral = $postsController->cargar_vectores();
-                    }
-                }
-                else
-                {
-                    require_once("posts_controller.php");
-                    $postsController = new PostsController();
-                    $vectorGeneral = $postsController->cargar_vectores();
 
-                    $jsondata["satisfactorio"] = true;
-                    $jsondata["mensaje"] = "La actividad se agregó correctamente";
-                    $jsondata["vectorGeneral"] = $vectorGeneral;
-                }
-            }         
+                        $jsondata["satisfactorio"] = true;
+                        $jsondata["mensaje"] = "La actividad se agregó correctamente";
+                        $jsondata["vectorGeneral"] = $vectorGeneral;
+                    }
+                }         
+            }
+            else
+            {
+                require_once("posts_controller.php");
+                $postsController = new PostsController();
+                $vectorGeneral = $postsController->cargar_vectores();
+
+                $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "No se pudo agregar la actividad";
+                $vectorGeneral = $postsController->cargar_vectores();
+            }
         }
         else
         {
-            require_once("posts_controller.php");
-            $postsController = new PostsController();
-            $vectorGeneral = $postsController->cargar_vectores();
-
             $jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "No se pudo agregar la actividad";
-            $vectorGeneral = $postsController->cargar_vectores();
+            $jsondata["mensaje"] = "Usuario no autorizado";
+            $vectorGeneral = "";        
         }
-        exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
+        exit(json_encode($jsondata)); 
     }
 
     public function editar_actividad()
@@ -401,7 +419,7 @@ class PostmetasController extends MvcPublicController
             $jsondata["mensaje"] = "No se pudieron guardar los cambios";
             $jsondata["vectorGeneral"] = $vectorGeneral;
         }    
-        exit(json_encode($jsondata, JSON_FORCE_OBJECT));
+        exit(json_encode($jsondata));
     }
 
     public function modificar_postmeta()
@@ -544,7 +562,7 @@ class PostmetasController extends MvcPublicController
             $jsondata["satisfactorio"] = false;
             $jsondata["mensaje"] = "No se pudo agregar el cliente a la propiedad";
         }
-        exit(json_encode($jsondata, JSON_FORCE_OBJECT)); 
+        exit(json_encode($jsondata)); 
     }
 
     public function eliminar_comprador()
@@ -587,7 +605,7 @@ class PostmetasController extends MvcPublicController
             $jsondata["satisfactorio"] = false;
             $jsondata["mensaje"] = "No se pudo eliminar el comprador";
         }    
-        exit(json_encode($jsondata, JSON_FORCE_OBJECT));
+        exit(json_encode($jsondata));
     }
 	public function desmarcar_notificaciones()
 	{
@@ -616,6 +634,38 @@ class PostmetasController extends MvcPublicController
 			$jsondata["satisfactorio"] = false;
             $jsondata["mensaje"] = "No se pudo actualizar el estatus de la notificación"; 
 		}
-		exit(json_encode($jsondata, JSON_FORCE_OBJECT));
+		exit(json_encode($jsondata));
 	}
+
+    public function verificarPermisos($rolesAutorizados = null)
+    {
+        $usuarioConectado = wp_get_current_user();
+        $idUsuario = $usuarioConectado->id;
+        $accesoPermitido = "false";
+
+        $this->load_model('Usermeta');
+        
+        if ($idUsuario > 0)
+        {
+            $objetoUsuario = $this->Usermeta->find_one(array(
+                'conditions' => array(
+                    'user_id' => array($idUsuario),
+                    'meta_key' => array("CRMdapliw_roles"))));
+
+            if (isset($objetoUsuario))
+            {
+                $roles = json_decode($objetoUsuario->meta_value);
+
+                foreach($roles as $rol)
+                {
+                    if (in_array($rol, $rolesAutorizados))
+                    {
+                        $accesoPermitido = "true";
+                        break;    
+                    }
+                }
+            }
+        }
+        return $accesoPermitido;    
+    }
 }

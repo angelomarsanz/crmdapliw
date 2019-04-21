@@ -534,7 +534,7 @@ var gFechaActualInvertida =
 
 var gAnoActualEntero = parseInt(gAnoActual);
 var gMesActualEntero = parseInt(gMesActual);
-var gMesActualMenosUno = gMesActualEntero - 1;
+var gMesActualEnteroMenosUno = gMesActualEntero - 1;
 var gDiaActualEntero = gDiaActual;
 
 var gBotonCerrarLlamador = "";
@@ -548,7 +548,7 @@ Date.prototype.getWeekNumber = function () {
     return Math.ceil((((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7) + 1) / 7);
 };
 
-var gSemanaActual = new Date(gAnoActualEntero, gMesActualMenosUno, gDiaActualEntero).getWeekNumber(); 
+var gSemanaActual = new Date(gAnoActualEntero, gMesActualEnteroMenosUno, gDiaActualEntero).getWeekNumber(); 
 
 // Funciones
 
@@ -779,10 +779,8 @@ function mostrarAgendaLista(tipoContenido, valor)
 		contador = 1;
 			
 		if (gDatosBienes[valor].CRMdapliw_actividad_agenda)
-		{					
-			arregloActividades = gDatosBienes[valor].CRMdapliw_actividad_agenda.slice();
-						
-			$j.each(arregloActividades, function(clave, datos)  
+		{											
+			$j.each(gDatosBienes[valor].CRMdapliw_actividad_agenda, function(clave, datos)  
 			{
 				if (datos.estatus == "Abierta")
 				{
@@ -826,10 +824,8 @@ function mostrarAgendaLista(tipoContenido, valor)
 		$j.each(gBienes, function(clave1, datos1) 
 		{		
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
-			{
-				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.slice();
-				
-				$j.each(arregloActividades, function(clave2, datos2)  
+			{				
+				$j.each(gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda, function(clave2, datos2)  
 				{
 					if (datos2.estatus == "Abierta")						
 					{
@@ -888,10 +884,8 @@ function mostrarAgendaLista(tipoContenido, valor)
 		$j.each(gBienes, function(clave1, datos1) 
 		{		
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
-			{
-				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.slice();
-				
-				$j.each(arregloActividades, function(clave2, datos2)  
+			{			
+				$j.each(gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda, function(clave2, datos2)  
 				{
 					if (datos2.estatus == "Abierta" && datos2.ver == "true")						
 					{
@@ -987,9 +981,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 
         if (gDatosBienes[valor].CRMdapliw_actividad_agenda)
         {
-            arregloActividades = gDatosBienes[idPost].CRMdapliw_actividad_agenda.slice();
-
-            $j.each(arregloActividades, function(clave, datos)  
+            $j.each(gDatosBienes[idPost].CRMdapliw_actividad_agenda, function(clave, datos)  
             {
 				if (datos.estatus == "Abierta")
 				{
@@ -1034,10 +1026,8 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 		$j.each(gBienes, function(clave1, datos1) 
 		{				
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
-			{
-				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.slice();
-				
-				$j.each(arregloActividades, function(clave2, datos2)  
+			{			
+				$j.each(gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda, function(clave2, datos2)  
 				{
 					if (datos2.estatus == "Abierta")						
 					{
@@ -1102,10 +1092,8 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 		$j.each(gBienes, function(clave1, datos1) 
 		{			
 			if (gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda)
-			{
-				arregloActividades = gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda.slice();
-				
-				$j.each(arregloActividades, function(clave2, datos2)  
+			{			
+				$j.each(gDatosBienes[datos1.ID].CRMdapliw_actividad_agenda, function(clave2, datos2)  
 				{
 					if (datos2.estatus == "Abierta" && datos2.ver == "true")						
 					{
@@ -2045,9 +2033,7 @@ function primeraActividadPendiente(idBien)
 
     if (gDatosBienes[idBien].CRMdapliw_actividad_agenda)
     {
-        arregloActividades = gDatosBienes[idBien].CRMdapliw_actividad_agenda.slice();
-
-        $j.each(arregloActividades, function(clave, datos)  
+        $j.each(gDatosBienes[idBien].CRMdapliw_actividad_agenda, function(clave, datos)  
         {
             if (datos.estatus == "Abierta")
             {
@@ -2114,9 +2100,7 @@ function alertaActividades(idBien)
 
     if (gDatosBienes[idBien].CRMdapliw_actividad_agenda)
     {
-        arregloActividades = gDatosBienes[idBien].CRMdapliw_actividad_agenda.slice();
-
-        $j.each(arregloActividades, function(clave, datos)  
+        $j.each(gDatosBienes[idBien].CRMdapliw_actividad_agenda, function(clave, datos)  
         {
             if (datos.estatus == "Abierta")
             {
@@ -2429,9 +2413,7 @@ function compradoresPotenciales(idBien)
 
     if (gDatosBienes[idBien].CRMdapliw_cliente)
     {
-        var arregloCompradores = gDatosBienes[idBien].CRMdapliw_cliente.slice();
-
-        $j.each(arregloCompradores, function(clave, datos)  
+        $j.each(gDatosBienes[idBien].CRMdapliw_cliente, function(clave, datos)  
         {
             if (datos.activo == "true")
             {
@@ -3489,6 +3471,13 @@ function guardarActividad()
 
     $j("#notas90").val($j.trim($j("#notas90").val().toUpperCase()));
 
+    anoPlanificadoEntero = parseInt($j("#ano90").val());
+    mesPlanificadoEntero = parseInt($j("#mes90").val());
+    mesPlanificadoEnteroMenosUno = mesPlanificadoEntero - 1;
+    diaPlanificadoEntero = parseInt($j("#dia90").val());
+
+    semanaPlanificada = new Date(anoPlanificadoEntero, mesPlanificadoEnteroMenosUno, diaPlanificadoEntero).getWeekNumber();
+
     jsonActividad = 
         {"idPost" : gIdPostActual,
         "actividad" :  
@@ -3501,6 +3490,7 @@ function guardarActividad()
                 "horaPlanificado" : $j("#hora90").val(),
                 "minutoPlanificado" : $j("#minuto90").val(),
                 "meridianoPlanificado" : $j("#meridiano90").val(),
+                "semanaPlanificada" : semanaPlanificada,
                 "anoCierre" : $j("#ano90").val(),
                 "mesCierre" : $j("#mes90").val(),
                 "diaCierre" : $j("#dia90").val(),
@@ -3543,11 +3533,10 @@ function guardarActividad()
     {
         if (response.satisfactorio) 
         {
-
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>¡ Los datos se guardaron exitosamente ! </strong>" +
+                    "<strong>" + response.mensaje + "</strong>" +
                 "</div>";
 
             vectorGeneralActualizado = response.vectorGeneral;
@@ -3616,14 +3605,9 @@ function actualizarVectores(vectorGeneralActualizado)
     gVectorGeneral = "";
 }
 
-
 // Eventos
 $j(document).ready(function()
 {
-    semanaPrueba = new Date(2019, 0, 1).getWeekNumber();
-
-    alert("gSemanaActual " + gSemanaActual + " semanaPrueba " + semanaPrueba);
-
     $j("#vistas20").val(gVistaPreferida);
 
     mostrarNotificaciones();
@@ -3994,6 +3978,7 @@ $j(document).ready(function()
 
     $j('#guardarActividad10').click(function()
     {
+        $j("#guardarActividad10").attr("disabled", true); 
         tipoActividad = "Nueva";
         validarActividad(tipoActividad, "");
     });

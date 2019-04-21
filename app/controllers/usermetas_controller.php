@@ -62,6 +62,6 @@ class UsermetasController extends MvcPublicController
 			$jsondata["satisfactorio"] = false;
             $jsondata["mensaje"] = "No se pudo actualizar la preferencia de vista. Datos recibidos incorrectos";
 		}
-		exit(json_encode($jsondata, JSON_FORCE_OBJECT));	
+		exit(json_encode($jsondata));	
 	}
 }
