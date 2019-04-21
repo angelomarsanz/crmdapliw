@@ -3931,8 +3931,9 @@ $j(document).ready(function()
         $j("#cerrarAgenda10").addClass('noVer');
         $j("#agregarActividad10").addClass("noVer");
         borrarMensajesAnteriores();
-        $j('#bienes60').removeClass('noVer');
-        primeraActividadPendiente(gIdPostActual);
+        filtrarPropiedades(0);
+        mostrarBienes("Propiedades", "");
+        $j("#bienes60").removeClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
         $j("#publicarPropiedad10").removeClass('noVer');
         $j("#" + gPosicionAnterior).focus();
@@ -3973,7 +3974,6 @@ $j(document).ready(function()
         var idActividad = $j(this).attr('id').substring(17);
         var arregloId = idActividad.split("-");       
         clave = arregloId[0];
-		gIdPostActual = arregloId[2];
         datos = gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[clave]		
 		if (datos.idEjecutor == gIdUsuario)
 		{
