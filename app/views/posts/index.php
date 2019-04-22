@@ -125,7 +125,7 @@
 					    <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/bell.svg" ?>
 					    alt="Ver notificaciones" class="icono">
 				    </button>
-                    <spam class="letraAzul" id="cantidadNotificaciones20"></spam>
+                    <spam class="letraRoja" id="cantidadNotificaciones20"></spam>
 				</div>
 			</div>
         </div>
@@ -1265,7 +1265,7 @@ function crearMosaicos(clave, datos)
 						"</div>" + 	
 
 						"<div class='row noVer' id='adicionalTitulo80-" + complementoId + "'>" +
-							"<h3>Datos para la confirmación de la cita</h3>" +
+							"<h4>Datos para la confirmación de la cita</h4>" +
 						"</div>" +
 
 						"<div class='row noVer' id='adicionalGrupoNotas80-" + complementoId + "'>" +
@@ -1883,7 +1883,7 @@ function mostrarBienes(tipoContenido, valor)
 						"</a>" +								
 								
 						"<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
-							" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
+							" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad' target='_blank'>" +
 							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
 							"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
 						"</a>" +
@@ -3082,7 +3082,7 @@ function guardarCambiosAgenda(idActividad)
 
     var estatusObj = "";
 
-    var informacionAdicional = "";
+    var informacionAdicional = [""];
 
     $j("#notas80-" + idActividad).val($j.trim($j("#notas80-" + idActividad).val().toUpperCase()));
 
@@ -3116,7 +3116,7 @@ function guardarCambiosAgenda(idActividad)
         adicionalMeridianoPlanificadoObj = $j("#adicionalMeridiano80-" + idActividad).val();
 
         informacionAdicional =
-            {
+            [{
                 "nombreActividad" : "Confirmación solicitud de cita para mostrar propiedad",
                 "notas" : adicionalNotasObj,
                 "anoPlanificado" : adicionalAnoPlanificadoObj,
@@ -3125,7 +3125,7 @@ function guardarCambiosAgenda(idActividad)
                 "horaPlanificado" : adicionalHoraPlanificadoObj,
                 "minutoPlanificado" : adicionalMinutoPlanificadoObj,
                 "meridianoPlanificado" : adicionalMeridianoPlanificadoObj
-            };
+            }];
     }
 
     var jsonActividad = 
@@ -3218,6 +3218,11 @@ function guardarCambiosAgenda(idActividad)
 
 function validarActividad(tipoActividad, idActividad)
 {
+    var actividadesRestringidas =
+        [
+            "Solicitar cita para mostrar propiedad"
+        ];
+
     var indicadorError = 0;
     var anterior =
         "<div class='alert alert-danger alert-dismissible'>" +
@@ -3268,62 +3273,80 @@ function validarActividad(tipoActividad, idActividad)
         }		
 	}	
 	else
-	{	
-		complementoId = idActividad;           
-		idFechas =
-		{
-			"idSelectAno" : "#ano80-" + complementoId,
-            "idMensajesAno" : "#mensajesAno80-" + complementoId,
+	{
+        var arregloId = idActividad.split("-");       
+        clave = arregloId[0];
+        datos = gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[clave]		
 
-			"idSelectMes" : "#mes80-" + complementoId,
-            "idMensajesMes" : "#mensajesMes80-" + complementoId,
-
-			"idSelectDia" : "#dia80-" + complementoId,
-            "idMensajesDia" : "#mensajesDia80-" + complementoId,
-
-			"idSelectHora" : "#hora80-" + complementoId,
-            "idMensajesHora" : "#mensajesHora80-" + complementoId,
-
-			"idSelectMinuto" : "#minuto80-" + complementoId,
-            "idMensajesMinuto" : "#mensajesMinuto80-" + complementoId,
-
-			"idSelectMeridiano" : "#meridiano80-" + complementoId,
-            "idMensajesMeridiano" : "#mensajesMeridiano80-" + complementoId		
-        };	
-	
-	    indicadorError = validarFecha(idFechas);
-
-        if (indicadorError == 0)
-        {
-            if (gIndicadorAdicional == 1)
+	    if (datos.idEjecutor == gIdUsuario)
+	    {	
+            if (actividadesRestringidas.includes(datos.nombreActividad))
             {
-		        idFechas =
-		        {
-			        "idSelectAno" : "#adicionalAno80-" + complementoId,
-                    "idMensajesAno" : "#adicionalMensajesAno80-" + complementoId,
-
-			        "idSelectMes" : "#adicionalMes80-" + complementoId,
-                    "idMensajesMes" : "#adicionalMensajesMes80-" + complementoId,
-
-			        "idSelectDia" : "#adicionalDia80-" + complementoId,
-                    "idMensajesDia" : "#adicionalMensajesDia80-" + complementoId,
-
-			        "idSelectHora" : "#adicionalHora80-" + complementoId,
-                    "idMensajesHora" : "#adicionalMensajesHora80-" + complementoId,
-
-			        "idSelectMinuto" : "#adicionalMinuto80-" + complementoId,
-                    "idMensajesMinuto" : "#adicionalMensajesMinuto80-" + complementoId,
-
-			        "idSelectMeridiano" : "#adicionalMeridiano80-" + complementoId,
-                    "idMensajesMeridiano" : "#adicionalMensajesMeridiano80-" + complementoId		
-                };
-                indicadorError = validarFecha(idFechas);
+                alert("Estimado usuario esta actividad no se puede modificar. Debe que esperar la confirmación de la solicitud");
             }
-        }
-        if (indicadorError == 0)
+            else
+            {
+	            complementoId = idActividad;           
+	            idFechas =
+	            {
+		            "idSelectAno" : "#ano80-" + complementoId,
+                    "idMensajesAno" : "#mensajesAno80-" + complementoId,
+
+		            "idSelectMes" : "#mes80-" + complementoId,
+                    "idMensajesMes" : "#mensajesMes80-" + complementoId,
+
+		            "idSelectDia" : "#dia80-" + complementoId,
+                    "idMensajesDia" : "#mensajesDia80-" + complementoId,
+
+		            "idSelectHora" : "#hora80-" + complementoId,
+                    "idMensajesHora" : "#mensajesHora80-" + complementoId,
+
+		            "idSelectMinuto" : "#minuto80-" + complementoId,
+                    "idMensajesMinuto" : "#mensajesMinuto80-" + complementoId,
+
+		            "idSelectMeridiano" : "#meridiano80-" + complementoId,
+                    "idMensajesMeridiano" : "#mensajesMeridiano80-" + complementoId		
+                };	
+
+                indicadorError = validarFecha(idFechas);
+
+                if (indicadorError == 0)
+                {
+                    if (gIndicadorAdicional == 1)
+                    {
+	                    idFechas =
+	                    {
+		                    "idSelectAno" : "#adicionalAno80-" + complementoId,
+                            "idMensajesAno" : "#adicionalMensajesAno80-" + complementoId,
+
+		                    "idSelectMes" : "#adicionalMes80-" + complementoId,
+                            "idMensajesMes" : "#adicionalMensajesMes80-" + complementoId,
+
+		                    "idSelectDia" : "#adicionalDia80-" + complementoId,
+                            "idMensajesDia" : "#adicionalMensajesDia80-" + complementoId,
+
+		                    "idSelectHora" : "#adicionalHora80-" + complementoId,
+                            "idMensajesHora" : "#adicionalMensajesHora80-" + complementoId,
+
+		                    "idSelectMinuto" : "#adicionalMinuto80-" + complementoId,
+                            "idMensajesMinuto" : "#adicionalMensajesMinuto80-" + complementoId,
+
+		                    "idSelectMeridiano" : "#adicionalMeridiano80-" + complementoId,
+                            "idMensajesMeridiano" : "#adicionalMensajesMeridiano80-" + complementoId		
+                        };
+                        indicadorError = validarFecha(idFechas);
+                    }
+                }
+                if (indicadorError == 0)
+                {
+                    guardarCambiosAgenda(idActividad);       
+                }
+            }
+	    }
+	    else
 	    {
-            guardarCambiosAgenda(idActividad);       
-	    }	            
+		    alert("No puede realizar cambios en esta actividad porque pertenece a otro usuario");
+	    }
     }
 }
 
@@ -3411,24 +3434,32 @@ function verificarAdicional(idActividad)
     var arregloId = idActividad.split("-");       
     clave = arregloId[1];
 
-    if (datos.nombreActividad == "Solicitud de cita para mostrar propiedad")
-    {
-        gIndicadorAdicional = 1;
+    datos = gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[clave]		
+	if (datos.idEjecutor == gIdUsuario)
+	{
+        if (datos.nombreActividad == "Solicitud de cita para mostrar propiedad")
+        {
+            gIndicadorAdicional = 1;
 
-        var mensajesUsuario = 
-            "<div class='alert alert-danger alert-dismissible'>" +
-                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                "<strong>Estimado usuario por favor escriba los datos referentes a la confirmación de la cita</strong>" +
-            "</div>";
+            var mensajesUsuario = 
+                "<div class='alert alert-danger alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>Estimado usuario por favor escriba los datos referentes a la confirmación de la cita</strong>" +
+                "</div>";
 
-        borrarMensajesAnteriores();
-        idMensaje = "#mensajesUsuario80-" + complementoId; 
-        $j(idMensaje).html(mensajesUsuario);
+            borrarMensajesAnteriores();
+            idMensaje = "#mensajesUsuario80-" + complementoId; 
+            $j(idMensaje).html(mensajesUsuario);
 
-		$j("#adicionalTitulo80-" + complementoId).removeClass("noVer");
-        $j("#adicionalFechaPlanificada80-" + complementoId).removeClass("noVer");
-        $j("#adicionalGrupoNotas80-" + complementoId).removeClass("noVer");
-    }
+		    $j("#adicionalTitulo80-" + complementoId).removeClass("noVer");
+            $j("#adicionalFechaPlanificada80-" + complementoId).removeClass("noVer");
+            $j("#adicionalGrupoNotas80-" + complementoId).removeClass("noVer");
+        }
+  	}
+	else
+	{
+		alert("No puede realizar cambios porque esta actividad pertenece a otro usuario");
+	}
 }
 
 function inicializarFormularioActividad()
@@ -3527,8 +3558,8 @@ function guardarActividad()
                 "idSolicitante" : gIdUsuario,
                 "idActividadPadre" : "",
                 "notificacion" : "Vista",
-                "informacionAdicional" : "",
-                "historialDeCambios" : "",
+                "informacionAdicional" : [""],
+                "historialDeCambios" : [""],
                 "estatus" : "Abierta"
             }
         };
@@ -3546,10 +3577,10 @@ function guardarActividad()
         });                               
 
         jsonActividad.actividad.informacionAdicional =
-            {
+            [{
                 "solicitante" : gNombreUsuario,
                 "destinatarios" : destinatarios
-            };        
+            }];        
     }
 
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'agregar_actividad')) ?>", 
@@ -3880,10 +3911,13 @@ $j(document).ready(function()
         $j("#personas100").addClass("noVer");
         $j("#cerrarPersonas10").addClass('noVer');
         $j("#agregarPersona10").addClass("noVer");
-        $j('#bienes60').removeClass('noVer');
+        borrarMensajesAnteriores();
+        filtrarPropiedades(0);
+        mostrarBienes("Propiedades", "");
+        $j("#bienes60").removeClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
         $j("#publicarPropiedad10").removeClass('noVer');
-        $j("#" + gPosicionAnterior).focus();
+        $j("#cicloBienes60").find("#" + gPosicionAnterior).focus();
     });
 
     $j('#nombreCaptador100').autocomplete(
@@ -3936,7 +3970,7 @@ $j(document).ready(function()
         $j("#bienes60").removeClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
         $j("#publicarPropiedad10").removeClass('noVer');
-        $j("#" + gPosicionAnterior).focus();
+        $j("#cicloBienes60").find("#" + gPosicionAnterior).focus();
     });
 
     $j("#agenda80").on("click", ".actividad80", function()
@@ -3972,17 +4006,7 @@ $j(document).ready(function()
     $j("#agenda80").on("click", ".guardarCambios80", function()
     {
         var idActividad = $j(this).attr('id').substring(17);
-        var arregloId = idActividad.split("-");       
-        clave = arregloId[0];
-        datos = gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[clave]		
-		if (datos.idEjecutor == gIdUsuario)
-		{
-			validarActividad("Existente", idActividad);
-		}
-		else
-		{
-			alert("No puede realizar cambios porque esta actividad pertenece a otro usuario");
-		}
+  	    validarActividad("Existente", idActividad);
     });
 
     $j('#agregarActividad10').click(function()

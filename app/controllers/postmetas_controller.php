@@ -30,7 +30,7 @@ class PostmetasController extends MvcPublicController
 
                 $datosActividad = 
                     '{"idPost" : "5297",
-                    "actividad" :  {"nombreActividad":"Solicitar cita para mostrar propiedad","notas":"","anoPlanificado":"2019","mesPlanificado":"04","diaPlanificado":"17","horaPlanificado":"11","minutoPlanificado":"10","meridianoPlanificado":"am","anoCierre":"2019","mesCierre":"04","diaCierre":"17","horaCierre":"11","minutoCierre":"10","meridianoCierre":"am","idPropiedad":"5297","idEjecutor":"41","idSolicitante":"41","idActividadPadre":"","notificacion":"Vista","informacionAdicional":{"solicitante":"Rub\u00e9n Montero","destinatarios":["5","38"]},"historialDeCambios":"","estatus":"Abierta"}}';
+                    "actividad" :  {"nombreActividad":"Solicitar cita para mostrar propiedad","notas":"","anoPlanificado":"2019","mesPlanificado":"04","diaPlanificado":"17","horaPlanificado":"11","minutoPlanificado":"10","meridianoPlanificado":"am","anoCierre":"2019","mesCierre":"04","diaCierre":"17","horaCierre":"11","minutoCierre":"10","meridianoCierre":"am","idPropiedad":"5297","idEjecutor":"41","idSolicitante":"41","idActividadPadre":"","notificacion":"Vista","informacionAdicional":[{"solicitante":"Rub\u00e9n Montero","destinatarios":["5","38"]}],"historialDeCambios":[""],"estatus":"Abierta"}}';
 
             $_POST = json_decode($datosActividad, true);
 
@@ -47,13 +47,13 @@ class PostmetasController extends MvcPublicController
 
                     if ($actividad["nombreActividad"] == "Solicitar cita para mostrar propiedad")
                     {
-                        $destinatarios = $actividad["informacionAdicional"]["destinatarios"];
+                        $destinatarios = $actividad["informacionAdicional"][0]["destinatarios"];
                         
                         $actividad["nombreActividad"] = "Solicitud de cita para mostrar propiedad";
-                        $actividad["notas"] = "Solicitada por " . $actividad["informacionAdicional"]["solicitante"]; 
+                        $actividad["notas"] = "Solicitada por " . $actividad["informacionAdicional"][0]["solicitante"]; 
                         $actividad["idSolicitante"] = $actividad["idEjecutor"];                    
                         $actividad["notificacion"] = "No vista";
-                        $actividad["informacionAdicional"] = "";
+                        $actividad["informacionAdicional"] = [""];
                         $actividad["idActividadPadre"] = $id;
 
                         $indicadorError = 0;
@@ -169,7 +169,7 @@ class PostmetasController extends MvcPublicController
 					"minutoPlanificado" : "33",
 					"meridianoPlanificado" : "am",
 					"informacionAdicional" : 
-						{
+						[{
 							"nombreActividad" : "Confirmación solicitud de cita para mostrar propiedad",
 							"notas" : "Prueba",
 							"anoPlanificado" : "2019",
@@ -178,7 +178,7 @@ class PostmetasController extends MvcPublicController
 							"horaPlanificado" : "10",
 							"minutoPlanificado" : "33",
 							"meridianoPlanificado" : "am"
-						},
+						}],
 					"estatus" : "Cerrada por el usuario"
 				}';
 			
@@ -191,11 +191,10 @@ class PostmetasController extends MvcPublicController
 				$object = $this->Postmeta->find_by_id($_POST["idActividad"]);
 
 				$objetoActividad = json_decode($object->meta_value);
-
+                
+				$notasAnterior = $objetoActividad->notas;
 				if ($objetoActividad->notas != $_POST["notas"])
 				{
-					$notasAnterior = $objetoActividad->notas;
-
 					$objetoActividad->notas = $_POST["notas"];
 					$indicadorCambios = 1;
 				}
@@ -226,34 +225,26 @@ class PostmetasController extends MvcPublicController
 					$objetoActividad->meridianoPlanificado = $_POST["meridianoPlanificado"];
 					$indicadorCambios = 1;
 				}
-		
-				$jsonInformacionAdicional = json_encode($_POST["informacionAdicional"]);
 
-				if ($objetoActividad->informacionAdicional != $jsonInformacionAdicional)
+    			$informacionAdicionalAnterior = $objetoActividad->informacionAdicional;
+
+				if ($objetoActividad->informacionAdicional != $_POST["informacionAdicional"])
 				{
-					$informacionAdicionalAnterior = $objetoActividad->informacionAdicional;
-
-					$objetoActividad->informacionAdicional = $jsonInformacionAdicional;
+					$objetoActividad->informacionAdicional = $_POST["informacionAdicional"];
 					$indicadorCambios = 1;
 				}
 					
 				if ($indicadorCambios == 1)
 				{
-					$arregloHistorial = json_decode($objetoActividad->historialDeCambios, true);
-					
 					$cambioActividad =
 						[
 							"fechaCambio" => $fechaFormato,
-							"notas" => $notasAnterior,
-							"fechaPlanificada" => $fechaPlanificadaGuardada,
-							"informacionAdicional" => $informacionAdicionalAnterior
+							"notasAnterior" => $notasAnterior,
+							"fechaPlanificadaAnterior" => $fechaPlanificadaGuardada,
+							"informacionAdicionalAnterior" => $informacionAdicionalAnterior
 						]; 
-									
-					$arregloHistorial[] = $cambioActividad;
-					
-					$jsonHistorial = json_encode($arregloHistorial);
-					
-					$objetoActividad->historialDeCambios = $jsonHistorial;
+
+                    $objetoActividad->historialDeCambios[] = $cambioActividad;
 				}
 					
 				if ($_POST["estatus"] == "Cerrada por el usuario")
@@ -294,12 +285,12 @@ class PostmetasController extends MvcPublicController
 									$arregloActividad->minutoCierre = "";
 									$arregloActividad->meridianoCierre = "";
 									$arregloActividad->estatus = "Cerrada por el sistema"; 
-
+ 
 									$jsonArregloActividad = json_encode($arregloActividad);      
 									$this->Postmeta->update($actividad->__id, array('meta_value' => $jsonArregloActividad));
 								}
 
-								$arregloAdicional = $_POST["informacionAdicional"]; 
+								$arregloAdicional = $_POST["informacionAdicional"][0]; 
 
 								$arregloActividad->nombreActividad = $arregloAdicional["nombreActividad"];
 								$arregloActividad->notas = $arregloAdicional["notas"];
@@ -320,8 +311,8 @@ class PostmetasController extends MvcPublicController
 								$arregloActividad->idSolicitante = $objetoActividad->idEjecutor;
 								$arregloActividad->idActividadPadre = $objetoActividad->$_POST["idActividad"];
 								$arregloActividad->notificacion = "No vista";
-								$arregloActividad->informacionAdicional = "";
-								$arregloActividad->historialDeCambios = "";
+								$arregloActividad->informacionAdicional = [""];
+								$arregloActividad->historialDeCambios = [""];
 								$arregloActividad->estatus = "Abierta";
 
 								$jsonArregloActividad = json_encode($arregloActividad);
