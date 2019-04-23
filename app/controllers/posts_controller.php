@@ -23,7 +23,7 @@ class PostsController extends MvcPublicController
                 "Administrador"
             ];
 
-        $accesoPermitido = $this->verificarPermisos($rolesAutorizados);
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
 
         if ($accesoPermitido == "true")
         {
@@ -34,6 +34,8 @@ class PostsController extends MvcPublicController
 
     public function cargar_vectores() 
     {   
+        $this->autoRender = false;
+
         $usuarioConectado = wp_get_current_user();
         $idUsuario = $usuarioConectado->id;
         $nombreUsuario = $usuarioConectado->display_name;
@@ -478,31 +480,51 @@ class PostsController extends MvcPublicController
     {
         $this->autoRender = false;
 
-        /* Solo para pruebas
-        $_POST['idBien'] = 5297;
-        $_POST['idPromotorAnterior'] = "1";
-        $_POST['idPromotorActual'] = 32;
-        */
+        $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Captador",
+                "Gestor de negocios",
+                "Administrador"
+            ];
 
-        if (isset($_POST['idBien']))
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
+
+        if ($accesoPermitido == "true")
         {
-            $jsondata = [];
+            /* Solo para pruebas
+            $_POST['idBien'] = 5297;
+            $_POST['idPromotorAnterior'] = "1";
+            $_POST['idPromotorActual'] = 32;
+            */
 
-            $this->load_model('Postmeta');
-            
-            $postmeta = ['post_id' => $_POST['idBien'], 'meta_key' => 'CRMdapliw_captador_anterior', 'meta_value' => $_POST['idCaptadorAnterior']];
-            $id = $this->Postmeta->insert($postmeta);
+            if (isset($_POST['idBien']))
+            {
+                $this->load_model('Postmeta');
+                
+                $postmeta = ['post_id' => $_POST['idBien'], 'meta_key' => 'CRMdapliw_captador_anterior', 'meta_value' => $_POST['idCaptadorAnterior']];
+                $id = $this->Postmeta->insert($postmeta);
 
-            $object = $this->Post->find_by_id($_POST["idBien"]);
-            $this->Post->update($object->__id, array('post_author' => $_POST['idNuevoCaptador']));
+                $object = $this->Post->find_by_id($_POST["idBien"]);
+                $this->Post->update($object->__id, array('post_author' => $_POST['idNuevoCaptador']));
 
-            $jsondata["satisfactorio"] = true;
-            $jsondata["mensaje"] = "El captador se actualizó exitosamente";
+                $jsondata["satisfactorio"] = true;
+                $jsondata["mensaje"] = "El captador se actualizó exitosamente";
+            }
+            else
+            {
+                $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "El captador no se pudo actualizar";
+            }
+            $vectorGeneral = $this->cargar_vectores();
+            $jsondata["vectorGeneral"] = $vectorGeneral;
         }
         else
         {
             $jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "El captador no se pudo actualizar";
+            $jsondata["mensaje"] = "Usuario no autorizado";
+            $vectorGeneral = "";        
         }
         exit(json_encode($jsondata)); 
     }
@@ -525,8 +547,10 @@ class PostsController extends MvcPublicController
         }
     }
 
-    public function verificarPermisos($rolesAutorizados = null)
+    public function verificar_permisos($rolesAutorizados = null)
     {
+        $this->autoRender = false;
+
         $usuarioConectado = wp_get_current_user();
         $idUsuario = $usuarioConectado->id;
         $accesoPermitido = "false";

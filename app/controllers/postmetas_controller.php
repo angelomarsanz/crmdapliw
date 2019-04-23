@@ -20,7 +20,7 @@ class PostmetasController extends MvcPublicController
                 "Administrador"
             ];
 
-        $accesoPermitido = $this->verificarPermisos($rolesAutorizados);
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
 
         if ($accesoPermitido == "true")
         {
@@ -78,45 +78,47 @@ class PostmetasController extends MvcPublicController
                                 break;
                             }
                         }
-                        require_once("posts_controller.php");
-                        $postsController = new PostsController();
-                        $vectorGeneral = $postsController->cargar_vectores();
-
                         if ($indicadorError == 0)
                         {
                             $jsondata["satisfactorio"] = true;
                             $jsondata["mensaje"] = "La actividad se agregó correctamente";
-                            $jsondata["vectorGeneral"] = $vectorGeneral;
                         }
                         else
                         {
                             $jsondata["satisfactorio"] = false;
                             $jsondata["mensaje"] = "No se pudo crear la actividad Solicitud de cita para el usuario " . $destinatario;
-                            $jsondata["vectorGeneral"] = $vectorGeneral;
                         }
                     }
                     else
                     {
-                        require_once("posts_controller.php");
-                        $postsController = new PostsController();
-                        $vectorGeneral = $postsController->cargar_vectores();
-
                         $jsondata["satisfactorio"] = true;
                         $jsondata["mensaje"] = "La actividad se agregó correctamente";
-                        $jsondata["vectorGeneral"] = $vectorGeneral;
                     }
-                }         
+                }
+                else
+                {   
+                    $binnacle = 
+                        [
+                            "novedad" => "No se pudo agregar la actividad a la propiedad: " . $_POST["idPost"],
+                            "tipo_clase" => "controlador",
+                            "nombre_clase" => "Postmetas",
+                            "nombre_metodo" => "agregar_actividad"                             
+                        ];
+                    $idBinnacle = $this->Binnacle->insert($binnacle);
+
+                    $jsondata["satisfactorio"] = false;
+                    $jsondata["mensaje"] = "No se pudo agregar la actividad a la propiedad: " . $_POST["idPost"];      
+                }
             }
             else
             {
-                require_once("posts_controller.php");
-                $postsController = new PostsController();
-                $vectorGeneral = $postsController->cargar_vectores();
-
                 $jsondata["satisfactorio"] = false;
                 $jsondata["mensaje"] = "No se pudo agregar la actividad";
-                $jsondata["vectorGeneral"] = $vectorGeneral;
             }
+            require_once("posts_controller.php");
+            $postsController = new PostsController();
+            $vectorGeneral = $postsController->cargar_vectores();
+            $jsondata["vectorGeneral"] = $vectorGeneral;
         }
         else
         {
@@ -140,7 +142,7 @@ class PostmetasController extends MvcPublicController
                 "Administrador"
             ];
 
-        $accesoPermitido = $this->verificarPermisos($rolesAutorizados);
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
 
         if ($accesoPermitido == "true")
         {
@@ -393,33 +395,26 @@ class PostmetasController extends MvcPublicController
 						}
 					}
 				}
-				require_once("posts_controller.php");
-				$postsController = new PostsController();
-				$vectorGeneral = $postsController->cargar_vectores();
-
 				if ($indicadorError == 0)
 				{              
 					$jsondata["satisfactorio"] = true;
 					$jsondata["mensaje"] = "Los cambios se guardaron correctamente";
-					$jsondata["vectorGeneral"] = $vectorGeneral;
 				}
 				else
 				{
 					$jsondata["satisfactorio"] = false;
 					$jsondata["mensaje"] = "No se pudieron guardar los cambios. Error al crear actividades de confirmación";
-					$jsondata["vectorGeneral"] = $vectorGeneral;
 				}
 			} 
 			else
 			{
-				require_once("posts_controller.php");
-				$postsController = new PostsController();
-				$vectorGeneral = $postsConstroller->cargarVectores();
-
 				$jsondata["satisfactorio"] = false;
 				$jsondata["mensaje"] = "No se pudieron guardar los cambios";
-				$jsondata["vectorGeneral"] = $vectorGeneral;
 			}
+            require_once("posts_controller.php");
+            $postsController = new PostsController();
+            $vectorGeneral = $postsController->cargar_vectores();
+            $jsondata["vectorGeneral"] = $vectorGeneral;
 		}
 		else
 		{
@@ -475,101 +470,122 @@ class PostmetasController extends MvcPublicController
     {
         $this->autoRender = false;
 
-        $this->load_model("User");
+        $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Captador",
+                "Gestor de negocios",
+                "Administrador"
+            ];
 
-        $this->load_model("Binnacle");
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
 
-        /* Descomentar solo para pruebas
-        $_POST['idBien'] = 5297;
-        $_POST['idComprador'] = 75;
-        */
-
-        if (isset($_POST['idBien']))
+        if ($accesoPermitido == "true")
         {
-            $jsondata = [];
+            $this->load_model("User");
 
-            $indicadorCompradorBien = 0;
+            $this->load_model("Binnacle");
 
-            $compradoresBienes = $this->Postmeta->find(array(
-                'conditions' => array(
-                'post_id' => array($_POST['idBien']),
-                'meta_key' => array('CRMdapliw_cliente'))));
+            /* Descomentar solo para pruebas
+            $_POST['idBien'] = 5297;
+            $_POST['idComprador'] = 75;
+            */
 
-            if (isset($compradoresBienes))
+            if (isset($_POST['idBien']))
             {
-                foreach($compradoresBienes as $comprador)
+                $indicadorCompradorBien = 0;
+
+                $compradoresBienes = $this->Postmeta->find(array(
+                    'conditions' => array(
+                    'post_id' => array($_POST['idBien']),
+                    'meta_key' => array('CRMdapliw_cliente'))));
+
+                if (isset($compradoresBienes))
                 {
-                    $objetoComprador = json_decode($comprador->meta_value);
-
-                    if ($objetoComprador->idUser == $_POST['idComprador'])
+                    foreach($compradoresBienes as $comprador)
                     {
-                        $objetoComprador->activo = "true";
+                        $objetoComprador = json_decode($comprador->meta_value);
 
-                        $jsonObjetoComprador = json_encode($objetoComprador);
-              
-                        $this->Postmeta->update($comprador->__id, array('meta_value' =>
-                            $jsonObjetoComprador));
+                        if ($objetoComprador->idUser == $_POST['idComprador'])
+                        {
+                            $objetoComprador->activo = "true";
 
-                            $jsondata["satisfactorio"] = true;
-                            $jsondata["mensaje"] = 
-                                "El comprador se agregó exitosamente a la propiedad"; 
+                            $jsonObjetoComprador = json_encode($objetoComprador);
+                  
+                            $this->Postmeta->update($comprador->__id, array('meta_value' =>
+                                $jsonObjetoComprador));
 
-                        $indicadorCompradorBien = 1;
-                        break;                                                                  
+                                $jsondata["satisfactorio"] = true;
+                                $jsondata["mensaje"] = 
+                                    "El comprador se agregó exitosamente a la propiedad"; 
+
+                            $indicadorCompradorBien = 1;
+                            break;                                                                  
+                        }
+                    }
+                }
+
+                if ($indicadorCompradorBien == 0)
+                {                        
+                    $metaValue = ["idUser" => $_POST['idComprador'], "activo" => "true"];
+                    $postmeta = ['post_id' => $_POST['idBien'], 'meta_key' => 'CRMdapliw_cliente', 'meta_value' => json_encode($metaValue)];
+                    $idPostmeta = $this->Postmeta->insert($postmeta);  
+
+                    if ($idPostmeta == 0)
+                    {
+                        $binnacle = 
+                            [
+                                "novedad" => "No se pudo asociar el cliente " . $_POST['idComprador'] . " a la propiedad " . $_POST['idBien'],
+                                "tipo_clase" => "controlador",
+                                "nombre_clase" => "Postmetas",
+                                "nombre_metodo" => "agregar_comprador_bien"                             
+                            ];
+
+                        $idBinnacle = $this->Binnacle->insert($binnacle);
+
+                        $jsondata["satisfactorio"] = false;
+                        $jsondata["mensaje"] = "No se pudo agregar el cliente a la propiedad";
+                    }
+                    else
+                    {
+                        $rolesComprador = $this->Usermeta->find_one(array(
+                            'conditions' => array(
+                            'user_id' => array($_POST['idComprador']),
+                            'meta_key' => array('CRMdapliw_roles'))));
+
+                        $arregloRoles = json_decode($rolesComprador->meta_value);
+
+                        if (!(in_array("Cliente", $arregloRoles)))
+                        {
+                            array_push($arregloRoles, "Cliente");
+
+                            $this->Usermeta->update($rolesComprador->umeta_id, array('meta_value' =>
+                                json_encode($arregloRoles)));
+                        }
+
+                        $jsondata["satisfactorio"] = true;
+                        $jsondata["mensaje"] = "El cliente se agregó exitosamente a la propiedad";
+                        $jsondata["idPostmeta"] = $idPostmeta;
                     }
                 }
             }
-
-            if ($indicadorCompradorBien == 0)
-            {                        
-                $metaValue = ["idUser" => $_POST['idComprador'], "activo" => "true"];
-                $postmeta = ['post_id' => $_POST['idBien'], 'meta_key' => 'CRMdapliw_cliente', 'meta_value' => json_encode($metaValue)];
-                $idPostmeta = $this->Postmeta->insert($postmeta);  
-
-                if ($idPostmeta == 0)
-                {
-                    $binnacle = 
-                        [
-                            "novedad" => "No se pudo asociar el cliente " . $_POST['idComprador'] . " a la propiedad " . $_POST['idBien'],
-                            "tipo_clase" => "controlador",
-                            "nombre_clase" => "Postmetas",
-                            "nombre_metodo" => "agregar_comprador_bien"                             
-                        ];
-
-                    $idBinnacle = $this->Binnacle->insert($binnacle);
-
-                    $jsondata["satisfactorio"] = false;
-                    $jsondata["mensaje"] = "No se pudo agregar el cliente a la propiedad";
-                }
-                else
-                {
-
-                    $rolesComprador = $this->Usermeta->find_one(array(
-                        'conditions' => array(
-                        'user_id' => array($_POST['idComprador']),
-                        'meta_key' => array('CRMdapliw_roles'))));
-
-                    $arregloRoles = json_decode($rolesComprador->meta_value);
-
-                    if (!(in_array("Cliente", $arregloRoles)))
-                    {
-                        array_push($arregloRoles, "Cliente");
-
-                        $this->Usermeta->update($rolesComprador->umeta_id, array('meta_value' =>
-                            json_encode($arregloRoles)));
-                    }
-
-                    $jsondata["satisfactorio"] = true;
-                    $jsondata["mensaje"] = "El cliente se agregó exitosamente a la propiedad";
-                    $jsondata["idPostmeta"] = $idPostmeta;
-                }
+            else
+            {
+                $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "No se pudo agregar el cliente a la propiedad";
             }
-        }
-        else
-        {
-            $jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "No se pudo agregar el cliente a la propiedad";
-        }
+			require_once("posts_controller.php");
+			$postsController = new PostsController();
+			$vectorGeneral = $postsController->cargar_vectores();
+			$jsondata["vectorGeneral"] = $vectorGeneral;
+		}
+		else
+		{
+			$jsondata["satisfactorio"] = false;
+			$jsondata["mensaje"] = "Usuario no autorizado"; 
+			$jsondata["vectorGeneral"] = "";			
+		}
         exit(json_encode($jsondata)); 
     }
 
@@ -578,43 +594,66 @@ class PostmetasController extends MvcPublicController
         $this->autoRender = false;
 
         $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Captador",
+                "Gestor de negocios",
+                "Administrador"
+            ];
 
-        /* Descomentar solo para pruebas 
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
 
-        $jsonPostmeta = '{"idPostmeta" : "5650"}';
+        if ($accesoPermitido == "true")
+        {
+            /* Descomentar solo para pruebas 
 
-        echo "<p>jsonPostmeta: " . $jsonPostmeta . "</p>";
+            $jsonPostmeta = '{"idPostmeta" : "5650"}';
+
+            echo "<p>jsonPostmeta: " . $jsonPostmeta . "</p>";
+            
+            $_POST = json_decode($jsonPostmeta, true);
+
+            var_dump($_POST);
+            echo "<br />";        
+
+            */
+
+            if (isset($_POST["idPostmeta"]))
+            {
+                $object = $this->Postmeta->find_by_id($_POST["idPostmeta"]);
+
+                $objetoComprador = json_decode($object->meta_value);
         
-        $_POST = json_decode($jsonPostmeta, true);
+                $objetoComprador->activo = "false";
 
-        var_dump($_POST);
-        echo "<br />";        
+                $jsonObjetoComprador = json_encode($objetoComprador);      
+                $this->Postmeta->update($object->__id, array('meta_value' =>
+                    $jsonObjetoComprador));
 
-        */
-
-        if (isset($_POST["idPostmeta"]))
-        {
-            $object = $this->Postmeta->find_by_id($_POST["idPostmeta"]);
-
-            $objetoComprador = json_decode($object->meta_value);
-    
-            $objetoComprador->activo = "false";
-
-            $jsonObjetoComprador = json_encode($objetoComprador);      
-            $this->Postmeta->update($object->__id, array('meta_value' =>
-                $jsonObjetoComprador));
-
-            $jsondata["satisfactorio"] = true;
-            $jsondata["mensaje"] = 
-                "El comprador se eliminó correctamente";        
-        } 
-        else
-        {
-            $jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "No se pudo eliminar el comprador";
-        }    
+                $jsondata["satisfactorio"] = true;
+                $jsondata["mensaje"] = 
+                    "El comprador se eliminó correctamente";        
+            } 
+            else
+            {
+                $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "No se pudo eliminar el comprador";
+            }
+			require_once("posts_controller.php");
+			$postsController = new PostsController();
+			$vectorGeneral = $postsController->cargar_vectores();
+			$jsondata["vectorGeneral"] = $vectorGeneral;  
+		}
+		else
+		{
+			$jsondata["satisfactorio"] = false;
+			$jsondata["mensaje"] = "Usuario no autorizado"; 
+			$jsondata["vectorGeneral"] = "";			
+		}  
         exit(json_encode($jsondata));
     }
+
 	public function desmarcar_notificaciones()
 	{
 		$this->autoRender = false;
@@ -628,7 +667,7 @@ class PostmetasController extends MvcPublicController
                 "Administrador"
             ];
 
-        $accesoPermitido = $this->verificarPermisos($rolesAutorizados);
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
 
         if ($accesoPermitido == "true")
         {		
@@ -646,25 +685,19 @@ class PostmetasController extends MvcPublicController
 
 					$jsonObjetoActividad = json_encode($objetoActividad);      
 					$this->Postmeta->update($object->__id, array('meta_value' => $jsonObjetoActividad));
-				}
-				require_once("posts_controller.php");
-				$postsController = new PostsController();
-				$vectorGeneral = $postsController->cargar_vectores();	
-				
+				}		
 				$jsondata["satisfactorio"] = true;
 				$jsondata["mensaje"] = "El estatus de la notificación se actualizó exitosamente";
-				$jsondata["vectorGeneral"] = $vectorGeneral;
 			}
 			else
-			{
-				require_once("posts_controller.php");
-				$postsController = new PostsController();
-				$vectorGeneral = $postsController->cargar_vectores();
-				
+			{	
 				$jsondata["satisfactorio"] = false;
 				$jsondata["mensaje"] = "No se pudo actualizar el estatus de la notificación"; 
-				$jsondata["vectorGeneral"] = $vectorGeneral;
 			}
+			require_once("posts_controller.php");
+			$postsController = new PostsController();
+			$vectorGeneral = $postsController->cargar_vectores();
+			$jsondata["vectorGeneral"] = $vectorGeneral;
 		}
 		else
 		{
@@ -675,8 +708,10 @@ class PostmetasController extends MvcPublicController
 		exit(json_encode($jsondata));
 	}
 
-    public function verificarPermisos($rolesAutorizados = null)
+    public function verificar_permisos($rolesAutorizados = null)
     {
+        $this->autoRender = false;
+
         $usuarioConectado = wp_get_current_user();
         $idUsuario = $usuarioConectado->id;
         $accesoPermitido = "false";

@@ -34,207 +34,229 @@ class UsersController extends MvcPublicController
     {
         $this->autoRender = false;
 
-        $this->load_model("Binnacle");
-        $this->load_model("Usermeta");
-        $this->load_model("Postmeta");
-        
-        $indicadorError = 0;
-       
-        /* Descomentar solo para pruebas 
-        $_POST['idPost'] = "5000";
-        $_POST['persona'] = 
+        $jsondata = [];
+        $rolesAutorizados = 
             [
-                "tipoIdentificacion" => "V",
-                "numeroIdentificacion" => 1,
-                "primerNombre" => "Ángel",
-                "segundoNombre" => "",
-                "primerApellido" => "Sanz",
-                "segundoApellido" => "",
-                "roles" => ["Cliente"],
-                "celular" => "1",
-                "telefonoFijo" => "",
-                "email" => "angel@gmail.com",
-                "direccion" => "Los Cerritos",
-                "idPromotor" => "1"
+                "Promotor",
+                "Captador",
+                "Gestor de negocios",
+                "Administrador"
             ];
-        */
 
-        if (isset($_POST['idPost']))
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
+
+        if ($accesoPermitido == "true")
         {
-            $jsondata = [];
+            $this->load_model("Binnacle");
+            $this->load_model("Usermeta");
+            $this->load_model("Postmeta");
+            
+            $indicadorError = 0;
+           
+            /* Descomentar solo para pruebas 
+            $_POST['idPost'] = "5000";
+            $_POST['persona'] = 
+                [
+                    "tipoIdentificacion" => "V",
+                    "numeroIdentificacion" => 1,
+                    "primerNombre" => "Ángel",
+                    "segundoNombre" => "",
+                    "primerApellido" => "Sanz",
+                    "segundoApellido" => "",
+                    "roles" => ["Cliente"],
+                    "celular" => "1",
+                    "telefonoFijo" => "",
+                    "email" => "angel@gmail.com",
+                    "direccion" => "Los Cerritos",
+                    "idPromotor" => "1"
+                ];
+            */
 
-            $usuarioRegistrado = $this->Usermeta->find_one(array(
-                'conditions' => array(
-                'meta_key' => array('CRMdapliw_identificacion'),
-                'meta_value' => array($_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"]))));
-
-            if (isset($usuarioRegistrado))
+            if (isset($_POST['idPost']))
             {
-                $jsondata["satisfactorio"] = false;
-                $jsondata["mensaje"] = "Ya existe un comprador registrado con la identificacion: " . $_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"];
+                $usuarioRegistrado = $this->Usermeta->find_one(array(
+                    'conditions' => array(
+                    'meta_key' => array('CRMdapliw_identificacion'),
+                    'meta_value' => array($_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"]))));
+
+                if (isset($usuarioRegistrado))
+                {
+                    $jsondata["satisfactorio"] = false;
+                    $jsondata["mensaje"] = "Ya existe un comprador registrado con la identificacion: " . $_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"];
+                }
+                else
+                {
+                    $primerNombre = $_POST['persona']['primerNombre'];
+                    $segundoNombre = $_POST['persona']['segundoNombre'];
+
+                    $primerApellido = $_POST['persona']['primerApellido'];
+                    $segundoApellido = $_POST['persona']['segundoApellido'];
+
+                    if ($segundoNombre != "")
+                    {
+                        $nombres = $primerNombre . " " . $segundoNombre;
+                    }
+                    else
+                    {
+                        $nombres = $primerNombre;
+                    }
+
+                    if ($segundoApellido != "")
+                    {
+                        $apellidos = $primerApellido . " " . $segundoApellido;
+                    }
+                    else
+                    {
+                        $apellidos = $primerApellido;
+                    }
+
+                    $primerNombreSaneado = $this->sanear_string($primerNombre);
+
+                    $primerApellidoSaneado = $this->sanear_string($primerApellido);
+
+                    $nombreApellido = strtolower($primerNombreSaneado) . strtolower($primerApellidoSaneado);
+
+                    $usuarioModelo = mvc_model('User');
+
+                    $contadorUsuarios = $usuarioModelo->count(
+                        array('conditions' => array('user_login like' => $nombreApellido . '%')));
+
+                    $contadorUsuarios++;
+
+                    $nuevoUsuario = $nombreApellido . $contadorUsuarios;
+
+                    setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
+                    date_default_timezone_set('America/Caracas');
+
+                    $fechaHoy = getdate();
+
+			        $clave = md5(substr($primerNombreSaneado, 0, 1) . substr($primerApellidoSaneado, 0, 1) . $fechaHoy['seconds'] . $fechaHoy['minutes'] . '$');
+
+                    $fechaHora = new DateTime(); 
+                    $fechaHoraFormato = $fechaHora->format('Y-m-d H:i:s'); 
+
+                    $user = 
+                        [
+                            "user_login" => $nuevoUsuario,
+                            "user_pass" => $clave,
+                            "user_nicename" => $nuevoUsuario,
+                            "user_email" => $_POST['persona']['email'],
+                            "user_url" => "",
+                            "user_registered" => $fechaHoraFormato,
+                            "user_activation_key" => "",
+                            "user_status" => 0,
+                            "display_name" => $nombres . " " . $apellidos 
+                        ];
+                                                       
+                    $idUser = $this->User->insert($user);
+
+                    if ($idUser > 0)
+                    {
+                        $camposMeta = 
+                            [
+                                "admin_color" => "fresh",
+                                "comment_shortcuts" => false,
+                                "description" => "",
+                                "dismissed_wp_pointers" => "",
+                                "first_name" => $nombres,
+                                "last_name" => $apellidos,
+                                "locale" => "",                 
+                                "nickname" => $nuevoUsuario,                    
+                                "rich_editing" => true,
+                                "show_admin_bar_front" => true,
+                                "syntax_highlighting" => true,
+                                "tmbr_capabilities" => 'a:1:{s:10:"subscriber";b:1;}',
+                                "tmbr_user_level" => 0,
+                                "use_ssl" => 0,
+                                "CRMdapliw_roles" => json_encode($_POST["persona"]["roles"]),
+                                "CRMdapliw_promotor_cliente" => $_POST["persona"]["idPromotor"],
+                                "CRMdapliw_identificacion" => $_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"],
+                                "CRMdapliw_celular" => $_POST["persona"]["celular"],
+                                "CRMdapliw_direccion" => $_POST["persona"]["direccion"],
+                                "CRMdapliw_estatus" => "ACTIVO"
+                            ];
+                        
+                        foreach ($camposMeta as $clave => $valor)
+                        {
+                            $usermeta = ["user_id" => $idUser, "meta_key" => $clave, "meta_value" => $valor];
+                            $idUsermeta = $this->Usermeta->insert($usermeta);
+
+                            if ($idUsermeta == 0)
+                            {
+                                $binnacle = 
+                                    [
+                                        "novedad" => "No se pudo agregar la propiedad " . $clave . " al nuevo usuario " . $idUser,
+                                        "tipo_clase" => "controlador",
+                                        "nombre_clase" => "Users",
+                                        "nombre_metodo" => "guardar_persona"                             
+                                    ];
+
+                                    $idBinnacle = $this->Binnacle->insert($binnacle);
+
+                                $indicadorError = 1;
+                                $jsondata["satisfactorio"] = false;
+                                $jsondata["mensaje"] = "No se pudo agregar la propiedad " . $clave . " al nuevo usuario " . $idUser;
+                                break;
+                            }
+                        }
+                   
+                        if ($indicadorError == 0)
+                        {
+                            $metaValue = ["idUser" => $idUser, "activo" => "true"];
+                            $postmeta = ['post_id' => $_POST['idPost'], 'meta_key' => 'CRMdapliw_cliente', 'meta_value' => json_encode($metaValue)];
+                            $idPostmeta = $this->Postmeta->insert($postmeta);  
+
+                            if ($idPostmeta == 0)
+                            {
+                                $binnacle = 
+                                    [
+                                        "novedad" => "No se pudo asociar la propiedad " . $_POST['idPost'] . " al cliente " . $idUser,
+                                        "tipo_clase" => "controlador",
+                                        "nombre_clase" => "Users",
+                                        "nombre_metodo" => "guardar_persona"                             
+                                    ];
+
+                                    $idBinnacle = $this->Binnacle->insert($binnacle);
+
+                                $jsondata["satisfactorio"] = false;
+                                $jsondata["mensaje"] = "No se pudo asociar la propiedad " . $_POST['idPost'] . " al cliente " . $idUser;
+                            }
+                            else
+                            {
+                                $jsondata["satisfactorio"] = true;
+                                $jsondata["mensaje"] = "La persona se agregó exitosamente ";
+                                $jsondata["idUser"] = $idUser;
+                                $jsondata["idPostmeta"] = $idPostmeta;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        $jsondata["satisfactorio"] = false;
+                        $jsondata["mensaje"] = "La persona no se pudo agregar. Error al grabar registro en la base de datos ";
+                    }            
+
+                    /* Descomentar solo para pruebas
+                        $jsondata["satisfactorio"] = true;
+                        $jsondata["mensaje"] = $_POST['arregloPrueba'][0]['nombre'] . ' ' . $_POST['arregloPrueba'][0]['apellido'];
+                    */
+                }
             }
             else
             {
-                $primerNombre = $_POST['persona']['primerNombre'];
-                $segundoNombre = $_POST['persona']['segundoNombre'];
-
-                $primerApellido = $_POST['persona']['primerApellido'];
-                $segundoApellido = $_POST['persona']['segundoApellido'];
-
-                if ($segundoNombre != "")
-                {
-                    $nombres = $primerNombre . " " . $segundoNombre;
-                }
-                else
-                {
-                    $nombres = $primerNombre;
-                }
-
-                if ($segundoApellido != "")
-                {
-                    $apellidos = $primerApellido . " " . $segundoApellido;
-                }
-                else
-                {
-                    $apellidos = $primerApellido;
-                }
-
-                $primerNombreSaneado = $this->sanear_string($primerNombre);
-
-                $primerApellidoSaneado = $this->sanear_string($primerApellido);
-
-                $nombreApellido = strtolower($primerNombreSaneado) . strtolower($primerApellidoSaneado);
-
-                $usuarioModelo = mvc_model('User');
-
-                $contadorUsuarios = $usuarioModelo->count(
-                    array('conditions' => array('user_login like' => $nombreApellido . '%')));
-
-                $contadorUsuarios++;
-
-                $nuevoUsuario = $nombreApellido . $contadorUsuarios;
-
-                setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
-                date_default_timezone_set('America/Caracas');
-
-                $fechaHoy = getdate();
-
-			    $clave = md5(substr($primerNombreSaneado, 0, 1) . substr($primerApellidoSaneado, 0, 1) . $fechaHoy['seconds'] . $fechaHoy['minutes'] . '$');
-
-                $fechaHora = new DateTime(); 
-                $fechaHoraFormato = $fechaHora->format('Y-m-d H:i:s'); 
-
-                $user = 
-                    [
-                        "user_login" => $nuevoUsuario,
-                        "user_pass" => $clave,
-                        "user_nicename" => $nuevoUsuario,
-                        "user_email" => $_POST['persona']['email'],
-                        "user_url" => "",
-                        "user_registered" => $fechaHoraFormato,
-                        "user_activation_key" => "",
-                        "user_status" => 0,
-                        "display_name" => $nombres . " " . $apellidos 
-                    ];
-                                                   
-                $idUser = $this->User->insert($user);
-
-                if ($idUser > 0)
-                {
-                    $camposMeta = 
-                        [
-                            "admin_color" => "fresh",
-                            "comment_shortcuts" => false,
-                            "description" => "",
-                            "dismissed_wp_pointers" => "",
-                            "first_name" => $nombres,
-                            "last_name" => $apellidos,
-                            "locale" => "",                 
-                            "nickname" => $nuevoUsuario,                    
-                            "rich_editing" => true,
-                            "show_admin_bar_front" => true,
-                            "syntax_highlighting" => true,
-                            "tmbr_capabilities" => 'a:1:{s:10:"subscriber";b:1;}',
-                            "tmbr_user_level" => 0,
-                            "use_ssl" => 0,
-                            "CRMdapliw_roles" => json_encode($_POST["persona"]["roles"]),
-                            "CRMdapliw_promotor_cliente" => $_POST["persona"]["idPromotor"],
-                            "CRMdapliw_identificacion" => $_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"],
-                            "CRMdapliw_celular" => $_POST["persona"]["celular"],
-                            "CRMdapliw_direccion" => $_POST["persona"]["direccion"],
-                            "CRMdapliw_estatus" => "ACTIVO"
-                        ];
-                    
-                    foreach ($camposMeta as $clave => $valor)
-                    {
-                        $usermeta = ["user_id" => $idUser, "meta_key" => $clave, "meta_value" => $valor];
-                        $idUsermeta = $this->Usermeta->insert($usermeta);
-
-                        if ($idUsermeta == 0)
-                        {
-                            $binnacle = 
-                                [
-                                    "novedad" => "No se pudo agregar la propiedad " . $clave . " al nuevo usuario " . $idUser,
-                                    "tipo_clase" => "controlador",
-                                    "nombre_clase" => "Users",
-                                    "nombre_metodo" => "guardar_persona"                             
-                                ];
-
-                                $idBinnacle = $this->Binnacle->insert($binnacle);
-
-                            $indicadorError = 1;
-                            $jsondata["satisfactorio"] = false;
-                            $jsondata["mensaje"] = "No se pudo agregar la propiedad " . $clave . " al nuevo usuario " . $idUser;
-                            break;
-                        }
-                    }
-               
-                    if ($indicadorError == 0)
-                    {
-                        $metaValue = ["idUser" => $idUser, "activo" => "true"];
-                        $postmeta = ['post_id' => $_POST['idPost'], 'meta_key' => 'CRMdapliw_cliente', 'meta_value' => json_encode($metaValue)];
-                        $idPostmeta = $this->Postmeta->insert($postmeta);  
-
-                        if ($idPostmeta == 0)
-                        {
-                            $binnacle = 
-                                [
-                                    "novedad" => "No se pudo asociar la propiedad " . $_POST['idPost'] . " al cliente " . $idUser,
-                                    "tipo_clase" => "controlador",
-                                    "nombre_clase" => "Users",
-                                    "nombre_metodo" => "guardar_persona"                             
-                                ];
-
-                                $idBinnacle = $this->Binnacle->insert($binnacle);
-
-                            $jsondata["satisfactorio"] = false;
-                            $jsondata["mensaje"] = "No se pudo asociar la propiedad " . $_POST['idPost'] . " al cliente " . $idUser;
-                        }
-                        else
-                        {
-                            $jsondata["satisfactorio"] = true;
-                            $jsondata["mensaje"] = "La persona se agregó exitosamente ";
-                            $jsondata["idUser"] = $idUser;
-                            $jsondata["idPostmeta"] = $idPostmeta;
-                        }
-                    }
-                }
-                else
-                {
-                    $jsondata["satisfactorio"] = false;
-                    $jsondata["mensaje"] = "La persona no se pudo agregar. Motivo: Error al grabar registro en la base de datos ";
-                }            
-
-                /* Descomentar solo para pruebas
-                    $jsondata["satisfactorio"] = true;
-                    $jsondata["mensaje"] = $_POST['arregloPrueba'][0]['nombre'] . ' ' . $_POST['arregloPrueba'][0]['apellido'];
-                */
+                $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "La Persona no se pudo agregar. No existe la variable idPost";
             }
+            require_once("posts_controller.php");
+            $postsController = new PostsController();
+            $vectorGeneral = $postsController->cargar_vectores();
+            $jsondata["vectorGeneral"] = $vectorGeneral;
         }
         else
         {
             $jsondata["satisfactorio"] = false;
-            $jsondata["mensaje"] = "La Persona no se pudo agregar. Motivo: No existe la variable idPost";
+            $jsondata["mensaje"] = "Usuario no autorizado";
+            $vectorGeneral = "";        
         }
         exit(json_encode($jsondata)); 
     }
@@ -328,5 +350,39 @@ class UsersController extends MvcPublicController
             }
         }
         echo "<p>Los registros usermeta se agregaron exitosamente</p>";
-    }   
+    }
+   
+    public function verificar_permisos($rolesAutorizados = null)
+    {
+        $this->autoRender = false;
+
+        $usuarioConectado = wp_get_current_user();
+        $idUsuario = $usuarioConectado->id;
+        $accesoPermitido = "false";
+
+        $this->load_model('Usermeta');
+        
+        if ($idUsuario > 0)
+        {
+            $objetoUsuario = $this->Usermeta->find_one(array(
+                'conditions' => array(
+                    'user_id' => array($idUsuario),
+                    'meta_key' => array("CRMdapliw_roles"))));
+
+            if (isset($objetoUsuario))
+            {
+                $roles = json_decode($objetoUsuario->meta_value);
+
+                foreach($roles as $rol)
+                {
+                    if (in_array($rol, $rolesAutorizados))
+                    {
+                        $accesoPermitido = "true";
+                        break;    
+                    }
+                }
+            }
+        }
+        return $accesoPermitido;    
+    }
 }

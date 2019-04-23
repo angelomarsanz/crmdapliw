@@ -117,7 +117,7 @@
 							<option value="Mosaicos con imágenes">Mosaicos con imágenes</option>
 							<option value="Mosaicos sin imágenes">Mosaicos sin imágenes</option>
 						</select>
-						<div id="mensajesVistas20" class="mensajesUsuarios"></div>
+						<div id="mensajesVistas20" class="mensajesUsuario"></div>
 					</div>
 				</div>
                 <div class="col-md-1 noVer" id="notificaciones20">
@@ -571,13 +571,13 @@ function mostrarNotificaciones()
 
 function actualizarVistaPreferida()
 {
+    borrarMensajesAnteriores();
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
             "<strong>Por favor espere mientras se actualiza la preferencia de vista</strong>" +
         "</div>";
 
-    borrarMensajesAnteriores();
     $j("#mensajesVistas20").html(mensajesUsuario);
 
     jsonVistaPreferida = 
@@ -592,29 +592,36 @@ function actualizarVistaPreferida()
     {
         if (response.satisfactorio) 
         {
+			borrarMensajesAnteriores();
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                     "<strong>" + response.mensaje + "</strong>" +
                 "</div>";
+
+			vectorGeneralActualizado = response.vectorGeneral;
+			actualizarVectores(vectorGeneralActualizado);
 				
-			borrarMensajesAnteriores();
             $j("#mensajesVistas20").html(mensajesUsuario);
         } 
         else 
         {
+			borrarMensajesAnteriores();
             mensajesUsuario =
                 "<div class='alert alert-danger alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                     "<strong>" + response.mensaje + "</strong>" +
                 "</div>"; 
 
-			borrarMensajesAnteriores();
+			vectorGeneralActualizado = response.vectorGeneral;
+			actualizarVectores(vectorGeneralActualizado);
+
             $j("#mensajesVistas20").html(mensajesUsuario);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
     {
+		borrarMensajesAnteriores();
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -628,7 +635,6 @@ function actualizarVistaPreferida()
                 "</a>" + 
             "</div>"; 
 
-		borrarMensajesAnteriores();
 		$j("#mensajesVistas20").html(mensajesUsuario);
     });      
 }
@@ -647,14 +653,13 @@ function mostrarAgenda(tipoContenido, valor)
 
     gIndicadorAdicional = 0;
 	
+	borrarMensajesAnteriores();
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
             "<strong>Por favor espere mientras se busca la información</strong>" +
         "</div>";
 		
-	borrarMensajesAnteriores();
-
   	$j("#mensajesUsuario30").html(mensajesUsuario);
     window.scrollTo(0, 0);
 
@@ -698,6 +703,7 @@ function mostrarAgenda(tipoContenido, valor)
 			} 
 			else 
 			{
+				borrarMensajesAnteriores();
 				mensajesUsuario =
 				"<div class='alert alert-danger alert-dismissible'>" +
 					"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -707,13 +713,13 @@ function mostrarAgenda(tipoContenido, valor)
 				vectorGeneralActualizado = response.vectorGeneral;
 				actualizarVectores(vectorGeneralActualizado);
 
-				borrarMensajesAnteriores();
 				$j("#mensajesUsuario30").html(mensajesUsuario);
 				window.scrollTo(0, 0);        
             }
 		})
 		.fail(function(jqXHR, textStatus, errorThrown) 
 		{
+    		borrarMensajesAnteriores();
 			mensajesUsuario =
 				"<div class='alert alert-danger alert-dismissible'>" +
 					"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -726,8 +732,6 @@ function mostrarAgenda(tipoContenido, valor)
                         " alt='Refrescar' class='icono'>" +
                     "</a>" + 
                 "</div>"; 
-
-				borrarMensajesAnteriores();
 
 				$j("#mensajesUsuario30").html(mensajesUsuario);
 				window.scrollTo(0, 0);    
@@ -2432,7 +2436,7 @@ function compradoresPotenciales(idBien)
             if (datos.activo == "true")
             {
                 compradoresPotenciales += 
-                    "<div class='card' id='comprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "'>" +
+                    "<div class='card' id='comprador100-" + datos.id + "-" + datos.idUser + "-" + idBien + "'>" +
                         "<div class='card-block'>" + 
                             "<h4 class='card-title'>" + datos.valor + "</h4>" +
                             "<div class='card bg-light text-dark'>" +
@@ -2443,8 +2447,8 @@ function compradoresPotenciales(idBien)
                             "<div class='card-footer'>" +
                                 "<p>" +                                                            
                                     "<button class='btn btn-light eliminarComprador100'" + 
-                                        "id='eliminarComprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'" + 
-                                        "title='Eliminar comprador potencial'>" +
+                                        "id='eliminarComprador100-" + datos.id + "-" + datos.idUser + "-" + idBien + "'" + 
+                                        " title='Eliminar comprador potencial'>" +
                                         "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
                                         "crmdapliw/app/public/images/trash.svg alt='Eliminar comprador' class='icono'>" +
                                     "</button>" +
@@ -2454,7 +2458,7 @@ function compradoresPotenciales(idBien)
                     "</div>" +
                     "<div class='row'>" +
                         "<div class='col-md-12'>" +
-                            "<div class='mensajesUsuario' id='mensajesComprador100-" + datos.posicionOriginal + "-" + datos.idUser + "-" + idBien + "-" + datos.id + "'>" +
+                            "<div class='mensajesUsuario' id='mensajesComprador100-" + datos.id + "-" + datos.idUser + "-" + idBien + "'>" +
                             "</div>" +
                         "</div>" +
                     "</div>" + 
@@ -2493,6 +2497,7 @@ function inicializarPersonas()
 
 function guardarPersona(indicadorCheckbox)
 {
+	borrarMensajesAnteriores();
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -2597,50 +2602,10 @@ function guardarPersona(indicadorCheckbox)
     {
         if (response.satisfactorio) 
         {   
-            if (gDatosBienes[gIdPostActual].CRMdapliw_cliente)
-            {
-                ultimaPosicion = 0;
+            vectorGeneralActualizado = response.vectorGeneral;
+            actualizarVectores(vectorGeneralActualizado);
 
-                $j.each(gDatosBienes[gIdPostActual].CRMdapliw_cliente, function(clave, datos)  
-                {
-                    ultimaPosicion = clave;
-                });
-                ultimaPosicion++;
-            }
-            else
-            {
-                ultimaPosicion = 0;
-            }
-
-            compradorPotencial = 
-                {
-                    "valor" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido,
-                    "id" : response.idPostmeta,
-                    "posicionOriginal" : ultimaPosicion,
-                    "idUser" : response.idUser,
-                    "activo" : "true",
-                    "idPromotorCliente" : gIdUsuario,
-                    "nombrePromotorCliente" : gNombreUsuario
-                }    
-
-            if (gDatosBienes[gIdPostActual].CRMdapliw_cliente)
-            {
-                gDatosBienes[gIdPostActual].CRMdapliw_cliente.push(compradorPotencial);
-            }
-            else
-            {
-                gDatosBienes[gIdPostActual].CRMdapliw_cliente = [compradorPotencial];
-            }
-
-            nuevoCliente = 
-                {
-                    "label" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido + " - COMPRADOR(A)",
-                    "value" : primerNombre + " " + segundoNombre + " " + primerApellido + " " + segundoApellido + " - COMPRADOR(A)",
-                    "id" : response.idUser
-                };              
-
-            gPersonasAsc.push(nuevoCliente);
-                
+            borrarMensajesAnteriores();                
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -2660,6 +2625,10 @@ function guardarPersona(indicadorCheckbox)
         } 
         else 
         {
+            vectorGeneralActualizado = response.vectorGeneral;
+            actualizarVectores(vectorGeneralActualizado);
+
+            borrarMensajesAnteriores();                
             mensajesUsuario =
                 "<div class='alert alert-danger alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -2671,6 +2640,7 @@ function guardarPersona(indicadorCheckbox)
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
     {
+		borrarMensajesAnteriores();
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -2786,13 +2756,13 @@ function validarPersona(indicadorCheckbox)
 
 function agregarComprador(idBien, idComprador, nombreComprador)
 {
+    borrarMensajesAnteriores();
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
             "<strong>Por favor espere mientras se agrega el comprador</strong>" +
         "</div>";
 
-    borrarMensajesAnteriores();
     $j("#mensajesCliente100").html(mensajesUsuario);
 
     indicadorArregloComprador = 0;
@@ -2805,13 +2775,13 @@ function agregarComprador(idBien, idComprador, nombreComprador)
             {
                 if (datos.activo == "true")
                 {
+                    borrarMensajesAnteriores();
                     mensajesUsuario =
                         "<div class='alert alert-danger alert-dismissible'>" +
                             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                             "<strong>Este comprador ya está asociado a esta propiedad</strong>" +
                         "</div>"; 
 
-                    borrarMensajesAnteriores();
 	                $j("#mensajesCliente100").html(mensajesUsuario);
                     indicadorArregloComprador = 1;                
                 }
@@ -2832,48 +2802,10 @@ function agregarComprador(idBien, idComprador, nombreComprador)
         {
             if (response.satisfactorio) 
             {
-                indicadorArregloActualizado = 0;
-                if (gDatosBienes[idBien].CRMdapliw_cliente)
-                {
-                    $j.each(gDatosBienes[idBien].CRMdapliw_cliente, function(clave, datos)  
-                    {
-                        if (datos.idUser == idComprador)
-                        {
-                            datos.activo = "true";
-                            indicadorArregloActualizado = 1;                
-                        }
-                    });
-                }
+			    vectorGeneralActualizado = response.vectorGeneral;
+			    actualizarVectores(vectorGeneralActualizado);
 
-                if (indicadorArregloActualizado == 0)
-                {
-                    ultimaPosicion = 0;
-
-                    $j.each(gDatosBienes[gIdPostActual].CRMdapliw_cliente, function(clave, datos)  
-                    {
-                        ultimaPosicion = clave;
-                    });
-                    ultimaPosicion++;
-
-                    compradorPotencial = 
-                        {
-                            "valor" : nombreComprador,
-                            "id" : response.idPostmeta,
-                            "idUser" : idComprador,
-                            "activo" : "true",
-                            "idPromotorCliente" : gIdUsuario,
-                            "nombrePromotorCliente" : gNombreUsuario
-                        }    
-
-                    if (gDatosBienes[idBien].CRMdapliw_cliente)
-                    {
-                        gDatosBienes[idBien].CRMdapliw_cliente.push(compradorPotencial);
-                    }
-                    else
-                    {
-                        gDatosBienes[idBien].CRMdapliw_cliente = [compradorPotencial];
-                    }
-                }   
+                borrarMensajesAnteriores();
                 mensajesUsuario =
                     "<div class='alert alert-success alert-dismissible'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -2886,6 +2818,9 @@ function agregarComprador(idBien, idComprador, nombreComprador)
             } 
             else 
             {
+    			vectorGeneralActualizado = response.vectorGeneral;
+    			actualizarVectores(vectorGeneralActualizado);
+                borrarMensajesAnteriores();
                 mensajesUsuario =
                     "<div class='alert alert-danger alert-dismissible'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -2897,6 +2832,7 @@ function agregarComprador(idBien, idComprador, nombreComprador)
         })
         .fail(function(jqXHR, textStatus, errorThrown) 
         {
+            borrarMensajesAnteriores();
             mensajesUsuario =
                 "<div class='alert alert-danger alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -2917,6 +2853,7 @@ function agregarComprador(idBien, idComprador, nombreComprador)
 
 function eliminarComprador(idCompradorPromotor)
 {
+    borrarMensajesAnteriores();
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -2925,9 +2862,8 @@ function eliminarComprador(idCompradorPromotor)
 
     var arregloId = idCompradorPromotor.split("-");
     var idMensaje = "#mensajesComprador100-" + idCompradorPromotor;  
-    var idPostmeta = arregloId[3];
-
-    borrarMensajesAnteriores();
+    var idPostmeta = arregloId[0];
+    
     $j(idMensaje).html(mensajesUsuario);
 
     var jsonPostmeta = 
@@ -2935,39 +2871,47 @@ function eliminarComprador(idCompradorPromotor)
         "idPostmeta" : idPostmeta
     }
 
+    $j("#eliminarComprador100-" + idCompradorPromotor).attr("disabled", true);  
+
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'eliminar_comprador')) ?>", 
         jsonPostmeta, null, "json")          
     .done(function(response) 
     {
         if (response.satisfactorio) 
         {
+            borrarMensajesAnteriores();
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                     "<strong>" + response.mensaje + "</strong>" +
                 "</div>";
 
-            borrarMensajesAnteriores();
             $j("#mensajesUsuario30").html(mensajesUsuario);
 
-            gDatosBienes[gIdPostActual].CRMdapliw_cliente[arregloId[0]].activo = "false";
+            vectorGeneralActualizado = response.vectorGeneral;
+            actualizarVectores(vectorGeneralActualizado);
 
             compradoresPotenciales(gIdPostActual);
             window.scrollTo(0, 0);
         } 
         else 
         {
+            borrarMensajesAnteriores();
             mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>" + response.mensaje + "</strong>" +
             "</div>"; 
 
+            vectorGeneralActualizado = response.vectorGeneral;
+            actualizarVectores(vectorGeneralActualizado);
+
         	$j(idMensaje).html(mensajesUsuario);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
     {
+        borrarMensajesAnteriores();
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -2987,6 +2931,7 @@ function eliminarComprador(idCompradorPromotor)
 
 function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje)
 {
+    borrarMensajesAnteriores();
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3008,14 +2953,10 @@ function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreN
     {
         if (response.satisfactorio) 
         {
-            gMatrizBienes[idBien].post_author = idNuevoCaptador;
-            gMatrizBienes[idBien].nombre_autor = nombreNuevoCaptador;
+			vectorGeneralActualizado = response.vectorGeneral;
+			actualizarVectores(vectorGeneralActualizado);
 
-            if (indicadorCaptador == 1)
-            {
-                $j("#buscarCaptador60-" + idBien).val(gMatrizBienes[idBien].nombre_autor);
-            }
-
+            borrarMensajesAnteriores();
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3025,6 +2966,10 @@ function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreN
         } 
         else 
         {
+			vectorGeneralActualizado = response.vectorGeneral;
+			actualizarVectores(vectorGeneralActualizado);
+
+            borrarMensajesAnteriores();
             mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3036,6 +2981,7 @@ function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreN
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
     {
+        borrarMensajesAnteriores();
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3055,6 +3001,7 @@ function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreN
 
 function guardarCambiosAgenda(idActividad)
 {
+    borrarMensajesAnteriores();
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3144,7 +3091,6 @@ function guardarCambiosAgenda(idActividad)
 
     $j("#guardarCambios80-" + idActividad).attr("disabled", true);    
 
-    borrarMensajesAnteriores();
     $j(idMensaje).html(mensajesUsuario);
 
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'editar_actividad')) ?>", 
@@ -3153,14 +3099,13 @@ function guardarCambiosAgenda(idActividad)
     {
         if (response.satisfactorio) 
         {
+			borrarMensajesAnteriores();
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                     "<strong>" + response.mensaje + "</strong>" +
                 "</div>";
-				
-			borrarMensajesAnteriores();
-			
+							
             if (estatusObj == "Cerrada por el usuario")
             {
                 $j(tarjeta).addClass("noVer");
@@ -3185,6 +3130,7 @@ function guardarCambiosAgenda(idActividad)
         } 
         else 
         {
+			borrarMensajesAnteriores();
             mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3199,6 +3145,7 @@ function guardarCambiosAgenda(idActividad)
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
     {
+		borrarMensajesAnteriores();
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3441,13 +3388,13 @@ function verificarAdicional(idActividad)
         {
             gIndicadorAdicional = 1;
 
+            borrarMensajesAnteriores();
             var mensajesUsuario = 
                 "<div class='alert alert-danger alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                     "<strong>Estimado usuario por favor escriba los datos referentes a la confirmación de la cita</strong>" +
                 "</div>";
 
-            borrarMensajesAnteriores();
             idMensaje = "#mensajesUsuario80-" + complementoId; 
             $j(idMensaje).html(mensajesUsuario);
 
@@ -3514,6 +3461,7 @@ function inicializarFormularioActividad()
 
 function guardarActividad()
 {
+    borrarMensajesAnteriores();
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3522,7 +3470,6 @@ function guardarActividad()
 
     $j("#guardarActividad10").attr("disabled", true); 
 
-    borrarMensajesAnteriores();
     $j("#mensajesAgregarActividad90").html(mensajesUsuario);
 
     $j("#notas90").val($j.trim($j("#notas90").val().toUpperCase()));
@@ -3589,6 +3536,7 @@ function guardarActividad()
     {
         if (response.satisfactorio) 
         {
+            borrarMensajesAnteriores();
             gMensajePendientePorMostrar =
                 "<div class='alert alert-success alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3605,6 +3553,7 @@ function guardarActividad()
         } 
         else 
         {
+            borrarMensajesAnteriores();
             mensajesUsuario =
                 "<div class='alert alert-danger alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3614,12 +3563,12 @@ function guardarActividad()
             vectorGeneralActualizado = response.vectorGeneral;
             actualizarVectores(vectorGeneralActualizado);
 
-            borrarMensajesAnteriores();
         	$j("#mensajesUsuario30").html(mensajesUsuario);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
     {
+        borrarMensajesAnteriores();
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
@@ -3654,6 +3603,67 @@ function actualizarVectores(vectorGeneralActualizado)
     gVistaPreferida = gVectorGeneral.vistaPreferida;
     gOpcionesSelectActividades = gVectorGeneral.opcionesSelectActividades;
     gVectorGeneral = "";
+
+    $j("#busquedaNombre50").autocomplete(
+    {
+        source: gBienesAutocomplete,
+        select: function( event, ui ) 
+        {   
+            idBienFiltro = ui.item.id;          
+            $j("#busquedaPropiedades50").addClass('noVer');
+            $j("#cerrarBusquedaPropiedades10").addClass('noVer');
+            $j("#busquedaPropiedades10").addClass('noVer');
+            filtrarPropiedades(idBienFiltro);
+            mostrarBienes("Bien", "");
+            $j("#bienes60").removeClass('noVer');
+            $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
+            $j("#publicarPropiedad10").removeClass('noVer');
+            window.scrollTo(0, 0);
+        }
+    });
+
+    $j("#cicloBienes60").find(".buscarCaptador60").autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        {
+            idBien = $j(this).attr("id").substring(17);
+            idCaptadorAnterior = gMatrizBienes[idBien].post_author;
+            idNuevoCaptador = ui.item.id;
+            nombreNuevoCaptador = ui.item.value;
+            indicadorCaptador = 0;
+            idMensaje = "#mensajesUsuario60-" + idBien; 
+            actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje);
+        }
+    });
+
+    $j('#nombreCaptador100').autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        {   
+            idBien = gIdPostActual;
+            idCaptadorAnterior = gMatrizBienes[idBien].post_author;
+            idNuevoCaptador = ui.item.id;
+            nombreNuevoCaptador = ui.item.value;
+            indicadorCaptador = 1;
+            idMensaje = "#mensajesCaptador100"; 
+            actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje);
+        }
+    });
+
+    $j('#nombreCliente100').autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        { 
+            idBien = gIdPostActual;  
+            idComprador = ui.item.id; 
+            nombreComprador = ui.item.value;
+            agregarComprador(idBien, idComprador, nombreComprador);
+        }
+    });
+
 }
 
 // Eventos
@@ -3709,6 +3719,7 @@ $j(document).ready(function()
         $j("#busquedaPropiedades50").addClass('noVer');
         $j("#cerrarBusquedaPropiedades10").addClass('noVer');
         $j("#busquedaPropiedades10").addClass('noVer');
+        borrarMensajesAnteriores();
         if ($j("#grupoVista20").hasClass('noVer'))
         {
             $j("#grupoVista20").removeClass('noVer');
@@ -3805,6 +3816,7 @@ $j(document).ready(function()
         $j("#busquedaAgenda51").addClass('noVer');
         $j("#cerrarBusquedaAgenda10").addClass('noVer');
         $j("#busquedaAgenda10").addClass('noVer');
+        borrarMensajesAnteriores();
         if ($j("#grupoVista20").hasClass('noVer'))
         {
             $j("#grupoVista20").removeClass('noVer');
