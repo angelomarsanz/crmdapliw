@@ -12,10 +12,10 @@
                 alt="Inicio CRM" class="iconoMenu">
             </a>
 
-           <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link noVer" id="cerrarNotificaciones10" title="Cerrar">
-                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
-                alt="Cerrar Notificaciones" class="iconoMenu">
-            </a>
+			<button title="Cerrar" class="btn btn-link noVer" id="cerrarNotificaciones10">
+				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
+				alt="Cerrar notificaciones" class="iconoMenu">
+			</button>
 
 			<button title="Cerrar" class="btn btn-link noVer" id="cerrarBusquedaPropiedades10">
 				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
@@ -40,6 +40,11 @@
             <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgenda10">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
                 alt="Cerrar agenda" class="iconoMenu">
+            </button>
+
+            <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgendaSinActividad10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                alt="Cerrar agenda sin actividad" class="iconoMenu">
             </button>
 
             <button title="Cerrar" class="btn btn-link noVer" id="cerrarActividadIndividual10">
@@ -80,6 +85,11 @@
             <button title="Cerrar" class="btn btn-link noVer" id="cerrarPersonas10">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
                 alt="Cerrar personas" class="iconoMenu">
+            </button>
+
+            <button title="Cerrar" class="btn btn-link noVer" id="cerrarPersonasSinActividad10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                alt="Cerrar personas sin actividad" class="iconoMenu">
             </button>
 
             <button title="Agregar persona" class="btn btn-link noVer" id="agregarPersona10">
@@ -274,9 +284,19 @@
 					<form>
 						<div class="row">
 							<div class="col-md-12">
+					            <div class="form-group noVer" id="grupoBusqueda90">
+						            <label for="busquedaPropiedad90">Propiedad</label>
+						            <input type="text" class="form-control texto50" id="busquedaPropiedad90">
+					            </div>                                
+                                <div class="mensajesUsuario" id="mensajesBusqueda90"></div>
+							</div>
+						</div> 
+
+						<div class="row">
+							<div class="col-md-12">
 								<div class='input-group mb-3' id='actividades90'>
 									<div class='input-group-prepend'>
-										<label class='input-group-text' for='Administrador90'>Actividad</label> 
+										<label class='input-group-text' for='selectOpciones90'>Actividad</label> 
 									</div>
 									<select class='custom-select' id='selectOpciones90'> 
 									</select> 
@@ -450,13 +470,13 @@
 
 						<div class="form-group"> 
 							<label for="celular110">Teléfono celular</label> 
-							<input type="text" class="form-control" id="celular110"> 
+							<input type="number" class="form-control" id="celular110"> 
 						</div>
 						<div id="mensajesCelular110" class="mensajesUsuario"></div> 
 
 						<div class="form-group"> 
 							<label for="telefonoFijo110">Teléfono fijo</label> 
-							<input type="text" class="form-control" id="telefonoFijo110"> 
+							<input type="number" class="form-control" id="telefonoFijo110"> 
 						</div>
 						<div id="mensajesTelefono110" class="mensajesUsuario"></div> 
 
@@ -552,6 +572,8 @@ Date.prototype.getWeekNumber = function () {
 var gSemanaActual = new Date(gAnoActualEntero, gMesActualEnteroMenosUno, gDiaActualEntero).getWeekNumber(); 
 
 var gMensajePendientePorMostrar = "";
+
+var gFuncionLlamadora = "";
 
 // Funciones
 
@@ -2122,8 +2144,19 @@ function alertaActividades(idBien)
         {
             if (datos.estatus == "Abierta")
             {
-                fechaInvertidaAntigua = datos.fechaInvertida;
-                return false;
+                if (gRoles.includes("Gestor de negocios") || gRoles.includes("Administrador"))
+                {
+                    fechaInvertidaAntigua = datos.fechaInvertida;
+                    return false;
+                }
+                else if (gRoles.includes("Promotor") || gRoles.includes("Captador"))
+                {
+                    if (datos.idEjecutor == gIdUsuario)
+                    {
+                        fechaInvertidaAntigua = datos.fechaInvertida;
+                        return false;
+                    }
+                }
             }
         });        
     }
@@ -2619,7 +2652,14 @@ function guardarPersona(indicadorCheckbox)
             $j("#guardarPersona10").addClass("noVer");
             personasBien(gIdPostActual);
             $j("#personas100").removeClass("noVer");
-            $j("#cerrarPersonas10").removeClass('noVer');
+		    if (gFuncionLlamadora == "bienesSinActividad51")
+		    {
+                $j("#cerrarPersonasSinActividad10").removeClass('noVer');
+		    }
+		    else if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
+		    {	
+                $j("#cerrarPersonas10").removeClass('noVer');
+		    }
             $j("#agregarPersona10").removeClass("noVer");
             window.scrollTo(0, 0);           
         } 
@@ -3089,9 +3129,9 @@ function guardarCambiosAgenda(idActividad)
         "estatus" : estatusObj
     }
 
-    $j("#guardarCambios80-" + idActividad).attr("disabled", true);    
-
     $j(idMensaje).html(mensajesUsuario);
+
+    $j("#guardarCambios80-" + idActividad).attr("disabled", true);    
 
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'editar_actividad')) ?>", 
         jsonActividad, null, "json")          
@@ -3115,6 +3155,7 @@ function guardarCambiosAgenda(idActividad)
 			else
 			{
 				$j(idMensaje).html(mensajesUsuario);
+                $j("#guardarCambios80-" + idActividad).attr("disabled", false);  
 			}
 			
             if (gIndicadorAdicional == 1)
@@ -3122,14 +3163,14 @@ function guardarCambiosAgenda(idActividad)
                 $j("#adicionalFechaPlanificada80-" + idActividad).addClass("noVer");
                 $j("#adicionalGrupoNotas80-" + idActividad).addClass("noVer");
             }
-        
-		    $j("#guardarCambios80-" + idActividad).attr("disabled", false);
-			
+        		
             vectorGeneralActualizado = response.vectorGeneral;
             actualizarVectores(vectorGeneralActualizado);
         } 
         else 
         {
+            $j("#guardarCambios80-" + idActividad).attr("disabled", false); 
+
 			borrarMensajesAnteriores();
             mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
@@ -3416,7 +3457,16 @@ function inicializarFormularioActividad()
 	{
 		$j("#guardarActividad10").attr("disabled", false);
 	}
-    $j('#tituloAgregarActividad90').html("Planificar actividades para " + gMatrizBienes[gIdPostActual].post_title); 
+    if (gBotonCerrarLlamador == "#cerrarAgenda10")
+    {
+        $j("#tituloAgregarActividad90").html("Planificar actividades para " + gMatrizBienes[gIdPostActual].post_title); 
+    }
+    else
+    {
+        $j("#tituloAgregarActividad90").html("Planificar actividades");
+        $j("#grupoBusqueda90").removeClass("noVer"); 
+    }
+    $j('#busquedaPropiedad90').val("");
     $j('#actividadAgenda90').val("");
     $j('#notas90').val("");
 
@@ -3458,7 +3508,6 @@ function inicializarFormularioActividad()
     $j("#fechaPlanificada90").html(lineaFecha);
 }
 
-
 function guardarActividad()
 {
     borrarMensajesAnteriores();
@@ -3467,8 +3516,6 @@ function guardarActividad()
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
             "<strong>Por favor espere mientras se guardan los datos</strong>" +
         "</div>";
-
-    $j("#guardarActividad10").attr("disabled", true); 
 
     $j("#mensajesAgregarActividad90").html(mensajesUsuario);
 
@@ -3530,12 +3577,16 @@ function guardarActividad()
             }];        
     }
 
+    $j("#guardarActividad10").attr("disabled", true); 
+
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'agregar_actividad')) ?>", 
         jsonActividad, null, "json")          
     .done(function(response) 
     {
         if (response.satisfactorio) 
         {
+            $j("#guardarActividad10").attr("disabled", false); 
+
             borrarMensajesAnteriores();
             gMensajePendientePorMostrar =
                 "<div class='alert alert-success alert-dismissible'>" +
@@ -3549,10 +3600,24 @@ function guardarActividad()
             $j("#agregarActividad90").addClass("noVer");
             $j("#cerrarAgregarActividad10").addClass("noVer");
             $j("#guardarActividad10").addClass("noVer");
-            mostrarAgenda("Propiedad", gIdPostActual); 
+            if (gFuncionLlamadora == "busquedaAgenda10")
+            {
+                filtro = filtrarAgenda();
+                mostrarAgenda(filtro, "");
+            }
+            else if (gFuncionLlamadora == "verNotificaciones20")
+            {
+                mostrarAgenda("Notificaciones", "");   
+            } 
+            else if (gFuncionLlamadora == "bienesSinActividad51" || gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
+            {
+                mostrarAgenda("Propiedad", gIdPostActual);    
+            }
         } 
         else 
         {
+            $j("#guardarActividad10").attr("disabled", false); 
+
             borrarMensajesAnteriores();
             mensajesUsuario =
                 "<div class='alert alert-danger alert-dismissible'>" +
@@ -3612,6 +3677,7 @@ function actualizarVectores(vectorGeneralActualizado)
             idBienFiltro = ui.item.id;          
             $j("#busquedaPropiedades50").addClass('noVer');
             $j("#cerrarBusquedaPropiedades10").addClass('noVer');
+            gFuncionLlamadora = "busquedaNombre50";
             $j("#busquedaPropiedades10").addClass('noVer');
             filtrarPropiedades(idBienFiltro);
             mostrarBienes("Bien", "");
@@ -3634,6 +3700,16 @@ function actualizarVectores(vectorGeneralActualizado)
             indicadorCaptador = 0;
             idMensaje = "#mensajesUsuario60-" + idBien; 
             actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreNuevoCaptador, indicadorCaptador, idMensaje);
+        }
+    });
+
+    $j("#busquedaPropiedad90").autocomplete(
+    {
+        source: gBienesAutocomplete,
+        select: function( event, ui ) 
+        {   
+            gIdPostActual = ui.item.id;          
+            $j("#busquedaPropiedad90").val(gIdPostActual);
         }
     });
 
@@ -3663,7 +3739,6 @@ function actualizarVectores(vectorGeneralActualizado)
             agregarComprador(idBien, idComprador, nombreComprador);
         }
     });
-
 }
 
 // Eventos
@@ -3692,9 +3767,27 @@ $j(document).ready(function()
         {
             $j("#notificaciones20").addClass('noVer');
         }
-  
+        gFuncionLlamadora = "verNotificaciones20";
         gBotonCerrarLlamador = "#cerrarNotificaciones10";  
         mostrarAgenda("Notificaciones", "");
+    });
+
+    $j("#cerrarNotificaciones10").click(function()
+    {
+        $j("#agenda80").addClass('noVer');
+        $j("#cerrarNotificaciones10").addClass('noVer');
+        $j("#agregarActividad10").addClass('noVer');
+        borrarMensajesAnteriores();
+        if ($j("#grupoVista20").hasClass('noVer'))
+        {
+            $j("#grupoVista20").removeClass('noVer');
+        }  
+        if (gNotificaciones > 0)
+        {
+            $j("#notificaciones20").removeClass('noVer');
+        }   
+        $j("#principal40").removeClass('noVer');
+        window.scrollTo(0, 0);
     });
 
     $j("#propiedades40").click(function()
@@ -3727,7 +3820,15 @@ $j(document).ready(function()
         if (gNotificaciones > 0)
         {
             $j("#notificaciones20").removeClass('noVer');
-        }   
+        } 
+        $j("#busquedaCodigo50").val(""); 
+        $j("#busquedaHabitaciones50").val(""); 
+        $j("#busquedaBanos50").val(""); 
+        $j("#busquedaGarajes50").val(""); 
+        $j("#busquedaArea50").val(""); 
+        $j("#busquedaZona50").val(""); 
+        $j("#busquedaPrecioMinimo50").val(""); 
+        $j("#busquedaPrecioMaximo50").val(""); 
         $j("#principal40").removeClass('noVer');
         window.scrollTo(0, 0);
     });
@@ -3741,6 +3842,7 @@ $j(document).ready(function()
             $j("#busquedaPropiedades50").addClass('noVer');
             $j("#cerrarBusquedaPropiedades10").addClass('noVer');
             $j("#busquedaPropiedades10").addClass('noVer');
+            gFuncionLlamadora = "busquedaNombre50";
             filtrarPropiedades(idBienFiltro);
             mostrarBienes("Bien", "");
             $j("#bienes60").removeClass('noVer');
@@ -3756,6 +3858,7 @@ $j(document).ready(function()
         $j("#cerrarBusquedaPropiedades10").addClass('noVer');
         $j("#busquedaPropiedades10").addClass('noVer');
         filtrarPropiedades(0);
+		gFuncionLlamadora = "busquedaPropiedades10";
         mostrarBienes("Propiedades", "");
         $j("#bienes60").removeClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
@@ -3767,10 +3870,20 @@ $j(document).ready(function()
     {
         $j("#bienes60").addClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").addClass('noVer');
-        $j("#publicarPropiedad10").addClass('noVer');
-        $j("#busquedaPropiedades50").removeClass('noVer');
-        $j("#cerrarBusquedaPropiedades10").removeClass('noVer');
-        $j("#busquedaPropiedades10").removeClass('noVer');
+		if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
+		{
+			$j("#publicarPropiedad10").addClass('noVer');
+            $j("#busquedaNombre50").val("");
+			$j("#busquedaPropiedades50").removeClass('noVer');
+			$j("#cerrarBusquedaPropiedades10").removeClass('noVer');
+			$j("#busquedaPropiedades10").removeClass('noVer');
+		}
+		else if (gFuncionLlamadora == "bienesSinActividad51")
+		{
+			$j("#busquedaAgenda51").removeClass('noVer');
+			$j("#cerrarBusquedaAgenda10").removeClass('noVer');
+			$j("#busquedaAgenda10").removeClass('noVer');			
+		}
         window.scrollTo(0, 0);
     });
 
@@ -3814,6 +3927,7 @@ $j(document).ready(function()
     $j("#cerrarBusquedaAgenda10").click(function()
     {
         $j("#busquedaAgenda51").addClass('noVer');
+        $j("#busquedaActividades51").val("");
         $j("#cerrarBusquedaAgenda10").addClass('noVer');
         $j("#busquedaAgenda10").addClass('noVer');
         borrarMensajesAnteriores();
@@ -3836,9 +3950,10 @@ $j(document).ready(function()
         $j("#busquedaAgenda10").addClass('noVer');
         desmarcarBienesVista();
         bienesSinActividad();
+		gFuncionLlamadora = "bienesSinActividad51";
         mostrarBienes("Propiedades sin Actividades Planificadas", "");
         $j("#bienes60").removeClass('noVer');
-        $j("#cerrarAgendaFiltrada10").removeClass('noVer');
+        $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
         window.scrollTo(0, 0);
     });
 
@@ -3848,6 +3963,7 @@ $j(document).ready(function()
         $j("#cerrarBusquedaAgenda10").addClass('noVer');
         $j("#busquedaAgenda10").addClass('noVer');
         filtro = filtrarAgenda();
+        gFuncionLlamadora = "busquedaAgenda10";
         gBotonCerrarLlamador = "#cerrarAgendaFiltrada10";
         mostrarAgenda(filtro, "");
     });
@@ -3855,10 +3971,6 @@ $j(document).ready(function()
     $j('#cerrarAgendaFiltrada10').click(function()
     {
         $j("#agenda80").addClass('noVer');
-        if ($j("#bienes60").hasClass('noVer') === false)
-        {
-            $j("#bienes60").addClass('noVer');
-        } 
         $j("#cerrarAgendaFiltrada10").addClass('noVer');
         $j("#agregarActividad10").addClass("noVer");
         $j("#busquedaAgenda51").removeClass('noVer');
@@ -3876,7 +3988,15 @@ $j(document).ready(function()
         $j("#publicarPropiedad10").addClass('noVer');
         personasBien(gIdPostActual);
         $j("#personas100").removeClass("noVer");
-        $j("#cerrarPersonas10").removeClass('noVer');
+		if (gFuncionLlamadora == "bienesSinActividad51")
+		{
+            $j("#cerrarPersonasSinActividad10").removeClass('noVer');
+		}
+		else if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
+
+		{	
+            $j("#cerrarPersonas10").removeClass('noVer');
+		}
         $j("#agregarPersona10").removeClass("noVer");
         window.scrollTo(0, 0);
     });
@@ -3884,7 +4004,14 @@ $j(document).ready(function()
     $j("#agregarPersona10").click(function()
     {       
         $j("#personas100").addClass("noVer");
-        $j("#cerrarPersonas10").addClass('noVer');
+        if (gFuncionLlamadora == "bienesSinActividad51")
+        {
+            $j("#cerrarPersonasSinActividad10").addClass('noVer');
+        }
+        else
+        {   
+            $j("#cerrarPersonas10").addClass('noVer');
+        }
         $j("#agregarPersona10").addClass('noVer');
         inicializarPersonas();
         $j("#agregarPersonas110").removeClass("noVer");
@@ -3924,12 +4051,33 @@ $j(document).ready(function()
         $j("#cerrarPersonas10").addClass('noVer');
         $j("#agregarPersona10").addClass("noVer");
         borrarMensajesAnteriores();
-        filtrarPropiedades(0);
+        if (gFuncionLlamadora == "busquedaPropiedades10")
+        {
+            filtrarPropiedades(0);
+        }
+        else if (gFuncionLlamadora == "busquedaNombre50")
+        {
+            filtrarPropiedades(gIdPostActual);
+        }            
         mostrarBienes("Propiedades", "");
         $j("#bienes60").removeClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
         $j("#publicarPropiedad10").removeClass('noVer');
         $j("#cicloBienes60").find("#" + gPosicionAnterior).focus();
+    });
+
+    $j('#cerrarPersonasSinActividad10').click(function()
+    {
+        $j("#personas100").addClass("noVer");
+        $j("#cerrarPersonasSinActividad10").addClass('noVer');
+        $j("#agregarPersona10").addClass("noVer");
+        borrarMensajesAnteriores();		
+        desmarcarBienesVista();
+        bienesSinActividad();
+        mostrarBienes("Propiedades sin Actividades Planificadas", "");
+        $j("#bienes60").removeClass('noVer');
+        $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
+        $j("#cicloBienes60").find("#" + gPosicionAnterior).focus();				
     });
 
     $j('#nombreCaptador100').autocomplete(
@@ -3967,7 +4115,14 @@ $j(document).ready(function()
         $j("#cerrarPropiedadesFiltradas10").addClass('noVer');
         $j("#publicarPropiedad10").addClass('noVer');
         $j("#agregarActividad10").removeClass('noVer');
-        gBotonCerrarLlamador = "#cerrarAgenda10";
+		if (gFuncionLlamadora == "bienesSinActividad51")
+		{
+			gBotonCerrarLlamador = "#cerrarAgendaSinActividad10";
+		}
+		else if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
+		{	
+			gBotonCerrarLlamador = "#cerrarAgenda10";
+		}
         mostrarAgenda("Propiedad", gIdPostActual);
     });
 
@@ -3977,12 +4132,33 @@ $j(document).ready(function()
         $j("#cerrarAgenda10").addClass('noVer');
         $j("#agregarActividad10").addClass("noVer");
         borrarMensajesAnteriores();
-        filtrarPropiedades(0);
+        if (gFuncionLlamadora == "busquedaPropiedades10")
+        {
+            filtrarPropiedades(0);
+        }
+        else if (gFuncionLlamadora == "busquedaNombre50")
+        {
+            filtrarPropiedades(gIdPostActual);
+        }            
         mostrarBienes("Propiedades", "");
         $j("#bienes60").removeClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
         $j("#publicarPropiedad10").removeClass('noVer');
-        $j("#cicloBienes60").find("#" + gPosicionAnterior).focus();
+        $j("#cicloBienes60").find("#" + gPosicionAnterior).focus();	
+    });
+
+    $j('#cerrarAgendaSinActividad10').click(function()
+    {
+        $j("#agenda80").addClass("noVer");
+        $j("#cerrarAgendaSinActividad10").addClass('noVer');
+        $j("#agregarActividad10").addClass("noVer");
+        borrarMensajesAnteriores();		
+        desmarcarBienesVista();
+        bienesSinActividad();
+        mostrarBienes("Propiedades sin Actividades Planificadas", "");
+        $j("#bienes60").removeClass('noVer');
+        $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
+        $j("#cicloBienes60").find("#" + gPosicionAnterior).focus();				
     });
 
     $j("#agenda80").on("click", ".actividad80", function()
@@ -3995,7 +4171,7 @@ $j(document).ready(function()
 		borrarMensajesAnteriores();
         mosaico = crearMosaicos(clave, datos);
         $j("#agenda80").html(mosaico);
-        $j("#cerrarAgenda10").addClass('noVer');
+        $j(gBotonCerrarLlamador).addClass('noVer');
         $j("#agregarActividad10").addClass('noVer');
         $j("#cerrarActividadIndividual10").removeClass("noVer");
         window.scrollTo(0, 0);  
@@ -4003,10 +4179,21 @@ $j(document).ready(function()
 
     $j("#cerrarActividadIndividual10").click(function()
     {
+        $j('#agenda80').addClass('noVer');
         $j("#cerrarActividadIndividual10").addClass('noVer');
-        $j("#agregarActividad10").removeClass('noVer');
-        gBotonCerrarLlamador = "#cerrarAgenda10";
-        mostrarAgenda("Propiedad", gIdPostActual);    
+        if (gFuncionLlamadora == "busquedaAgenda10")
+        {
+            filtro = filtrarAgenda();
+            mostrarAgenda(filtro, "");
+        }
+        else if (gFuncionLlamadora == "verNotificaciones20")
+        {
+            mostrarAgenda("Notificaciones", "");   
+        } 
+        else if (gFuncionLlamadora == "bienesSinActividad51" || gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
+        {
+            mostrarAgenda("Propiedad", gIdPostActual);    
+        }
     });
 
     $j("#agenda80").on("click", ".cerrarActividad80", function()
@@ -4024,7 +4211,7 @@ $j(document).ready(function()
     $j('#agregarActividad10').click(function()
     {
         $j('#agenda80').addClass('noVer');
-        $j('#cerrarAgenda10').addClass('noVer');
+        $j(gBotonCerrarLlamador).addClass('noVer');
         $j('#agregarActividad10').addClass('noVer');
         inicializarFormularioActividad();
         $j('#agregarActividad90').removeClass('noVer');       
@@ -4049,6 +4236,24 @@ $j(document).ready(function()
         tipoActividad = "Nueva";
         validarActividad(tipoActividad, "");
     });
+
+    $j("#busquedaPropiedad90").autocomplete(
+    {
+        source: gBienesAutocomplete,
+        select: function( event, ui ) 
+        {   
+            gIdPostActual = ui.item.id;          
+            $j("#busquedaPropiedad90").val(gIdPostActual);
+        }
+    });
+
+    $j("#direccion110").on("keydown", function(e) 
+    {
+        if (e.which == 9)
+        {
+            return false;
+        }
+    });   
 
 });
 </script>
