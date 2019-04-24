@@ -12,6 +12,11 @@
                 alt="Inicio CRM" class="iconoMenu">
             </a>
 
+            <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="inicioCrm10" title="Refrescar datos">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/reload.svg" ?>
+                alt="Refrescar datos" class="iconoMenu">
+            </a>
+
 			<button title="Cerrar" class="btn btn-link noVer" id="cerrarNotificaciones10">
 				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
 				alt="Cerrar notificaciones" class="iconoMenu">
@@ -575,6 +580,8 @@ var gMensajePendientePorMostrar = "";
 
 var gFuncionLlamadora = "";
 
+var gIdPersonaActual = "";
+
 // Funciones
 
 function testFunction()
@@ -625,6 +632,7 @@ function actualizarVistaPreferida()
 			actualizarVectores(vectorGeneralActualizado);
 				
             $j("#mensajesVistas20").html(mensajesUsuario);
+			window.scrollTo(0, 0);
         } 
         else 
         {
@@ -639,6 +647,7 @@ function actualizarVistaPreferida()
 			actualizarVectores(vectorGeneralActualizado);
 
             $j("#mensajesVistas20").html(mensajesUsuario);
+			window.scrollTo(0, 0);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
@@ -658,6 +667,7 @@ function actualizarVistaPreferida()
             "</div>"; 
 
 		$j("#mensajesVistas20").html(mensajesUsuario);
+		window.scrollTo(0, 0);
     });      
 }
 
@@ -899,8 +909,9 @@ function mostrarAgendaLista(tipoContenido, valor)
 		}
 		else if (tipoContenido == "Persona")
 		{
+			nombrePersona = gUsuarios[gIdPersonaActual].first_name + " " + gUsuarios[gIdPersonaActual].last_name;
 			var agenda =
-				"<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + valor + "</h2>" +
+				"<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + nombrePersona + "</h2>" +
 				"<br />" +
 				"<br />" +
 				encabezadoTabla;
@@ -997,7 +1008,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
     var bienesNotificaciones = [];   
     var notificaciones = [];
 
-	if (tipoContenido == "propiedad")
+	if (tipoContenido == "Propiedad")
 	{
         var agenda =
             "<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + gMatrizBienes[valor].post_title + "</h2>" +
@@ -1016,7 +1027,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 
         if (gDatosBienes[valor].CRMdapliw_actividad_agenda)
         {
-            $j.each(gDatosBienes[idPost].CRMdapliw_actividad_agenda, function(clave, datos)  
+            $j.each(gDatosBienes[valor].CRMdapliw_actividad_agenda, function(clave, datos)  
             {
 				if (datos.estatus == "Abierta")
 				{
@@ -1189,7 +1200,7 @@ function mostrarImagenCabecera(valor)
             imagenCabecera +=
                 "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
                     "<div class='card'>" +
-						"<a href=" + gDatosBienes[valor]._thumbnail_id[0].valor + " title='Ver foto'>" +
+						"<a href=" + gDatosBienes[valor]._thumbnail_id[0].valor + " title='Ver foto' target='_blank' class='text-center'>" +
 						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera-slr.svg' ?>" +
 						" alt='Ver foto' class='icono'>" +
 						"</a>" + 
@@ -2016,7 +2027,7 @@ function mostrarBienes(tipoContenido, valor)
 										"</a>" +								
 												
 										"<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
-											" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
+											" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad' target='_blank'>" +
 											"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
 											"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
 										"</a>" +
@@ -2077,13 +2088,29 @@ function primeraActividadPendiente(idBien)
         {
             if (datos.estatus == "Abierta")
             {
-                actividadMasAntigua = datos.nombreActividad;
-                fechaMasAntigua = 
-                    datos.diaPlanificado + "/" + 
-                    datos.mesPlanificado + "/" +
-                    datos.anoPlanificado;
-                fechaInvertidaAntigua = datos.fechaInvertida;
-                return false;
+				if (gRoles.includes("Gestor de negocios") || gRoles.includes("Administrador"))
+                {
+					actividadMasAntigua = datos.nombreActividad;
+					fechaMasAntigua = 
+						datos.diaPlanificado + "/" + 
+						datos.mesPlanificado + "/" +
+						datos.anoPlanificado;
+					fechaInvertidaAntigua = datos.fechaInvertida;
+					return false;
+				}
+                else if (gRoles.includes("Promotor") || gRoles.includes("Captador"))
+                {
+                    if (datos.idEjecutor == gIdUsuario)
+                    {
+						actividadMasAntigua = datos.nombreActividad;
+						fechaMasAntigua = 
+							datos.diaPlanificado + "/" + 
+							datos.mesPlanificado + "/" +
+							datos.anoPlanificado;
+						fechaInvertidaAntigua = datos.fechaInvertida;
+						return false;
+					}
+				}
             }
         });        
     }
@@ -2222,13 +2249,13 @@ function bienesSinActividad()
     });
 }
 
-function filtrarAgenda(idPersonaFiltro)
+function filtrarAgenda(idPersona)
 {
     var indicadorVer = "";
 	
 	var filtro = "";
 
-    if (idPersonaFiltro > 0)
+    if (idPersona > 0)
     {
 		filtro = "Persona"
 		
@@ -2240,7 +2267,7 @@ function filtrarAgenda(idPersonaFiltro)
             {
                 $j.each(datos1.CRMdapliw_actividad_agenda, function(clave2, datos2)  
                 {
-                    if (datos2.idEjecutor == idPersonaFiltro)
+                    if (datos2.idEjecutor == idPersona)
                     {
                         gDatosBienes[clave1].CRMdapliw_actividad_agenda[clave2].ver = "true";
                     }
@@ -2676,6 +2703,7 @@ function guardarPersona(indicadorCheckbox)
                 "</div>"; 
 
         	$j("#mensajesUsuario30").html(mensajesUsuario);
+			window.scrollTo(0, 0);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
@@ -2695,6 +2723,7 @@ function guardarPersona(indicadorCheckbox)
             "</div>"; 
 
         $j("#mensajesUsuario30").html(mensajesUsuario);
+		window.scrollTo(0, 0);
     });  
 }
 
@@ -2868,6 +2897,7 @@ function agregarComprador(idBien, idComprador, nombreComprador)
                     "</div>"; 
 
             	$j("#mensajesUsuario30").html(mensajesUsuario);
+				window.scrollTo(0, 0);
             }
         })
         .fail(function(jqXHR, textStatus, errorThrown) 
@@ -2887,6 +2917,7 @@ function agregarComprador(idBien, idComprador, nombreComprador)
                 "</div>"; 
 
             $j("#mensajesUsuario30").html(mensajesUsuario);
+			window.scrollTo(0, 0);
         });  
     }        
 }
@@ -3613,6 +3644,16 @@ function guardarActividad()
             {
                 mostrarAgenda("Propiedad", gIdPostActual);    
             }
+            else if (gFuncionLlamadora == "solicitudesDeCita51")
+            {
+                solicitudesDeCita();
+                mostrarAgenda("Citas", 0);
+            } 
+			else if (gFuncionLlamadora == "PersonaAgenda51")
+			{
+				filtro = filtrarAgenda(gIdPersonaActual);  
+				mostrarAgenda(filtro, gIdPersonaActual);
+			} 
         } 
         else 
         {
@@ -3629,6 +3670,7 @@ function guardarActividad()
             actualizarVectores(vectorGeneralActualizado);
 
         	$j("#mensajesUsuario30").html(mensajesUsuario);
+			window.scrollTo(0, 0);
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
@@ -3648,6 +3690,7 @@ function guardarActividad()
             "</div>"; 
 
         $j("#mensajesUsuario30").html(mensajesUsuario);
+		window.scrollTo(0, 0);
     });  
 }
 
@@ -3739,6 +3782,41 @@ function actualizarVectores(vectorGeneralActualizado)
             agregarComprador(idBien, idComprador, nombreComprador);
         }
     });
+
+    $j("#personaAgenda51").autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        {   
+            gIdPersonaActual = ui.item.id;    
+            $j("#busquedaAgenda51").addClass('noVer');
+            $j("#cerrarBusquedaAgenda10").addClass('noVer');
+            $j("#busquedaAgenda10").addClass('noVer');
+            gFuncionLlamadora = "PersonaAgenda51";
+            gBotonCerrarLlamador = "#cerrarAgendaFiltrada10";
+            filtro = filtrarAgenda(gIdPersonaActual);  
+            mostrarAgenda(filtro, gIdPersonaActual);
+        }
+    });
+}
+
+function solicitudesDeCita()
+{
+    desmarcarAgendaVista();
+
+    $j.each(gDatosBienes, function(clave1, datos1)  
+    {
+        if (datos1.CRMdapliw_actividad_agenda)
+        {
+            $j.each(datos1.CRMdapliw_actividad_agenda, function(clave2, datos2)  
+            {
+                if (datos2.nombreActividad == "Solicitud de cita para mostrar propiedad")
+                {
+                    datos2.ver = "true";
+                }
+            });
+        }
+    });    
 }
 
 // Eventos
@@ -3970,6 +4048,7 @@ $j(document).ready(function()
 
     $j('#cerrarAgendaFiltrada10').click(function()
     {
+		$j("#personaAgenda51").val("");
         $j("#agenda80").addClass('noVer');
         $j("#cerrarAgendaFiltrada10").addClass('noVer');
         $j("#agregarActividad10").addClass("noVer");
@@ -4194,6 +4273,16 @@ $j(document).ready(function()
         {
             mostrarAgenda("Propiedad", gIdPostActual);    
         }
+        else if (gFuncionLlamadora == "solicitudesDeCita51")
+        {
+            solicitudesDeCita();
+            mostrarAgenda("Citas", 0);
+        } 
+        else if (gFuncionLlamadora == "PersonaAgenda51")
+        {
+            filtro = filtrarAgenda(gIdPersonaActual);  
+            mostrarAgenda(filtro, gIdPersonaActual);
+        } 
     });
 
     $j("#agenda80").on("click", ".cerrarActividad80", function()
@@ -4253,7 +4342,34 @@ $j(document).ready(function()
         {
             return false;
         }
-    });   
+    });  
 
+    $j('#solicitudesDeCita51').click(function()
+    {
+        $j("#busquedaAgenda51").addClass('noVer');
+        $j("#cerrarBusquedaAgenda10").addClass('noVer');
+        $j("#busquedaAgenda10").addClass('noVer');
+        gFuncionLlamadora = "solicitudesDeCita51"  
+        gBotonCerrarLlamador = "#cerrarAgendaFiltrada10";
+        solicitudesDeCita();
+        mostrarAgenda("Citas", 0);
+    });
+
+    $j("#personaAgenda51").autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        {   
+            gIdPersonaActual = ui.item.id;    
+            $j("#busquedaAgenda51").addClass('noVer');
+            $j("#cerrarBusquedaAgenda10").addClass('noVer');
+            $j("#busquedaAgenda10").addClass('noVer');
+            gFuncionLlamadora = "PersonaAgenda51";
+            gBotonCerrarLlamador = "#cerrarAgendaFiltrada10";
+            filtro = filtrarAgenda(gIdPersonaActual);  
+			console.log("filtro " + filtro);
+            mostrarAgenda(filtro, gIdPersonaActual);
+        }
+    });
 });
 </script>

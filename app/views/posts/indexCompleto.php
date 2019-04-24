@@ -3313,7 +3313,7 @@ function solicitudesDeCita()
 
     $j.each(gDatosBienes, function(clave1, datos1)  
     {
-        if (datos1.CRMdapliw_actividad_agenda[0])
+        if (datos1.CRMdapliw_actividad_agenda)
         {
             $j.each(datos1.CRMdapliw_actividad_agenda, function(clave2, datos2)  
             {
