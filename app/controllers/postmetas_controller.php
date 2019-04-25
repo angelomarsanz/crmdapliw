@@ -311,7 +311,7 @@ class PostmetasController extends MvcPublicController
 								$arregloActividad->meridianoCierre = $arregloAdicional["meridianoPlanificado"];
 
 								$arregloActividad->idSolicitante = $objetoActividad->idEjecutor;
-								$arregloActividad->idActividadPadre = $objetoActividad->$_POST["idActividad"];
+								$arregloActividad->idActividadPadre = $object->__id;
 								$arregloActividad->notificacion = "No vista";
 								$arregloActividad->informacionAdicional = [""];
 								$arregloActividad->historialDeCambios = [""];

@@ -12,9 +12,9 @@
                 alt="Inicio CRM" class="iconoMenu">
             </a>
 
-            <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="inicioCrm10" title="Refrescar datos">
+            <a href=<?= mvc_public_url(array("controller" => "posts")) ?> class="btn btn-link" id="recargarPagina10" title="Recargar página">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/reload.svg" ?>
-                alt="Refrescar datos" class="iconoMenu">
+                alt="Recargar página" class="iconoMenu">
             </a>
 
 			<button title="Cerrar" class="btn btn-link noVer" id="cerrarNotificaciones10">
@@ -84,7 +84,7 @@
 
             <button title="Guardar actividad" class="btn btn-link noVer" id="guardarActividad10">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
-                alt="Agregar actividad" class="iconoMenu">
+                alt="Agregar actividad" class="iconoMenu" id="imagenGuardarActividad10">
             </button>
 
             <button title="Cerrar" class="btn btn-link noVer" id="cerrarPersonas10">
@@ -109,7 +109,7 @@
 
             <button title="Guardar persona" class="btn btn-link noVer" id="guardarPersona10">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
-                alt="Guardar persona" class="iconoMenu">
+                alt="Guardar persona" class="iconoMenu" id="imagenGuardarPersona10">
             </button>
 
         </div>
@@ -520,7 +520,7 @@
         <br />
     <?php endif; ?>
     <?php
-        for ($i = 1; $i <= 17; $i++) 
+        for ($i = 1; $i <= 20; $i++) 
         {
             echo "<br />";
         }
@@ -582,6 +582,12 @@ var gFuncionLlamadora = "";
 
 var gIdPersonaActual = "";
 
+var gImagenAnterior = "";
+
+var gImagenEspere = 
+    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/apertureEspere.svg' ?>" +
+    " alt='Por favor espere' class='iconoMenu imgr' id='imagenEspere'>";
+
 // Funciones
 
 function testFunction()
@@ -604,7 +610,9 @@ function actualizarVistaPreferida()
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-            "<strong>Por favor espere mientras se actualiza la preferencia de vista</strong>" +
+            "<strong>Por favor espere mientras se actualiza la preferencia de vista </strong>" +
+            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/aperture.svg' ?>" +
+            " alt='Por favor espere' class='icono imgre'>" +
         "</div>";
 
     $j("#mensajesVistas20").html(mensajesUsuario);
@@ -658,14 +666,12 @@ function actualizarVistaPreferida()
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>" +
                     "Estimado usuario el servidor tardó mucho en responder, " +
-                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
-                "</strong>" +
-                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "por favor pulse el botón 'Recargar página' " + 
                     "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
-                    " alt='Refrescar' class='icono'>" +
-                "</a>" + 
+                    " alt='Recargar página' class='icono'>" +
+					" que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+                "</strong>" + 
             "</div>"; 
-
 		$j("#mensajesVistas20").html(mensajesUsuario);
 		window.scrollTo(0, 0);
     });      
@@ -689,7 +695,9 @@ function mostrarAgenda(tipoContenido, valor)
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-            "<strong>Por favor espere mientras se busca la información</strong>" +
+            "<strong>Por favor espere mientras se busca la información </strong>" +
+            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/aperture.svg' ?>" +
+            " alt='Por favor espere' class='icono imgre'>" +
         "</div>";
 		
   	$j("#mensajesUsuario30").html(mensajesUsuario);
@@ -755,15 +763,14 @@ function mostrarAgenda(tipoContenido, valor)
 			mensajesUsuario =
 				"<div class='alert alert-danger alert-dismissible'>" +
 					"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>" +
-                        "Estimado usuario el servidor tardó mucho en responder, " +
-                        "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
-                    "</strong>" +
-                    "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
-                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
-                        " alt='Refrescar' class='icono'>" +
-                    "</a>" + 
-                "</div>"; 
+					"<strong>" +
+						"Estimado usuario el servidor tardó mucho en responder, " +
+						"por favor pulse el botón 'Recargar página' " + 
+						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+						" alt='Recargar página' class='icono'>" +
+						" que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+					"</strong>" + 
+				"</div>"; 
 
 				$j("#mensajesUsuario30").html(mensajesUsuario);
 				window.scrollTo(0, 0);    
@@ -1041,13 +1048,16 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
                     {
                         mosaico = crearMosaicos(clave, datos);
                         agenda += mosaico;
+                        inhabilitarTecla(clave, datos);
                     }
                     else
                     {
                         if (datos.idEjecutor == gIdUsuario)
                         {
                             mosaico = crearMosaicos(clave, datos);
-                            agenda += mosaico;                        }
+                            agenda += mosaico; 
+                            inhabilitarTecla(clave, datos);                       
+                        }
                     }                             
 				}
             });		
@@ -1083,6 +1093,7 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 							notificaciones.push(datos2.id);
                             mosaico = crearMosaicos(clave2, datos2);
                             agenda += mosaico;
+                            inhabilitarTecla(clave2, datos2);
                         }
                     }
                 });
@@ -1147,10 +1158,10 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 						{
                             bienesNotificaciones.push(datos2.idPropiedad);
 							notificaciones.push(datos2.id);
-						}
-						
+						}						
                         mosaico = crearMosaicos(clave2, datos2);
                         agenda += mosaico;
+                        inhabilitarTecla(clave2, datos2);
 					}
 				});
 			}
@@ -1296,7 +1307,7 @@ function crearMosaicos(clave, datos)
 						
 						"<div class='row'>" +
 							"<div class='col-md-12'>" +
-								"<div class='mensajesUsuario' id='mensajesUsuario80-" + complementoId + "'>" +
+								"<div class='mensajesUsuario' id='mensajesAdicional80-" + complementoId + "'>" +
 								"</div>" +
 							"</div>" +
 						"</div>" + 	
@@ -1372,11 +1383,19 @@ function crearMosaicos(clave, datos)
                                 "<button class='guardarCambios80 btn btn-link' title='Guardar cambios' id='guardarCambios80-" + 
                                     complementoId + "'>" + 
                                     "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
-                                    "crmdapliw/app/public/images/pencil.svg alt='Guardar cambios' class='icono'>" +
+                                    "crmdapliw/app/public/images/pencil.svg alt='Guardar cambios' class='icono'" +
+                                    " id='imagenGuardarCambios80-" + complementoId + "'>" +
                                 "</button>" +
                             "</div>"+
 
                         "</div>" +
+
+						"<div class='row'>" +
+							"<div class='col-md-12'>" +
+								"<div class='mensajesUsuario' id='mensajesUsuario80-" + complementoId + "'>" +
+								"</div>" +
+							"</div>" +
+						"</div>" + 	
 
                     "</div>" +
                 "</div>" +
@@ -2458,7 +2477,7 @@ function personasBien(idBien)
         }
     }
 
-    if (indicadorCaptadorPropietario == 1 || gRoles.includes("Gestor de negocios") || gRoles.includes("A"))
+    if (indicadorCaptadorPropietario == 1 || gRoles.includes("Gestor de negocios") || gRoles.includes("Administrador"))
     {
         $j("#nombrePropietario100").val(gMatrizBienes[idBien].propietario);
         $j("#mensajesPropietario100").html("");
@@ -2489,14 +2508,18 @@ function compradoresPotenciales(idBien)
     var compradoresPotenciales =
             "<div class='col-md-12 mb-3'>";
 
+    var complementoId = "";
+
     if (gDatosBienes[idBien].CRMdapliw_cliente)
     {
         $j.each(gDatosBienes[idBien].CRMdapliw_cliente, function(clave, datos)  
         {
             if (datos.activo == "true")
             {
+                complementoId = datos.id + "-" + datos.idUser + "-" + idBien;
+
                 compradoresPotenciales += 
-                    "<div class='card' id='comprador100-" + datos.id + "-" + datos.idUser + "-" + idBien + "'>" +
+                    "<div class='card' id='comprador100-" + complementoId + "'>" +
                         "<div class='card-block'>" + 
                             "<h4 class='card-title'>" + datos.valor + "</h4>" +
                             "<div class='card bg-light text-dark'>" +
@@ -2507,10 +2530,11 @@ function compradoresPotenciales(idBien)
                             "<div class='card-footer'>" +
                                 "<p>" +                                                            
                                     "<button class='btn btn-light eliminarComprador100'" + 
-                                        "id='eliminarComprador100-" + datos.id + "-" + datos.idUser + "-" + idBien + "'" + 
+                                        "id='eliminarComprador100-" + complementoId + "'" + 
                                         " title='Eliminar comprador potencial'>" +
                                         "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-                                        "crmdapliw/app/public/images/trash.svg alt='Eliminar comprador' class='icono'>" +
+                                        "crmdapliw/app/public/images/trash.svg alt='Eliminar comprador' class='icono'" +
+                                        " id='imagenEliminarComprador100-" + complementoId + "'>" +
                                     "</button>" +
                                 "</p>" +
                             "</div>" +  
@@ -2518,7 +2542,7 @@ function compradoresPotenciales(idBien)
                     "</div>" +
                     "<div class='row'>" +
                         "<div class='col-md-12'>" +
-                            "<div class='mensajesUsuario' id='mensajesComprador100-" + datos.id + "-" + datos.idUser + "-" + idBien + "'>" +
+                            "<div class='mensajesUsuario' id='mensajesComprador100-" + complementoId + "'>" +
                             "</div>" +
                         "</div>" +
                     "</div>" + 
@@ -2534,6 +2558,7 @@ function compradoresPotenciales(idBien)
 
 function inicializarPersonas()
 {
+    borrarMensajesAnteriores();
     $j("#tipoIdentificacion110").val("");
     $j("#numeroIdentificacion110").val(0);
     $j("#primerNombre110").val("");
@@ -2561,7 +2586,9 @@ function guardarPersona(indicadorCheckbox)
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-            "<strong>Por favor espere mientras se guardan los datos</strong>" +
+            "<strong>Por favor espere mientras se guardan los datos </strong>" +
+            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/aperture.svg' ?>" +
+            " alt='Por favor espere' class='icono imgre'>" +
         "</div>";
 
     $j("#mensajesUsuario30").html(mensajesUsuario);
@@ -2662,6 +2689,8 @@ function guardarPersona(indicadorCheckbox)
     {
         if (response.satisfactorio) 
         {   
+            $j("#guardarPersona10").attr("disabled", false).html(gImagenAnterior);
+
             vectorGeneralActualizado = response.vectorGeneral;
             actualizarVectores(vectorGeneralActualizado);
 
@@ -2692,6 +2721,8 @@ function guardarPersona(indicadorCheckbox)
         } 
         else 
         {
+            $j("#guardarPersona10").attr("disabled", false).html(gImagenAnterior);
+
             vectorGeneralActualizado = response.vectorGeneral;
             actualizarVectores(vectorGeneralActualizado);
 
@@ -2708,18 +2739,19 @@ function guardarPersona(indicadorCheckbox)
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
     {
+        $j("#guardarPersona10").attr("disabled", false).html(gImagenAnterior);
+
 		borrarMensajesAnteriores();
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>" +
                     "Estimado usuario el servidor tardó mucho en responder, " +
-                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
-                "</strong>" +
-                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "por favor pulse el botón 'Recargar página' " + 
                     "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
-                    " alt='Refrescar' class='icono'>" +
-                "</a>" + 
+                    " alt='Recargar página' class='icono'>" +
+					" que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+                "</strong>" + 
             "</div>"; 
 
         $j("#mensajesUsuario30").html(mensajesUsuario);
@@ -2817,6 +2849,7 @@ function validarPersona(indicadorCheckbox)
     }
     else
     {
+        $j("#guardarPersona10").attr("disabled", false).html(gImagenAnterior);
         mensajeError = anterior + "Estimado usuario uno o más datos contienen errores, por favor verifique" + posterior;
         $j("#mensajesUsuario30").html(mensajeError);
         window.scrollTo(0, 0);           
@@ -2829,7 +2862,9 @@ function agregarComprador(idBien, idComprador, nombreComprador)
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-            "<strong>Por favor espere mientras se agrega el comprador</strong>" +
+            "<strong>Por favor espere mientras se agrega el comprador </strong>" +
+            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/aperture.svg' ?>" +
+            " alt='Por favor espere' class='icono imgre'>" +
         "</div>";
 
     $j("#mensajesCliente100").html(mensajesUsuario);
@@ -2904,17 +2939,16 @@ function agregarComprador(idBien, idComprador, nombreComprador)
         {
             borrarMensajesAnteriores();
             mensajesUsuario =
-                "<div class='alert alert-danger alert-dismissible'>" +
-                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>" +
-                        "Estimado usuario el servidor tardó mucho en responder, " +
-                        "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
-                    "</strong>" +
-                    "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
-                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
-                        " alt='Refrescar' class='icono'>" +
-                    "</a>" + 
-                "</div>"; 
+				"<div class='alert alert-danger alert-dismissible'>" +
+					"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+					"<strong>" +
+						"Estimado usuario el servidor tardó mucho en responder, " +
+						"por favor pulse el botón 'Recargar página' " + 
+						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+						" alt='Recargar página' class='icono'>" +
+						" que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+					"</strong>" + 
+				"</div>"; 
 
             $j("#mensajesUsuario30").html(mensajesUsuario);
 			window.scrollTo(0, 0);
@@ -2928,7 +2962,9 @@ function eliminarComprador(idCompradorPromotor)
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-            "<strong>Por favor espere mientras se elimina el comprador</strong>" +
+            "<strong>Por favor espere mientras se elimina el comprador </strong>" +
+            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/aperture.svg' ?>" +
+            " alt='Por favor espere' class='icono imgre'>" +
         "</div>";
 
     var arregloId = idCompradorPromotor.split("-");
@@ -2941,15 +2977,15 @@ function eliminarComprador(idCompradorPromotor)
     {
         "idPostmeta" : idPostmeta
     }
-
-    $j("#eliminarComprador100-" + idCompradorPromotor).attr("disabled", true);  
-
+	
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'eliminar_comprador')) ?>", 
         jsonPostmeta, null, "json")          
     .done(function(response) 
     {
         if (response.satisfactorio) 
         {
+            $j("#eliminarComprador100-" + idCompradorPromotor).attr("disabled", false).html(gImagenAnterior);  
+
             borrarMensajesAnteriores();
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
@@ -2967,6 +3003,8 @@ function eliminarComprador(idCompradorPromotor)
         } 
         else 
         {
+            $j("#eliminarComprador100-" + idCompradorPromotor).attr("disabled", false).html(gImagenAnterior); 
+
             borrarMensajesAnteriores();
             mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
@@ -2982,19 +3020,20 @@ function eliminarComprador(idCompradorPromotor)
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
     {
+        $j("#eliminarComprador100-" + idCompradorPromotor).attr("disabled", false).html(gImagenAnterior); 
+
         borrarMensajesAnteriores();
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>" +
                     "Estimado usuario el servidor tardó mucho en responder, " +
-                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
-                "</strong>" +
-                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "por favor pulse el botón 'Recargar página' " + 
                     "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
-                    " alt='Refrescar' class='icono'>" +
-                "</a>" + 
-            "</div>"; 
+                    " alt='Recargar página' class='icono'>" +
+					" que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+                "</strong>" + 
+            "</div>";
 
 	    $j(idMensaje).html(mensajesUsuario);
     });
@@ -3006,7 +3045,9 @@ function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreN
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-            "<strong>Por favor espere mientras se guardan los datos</strong>" +
+            "<strong>Por favor espere mientras se guardan los datos </strong>" +
+            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/aperture.svg' ?>" +
+            " alt='Por favor espere' class='icono imgre'>" +
         "</div>";
 
   	$j(idMensaje).html(mensajesUsuario);
@@ -3058,12 +3099,11 @@ function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreN
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>" +
                     "Estimado usuario el servidor tardó mucho en responder, " +
-                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
-                "</strong>" +
-                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "por favor pulse el botón 'Recargar página' " + 
                     "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
-                    " alt='Refrescar' class='icono'>" +
-                "</a>" + 
+                    " alt='Recargar página' class='icono'>" +
+					" que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+                "</strong>" + 
             "</div>"; 
 
     	$j(idMensaje).html(mensajesUsuario);
@@ -3076,7 +3116,9 @@ function guardarCambiosAgenda(idActividad)
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-            "<strong>Por favor espere mientras se guardan los datos</strong>" +
+            "<strong>Por favor espere mientras se guardan los datos </strong>" +
+            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/aperture.svg' ?>" +
+            " alt='Por favor espere' class='icono imgre'>" +
         "</div>";
     var arregloId = idActividad.split("-");
     var idMensaje = "#mensajesUsuario80-" + idActividad;
@@ -3161,15 +3203,15 @@ function guardarCambiosAgenda(idActividad)
     }
 
     $j(idMensaje).html(mensajesUsuario);
-
-    $j("#guardarCambios80-" + idActividad).attr("disabled", true);    
-
+ 
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'editar_actividad')) ?>", 
         jsonActividad, null, "json")          
     .done(function(response) 
     {
         if (response.satisfactorio) 
         {
+			$j("#guardarCambios80-" + idActividad).attr("disabled", false).html(gImagenAnterior);
+
 			borrarMensajesAnteriores();
             mensajesUsuario =
                 "<div class='alert alert-success alert-dismissible'>" +
@@ -3186,7 +3228,6 @@ function guardarCambiosAgenda(idActividad)
 			else
 			{
 				$j(idMensaje).html(mensajesUsuario);
-                $j("#guardarCambios80-" + idActividad).attr("disabled", false);  
 			}
 			
             if (gIndicadorAdicional == 1)
@@ -3200,7 +3241,7 @@ function guardarCambiosAgenda(idActividad)
         } 
         else 
         {
-            $j("#guardarCambios80-" + idActividad).attr("disabled", false); 
+			$j("#guardarCambios80-" + idActividad).attr("disabled", false).html(gImagenAnterior);
 
 			borrarMensajesAnteriores();
             mensajesUsuario =
@@ -3217,18 +3258,19 @@ function guardarCambiosAgenda(idActividad)
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
     {
+		$j("#guardarCambios80-" + idActividad).attr("disabled", false).html(gImagenAnterior);
+
 		borrarMensajesAnteriores();
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>" +
                     "Estimado usuario el servidor tardó mucho en responder, " +
-                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
-                "</strong>" +
-                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "por favor pulse el botón 'Recargar página' " + 
                     "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
-                    " alt='Refrescar' class='icono'>" +
-                "</a>" + 
+                    " alt='Recargar página' class='icono'>" +
+					" que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+                "</strong>" + 
             "</div>"; 
 
 	    $j(idMensaje).html(mensajesUsuario);
@@ -3256,6 +3298,7 @@ function validarActividad(tipoActividad, idActividad)
     {
         if ($j("#selectOpciones90").val() == "")  
         {   
+            $j("#guardarActividad10").attr("disabled", false).html(gImagenAnterior); 
             indicadorError = 1;
             mensajeError = anterior + "Seleccione una actividad" + posterior;
             $j("#mensajesActividad90").html(mensajeError);
@@ -3289,18 +3332,29 @@ function validarActividad(tipoActividad, idActividad)
 		    {
 			    guardarActividad();
 		    }
-        }		
+            else
+            {
+                $j("#guardarActividad10").attr("disabled", false).html(gImagenAnterior); 
+            }
+        }	
 	}	
 	else
 	{
         var arregloId = idActividad.split("-");       
         clave = arregloId[0];
+
+        if (gFuncionLlamadora == "verNotificaciones20" || gFuncionLlamadora == "busquedaAgenda10")
+        {
+            gIdPostActual = arregloId[2];
+        }
+
         datos = gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[clave]		
 
 	    if (datos.idEjecutor == gIdUsuario)
 	    {	
             if (actividadesRestringidas.includes(datos.nombreActividad))
             {
+				$j("#guardarCambios80-" + idActividad).attr("disabled", false).html(gImagenAnterior);
                 alert("Estimado usuario esta actividad no se puede modificar. Debe que esperar la confirmación de la solicitud");
             }
             else
@@ -3360,10 +3414,15 @@ function validarActividad(tipoActividad, idActividad)
                 {
                     guardarCambiosAgenda(idActividad);       
                 }
+				else
+				{
+					$j("#guardarCambios80-" + idActividad).attr("disabled", false).html(gImagenAnterior);
+				}
             }
 	    }
 	    else
 	    {
+			$j("#guardarCambios80-" + idActividad).attr("disabled", false).html(gImagenAnterior);
 		    alert("No puede realizar cambios en esta actividad porque pertenece a otro usuario");
 	    }
     }
@@ -3453,6 +3512,11 @@ function verificarAdicional(idActividad)
     var arregloId = idActividad.split("-");       
     clave = arregloId[1];
 
+    if (gFuncionLlamadora == "verNotificaciones20" || gFuncionLlamadora == "busquedaAgenda10")
+    {
+        gIdPostActual = arregloId[3];
+    }
+       
     datos = gDatosBienes[gIdPostActual].CRMdapliw_actividad_agenda[clave]		
 	if (datos.idEjecutor == gIdUsuario)
 	{
@@ -3467,7 +3531,7 @@ function verificarAdicional(idActividad)
                     "<strong>Estimado usuario por favor escriba los datos referentes a la confirmación de la cita</strong>" +
                 "</div>";
 
-            idMensaje = "#mensajesUsuario80-" + complementoId; 
+            idMensaje = "#mensajesAdicional80-" + complementoId; 
             $j(idMensaje).html(mensajesUsuario);
 
 		    $j("#adicionalTitulo80-" + complementoId).removeClass("noVer");
@@ -3484,10 +3548,6 @@ function verificarAdicional(idActividad)
 function inicializarFormularioActividad()
 {
 	borrarMensajesAnteriores();
-	if ($j("#guardarActividad10").attr("disabled"))
-	{
-		$j("#guardarActividad10").attr("disabled", false);
-	}
     if (gBotonCerrarLlamador == "#cerrarAgenda10")
     {
         $j("#tituloAgregarActividad90").html("Planificar actividades para " + gMatrizBienes[gIdPostActual].post_title); 
@@ -3537,6 +3597,14 @@ function inicializarFormularioActividad()
 				
     lineaFecha = inicializarFecha(idFechas);
     $j("#fechaPlanificada90").html(lineaFecha);
+
+    $j("#meridiano90").on("keydown", function(e) 
+    {
+        if (e.which == 9)
+        {
+            return false;
+        }
+    });  
 }
 
 function guardarActividad()
@@ -3545,10 +3613,10 @@ function guardarActividad()
     var mensajesUsuario = 
         "<div class='alert alert-info alert-dismissible'>" +
             "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-            "<strong>Por favor espere mientras se guardan los datos</strong>" +
+            "<strong>Por favor espere mientras se guardan los datos </strong>" +
+            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/aperture.svg' ?>" +
+            " alt='Por favor espere' class='icono imgre'>" +
         "</div>";
-
-    $j("#mensajesAgregarActividad90").html(mensajesUsuario);
 
     $j("#notas90").val($j.trim($j("#notas90").val().toUpperCase()));
 
@@ -3608,7 +3676,7 @@ function guardarActividad()
             }];        
     }
 
-    $j("#guardarActividad10").attr("disabled", true); 
+    $j("#mensajesAgregarActividad90").html(mensajesUsuario);
 
     $j.post("<?= mvc_public_url(array('controller' => 'postmetas', 'action' => 'agregar_actividad')) ?>", 
         jsonActividad, null, "json")          
@@ -3616,7 +3684,7 @@ function guardarActividad()
     {
         if (response.satisfactorio) 
         {
-            $j("#guardarActividad10").attr("disabled", false); 
+            $j("#guardarActividad10").attr("disabled", false).html(gImagenAnterior); 
 
             borrarMensajesAnteriores();
             gMensajePendientePorMostrar =
@@ -3657,7 +3725,7 @@ function guardarActividad()
         } 
         else 
         {
-            $j("#guardarActividad10").attr("disabled", false); 
+            $j("#guardarActividad10").attr("disabled", false).html(gImagenAnterior); 
 
             borrarMensajesAnteriores();
             mensajesUsuario =
@@ -3675,18 +3743,19 @@ function guardarActividad()
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
     {
+        $j("#guardarActividad10").attr("disabled", false).html(gImagenAnterior); 
+
         borrarMensajesAnteriores();
         mensajesUsuario =
             "<div class='alert alert-danger alert-dismissible'>" +
                 "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                 "<strong>" +
                     "Estimado usuario el servidor tardó mucho en responder, " +
-                    "pulse el siguiente botón y luego consulte si efectivamente se actualizaron los datos  " +
-                "</strong>" +
-                "<a href=<?= mvc_public_url(array('controller' => 'posts')) ?> class='btn btn-light' id='refrescar' title='Refrescar'>" +
+                    "por favor pulse el botón 'Recargar página' " + 
                     "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
-                    " alt='Refrescar' class='icono'>" +
-                "</a>" + 
+                    " alt='Recargar página' class='icono'>" +
+					" que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+                "</strong>" + 
             "</div>"; 
 
         $j("#mensajesUsuario30").html(mensajesUsuario);
@@ -3817,6 +3886,25 @@ function solicitudesDeCita()
             });
         }
     });    
+}
+
+function inhabilitarTecla(clave, datos)
+{
+    complementoId = clave + "-" + datos.id + "-" + datos.idPropiedad;   
+    $j("#meridiano80-" + complementoId).on("keydown", function(e) 
+    {
+        if (e.which == 9)
+        {
+            return false;
+        }
+    });  
+    $j("#adicionalMeridiano80-" + complementoId).on("keydown", function(e) 
+    {
+        if (e.which == 9)
+        {
+            return false;
+        }
+    });  
 }
 
 // Eventos
@@ -4005,7 +4093,7 @@ $j(document).ready(function()
     $j("#cerrarBusquedaAgenda10").click(function()
     {
         $j("#busquedaAgenda51").addClass('noVer');
-        $j("#busquedaActividades51").val("");
+        $j("#busquedaActividades51").val("Todas");
         $j("#cerrarBusquedaAgenda10").addClass('noVer');
         $j("#busquedaAgenda10").addClass('noVer');
         borrarMensajesAnteriores();
@@ -4072,7 +4160,6 @@ $j(document).ready(function()
             $j("#cerrarPersonasSinActividad10").removeClass('noVer');
 		}
 		else if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
-
 		{	
             $j("#cerrarPersonas10").removeClass('noVer');
 		}
@@ -4102,6 +4189,8 @@ $j(document).ready(function()
 
     $j("#guardarPersona10").click(function()
     {
+        gImagenAnterior = $j("#guardarPersona10").html();  
+        $j("#guardarPersona10").attr("disabled", true).html(gImagenEspere);
         indicadorCheckbox = 0;
         validarPersona(indicadorCheckbox);
     });
@@ -4120,6 +4209,8 @@ $j(document).ready(function()
 
     $j("#personas100").on("click", ".eliminarComprador100", function()
     {
+		gImagenAnterior = $j(this).html();
+		$j(this).attr("disabled", true).html(gImagenEspere);
         idCompradorPromotor = $j(this).attr("id").substring(21); 
         eliminarComprador(idCompradorPromotor);
     });
@@ -4250,6 +4341,7 @@ $j(document).ready(function()
 		borrarMensajesAnteriores();
         mosaico = crearMosaicos(clave, datos);
         $j("#agenda80").html(mosaico);
+        inhabilitarTecla(clave, datos);
         $j(gBotonCerrarLlamador).addClass('noVer');
         $j("#agregarActividad10").addClass('noVer');
         $j("#cerrarActividadIndividual10").removeClass("noVer");
@@ -4293,6 +4385,8 @@ $j(document).ready(function()
 
     $j("#agenda80").on("click", ".guardarCambios80", function()
     {
+		gImagenAnterior = $j(this).html();
+		$j(this).attr("disabled", true).html(gImagenEspere);
         var idActividad = $j(this).attr('id').substring(17);
   	    validarActividad("Existente", idActividad);
     });
@@ -4322,6 +4416,8 @@ $j(document).ready(function()
 
     $j('#guardarActividad10').click(function()
     {
+        gImagenAnterior = $j("#guardarActividad10").html();
+        $j("#guardarActividad10").attr("disabled", true).html(gImagenEspere);
         tipoActividad = "Nueva";
         validarActividad(tipoActividad, "");
     });
@@ -4371,5 +4467,16 @@ $j(document).ready(function()
             mostrarAgenda(filtro, gIdPersonaActual);
         }
     });
+
+    $j('#inicioCrm10').click(function()
+    {
+        $j("#inicioCrm10").attr("disabled", true).html(gImagenEspere);
+    });
+
+    $j('#recargarPagina10').click(function()
+    {
+        $j("#recargarPagina10").attr("disabled", true).html(gImagenEspere);
+    });
+	
 });
 </script>
