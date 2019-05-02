@@ -117,8 +117,10 @@
         <!-- div con sufijo 20 -->
         <div class="container" id="tituloCrm20">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-1">
 					<h1 class="letraAzul">CRM</h1>
+				</div>
+				<div class="col-md-1" id="fotoPerfil20">
 				</div>
 				<div class="col-md-3" id="grupoVista20">
 					<div class="input-group mb-3">
@@ -1199,14 +1201,20 @@ function mostrarImagenCabecera(tipoContenido, valor)
     {
         if (fotoPerfil == "")
         {
-            fotoPerfil = "<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
-                         "crmdapliw/app/public/images/person.svg";
+            imagenCabecera +=
+                "<div class='col-12 col-sm-6 col-md-12 mb-3'>" +
+                    "<img class='img-fluid img-thumbnail border border-info' style='width: 100px; opacity: 0.3;' alt='Foto del captador'" +
+                    " src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
+                    "crmdapliw/app/public/images/person.svg>" +
+                "</div>";
         }
-
-        imagenCabecera +=
-            "<div class='col-12 col-sm-6 col-md-12 mb-3'>" +
-                "<img class='img-fluid img-thumbnail' style='width: 150px' alt='Foto del captador' src=" + fotoPerfil + ">" +
-            "</div>"; 
+        else
+        {
+            imagenCabecera +=
+                "<div class='col-12 col-sm-6 col-md-12 mb-3'>" +
+                    "<img class='img-fluid img-thumbnail border border-info' style='width: 100px' alt='Foto del captador' src=" + fotoPerfil + ">" +
+                "</div>";
+        } 
     }
     else
     {
@@ -3912,13 +3920,34 @@ function inhabilitarTecla(clave, datos)
     });  
 }
 
+function mostrarFotoPerfil()
+{
+    var fotoPerfil = "";
+	if (gUsuarios[gIdUsuario].fotoPerfil)
+	{
+		fotoPerfil = 
+            "<img class='img-fluid img-thumbnail border border-info' style='width: 50px;' alt='Foto perfil' src=" + gUsuarios[gIdUsuario].fotoPerfil + ">"; 
+	}
+	else
+	{
+        fotoPerfil = 
+            "<img class='img-fluid img-thumbnail border border-info' style='width: 50px; opacity: 0.3;' alt='Foto perfil'" +
+            " src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
+            "crmdapliw/app/public/images/person.svg>"; 
+
+    }
+       
+    $j("#fotoPerfil20").html(fotoPerfil);
+}
+
 // Eventos
 $j(document).ready(function()
 {
     $j("#vistas20").val(gVistaPreferida);
 
     mostrarNotificaciones();
-
+    mostrarFotoPerfil()
+    
     $j("#vistas20").change(function()
     {
         gVistaPreferida = $j("#vistas20").val();
