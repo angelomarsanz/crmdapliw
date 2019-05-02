@@ -52,7 +52,7 @@ class PostsController extends MvcPublicController
             'conditions' => array(
                 // 'User.ID' => array(32),
                 'Usermeta.meta_key' => array("first_name", "last_name", "CRMdapliw_roles", "CRMdapliw_promotor_cliente", "CRMdapliw_captador_propietario", 
-                    "CRMdapliw_estatus", "CRMdapliw_vista_preferida")),
+                    "CRMdapliw_estatus", "CRMdapliw_vista_preferida", "profile_image_id")),
             'order' => 'User.ID ASC, Usermeta.meta_key ASC, Usermeta.umeta_id ASC')); 
 
         foreach ($userMetas as $userMeta)
@@ -73,6 +73,7 @@ class PostsController extends MvcPublicController
         $contadorUsuarios = 0;
         $idUsuarioActual = "";
         $usuarios = [];
+        $idFotoPerfil = 0;
         foreach ($userMetas as $userMeta)
         {
             if ($contadorUsuarios == 0)
@@ -82,12 +83,22 @@ class PostsController extends MvcPublicController
             }
             if ($idUsuarioActual != $userMeta->ID)
             {
+                if ($idFotoPerfil > 0)
+                {
+                    $postPerfil = $this->Post->find_by_id($idFotoPerfil);
+				    $usuarios[$idUsuarioActual]["fotoPerfil"] = $postPerfil->guid;
+                    $idFotoPerfil = 0;
+                }
                 $idUsuarioActual = $userMeta->ID;
                 $usuarios[$idUsuarioActual]["email"] = $userMeta->user_email;
             }
             if ($userMeta->meta_key == "CRMdapliw_roles")
             {
                 $usuarios[$idUsuarioActual][$userMeta->meta_key] = json_decode($userMeta->meta_value);
+            }
+            elseif ($userMeta->meta_key == "profile_image_id")
+            {
+                $idFotoPerfil = $userMeta->meta_value;
             }
             else
             {
@@ -303,11 +314,14 @@ class PostsController extends MvcPublicController
                 $arregloActividad["fechaInvertida"] = 
                     $arregloActividad["anoPlanificado"] . $arregloActividad["mesPlanificado"] . $arregloActividad["diaPlanificado"];
 
-                if ($arregloActividad["notificacion"] == "No vista")
+                if ($arregloActividad["estatus"] == "Abierta")
                 {
-                    if ($arregloActividad["idEjecutor"] == $idUsuario)
+                    if ($arregloActividad["notificacion"] == "No vista")
                     {
-                        $notificaciones++;
+                        if ($arregloActividad["idEjecutor"] == $idUsuario)
+                        {
+                            $notificaciones++;
+                        }
                     }
                 }
                 
@@ -433,7 +447,6 @@ class PostsController extends MvcPublicController
                 "personasAsc" => $personasAsc,
                 "userMetas" => $userMetas,
                 "usuarios" => $usuarios,           
-                "posts" => $posts,
                 "bienes" => $bienes,
                 "propiedadesBienes" => $propiedadesBienes,
                 "matrizBienes" => $matrizBienes,
@@ -542,7 +555,7 @@ class PostsController extends MvcPublicController
         foreach($actividadesAgenda as $actividad)
         {
             $opcion = ["opcion" => $actividad->columna_extra1, "rol" => $actividad->columna_extra2, "estatus" => "Activa"];  
-            $postmeta = ['post_id' => "5870", 'meta_key' => 'CRMdapliw_opcion_actividades', 'meta_value' => json_encode($opcion)]; 
+            $postmeta = ['post_id' => "6080", 'meta_key' => 'CRMdapliw_opcion_actividades', 'meta_value' => json_encode($opcion)]; 
             $idPostmeta = $this->Postmeta->insert($postmeta);  
         }
     }

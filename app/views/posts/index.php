@@ -153,15 +153,15 @@
         <div class="container formulario" id="principal40">
 			<div class="row">
 				<div class="col-4 col-md-4 text-center">
-					<button title="Propiedades" class="btn btn-link" id="propiedades40">
-						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/tmbr-soloicon.svg" ?>
-							alt="Propiedades" class="img-fluid iconoPrincipal">
-					</button>
-				</div>
-				<div class="col-4 col-md-4 text-center">
 					<button title="Agenda" class="btn btn-link" id="agenda40">
 						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/calendar.svg" ?>
 							alt="Agenda" class="img-fluid mx-auto iconoPrincipal">
+					</button>
+				</div>
+				<div class="col-4 col-md-4 text-center">
+					<button title="Propiedades" class="btn btn-link" id="propiedades40">
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/tmbr-soloicon.svg" ?>
+							alt="Propiedades" class="img-fluid iconoPrincipal">
 					</button>
 				</div>
 				<div class="col-4 col-md-4 text-center">
@@ -825,8 +825,11 @@ function mostrarAgendaLista(tipoContenido, valor)
 			"<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + gMatrizBienes[valor].post_title + "</h2>" +
 			"<h3 class='letraAzul'>Captador responsable: " + gMatrizBienes[valor].nombre_autor + "</h3>" +
 			"<br />" +
-			"<br />" +
-			encabezadoTabla;
+			"<br />";
+
+        imagenCabecera = mostrarImagenCabecera(tipoContenido, valor);
+
+        agenda += imagenCabecera + encabezadoTabla;
 			
 		contador = 1;
 			
@@ -920,8 +923,12 @@ function mostrarAgendaLista(tipoContenido, valor)
 			var agenda =
 				"<h2 class='letraAzul' id='tituloAgenda80'>Actividades planificadas para " + nombrePersona + "</h2>" +
 				"<br />" +
-				"<br />" +
-				encabezadoTabla;
+				"<br />";
+
+            imagenCabecera = mostrarImagenCabecera(tipoContenido, valor);
+
+            agenda += imagenCabecera + encabezadoTabla;
+
 		}
 		else if (tipoContenido.substring(0, 11) == "Actividades")
 		{
@@ -1025,12 +1032,9 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
             "<div class='row'>" +
 				"<div class='col-12 col-sm-6 col-md-8 mb-3'>";
 
-        if (valor != "")
-        {
-            imagenCabecera = mostrarImagenCabecera(valor);
+        imagenCabecera = mostrarImagenCabecera(tipoContenido, valor);
 
-            agenda += imagenCabecera;
-        }
+        agenda += imagenCabecera;
 
         if (gDatosBienes[valor].CRMdapliw_actividad_agenda)
         {
@@ -1071,13 +1075,6 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
             "<br />" +
             "<div class='row'>" +
 				"<div class='col-12 col-sm-6 col-md-8 mb-3'>";
-
-        if (valor > 0)
-        {
-            imagenCabecera = mostrarImagenCabecera(valor);
-
-            agenda += imagenCabecera;
-        }
 
 		$j.each(gBienes, function(clave1, datos1) 
 		{				
@@ -1128,6 +1125,11 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 				"<br />" +
                 "<div class='row'>" +
 				    "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
+
+            imagenCabecera = mostrarImagenCabecera(tipoContenido, valor);
+
+            agenda += imagenCabecera;
+
 		}
 		else if (tipoContenido.substring(0, 11) == "Actividades")
 		{
@@ -1137,13 +1139,6 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 				"<br />" +
                 "<div class='row'>" +
 				    "<div class='col-12 col-sm-6 col-md-8 mb-3'>";
-        }
-
-        if (valor != "")
-        {
-            imagenCabecera = mostrarImagenCabecera(valor);
-
-            agenda += imagenCabecera;
         }
 
 		$j.each(gBienes, function(clave1, datos1) 
@@ -1180,52 +1175,57 @@ function mostrarAgendaMosaicos(tipoContenido, valor)
 	return resultado;
 }
 
-function mostrarImagenCabecera(valor)
+function mostrarImagenCabecera(tipoContenido, valor)
 {
     imagenCabecera = "";
-	if (gVistaPreferida == "Mosaicos con imágenes")
-	{
-        if (gDatosBienes[valor]._thumbnail_id)
+    fotoPerfil = "";
+
+    if (tipoContenido == "Propiedad")
+    {
+        if (gUsuarios[gMatrizBienes[valor].post_author].fotoPerfil)
         {
-            imagenCabecera +=
-                "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
-                    "<div class='card'>" +
-                        "<img src=" + gDatosBienes[valor]._thumbnail_id[0].valor + " class='card-img-top img-fluid' alt='Foto de la propiedad'>" +
-                    "</div>" +
-                "</div>";
+            fotoPerfil = gUsuarios[gMatrizBienes[valor].post_author].fotoPerfil;
         }
-        else
+    }
+    else if (tipoContenido == "Persona")
+    {
+        if (gUsuarios[gIdPersonaActual].fotoPerfil)
         {
-            imagenCabecera +=
-                "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
-                    "<div class='card'>" +
-                        "Foto de la propiedad" +
-                    "</div>" +
-                "</div>";
+            fotoPerfil = gUsuarios[gIdPersonaActual].fotoPerfil;
         }
+    }
+
+    if (gVistaPreferida == "Lista con imágenes" || gVistaPreferida == "Mosaicos con imágenes")
+    {
+        if (fotoPerfil == "")
+        {
+            fotoPerfil = "<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
+                         "crmdapliw/app/public/images/person.svg";
+        }
+
+        imagenCabecera +=
+            "<div class='col-12 col-sm-6 col-md-12 mb-3'>" +
+                "<img class='img-fluid img-thumbnail' style='width: 150px' alt='Foto del captador' src=" + fotoPerfil + ">" +
+            "</div>"; 
     }
     else
     {
-        if (gDatosBienes[valor]._thumbnail_id)
+        if (fotoPerfil == "")
         {
             imagenCabecera +=
-                "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
-                    "<div class='card'>" +
-						"<a href=" + gDatosBienes[valor]._thumbnail_id[0].valor + " title='Ver foto' target='_blank' class='text-center'>" +
-						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera-slr.svg' ?>" +
-						" alt='Ver foto' class='icono'>" +
-						"</a>" + 
-                    "</div>" +
+                "<div class='col-12 col-sm-6 col-md-12 mb-3'>" +
+                    "Sin foto" +
                 "</div>";
         }
         else
         {
             imagenCabecera +=
-                "<div class='col-12 col-sm-6 col-md-4 mb-3'>" +
-                    "<div class='card'>" +
-                        "Sin foto" +
-                    "</div>" +
-                "</div>";
+                "<div class='col-12 col-sm-6 col-md-12 mb-3'>" +
+    			    "<a href=" + fotoPerfil + " title='Ver foto' target='_blank' class='text-center'>" +
+				        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera-slr.svg' ?>" +
+					        " alt='Ver foto' class='icono'>" +
+			        "</a>" + 
+                "</div>"; 
         }
     }
     return imagenCabecera;
@@ -3343,7 +3343,8 @@ function validarActividad(tipoActividad, idActividad)
         var arregloId = idActividad.split("-");       
         clave = arregloId[0];
 
-        if (gFuncionLlamadora == "verNotificaciones20" || gFuncionLlamadora == "busquedaAgenda10")
+        if (gFuncionLlamadora == "verNotificaciones20" || gFuncionLlamadora == "busquedaAgenda10" 
+            || gFuncionLlamadora == "solicitudesDeCita51" || gFuncionLlamadora == "personaAgenda51")
         {
             gIdPostActual = arregloId[2];
         }
@@ -3512,7 +3513,8 @@ function verificarAdicional(idActividad)
     var arregloId = idActividad.split("-");       
     clave = arregloId[1];
 
-    if (gFuncionLlamadora == "verNotificaciones20" || gFuncionLlamadora == "busquedaAgenda10")
+    if (gFuncionLlamadora == "verNotificaciones20" || gFuncionLlamadora == "busquedaAgenda10" 
+        || gFuncionLlamadora == "solicitudesDeCita51" || gFuncionLlamadora == "personaAgenda51")
     {
         gIdPostActual = arregloId[3];
     }
@@ -3548,7 +3550,9 @@ function verificarAdicional(idActividad)
 function inicializarFormularioActividad()
 {
 	borrarMensajesAnteriores();
-    if (gBotonCerrarLlamador == "#cerrarAgenda10")
+
+    if (gFuncionLlamadora == "bienesSinActividad51" || gFuncionLlamadora == "busquedaPropiedades10" 
+        || gFuncionLlamadora == "busquedaNombre50")
     {
         $j("#tituloAgregarActividad90").html("Planificar actividades para " + gMatrizBienes[gIdPostActual].post_title); 
     }
@@ -3557,6 +3561,7 @@ function inicializarFormularioActividad()
         $j("#tituloAgregarActividad90").html("Planificar actividades");
         $j("#grupoBusqueda90").removeClass("noVer"); 
     }
+
     $j('#busquedaPropiedad90').val("");
     $j('#actividadAgenda90').val("");
     $j('#notas90').val("");
@@ -3715,12 +3720,12 @@ function guardarActividad()
             else if (gFuncionLlamadora == "solicitudesDeCita51")
             {
                 solicitudesDeCita();
-                mostrarAgenda("Citas", 0);
+                mostrarAgenda("Citas", "");
             } 
-			else if (gFuncionLlamadora == "PersonaAgenda51")
+			else if (gFuncionLlamadora == "personaAgenda51")
 			{
 				filtro = filtrarAgenda(gIdPersonaActual);  
-				mostrarAgenda(filtro, gIdPersonaActual);
+				mostrarAgenda(filtro, "");
 			} 
         } 
         else 
@@ -3861,10 +3866,10 @@ function actualizarVectores(vectorGeneralActualizado)
             $j("#busquedaAgenda51").addClass('noVer');
             $j("#cerrarBusquedaAgenda10").addClass('noVer');
             $j("#busquedaAgenda10").addClass('noVer');
-            gFuncionLlamadora = "PersonaAgenda51";
+            gFuncionLlamadora = "personaAgenda51";
             gBotonCerrarLlamador = "#cerrarAgendaFiltrada10";
             filtro = filtrarAgenda(gIdPersonaActual);  
-            mostrarAgenda(filtro, gIdPersonaActual);
+            mostrarAgenda(filtro, "");
         }
     });
 }
@@ -4128,9 +4133,9 @@ $j(document).ready(function()
         $j("#busquedaAgenda51").addClass('noVer');
         $j("#cerrarBusquedaAgenda10").addClass('noVer');
         $j("#busquedaAgenda10").addClass('noVer');
-        filtro = filtrarAgenda();
         gFuncionLlamadora = "busquedaAgenda10";
         gBotonCerrarLlamador = "#cerrarAgendaFiltrada10";
+        filtro = filtrarAgenda();
         mostrarAgenda(filtro, "");
     });
 
@@ -4368,12 +4373,12 @@ $j(document).ready(function()
         else if (gFuncionLlamadora == "solicitudesDeCita51")
         {
             solicitudesDeCita();
-            mostrarAgenda("Citas", 0);
+            mostrarAgenda("Citas", "");
         } 
-        else if (gFuncionLlamadora == "PersonaAgenda51")
+        else if (gFuncionLlamadora == "personaAgenda51")
         {
             filtro = filtrarAgenda(gIdPersonaActual);  
-            mostrarAgenda(filtro, gIdPersonaActual);
+            mostrarAgenda(filtro, "");
         } 
     });
 
@@ -4448,7 +4453,7 @@ $j(document).ready(function()
         gFuncionLlamadora = "solicitudesDeCita51"  
         gBotonCerrarLlamador = "#cerrarAgendaFiltrada10";
         solicitudesDeCita();
-        mostrarAgenda("Citas", 0);
+        mostrarAgenda("Citas", "");
     });
 
     $j("#personaAgenda51").autocomplete(
@@ -4460,11 +4465,10 @@ $j(document).ready(function()
             $j("#busquedaAgenda51").addClass('noVer');
             $j("#cerrarBusquedaAgenda10").addClass('noVer');
             $j("#busquedaAgenda10").addClass('noVer');
-            gFuncionLlamadora = "PersonaAgenda51";
+            gFuncionLlamadora = "personaAgenda51";
             gBotonCerrarLlamador = "#cerrarAgendaFiltrada10";
             filtro = filtrarAgenda(gIdPersonaActual);  
-			console.log("filtro " + filtro);
-            mostrarAgenda(filtro, gIdPersonaActual);
+            mostrarAgenda(filtro, "");
         }
     });
 
