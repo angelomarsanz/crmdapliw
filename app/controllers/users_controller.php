@@ -35,6 +35,7 @@ class UsersController extends MvcPublicController
         $this->autoRender = false;
 
         $jsondata = [];
+        $indicadorYaRegistrado = 0;
         $rolesAutorizados = 
             [
                 "Promotor",
@@ -74,41 +75,38 @@ class UsersController extends MvcPublicController
 
             if (isset($_POST['idPost']))
             {
-                $usuarioRegistrado = $this->Usermeta->find_one(array(
+                $usuarioIdentificacion = $this->Usermeta->find_one(array(
                     'conditions' => array(
                     'meta_key' => array('CRMdapliw_identificacion'),
                     'meta_value' => array($_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"]))));
 
-                if (isset($usuarioRegistrado))
+                if (isset($usuarioIdentificacion))
                 {
+                    $indicadorYaRegistrado = 1;
                     $jsondata["satisfactorio"] = false;
-                    $jsondata["mensaje"] = "Ya existe un comprador registrado con la identificacion: " . $_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"];
+                    $jsondata["mensaje"] = "Datos invalidos, por favor verifique";
+                    $jsondata["identificacionDuplicada"] = "Ya existe un usuario registrado con la misma identificacion";
                 }
-                else
+
+                $usuarioEmail = $this->User->find_one(array(
+                    'conditions' => array(
+                    'user_email' => array($_POST["persona"]["email"]))));
+
+                if (isset($usuarioEmail))
                 {
-                    $primerNombre = $_POST['persona']['primerNombre'];
-                    $segundoNombre = $_POST['persona']['segundoNombre'];
+                    $indicadorYaRegistrado = 1;
+                    $jsondata["satisfactorio"] = false;
+                    $jsondata["mensaje"] = "Datos invalidos, por favor verifique";
+                    $jsondata["emailDuplicado"] = "Ya existe un usuario registrado con el mismo email";
+                }
 
-                    $primerApellido = $_POST['persona']['primerApellido'];
-                    $segundoApellido = $_POST['persona']['segundoApellido'];
+                if ($indicadorYaRegistrado == 0)
+                {
+					$arrayNombre = explode(" ", $_POST['persona']['primerNombre']);
+                    $primerNombre = $arrayNombre[0];
 
-                    if ($segundoNombre != "")
-                    {
-                        $nombres = $primerNombre . " " . $segundoNombre;
-                    }
-                    else
-                    {
-                        $nombres = $primerNombre;
-                    }
-
-                    if ($segundoApellido != "")
-                    {
-                        $apellidos = $primerApellido . " " . $segundoApellido;
-                    }
-                    else
-                    {
-                        $apellidos = $primerApellido;
-                    }
+					$arrayApellido = explode(" ", $_POST['persona']['primerApellido']);
+                    $primerApellido = $arrayApellido[0];
 
                     $primerNombreSaneado = $this->sanear_string($primerNombre);
 
@@ -145,7 +143,7 @@ class UsersController extends MvcPublicController
                             "user_registered" => $fechaHoraFormato,
                             "user_activation_key" => "",
                             "user_status" => 0,
-                            "display_name" => $nombres . " " . $apellidos 
+                            "display_name" => $_POST['persona']['primerNombre'] . " " . $_POST['persona']['primerApellido']
                         ];
                                                        
                     $idUser = $this->User->insert($user);
@@ -158,8 +156,8 @@ class UsersController extends MvcPublicController
                                 "comment_shortcuts" => false,
                                 "description" => "",
                                 "dismissed_wp_pointers" => "",
-                                "first_name" => $nombres,
-                                "last_name" => $apellidos,
+                                "first_name" => $_POST['persona']['primerNombre'],
+                                "last_name" => $_POST['persona']['primerApellido'],
                                 "locale" => "",                 
                                 "nickname" => $nuevoUsuario,                    
                                 "rich_editing" => true,
@@ -172,6 +170,7 @@ class UsersController extends MvcPublicController
                                 "CRMdapliw_promotor_cliente" => $_POST["persona"]["idPromotor"],
                                 "CRMdapliw_identificacion" => $_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"],
                                 "CRMdapliw_celular" => $_POST["persona"]["celular"],
+                                "CRMdapliw_telefono_fijo" => $_POST["persona"]["telefonoFijo"],
                                 "CRMdapliw_direccion" => $_POST["persona"]["direccion"],
                                 "CRMdapliw_estatus" => "ACTIVO"
                             ];
@@ -317,6 +316,7 @@ class UsersController extends MvcPublicController
         );     
         return $string;
     }
+
     public function agregar_usermeta_masivo()
     {
         $this->load_model('Usermeta');
@@ -384,5 +384,145 @@ class UsersController extends MvcPublicController
             }
         }
         return $accesoPermitido;    
+    }
+    public function guardar_Cambios_Persona()
+    {
+        $this->autoRender = false;
+
+        $indicadorYaRegistrado = 0;
+        $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Captador",
+                "Gestor de negocios",
+                "Administrador"
+            ];
+
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
+
+        if ($accesoPermitido == "true")
+        {
+            $this->load_model("Binnacle");
+            $this->load_model("Usermeta");
+            $this->load_model("Postmeta");
+            
+            $indicadorError = 0;
+           
+            if (isset($_POST['idUser']))
+            {
+                $usuarioIdentificacion = $this->Usermeta->find_one(array(
+                    'conditions' => array(
+                    'meta_key' => array('CRMdapliw_identificacion'),
+                    'meta_value' => array($_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"]))));
+
+                if (isset($usuarioIdentificacion))
+                {
+                    if ($usuarioIdentificacion->user_id != $_POST['idUser'])
+                    {
+                        $indicadorYaRegistrado = 1;
+                        $jsondata["satisfactorio"] = false;
+                        $jsondata["mensaje"] = "Datos invalidos, por favor verifique";
+                        $jsondata["identificacionDuplicada"] = "Ya existe un usuario registrado con la misma identificacion";
+                    }
+                }
+
+                $usuarioEmail = $this->User->find_one(array(
+                    'conditions' => array(
+                    'user_email' => array($_POST["persona"]["email"]))));
+
+                if (isset($usuarioEmail))
+                {
+                    if ($usuarioEmail->__id != $_POST['idUser'])
+                    {                    
+                        $indicadorYaRegistrado = 1;
+                        $jsondata["satisfactorio"] = false;
+                        $jsondata["mensaje"] = "Datos invalidos, por favor verifique";
+                        $jsondata["emailDuplicado"] = "Ya existe un usuario registrado con el mismo email";
+                    }
+                }                
+
+                if ($indicadorYaRegistrado == 0)
+                {
+                    $registroUser = $this->User->find_by_id($_POST['idUser']);
+
+                    if ($registroUser->user_email != $_POST["persona"]["email"])
+                    {
+					    $this->User->update($registroUser->__id, array('user_email' => $_POST["persona"]["email"]));
+                    }
+
+                    $camposMeta = 
+                        [
+                            "first_name" => $_POST['persona']['primerNombre'],
+                            "last_name" => $_POST['persona']['primerApellido'],
+                            "CRMdapliw_roles" => json_encode($_POST["persona"]["roles"]),
+                            "CRMdapliw_identificacion" => $_POST["persona"]["tipoIdentificacion"] . '-' . $_POST["persona"]["numeroIdentificacion"],
+                            "CRMdapliw_celular" => $_POST["persona"]["celular"],
+                            "CRMdapliw_telefono_fijo" => $_POST["persona"]["telefonoFijo"],
+                            "CRMdapliw_direccion" => $_POST["persona"]["direccion"]
+                        ];
+                    
+                    foreach ($camposMeta as $clave => $valor)
+                    {
+                        $registroMeta = $this->Usermeta->find_one(array(
+                            'conditions' => array(
+                            'user_id' => array($_POST['idUser']),
+                            'meta_key' => array($clave))));
+
+                        if (isset($registroMeta))
+                        {
+                            if ($registroMeta->meta_value != $valor)
+                            {
+                                $this->Usermeta->update($registroMeta->__id, array('meta_value' => $valor));
+                            }
+                        }
+                        else
+                        {
+                            $usermeta = ["user_id" => $_POST['idUser'], "meta_key" => $clave, "meta_value" => $valor];
+                            $idUsermeta = $this->Usermeta->insert($usermeta);
+
+                            if ($idUsermeta == 0)
+                            {
+                                $binnacle = 
+                                    [
+                                        "novedad" => "No se pudo agregar la propiedad " . $clave . " al usuario " . $idUser,
+                                        "tipo_clase" => "controlador",
+                                        "nombre_clase" => "Users",
+                                        "nombre_metodo" => "guardar_cambios_persona"                             
+                                    ];
+
+                                    $idBinnacle = $this->Binnacle->insert($binnacle);
+
+                                $indicadorError = 1;
+                                $jsondata["satisfactorio"] = false;
+                                $jsondata["mensaje"] = "No se pudo agregar la propiedad " . $clave . " al usuario " . $_POST['idUser'];
+                                break;
+                            }
+                        }
+                    }
+                    if ($indicadorError == 0)
+                    {
+                        $jsondata["satisfactorio"] = true;
+                        $jsondata["mensaje"] = "Los cambios se guardaron satisfactoriamente";
+                    }
+                }
+            }
+            else
+            {
+                $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "La Persona no se pudo agregar. No existe la variable idUser";
+            }
+            require_once("posts_controller.php");
+            $postsController = new PostsController();
+            $vectorGeneral = $postsController->cargar_vectores();
+            $jsondata["vectorGeneral"] = $vectorGeneral;
+        }
+        else
+        {
+            $jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = "Usuario no autorizado";
+            $vectorGeneral = "";        
+        }
+        exit(json_encode($jsondata)); 
     }
 }

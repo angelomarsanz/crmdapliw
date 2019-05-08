@@ -88,6 +88,75 @@ class UsermetasController extends MvcPublicController
 		exit(json_encode($jsondata));	
 	}
 
+	public function eliminar_persona()
+	{
+        $this->autoRender = false;
+
+        $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Gestor de negocios",
+                "Administrador"
+            ];
+
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
+
+        if ($accesoPermitido == "true")
+        {
+            $this->load_model("Binnacle");
+				
+		    /* Descomentar solo para pruebas
+			    $_POST["vistaPreferida"] = "Lista sin imágenes";
+			    $_POST["idUsuario"] = 41;
+		    */
+		
+		    if (isset($_POST["idPersonaEliminar"]))
+		    {
+			    $estatusPersona = $this->Usermeta->find_one(array(
+			    'conditions' => array(
+			    'user_id' => array($_POST['idPersonaEliminar']),
+			    'meta_key' => array('CRMdapliw_estatus'))));
+			
+			    if (isset($estatusPersona))
+			    {
+        		    $this->Usermeta->update($estatusPersona->umeta_id, array('meta_value' => "ELIMINADO"));    
+				    $jsondata["satisfactorio"] = true;
+				    $jsondata["mensaje"] = "El usuario se eliminó correctamente";	
+			    }
+			    else
+			    {
+                    $binnacle = 
+                        [
+                            "novedad" => "No se pudo eliminar el usuario. No existe el registro usermeta " . $_POST["idPersonaEliminar"],
+                            "tipo_clase" => "controlador",
+                            "nombre_clase" => "Usermetas",
+                            "nombre_metodo" => "eliminar_persona"                             
+                        ];
+
+                    $idBinnacle = $this->Binnacle->insert($binnacle);
+		            $jsondata["satisfactorio"] = false;
+                    $jsondata["mensaje"] = "No se pudo eliminar el usuario. No existe el registro usermeta";
+			    }
+		    }
+		    else
+		    {
+			    $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "No se pudo eliminar el usuario. Datos recibidos incorrectos";
+		    }
+		    require_once("posts_controller.php");
+		    $postsController = new PostsController();
+		    $vectorGeneral = $postsController->cargar_vectores();
+            $jsondata["vectorGeneral"] = $vectorGeneral;
+        }
+        else
+        {
+            $jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = "Usuario no autorizado";
+            $vectorGeneral = "";        
+        }
+		exit(json_encode($jsondata));	
+	}
+
     public function verificar_permisos($rolesAutorizados = null)
     {
         $this->autoRender = false;

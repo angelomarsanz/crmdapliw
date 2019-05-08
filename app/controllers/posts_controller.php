@@ -4,13 +4,7 @@ class PostsController extends MvcPublicController
 {
     public function test_function()
     {
-        require_once("postmetas_controller.php");
-
-        $postmeta = new PostmetasController();
-
-        $resultado = $postmeta->test_function();
-
-        echo "Resultado " . $resultado;
+        inspiry_new_user_notification( 18, 123 );
     }
 
     public function index() 
@@ -52,7 +46,8 @@ class PostsController extends MvcPublicController
             'conditions' => array(
                 // 'User.ID' => array(32),
                 'Usermeta.meta_key' => array("first_name", "last_name", "CRMdapliw_roles", "CRMdapliw_promotor_cliente", "CRMdapliw_captador_propietario", 
-                    "CRMdapliw_estatus", "CRMdapliw_vista_preferida", "profile_image_id")),
+                "CRMdapliw_estatus", "CRMdapliw_vista_preferida", "profile_image_id", "CRMdapliw_identificacion",
+                "CRMdapliw_celular", "CRMdapliw_telefono_fijo", "CRMdapliw_direccion", "CRMdapliw_preferencias")),
             'order' => 'User.ID ASC, Usermeta.meta_key ASC, Usermeta.umeta_id ASC')); 
 
         foreach ($userMetas as $userMeta)
@@ -100,6 +95,10 @@ class PostsController extends MvcPublicController
             {
                 $idFotoPerfil = $userMeta->meta_value;
             }
+            elseif ($userMeta->meta_key == "CRMdapliw_preferencias")
+            {
+				$usuarios[$idUsuarioActual][$userMeta->meta_key] = json_decode($userMeta->meta_value);
+			}
             else
             {
                 $usuarios[$idUsuarioActual][$userMeta->meta_key] = $userMeta->meta_value;

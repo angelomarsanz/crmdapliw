@@ -112,6 +112,43 @@
                 alt="Guardar persona" class="iconoMenu" id="imagenGuardarPersona10">
             </button>
 
+			<button title="Cerrar" class="btn btn-link noVer" id="cerrarBusquedaPersonas10">
+				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?>
+				alt="Cerrar búsqueda personas" class="iconoMenu">
+			</button>
+
+			<button title="Ejecutar búsqueda" class="btn btn-link noVer" id="busquedaPersonas10">
+				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/magnifying-glass.svg" ?>
+				alt="Ejecutar búsqueda personas" class="iconoMenu">
+			</button>
+
+            <button title="Cerrar" class="btn btn-link noVer" id="cerrarBusquedaPorPersona10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                alt="Cerrar personas filtradas" class="iconoMenu">
+            </button>
+
+            <button title="Guardar cambios" class="btn btn-link noVer" id="guardarCambiosPersona10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/pencil.svg" ?> 
+                alt="Guardar cambios" class="iconoMenu" id="imagenGuardarPersona10">
+            </button>
+
+            <button title="Preferencias" class="btn btn-link noVer" id="preferencias10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/preferencias.svg" ?> 
+                alt="Preferencias" class="iconoMenu">
+            </button>     
+
+            <button title="Asociar propiedad" class="btn btn-link noVer" id="asociarPropiedad10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/tmbr-soloicon.svg" ?> 
+                alt="Asociar propiedad" class="iconoMenu">
+            </button>     
+
+            <button title="Agregar persona" class="btn btn-link noVer" id="agregarMasPersonas10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
+                alt="Agregar persona" class="iconoMenu">
+            </button>     
+
+
+
         </div>
 
         <!-- div con sufijo 20 -->
@@ -266,6 +303,39 @@
 				</div>
             </div>
         </div>
+
+        <!-- div con sufijo 52 -->
+        <div class="container formulario noVer" id="busquedaPersonas52">
+   			<h2 class="letraAzul">Filtro Personas</h2>
+            <div class="row">
+                <div class="col-md-4">              
+                    <p>
+					    <div class="form-group" id="grupoBusquedaPorPersona52">
+						    <label for="busquedaPorPersona52">Persona</label>
+						    <input type="text" class="form-control" id="busquedaPorPersona52">
+					    </div>
+                    </p>
+                    <p>
+					    <div class="input-group mb-3">
+						    <div class="input-group-prepend">
+							    <label class="input-group-text" for="busquedaGrupos52">Grupos de personas</label>
+						    </div>
+						    <select class="custom-select" id="busquedaGrupos52">
+							    <option value="Administradores">Administradores</option>
+							    <option value="Asesores de inversión inmobiliaria">Asesores de inversión inmobiliaria</option>
+                                <option value="Captadores">Captadores</option>
+								<option value="Clientes">Clientes</option>
+							    <option value="Compradores">Compradores</option>
+							    <option value="Gestores de negocios">Gestores de negocios</option>
+							    <option value="Outsourcing">Outsourcing</option>
+							    <option value="Propietarios">Propietarios</option>
+							    <option selected value="Todos">Todos</option>
+						    </select>
+					    </div>
+                    </p>
+				</div>
+            </div>
+        </div>
 				 
         <!-- div con sufijo 60 -->
         <div class="container formulario noVer" id="bienes60">
@@ -407,32 +477,20 @@
 						<div id="mensajesIdentificacion110" class="mensajesUsuario"></div>    
 
 						<div class="form-group"> 
-							<label for="primerNombre110">Primer nombre*</label> 
+							<label for="primerNombre110">Nombre(s)*</label> 
 							<input type="text" class="form-control" id="primerNombre110"> 
 						</div>
 						<div id="mensajesPrimerNombre110" class="mensajesUsuario"></div>    
 
 						<div class="form-group"> 
-							<label for="segundoNombre110">Segundo nombre</label> 
-							<input type="text" class="form-control" id="segundoNombre110"> 
-						</div>
-						<div id="mensajesSegundoNombre110" class="mensajesUsuario"></div>    
-
-						<div class="form-group"> 
-							<label for="primerApellido110">Primer apellido*</label> 
+							<label for="primerApellido110">Apellido(s)*</label> 
 							<input type="text" class="form-control" id="primerApellido110"> 
 						</div>
 						<div id="mensajesPrimerApellido110" class="mensajesUsuario"></div>    
 
-						<div class="form-group"> 
-							<label for="segundoApellido110">Segundo apellido</label> 
-							<input type="text" class="form-control" id="segundoApellido110"> 
-						</div>
-						<div id="mensajesSegundoApellido110" class="mensajesUsuario"></div>    
-
 						<div id="rolesCheckbox110">
 
-							<p>Roles*</p>
+							<p style="color: black;">Roles*</p>
 
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" id="administrador110"> 
@@ -461,19 +519,27 @@
 
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" id="cliente110"> 
-								<label class='form-check-label' for="cliente110">&nbsp;&nbsp;Comprador potencial</label>
+								<label class='form-check-label' for="cliente110">&nbsp;&nbsp;Cliente</label>
 							</div>
+
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="outsourcing110"> 
+								<label class='form-check-label' for="outsourcing110">&nbsp;&nbsp;Outsourcing</label>
+							</div>
+
 							<div id="mensajesRoles110" class="mensajesUsuario"></div> 
 
 							<br />
 
 						</div>
-
-						<div class="form-group"> 
-							<label for="rol110">Rol*</label> 
-							<input type="text" class="form-control" id="rol110" value="Cliente" disabled> 
-						</div>
-						<div id="mensajesRol110" class="mensajesUsuario"></div> 
+                        
+                        <div id="grupoRol110">
+						    <div class="form-group"> 
+							    <label for="rol110">Rol*</label> 
+							    <input type="text" class="form-control" id="rol110" value="Cliente" disabled> 
+						    </div>
+						    <div id="mensajesRol110" class="mensajesUsuario"></div>
+                        </div> 
 
 						<div class="form-group"> 
 							<label for="celular110">Teléfono celular</label> 
@@ -500,10 +566,24 @@
 						<div id="mensajesDireccion110" class="mensajesUsuario"></div> 
 
 					</form>
+
+                    <button class="btn btn-link" title="Eliminar persona" id="eliminarPersona110"> 
+                        <img src=<?= mvc_public_url(array("controller" => "wp-content", "action" => "plugins")) .
+                        "crmdapliw/app/public/images/trash.svg" ?> alt='Eliminar persona' class='icono'" 
+                        id="imagenEliminarPersona110">
+                    </button>
+                    <div id="mensajesEliminarPersona110" class="mensajesUsuario"></div>
 				</div>
 
 			</div>
 		</div>
+
+		<!-- div con sufijo 111 -->
+		<div class="container formulario noVer" id="preferencias111">
+			<h2 class="letraAzul" id="tituloPreferencias111"></h2>
+			<br />
+			<div id="detallePreferencias111"></div>
+        </div>
         <br />
         <br />
         <br />
@@ -652,9 +732,12 @@ function actualizarVistaPreferida()
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                     "<strong>" + response.mensaje + "</strong>" +
                 "</div>"; 
-
-			vectorGeneralActualizado = response.vectorGeneral;
-			actualizarVectores(vectorGeneralActualizado);
+            
+            if (response.mensaje != "Usuario no autorizado")
+            {
+    			vectorGeneralActualizado = response.vectorGeneral;
+    			actualizarVectores(vectorGeneralActualizado);
+            }
 
             $j("#mensajesVistas20").html(mensajesUsuario);
 			window.scrollTo(0, 0);
@@ -752,8 +835,11 @@ function mostrarAgenda(tipoContenido, valor)
 					"<strong>" + response.mensaje + "</strong>" +
 				"</div>"; 
 
-				vectorGeneralActualizado = response.vectorGeneral;
-				actualizarVectores(vectorGeneralActualizado);
+                if (response.mensaje != "Usuario no autorizado")
+                {
+        			vectorGeneralActualizado = response.vectorGeneral;
+        			actualizarVectores(vectorGeneralActualizado);
+                }
 
 				$j("#mensajesUsuario30").html(mensajesUsuario);
 				window.scrollTo(0, 0);        
@@ -2603,19 +2689,11 @@ function guardarPersona(indicadorCheckbox)
     window.scrollTo(0, 0);
 
     $j("#primerNombre110").val($j.trim($j("#primerNombre110").val().toUpperCase()));
-    $j("#segundoNombre110").val($j.trim($j("#segundoNombre110").val().toUpperCase()));
     $j("#primerApellido110").val($j.trim($j("#primerApellido110").val().toUpperCase()));
-    $j("#segundoApellido110").val($j.trim($j("#segundoApellido110").val().toUpperCase()));
     $j("#celular110").val($j.trim($j("#celular110").val().toUpperCase()));
     $j("#telefonoFijo110").val($j.trim($j("#telefonoFijo110").val().toUpperCase()));
     $j("#email110").val($j.trim($j("#email110").val().toLowerCase()));
     $j("#direccion110").val($j.trim($j("#direccion110").val().toUpperCase())); 
-
-    primerNombre = $j("#primerNombre110").val(); 
-    segundoNombre = $j("#segundoNombre110").val();  
-
-    primerApellido = $j("#primerApellido110").val();
-    segundoApellido = $j("#segundoApellido110").val();  
 
     if (indicadorCheckbox == 0)
     {
@@ -2652,6 +2730,10 @@ function guardarPersona(indicadorCheckbox)
                 {
                     roles.push("Cliente");
                 }
+                if ($j(this).attr("id") == "outsourcing110")
+                {
+                    roles.push("Outsourcing");
+                }				
             }
         });
     } 
@@ -2678,10 +2760,8 @@ function guardarPersona(indicadorCheckbox)
             {
                 "tipoIdentificacion" : $j("#tipoIdentificacion110").val(),
                 "numeroIdentificacion" : $j("#numeroIdentificacion110").val(),
-                "primerNombre" : primerNombre,
-                "segundoNombre" : segundoNombre,
-                "primerApellido" : primerApellido,
-                "segundoApellido" : segundoApellido,
+                "primerNombre" : $j("#primerNombre110").val(),
+                "primerApellido" : $j("#primerApellido110").val(),
                 "roles" : roles,
                 "celular" : celular,
                 "telefonoFijo" : telefonoFijo,
@@ -2731,18 +2811,31 @@ function guardarPersona(indicadorCheckbox)
         {
             $j("#guardarPersona10").attr("disabled", false).html(gImagenAnterior);
 
-            vectorGeneralActualizado = response.vectorGeneral;
-            actualizarVectores(vectorGeneralActualizado);
+            if (response.mensaje != "Usuario no autorizado")
+            {
+    			vectorGeneralActualizado = response.vectorGeneral;
+    			actualizarVectores(vectorGeneralActualizado);
+            }
 
-            borrarMensajesAnteriores();                
-            mensajesUsuario =
+            borrarMensajesAnteriores();
+
+            var anterior =
                 "<div class='alert alert-danger alert-dismissible'>" +
                     "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                    "<strong>" + response.mensaje + "</strong>" +
-                "</div>"; 
+                    "<strong>";
 
-        	$j("#mensajesUsuario30").html(mensajesUsuario);
-			window.scrollTo(0, 0);
+            var posterior = "</strong></div>"; 
+                
+        	$j("#mensajesUsuario30").html(anterior + response.mensaje + posterior);
+
+            if (response.identificacionDuplicada)
+            {
+                $j("#mensajesIdentificacion110").html(anterior + response.identificacionDuplicada + posterior);
+            }
+            if (response.emailDuplicado)
+            {
+                $j("#mensajesEmail110").html(anterior + response.emailDuplicado + posterior);
+            }
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) 
@@ -2835,7 +2928,7 @@ function validarPersona(indicadorCheckbox)
 
     if (indicadorCheckbox == 1)
     {
-        $j("#rolesCheckbox110").each(function (index) 
+        $j("#rolesCheckbox110 input").each(function (index) 
         {
             if ($j(this).prop("checked") == true)
             {
@@ -2851,17 +2944,7 @@ function validarPersona(indicadorCheckbox)
         }
     }
 
-    if (indicadorError == 0)
-    {
-        guardarPersona(indicadorCheckbox);
-    }
-    else
-    {
-        $j("#guardarPersona10").attr("disabled", false).html(gImagenAnterior);
-        mensajeError = anterior + "Estimado usuario uno o más datos contienen errores, por favor verifique" + posterior;
-        $j("#mensajesUsuario30").html(mensajeError);
-        window.scrollTo(0, 0);           
-    }
+	return indicadorError;
 }
 
 function agregarComprador(idBien, idComprador, nombreComprador)
@@ -2930,8 +3013,12 @@ function agregarComprador(idBien, idComprador, nombreComprador)
             } 
             else 
             {
-    			vectorGeneralActualizado = response.vectorGeneral;
-    			actualizarVectores(vectorGeneralActualizado);
+                if (response.mensaje != "Usuario no autorizado")
+                {
+        			vectorGeneralActualizado = response.vectorGeneral;
+        			actualizarVectores(vectorGeneralActualizado);
+                }
+
                 borrarMensajesAnteriores();
                 mensajesUsuario =
                     "<div class='alert alert-danger alert-dismissible'>" +
@@ -3020,8 +3107,11 @@ function eliminarComprador(idCompradorPromotor)
                 "<strong>" + response.mensaje + "</strong>" +
             "</div>"; 
 
-            vectorGeneralActualizado = response.vectorGeneral;
-            actualizarVectores(vectorGeneralActualizado);
+            if (response.mensaje != "Usuario no autorizado")
+            {
+    			vectorGeneralActualizado = response.vectorGeneral;
+    			actualizarVectores(vectorGeneralActualizado);
+            }
 
         	$j(idMensaje).html(mensajesUsuario);
         }
@@ -3086,8 +3176,11 @@ function actualizarCaptador(idBien, idCaptadorAnterior, idNuevoCaptador, nombreN
         } 
         else 
         {
-			vectorGeneralActualizado = response.vectorGeneral;
-			actualizarVectores(vectorGeneralActualizado);
+            if (response.mensaje != "Usuario no autorizado")
+            {
+    			vectorGeneralActualizado = response.vectorGeneral;
+    			actualizarVectores(vectorGeneralActualizado);
+            }
 
             borrarMensajesAnteriores();
             mensajesUsuario =
@@ -3258,8 +3351,11 @@ function guardarCambiosAgenda(idActividad)
                 "<strong>" + response.mensaje + "</strong>" +
             "</div>"; 
 
-            vectorGeneralActualizado = response.vectorGeneral;
-            actualizarVectores(vectorGeneralActualizado);
+            if (response.mensaje != "Usuario no autorizado")
+            {
+    			vectorGeneralActualizado = response.vectorGeneral;
+    			actualizarVectores(vectorGeneralActualizado);
+            }
 
         	$j(idMensaje).html(mensajesUsuario);
         }
@@ -3747,8 +3843,11 @@ function guardarActividad()
                     "<strong>" + response.mensaje + "</strong>" +
                 "</div>"; 
 
-            vectorGeneralActualizado = response.vectorGeneral;
-            actualizarVectores(vectorGeneralActualizado);
+            if (response.mensaje != "Usuario no autorizado")
+            {
+    			vectorGeneralActualizado = response.vectorGeneral;
+    			actualizarVectores(vectorGeneralActualizado);
+            }
 
         	$j("#mensajesUsuario30").html(mensajesUsuario);
 			window.scrollTo(0, 0);
@@ -3880,6 +3979,29 @@ function actualizarVectores(vectorGeneralActualizado)
             mostrarAgenda(filtro, "");
         }
     });
+
+    $j("#busquedaPorPersona52").autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        {   
+            gIdPersonaActual = ui.item.id;    
+            $j("#busquedaPersonas52").addClass('noVer');
+            $j("#cerrarBusquedaPersonas10").addClass('noVer');
+            $j("#busquedaPersonas10").addClass('noVer');
+            $j("#cerrarBusquedaPorPersona10").removeClass('noVer');
+            $j("#guardarCambiosPersona10").removeClass('noVer');
+            $j("#preferencias10").removeClass('noVer');
+            $j("#asociarPropiedad10").removeClass('noVer');
+            $j("#agregarPersonas110").removeClass('noVer');
+            if ($j("#grupoRol110").hasClass('noVer') === false)
+            {
+                $j("#grupoRol110").addClass('noVer');
+            }
+            gFuncionLlamadora = "busquedaPorPersona52";
+            cargarDatosPersona();
+        }
+    });
 }
 
 function solicitudesDeCita()
@@ -3938,6 +4060,392 @@ function mostrarFotoPerfil()
     }
        
     $j("#fotoPerfil20").html(fotoPerfil);
+}
+
+function cargarDatosPersona()
+{
+	var tipoIdentificacion = "";
+	var numeroIdentificacion = "";
+	
+	if (gUsuarios[gIdPersonaActual].CRMdapliw_identificacion)
+    {
+        console.log(gUsuarios[gIdPersonaActual].CRMdapliw_identificacion);
+		var arregloIdentificacion = gUsuarios[gIdPersonaActual].CRMdapliw_identificacion.split("-");       
+		tipoIdentificacion = arregloIdentificacion[0];
+		numeroIdentificacion = arregloIdentificacion[1];
+	}
+
+    $j("#tipoIdentificacion110").val(tipoIdentificacion);
+    $j("#numeroIdentificacion110").val(numeroIdentificacion);
+    
+    $j("#primerNombre110").val(gUsuarios[gIdPersonaActual].first_name);
+    $j("#primerApellido110").val(gUsuarios[gIdPersonaActual].last_name);
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Administrador"))
+    {
+   		$j("#administrador110").attr('checked', true);
+		$j("#administrador110").prop('checked', true);
+    }
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Gestor de negocios"))
+    {
+   		$j("#gestorNegocios110").attr('checked', true);
+		$j("#gestorNegocios110").prop('checked', true);
+    }
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Captador"))
+    {
+   		$j("#captador110").attr('checked', true);
+		$j("#captador110").prop('checked', true);
+    }
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Promotor"))
+    {
+   		$j("#promotor110").attr('checked', true);
+		$j("#promotor110").prop('checked', true);
+    }
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Propietario"))
+    {
+   		$j("#propietario110").attr('checked', true);
+		$j("#propietario110").prop('checked', true);
+    }
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Cliente"))
+    {
+   		$j("#cliente110").attr('checked', true);
+		$j("#cliente110").prop('checked', true);
+    }
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Outsourcing"))
+    {
+   		$j("#outsourcing110").attr('checked', true);
+		$j("#outsourcing110").prop('checked', true);
+    }
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_celular)
+    {
+        $j("#celular110").val(gUsuarios[gIdPersonaActual].CRMdapliw_celular);
+    }
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_telefono_fijo)
+    {
+        $j("#telefonoFijo110").val(gUsuarios[gIdPersonaActual].CRMdapliw_telefono_fijo);
+    }
+    $j("#email110").val(gUsuarios[gIdPersonaActual].email);
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_direccion)
+    {
+        $j("#direccion110").val(gUsuarios[gIdPersonaActual].CRMdapliw_direccion);
+    }
+}
+   
+function eliminarPersona()
+{
+	borrarMensajesAnteriores();
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se elimina el usuario </strong>" +
+            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/aperture.svg' ?>" +
+            " alt='Por favor espere' class='icono imgre'>" +
+        "</div>";
+
+    $j("#mensajesEliminarPersona110").html(mensajesUsuario);
+
+    $j.post("<?= mvc_public_url(array('controller' => 'usermetas', 'action' => 'eliminar_persona')) ?>", 
+        { "idPersonaEliminar" : gIdPersonaActual }, null, "json")          
+    .done(function(response) 
+    {
+        if (response.satisfactorio) 
+        {   
+            $j("#eliminarPersona110").attr("disabled", false).html(gImagenAnterior);
+
+            vectorGeneralActualizado = response.vectorGeneral;
+            actualizarVectores(vectorGeneralActualizado);
+
+            borrarMensajesAnteriores();                
+            mensajesUsuario =
+                "<div class='alert alert-success alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" + response.mensaje + "</strong>" +
+                "</div>";
+
+            $j("#mensajesUsuario30").html(mensajesUsuario);
+
+            if (gFuncionLlamadora == "busquedaPorPersona52")
+            {
+                $j("#cerrarBusquedaPorPersona10").addClass('noVer');
+                $j("#guardarCambiosPersona10").addClass('noVer');
+                $j("#preferencias10").addClass('noVer');
+                $j("#asociarPropiedad10").addClass('noVer');
+                $j("#agregarPersonas110").addClass('noVer');
+                $j("#busquedaPorPersona52").val("");
+                $j("#busquedaPersonas52").removeClass('noVer');
+                $j("#cerrarBusquedaPersonas10").removeClass('noVer');
+                $j("#busquedaPersonas10").removeClass('noVer');
+            }
+            window.scrollTo(0, 0);           
+        } 
+        else 
+        {
+            $j("#eliminarPersona110").attr("disabled", false).html(gImagenAnterior);
+
+            if (response.mensaje != "Usuario no autorizado")
+            {
+                vectorGeneralActualizado = response.vectorGeneral;
+                actualizarVectores(vectorGeneralActualizado);
+            }
+
+            borrarMensajesAnteriores();                
+            mensajesUsuario =
+                "<div class='alert alert-danger alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" + response.mensaje + "</strong>" +
+                "</div>"; 
+
+        	$j("#mensajesEliminarPersona110").html(mensajesUsuario);
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) 
+    {
+        $j("#eliminarPersona110").attr("disabled", false).html(gImagenAnterior);
+
+		borrarMensajesAnteriores();
+        mensajesUsuario =
+            "<div class='alert alert-danger alert-dismissible'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                "<strong>" +
+                    "Estimado usuario el servidor tardó mucho en responder, " +
+                    "por favor pulse el botón 'Recargar página' " + 
+                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                    " alt='Recargar página' class='icono'>" +
+					" que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+                "</strong>" + 
+            "</div>"; 
+
+        $j("#mensajesEliminarPersona110").html(mensajesUsuario);
+    });  
+}
+
+function guardarCambiosPersona(indicadorCheckbox)
+{
+	borrarMensajesAnteriores();
+    var mensajesUsuario = 
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>Por favor espere mientras se guardan los datos </strong>" +
+            "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/aperture.svg' ?>" +
+            " alt='Por favor espere' class='icono imgre'>" +
+        "</div>";
+
+    $j("#mensajesUsuario30").html(mensajesUsuario);
+    window.scrollTo(0, 0);
+
+    $j("#primerNombre110").val($j.trim($j("#primerNombre110").val().toUpperCase()));
+    $j("#primerApellido110").val($j.trim($j("#primerApellido110").val().toUpperCase()));
+    $j("#celular110").val($j.trim($j("#celular110").val().toUpperCase()));
+    $j("#telefonoFijo110").val($j.trim($j("#telefonoFijo110").val().toUpperCase()));
+    $j("#email110").val($j.trim($j("#email110").val().toLowerCase()));
+    $j("#direccion110").val($j.trim($j("#direccion110").val().toUpperCase())); 
+
+    if (indicadorCheckbox == 0)
+    {
+        roles = ["Cliente"];
+    }
+    else
+    {
+        roles = [];
+        $j("#rolesCheckbox110 input").each(function (index) 
+        {
+            if ($j(this).prop("checked") == true)
+            {
+                if ($j(this).attr("id") == "administrador110")
+                {
+                    roles.push("Administrador");
+                }
+                if ($j(this).attr("id") == "gestorNegocios110")
+                {
+                    roles.push("Gestor de negocios");
+                }
+                if ($j(this).attr("id") == "captador110")
+                {
+                    roles.push("Captador");
+                }
+                if ($j(this).attr("id") == "promotor110")
+                {
+                    roles.push("Promotor");
+                }
+                if ($j(this).attr("id") == "propietario110")
+                {
+                    roles.push("Propietario");
+                }
+                if ($j(this).attr("id") == "cliente110")
+                {
+                    roles.push("Cliente");
+                }
+                if ($j(this).attr("id") == "outsourcing110")
+                {
+                    roles.push("Outsourcing");
+                }				
+            }
+        });
+    } 
+
+    celular = $j("#celular110").val(); 
+    telefonoFijo = $j("#telefonoFijo110").val();
+
+    email = $j("#email110").val();
+    direccion = $j("#direccion110").val();  
+    
+    jsonPersona = 
+        {"idUser" : gIdPersonaActual,
+        "persona" :  
+            {
+                "tipoIdentificacion" : $j("#tipoIdentificacion110").val(),
+                "numeroIdentificacion" : $j("#numeroIdentificacion110").val(),
+                "primerNombre" : $j("#primerNombre110").val(),
+                "primerApellido" : $j("#primerApellido110").val(),
+                "roles" : roles,
+                "celular" : celular,
+                "telefonoFijo" : telefonoFijo,
+                "email" : email,
+                "direccion" : direccion,
+            }
+        };
+
+    console.log(jsonPersona);
+
+    $j.post("<?= mvc_public_url(array('controller' => 'users', 'action' => 'guardar_Cambios_persona')) ?>", 
+        jsonPersona, null, "json")          
+    .done(function(response) 
+    {
+        if (response.satisfactorio) 
+        {   
+            $j("#guardarCambiosPersona10").attr("disabled", false).html(gImagenAnterior);
+
+            vectorGeneralActualizado = response.vectorGeneral;
+            actualizarVectores(vectorGeneralActualizado);
+
+            borrarMensajesAnteriores();                
+            mensajesUsuario =
+                "<div class='alert alert-success alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" + response.mensaje + "</strong>" +
+                "</div>";
+
+            $j("#mensajesUsuario30").html(mensajesUsuario);
+            window.scrollTo(0, 0);           
+        } 
+        else 
+        {
+            $j("#guardarCambiosPersona10").attr("disabled", false).html(gImagenAnterior);
+
+            if (response.mensaje != "Usuario no autorizado")
+            {
+    			vectorGeneralActualizado = response.vectorGeneral;
+    			actualizarVectores(vectorGeneralActualizado);
+            }
+
+            borrarMensajesAnteriores();
+
+            var anterior =
+                "<div class='alert alert-danger alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>";
+
+            var posterior = "</strong></div>"; 
+                
+        	$j("#mensajesUsuario30").html(anterior + response.mensaje + posterior);
+
+            if (response.identificacionDuplicada)
+            {
+                $j("#mensajesIdentificacion110").html(anterior + response.identificacionDuplicada + posterior);
+            }
+            if (response.emailDuplicado)
+            {
+                $j("#mensajesEmail110").html(anterior + response.emailDuplicado + posterior);
+            }
+			window.scrollTo(0, 0);
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) 
+    {
+        $j("#guardarPersona10").attr("disabled", false).html(gImagenAnterior);
+
+		borrarMensajesAnteriores();
+        mensajesUsuario =
+            "<div class='alert alert-danger alert-dismissible'>" +
+                "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                "<strong>" +
+                    "Estimado usuario el servidor tardó mucho en responder, " +
+                    "por favor pulse el botón 'Recargar página' " + 
+                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                    " alt='Recargar página' class='icono'>" +
+					" que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+                "</strong>" + 
+            "</div>"; 
+
+        $j("#mensajesUsuario30").html(mensajesUsuario);
+		window.scrollTo(0, 0);
+    });  
+}
+
+function mostrarPreferencias()
+{
+    tituloPreferencias = "Preferencias del cliente: " + gUsuarios[gIdPersonaActual].first_name + " " + gUsuarios[gIdPersonaActual].last_name;
+    $j("#tituloPreferencias111").html(tituloPreferencias);
+ 
+    var preferencias =
+            "<div class='col-md-12 mb-3'>";
+
+    var complementoId = "";
+
+    if (gUsuarios[gIdPersonaActual].CRMdapliw_preferencias)
+    {
+		contadorPreferencia = 0;
+        $j.each(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias, function(clave1, datos1)  
+        {
+            if (datos1.estatus == "Activa")
+            {
+				contadorPreferencia++;
+				
+                complementoId = clave1;
+
+                preferencias += 
+                    "<div class='card' id='preferencia111-" + complementoId + "'>" +
+                        "<div class='card-block'>" + 
+                            "<h4 class='card-title'> Preferencia " + contadorPreferencia + "</h4>" +
+                            "<div class='card bg-light text-dark'>" +
+                                "<div class='card-body'>" +
+								"<p>";
+		
+				$j.each(datos1, function(clave2, datos2)  
+				{						
+					preferencias += "<b>" + clave2 + ":</b> " + datos2 + " ";					
+				});
+		
+				preferencias += 
+									"</p>"+
+                                "</div>" +
+                            "</div>" +
+                            "<div class='card-footer'>" +
+                                "<p>" +                                                            
+                                    "<button class='btn btn-light eliminarPreferencia111'" + 
+                                        "id='eliminarPreferencia111-" + complementoId + "'" + 
+                                        " title='Eliminar preferencia'>" +
+                                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+                                        "crmdapliw/app/public/images/trash.svg alt='Eliminar preferencia' class='icono'" +
+                                        " id='imagenEliminarPreferencia111-" + complementoId + "'>" +
+                                    "</button>" +
+                                "</p>" +
+                            "</div>" +  
+                        "</div>" +
+                    "</div>" +
+                    "<div class='row'>" +
+                        "<div class='col-md-12'>" +
+                            "<div class='mensajesUsuario' id='mensajesPreferencia111-" + complementoId + "'>" +
+                            "</div>" +
+                        "</div>" +
+                    "</div>" + 
+                    "<br />";
+            }
+        });
+    }
+
+    preferencias += "</div>";
+
+    $j("#detallePreferencias111").html(compradoresPotenciales);
 }
 
 // Eventos
@@ -4215,7 +4723,14 @@ $j(document).ready(function()
         $j("#agregarPersona10").addClass('noVer');
         inicializarPersonas();
         $j("#agregarPersonas110").removeClass("noVer");
-        $j("#rolesCheckbox110").addClass('noVer');
+        if ($j("#rolesCheckbox110").hasClass('noVer') === false)
+        {
+            $j("#rolesCheckbox110").addClass('noVer');
+        }
+        if ($j("#eliminarPersona110").hasClass('noVer') === false)
+        {
+            $j("#eliminarPersona110").addClass('noVer');
+        }
         $j("#cerrarAgregarPersona10").removeClass('noVer');
         $j("#guardarPersona10").removeClass("noVer");
         window.scrollTo(0, 0);
@@ -4226,7 +4741,24 @@ $j(document).ready(function()
         gImagenAnterior = $j("#guardarPersona10").html();  
         $j("#guardarPersona10").attr("disabled", true).html(gImagenEspere);
         indicadorCheckbox = 0;
-        validarPersona(indicadorCheckbox);
+        indicadorError = validarPersona(indicadorCheckbox);
+		if (indicadorError == 0)
+		{
+			guardarPersona(indicadorCheckbox);
+		}
+		else
+		{
+			$j("#guardarPersona10").attr("disabled", false).html(gImagenAnterior);
+			
+			mensajesUsuario =
+				"<div class='alert alert-danger alert-dismissible'>" +
+					"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+					"<strong>Estimado usuario uno o más datos contienen errores, por favor verifique</strong>" +
+				"</div>"; 			
+			
+			$j("#mensajesUsuario30").html(mensajesUsuario);
+			window.scrollTo(0, 0);           
+		}
     });
 
     $j('#nombreCliente100').autocomplete(
@@ -4510,6 +5042,124 @@ $j(document).ready(function()
     {
         $j("#recargarPagina10").attr("disabled", true).html(gImagenEspere);
     });
+
+    $j("#personas40").click(function()
+    {
+        $j("#principal40").addClass('noVer');
+
+        if ($j("#grupoVista20").hasClass('noVer') === false)
+        {
+            $j("#grupoVista20").addClass('noVer');
+        }  
+
+        if ($j("#notificaciones20").hasClass('noVer') === false)
+        {
+            $j("#notificaciones20").addClass('noVer');
+        }   
+
+        $j("#busquedaPersonas52").removeClass('noVer');
+        $j("#cerrarBusquedaPersonas10").removeClass('noVer');
+        $j("#busquedaPersonas10").removeClass('noVer');
+        window.scrollTo(0, 0);
+    });
+
+    $j("#cerrarBusquedaPersonas10").click(function()
+    {
+        $j("#busquedaPersonas52").addClass('noVer');
+        $j("#busquedaPorPersona52").val("");
+        $j("#busquedaGrupos52").val("Todos");
+        $j("#cerrarBusquedaPersonas10").addClass('noVer');
+        $j("#busquedaPersonas10").addClass('noVer');
+        borrarMensajesAnteriores();
+        if ($j("#grupoVista20").hasClass('noVer'))
+        {
+            $j("#grupoVista20").removeClass('noVer');
+        }  
+        if (gNotificaciones > 0)
+        {
+            $j("#notificaciones20").removeClass('noVer');
+        }   
+        $j("#principal40").removeClass('noVer');
+        window.scrollTo(0, 0);
+    });
+
+    $j("#busquedaPorPersona52").autocomplete(
+    {
+        source: gPersonasAsc,
+        select: function( event, ui ) 
+        {   
+            gIdPersonaActual = ui.item.id;    
+            $j("#busquedaPersonas52").addClass('noVer');
+            $j("#cerrarBusquedaPersonas10").addClass('noVer');
+            $j("#busquedaPersonas10").addClass('noVer');
+            $j("#cerrarBusquedaPorPersona10").removeClass('noVer');
+            $j("#guardarCambiosPersona10").removeClass('noVer');
+            $j("#preferencias10").removeClass('noVer');
+            $j("#asociarPropiedad10").removeClass('noVer');
+            $j("#agregarPersonas110").removeClass('noVer');
+            if ($j("#grupoRol110").hasClass('noVer') === false)
+            {
+                $j("#grupoRol110").addClass('noVer');
+            }
+            gFuncionLlamadora = "busquedaPorPersona52";
+            cargarDatosPersona();
+        }
+    });
+
+    $j("#cerrarBusquedaPorPersona10").click(function()
+    {
+        $j("#cerrarBusquedaPorPersona10").addClass('noVer');
+        $j("#guardarCambiosPersona10").addClass('noVer');
+        $j("#preferencias10").addClass('noVer');
+        $j("#asociarPropiedad10").addClass('noVer');
+        $j("#agregarPersonas110").addClass('noVer');
+        $j("#busquedaPorPersona52").val("");
+        borrarMensajesAnteriores();
+        $j("#busquedaPersonas52").removeClass('noVer');
+        $j("#cerrarBusquedaPersonas10").removeClass('noVer');
+        $j("#busquedaPersonas10").removeClass('noVer');
+        window.scrollTo(0, 0);        
+    });
+
+    $j("#eliminarPersona110").click(function()
+    {
+        var r= confirm('¿Está seguro de que desea eliminar este usuario');
+        if (r == false)
+        {
+            return false;
+        }
+        gImagenAnterior = $j("#eliminarPersona110").html();  
+        $j("#eliminarPersona110").attr("disabled", true).html(gImagenEspere);
+        eliminarPersona()
+    });
 	
+    $j("#guardarCambiosPersona10").click(function()
+    {
+        gImagenAnterior = $j("#guardarCambiosPersona10").html();  
+        $j("#guardarCambiosPersona10").attr("disabled", true).html(gImagenEspere);
+        indicadorCheckbox = 1;
+        indicadorError = validarPersona(indicadorCheckbox);
+		if (indicadorError == 0)
+		{
+			guardarCambiosPersona(indicadorCheckbox);
+		}
+		else
+		{
+			$j("#guardarCambiosPersona10").attr("disabled", false).html(gImagenAnterior);
+			mensajesUsuario =
+				"<div class='alert alert-danger alert-dismissible'>" +
+					"<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+					"<strong>Estimado usuario uno o más datos contienen errores, por favor verifique</strong>" +
+				"</div>"; 			
+			
+			$j("#mensajesUsuario30").html(mensajesUsuario);
+			window.scrollTo(0, 0);           
+		}
+    });
+    $j("#preferencia10").click(function()
+    {
+		mostrarPreferencias();
+	});
+
 });
 </script>

@@ -1,4 +1,1 @@
-controllers/usermetas_controller.php - ok
-public/css/misestilos.css - ok
-views/posts/index.php
-views/usermetas/actualizar_vista_preferida - ok
+Pendientes por subir a partir del commit del 08/05/2019
