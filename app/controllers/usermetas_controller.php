@@ -190,4 +190,221 @@ class UsermetasController extends MvcPublicController
         }
         return $accesoPermitido;    
     }
+
+	public function guardar_preferencia()
+	{
+        $this->autoRender = false;
+
+        $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Gestor de negocios",
+                "Administrador"
+            ];
+
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
+
+        if ($accesoPermitido == "true")
+        {
+            $this->load_model("Binnacle");
+					
+		    if (isset($_POST["idUsuario"]))
+		    {
+			    $preferenciasCliente = $this->Usermeta->find_one(array(
+			    'conditions' => array(
+			    'user_id' => array($_POST['idUsuario']),
+			    'meta_key' => array('CRMdapliw_preferencias'))));
+			
+			    if (isset($preferenciasCliente))
+			    {
+                    $vectorPreferencias = json_decode($preferenciasCliente->meta_value, true);
+                    $vectorPreferencias[] = $_POST["preferencia"];
+
+        		    $this->Usermeta->update($preferenciasCliente->umeta_id, array('meta_value' => json_encode($vectorPreferencias)));    
+				    $jsondata["satisfactorio"] = true;
+				    $jsondata["mensaje"] = "La preferencia del cliente se registró exitosamente";	
+			    }
+			    else
+			    {
+                    $vectorPreferencias = [];
+                    $vectorPreferencias[] = $_POST["preferencia"];
+				    $usermeta = ['user_id' => $_POST['idUsuario'], 'meta_key' => 'CRMdapliw_preferencias', 'meta_value' => json_encode($vectorPreferencias)];
+				    $idUsermeta = $this->Usermeta->insert($usermeta);
+
+                    if ($idUsermeta == 0)
+                    {
+                        $binnacle = 
+                            [
+                                "novedad" => "No se pudo registrar la preferencia del cliente" . $_POST["idusuario"],
+                                "tipo_clase" => "controlador",
+                                "nombre_clase" => "Usermetas",
+                                "nombre_metodo" => "guardar_preferencia"                             
+                            ];
+
+                        $idBinnacle = $this->Binnacle->insert($binnacle);
+			            $jsondata["satisfactorio"] = false;
+                        $jsondata["mensaje"] = "No se pudo registrar la preferencia del cliente";
+				    }
+				    else
+				    {
+					    $jsondata["satisfactorio"] = true;
+					    $jsondata["mensaje"] = "La preferencia del cliente ser registró satisfactoriamente";				
+				    }
+			    }
+		    }
+		    else
+		    {
+			    $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "No se pudo registrar la preferencia del cliente. Datos recibidos incorrectos";
+		    }
+		    require_once("posts_controller.php");
+		    $postsController = new PostsController();
+		    $vectorGeneral = $postsController->cargar_vectores();
+            $jsondata["vectorGeneral"] = $vectorGeneral;
+        }
+        else
+        {
+            $jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = "Usuario no autorizado";
+            $vectorGeneral = "";        
+        }
+		exit(json_encode($jsondata));	
+    }
+
+	public function guardar_cambios_preferencia()
+	{
+        $this->autoRender = false;
+
+        $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Gestor de negocios",
+                "Administrador"
+            ];
+
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
+
+        if ($accesoPermitido == "true")
+        {
+            $this->load_model("Binnacle");
+					
+		    if (isset($_POST["idUsuario"]))
+		    {
+			    $preferenciasCliente = $this->Usermeta->find_one(array(
+			    'conditions' => array(
+			    'user_id' => array($_POST['idUsuario']),
+			    'meta_key' => array('CRMdapliw_preferencias'))));
+			
+			    if (isset($preferenciasCliente))
+			    {
+                    $vectorPreferencias = json_decode($preferenciasCliente->meta_value, true);
+                    $vectorPreferencias[$_POST["clavePreferencia"]] = $_POST["preferencia"];
+
+        		    $this->Usermeta->update($preferenciasCliente->umeta_id, array('meta_value' => json_encode($vectorPreferencias)));    
+				    $jsondata["satisfactorio"] = true;
+				    $jsondata["mensaje"] = "La preferencia del cliente se actualizó exitosamente";	
+			    }
+			    else
+			    {
+                    $binnacle = 
+                        [
+                            "novedad" => "No se pudo actualizar la preferencia del cliente" . $_POST["idusuario"],
+                            "tipo_clase" => "controlador",
+                            "nombre_clase" => "Usermetas",
+                            "nombre_metodo" => "guardar_cambios_preferencia"                             
+                        ];
+
+                    $idBinnacle = $this->Binnacle->insert($binnacle);
+                    $jsondata["satisfactorio"] = false;
+                    $jsondata["mensaje"] = "No se pudo actualizar la preferencia del cliente";
+			    }
+		    }
+		    else
+		    {
+			    $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "No se pudo actualizar la preferencia del cliente. Datos recibidos incorrectos";
+		    }
+		    require_once("posts_controller.php");
+		    $postsController = new PostsController();
+		    $vectorGeneral = $postsController->cargar_vectores();
+            $jsondata["vectorGeneral"] = $vectorGeneral;
+        }
+        else
+        {
+            $jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = "Usuario no autorizado";
+            $vectorGeneral = "";        
+        }
+		exit(json_encode($jsondata));	
+    }
+
+	public function eliminar_preferencia()
+	{
+        $this->autoRender = false;
+
+        $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Gestor de negocios",
+                "Administrador"
+            ];
+
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
+
+        if ($accesoPermitido == "true")
+        {
+            $this->load_model("Binnacle");
+					
+		    if (isset($_POST["idUsuario"]))
+		    {
+			    $preferenciasCliente = $this->Usermeta->find_one(array(
+			    'conditions' => array(
+			    'user_id' => array($_POST['idUsuario']),
+			    'meta_key' => array('CRMdapliw_preferencias'))));
+			
+			    if (isset($preferenciasCliente))
+			    {
+                    $vectorPreferencias = json_decode($preferenciasCliente->meta_value, true);
+                    $vectorPreferencias[$_POST["clavePreferencia"]]["Estatus"] = "Eliminada";
+
+        		    $this->Usermeta->update($preferenciasCliente->umeta_id, array('meta_value' => json_encode($vectorPreferencias)));    
+				    $jsondata["satisfactorio"] = true;
+				    $jsondata["mensaje"] = "La preferencia se eliminó exitosamente";	
+			    }
+			    else
+			    {
+                    $binnacle = 
+                        [
+                            "novedad" => "No se pudo eliminar la preferencia del cliente" . $_POST["idusuario"],
+                            "tipo_clase" => "controlador",
+                            "nombre_clase" => "Usermetas",
+                            "nombre_metodo" => "eliminar_preferencia"                             
+                        ];
+
+                    $idBinnacle = $this->Binnacle->insert($binnacle);
+                    $jsondata["satisfactorio"] = false;
+                    $jsondata["mensaje"] = "No se pudo eliminar la preferencia del cliente";
+			    }
+		    }
+		    else
+		    {
+			    $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "No se pudo eliminar la preferencia del cliente. Datos recibidos incorrectos";
+		    }
+		    require_once("posts_controller.php");
+		    $postsController = new PostsController();
+		    $vectorGeneral = $postsController->cargar_vectores();
+            $jsondata["vectorGeneral"] = $vectorGeneral;
+        }
+        else
+        {
+            $jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = "Usuario no autorizado";
+            $vectorGeneral = "";        
+        }
+		exit(json_encode($jsondata));	
+    }
 }
