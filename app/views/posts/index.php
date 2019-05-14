@@ -177,6 +177,16 @@
                 alt="Guardar cambios preferencia" class="iconoMenu" id="imagenGuardarCambiosPreferencia10">
             </button>
 
+            <button title="Cerrar" class="btn btn-link noVer" id="cerrarPersonasFiltradas10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                alt="Cerrar personas filtradas" class="iconoMenu">
+            </button>
+
+            <button title="Agregar persona" class="btn btn-link noVer" id="agregarPersonaFiltro10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?> 
+                alt="Agregar persona filtro" class="iconoMenu">
+            </button>          
+
 
         </div>
 
@@ -355,7 +365,6 @@
 							    <option value="Asesores de inversión inmobiliaria">Asesores de inversión inmobiliaria</option>
                                 <option value="Captadores">Captadores</option>
 								<option value="Clientes">Clientes</option>
-							    <option value="Compradores">Compradores</option>
 							    <option value="Gestores de negocios">Gestores de negocios</option>
 							    <option value="Outsourcing">Outsourcing</option>
 							    <option value="Propietarios">Propietarios</option>
@@ -476,6 +485,14 @@
 
 			</div>
 		</div>
+
+
+		<!-- div con sufijo 105 -->
+		<div class="container formulario noVer" id="listaPersonas105">
+			<h2 class="letraAzul" id="tituloListaPersonas105"></h2>
+			<br />
+			<div class="row" id="detalleListaPersonas105"></div>
+        </div>
 
 		<!-- div con sufijo 110 -->
 		<div class="container formulario noVer" id="agregarPersonas110">
@@ -735,7 +752,14 @@ var gIdUsuario = gVectorGeneral.idUsuario;
 var gNombreUsuario = gVectorGeneral.nombreUsuario;
 var gRoles = gVectorGeneral.roles;
 var gUsuarios = gVectorGeneral.usuarios;
-var gPersonasAsc = gVectorGeneral.personasAsc;
+var gPersonas = gVectorGeneral.personas;
+var gAdministradores = gVectorGeneral.administradores;
+var gGestores = gVectorGeneral.gestores;
+var gCaptadores = gVectorGeneral.captadores;
+var gPromotores = gVectorGeneral.promotores;
+var gPropietarios = gVectorGeneral.propietarios;
+var gClientes = gVectorGeneral.clientes;
+var gOutsourcing = gVectorGeneral.outsourcing;
 var gNotificaciones = gVectorGeneral.notificaciones;
 var gVistaPreferida = gVectorGeneral.vistaPreferida;
 var gOpcionesSelectActividades = gVectorGeneral.opcionesSelectActividades;
@@ -2287,7 +2311,7 @@ function mostrarBienes(tipoContenido, valor)
 
     $j("#cicloBienes60").html(bienes).find(".buscarCaptador60").autocomplete(
     {
-        source: gPersonasAsc,
+        source: gPersonas,
         select: function( event, ui ) 
         {
             idBien = $j(this).attr("id").substring(17);
@@ -4005,7 +4029,14 @@ function actualizarVectores(vectorGeneralActualizado)
     gNombreUsuario = gVectorGeneral.nombreUsuario;
     gRoles = gVectorGeneral.roles;
     gUsuarios = gVectorGeneral.usuarios;
-    gPersonasAsc = gVectorGeneral.personasAsc;
+    gPersonas = gVectorGeneral.personas;
+    gAdministradores = gVectorGeneral.administradores;
+    gGestores = gVectorGeneral.gestores;
+    gCaptadores = gVectorGeneral.captadores;
+    gPromotores = gVectorGeneral.promotores;
+    gPropietarios = gVectorGeneral.propietarios;
+    gClientes = gVectorGeneral.clientes;
+    gOutsourcing = gVectorGeneral.outsourcing;
     gNotificaciones = gVectorGeneral.notificaciones;	
     gVistaPreferida = gVectorGeneral.vistaPreferida;
     gOpcionesSelectActividades = gVectorGeneral.opcionesSelectActividades;
@@ -4032,7 +4063,7 @@ function actualizarVectores(vectorGeneralActualizado)
 
     $j("#cicloBienes60").find(".buscarCaptador60").autocomplete(
     {
-        source: gPersonasAsc,
+        source: gPersonas,
         select: function( event, ui ) 
         {
             idBien = $j(this).attr("id").substring(17);
@@ -4057,7 +4088,7 @@ function actualizarVectores(vectorGeneralActualizado)
 
     $j('#nombreCaptador100').autocomplete(
     {
-        source: gPersonasAsc,
+        source: gPersonas,
         select: function( event, ui ) 
         {   
             idBien = gIdPostActual;
@@ -4072,7 +4103,7 @@ function actualizarVectores(vectorGeneralActualizado)
 
     $j('#nombreCliente100').autocomplete(
     {
-        source: gPersonasAsc,
+        source: gPersonas,
         select: function( event, ui ) 
         { 
             idBien = gIdPostActual;  
@@ -4084,7 +4115,7 @@ function actualizarVectores(vectorGeneralActualizado)
 
     $j("#personaAgenda51").autocomplete(
     {
-        source: gPersonasAsc,
+        source: gPersonas,
         select: function( event, ui ) 
         {   
             gIdPersonaActual = ui.item.id;    
@@ -4100,7 +4131,7 @@ function actualizarVectores(vectorGeneralActualizado)
 
     $j("#busquedaPorPersona52").autocomplete(
     {
-        source: gPersonasAsc,
+        source: gPersonas,
         select: function( event, ui ) 
         {   
             gIdPersonaActual = ui.item.id;    
@@ -5202,6 +5233,107 @@ function limpiarCamposPreferencia()
     $j("#precioMaximo112").val("");    
 }
 
+function verificarFiltroPersonas(filtroPersonas)
+{
+	vectorPermisosPersonas =
+		{
+			"Administradores" : ["Administrador"],
+			"Asesores de inversión inmobiliaria" : ["Administrador", "Gestor de negocios"], 
+			"Captadores" : ["Administrador", "Gestor de negocios"],
+			"Clientes" : ["Administrador", "Gestor de negocios", "Promotor"],
+			"Gestores de negocios" : ["Administrador"],
+			"Outsourcing" : ["Administrador", "Gestor de negocios"],
+			"Propietarios" : ["Administrador", "Gestor de negocios", "Captador"],
+			"Todos" : ["Administrador"]
+		};
+
+	permisoFiltroPersonas = false;
+	
+	rolesAutorizados = vectorPermisosPersonas[filtroPersonas];
+	
+	$j.each(rolesAutorizados, function(clave, datos)  
+	{	
+		if (gRoles.includes(datos))
+		{
+			permisoFiltroPersonas = true;
+			return false;
+		}
+	});
+	
+	return permisoFiltroPersonas;		
+}
+
+function mostrarPersonas(filtroPersonas)
+{
+    var vectorFiltro = "";
+    var complementoId = "";
+    var tablaFiltroVector =
+        {
+            "Administradores" : gAdministradores,
+            "Gestores de negocios" : gGestores,
+            "Captadores" : gCaptadores,
+            "Asesores de inversión inmobiliaria" : gPromotores,
+            "Propietarios" : gPropietarios,
+            "Clientes" : gClientes,
+            "Outsourcing" : gOutsourcing,
+            "Todos" : gPersonas
+        };
+
+    $j.each(tablaFiltroVector, function(clave, datos)  
+	{
+        if (clave == filtroPersonas)
+        {
+            vectorFiltro = datos;
+            return false;        
+        }
+    });
+
+    if (vectorFiltro[0])
+    {
+        mosaicoPersonas(vectorFiltro);
+    }
+}
+
+function mosaicoPersonas(vectorFiltro)
+{
+    var mosaicoPersonas = "";
+
+    $j("#tituloPreferencias111").html(filtroPersonas);
+    
+    mosaicoPersonas += "<div class='col-md-4 mb-3'>";
+
+    $j.each(vectorFiltro, function(clave, datos)  
+    {			
+        complementoId = datos.id;
+
+        mosaicoPersonas += 
+            "<div class='card' id='persona105-" + complementoId + "'>" +
+                "<div class='card-block'>" + 
+                    "<h4 class='card-title'>" + datos.label + "</h4>" +
+                    "<div class='card bg-light text-dark'>" +
+                        "<div class='card-body'>" +
+                            "<p>" +                                                            
+                                "<button class='btn btn-light modificarPreferencia111'" + 
+                                    "id='verPersona105-" + complementoId + "'" + 
+                                    " title='Ver persona'>" +
+                                    "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+                                    "crmdapliw/app/public/images/eye.svg alt='Ver persona' class='icono'" +
+                                    " id='imagenVerPersona-" + complementoId + "'>" +
+                                "</button>" +
+                            "</p>" +
+                        "</div>" +  
+                    "</div>" +
+                "</div>" +
+            "</div>" +
+            "<div class='mensajesUsuario' id='mensajesPreferencia111-" + complementoId + "'>" +
+            "</div>" +
+            "<br />";
+    });
+
+    mosaicoPersonas += "</div>";
+    $j("#detalleListaPersonas105").html(mosaicoPersonas);
+}
+
 // Eventos
 $j(document).ready(function()
 {
@@ -5517,7 +5649,7 @@ $j(document).ready(function()
 
     $j('#nombreCliente100').autocomplete(
     {
-        source: gPersonasAsc,
+        source: gPersonas,
         select: function( event, ui ) 
         { 
             idBien = gIdPostActual;  
@@ -5572,7 +5704,7 @@ $j(document).ready(function()
 
     $j('#nombreCaptador100').autocomplete(
     {
-        source: gPersonasAsc,
+        source: gPersonas,
         select: function( event, ui ) 
         {   
             idBien = gIdPostActual;
@@ -5773,7 +5905,7 @@ $j(document).ready(function()
 
     $j("#personaAgenda51").autocomplete(
     {
-        source: gPersonasAsc,
+        source: gPersonas,
         select: function( event, ui ) 
         {   
             gIdPersonaActual = ui.item.id;    
@@ -5839,7 +5971,7 @@ $j(document).ready(function()
 
     $j("#busquedaPorPersona52").autocomplete(
     {
-        source: gPersonasAsc,
+        source: gPersonas,
         select: function( event, ui ) 
         {   
             gIdPersonaActual = ui.item.id;    
@@ -6017,7 +6149,39 @@ $j(document).ready(function()
         $j(this).attr("disabled", true).html(gImagenEspere);
         eliminarPreferencia(idPreferencia);
     });
-
+	
+	$j("#busquedaPersonas10").click(function()
+	{
+        filtroPersonas = $j("#busquedaGrupos52").val();
+		permisoFiltroPersonas = verificarFiltroPersonas(filtroPersonas);
+		if (permisoFiltroPersonas == true)
+		{
+			$j("#busquedaPersonas52").addClass('noVer');
+			$j("#cerrarBusquedaPersonas10").addClass('noVer');
+			$j("#busquedaPersonas10").addClass('noVer');
+			$j("#cerrarPersonasFiltradas10").removeClass('noVer');
+			$j("#agregarPersonaFiltro10").removeClass('noVer');
+            mostrarPersonas(filtroPersonas);
+            $j("#listaPersonas105").removeClass('noVer');
+		}
+		else
+		{
+			alert("Estimado usuario usted no está autorizado a visualizar la información del grupo de personas seleccionado");
+		}
+	});
+	
+	$j("#cerrarPersonasFiltradas10").click(function()
+	{
+		$j("#busquedaGrupos52").val("Todos");
+		$j("#cerrarPersonasFiltradas10").addClass('noVer');
+        $j("#detalleListaPersonas105").html("");
+		$j("#listaPersonas105").addClass('noVer');
+        $j("#agregarPersonaFiltro10").addClass('noVer');
+		$j("#busquedaPersonas52").removeClass('noVer');
+        $j("#cerrarBusquedaPersonas10").removeClass('noVer');
+        $j("#busquedaPersonas10").removeClass('noVer');
+	});
+	
     $j('.map-wrapper').each(function(){
         mapField.init($j(this));
     });

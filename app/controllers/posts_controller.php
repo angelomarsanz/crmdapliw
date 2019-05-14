@@ -106,9 +106,18 @@ class PostsController extends MvcPublicController
             $contadorUsuarios++;
         }
 
+        $usuariosAsc = $this->array_orderby($usuarios, 'first_name', SORT_ASC, 'last_name', SORT_ASC ); 
+ 
         $personas = [];
+        $administradores = [];
+        $gestores = [];
+        $captadores = [];
+        $promotores = [];
+        $propietarios = [];
+        $clientes = [];
+        $outsourcing = [];
 
-        foreach ($usuarios as $clave => $usuario)
+        foreach ($usuariosAsc as $clave => $usuario)
         {
             if ($usuario["CRMdapliw_estatus"] == "ACTIVO")
             {
@@ -122,6 +131,7 @@ class PostsController extends MvcPublicController
                         {
                             $nombreRol = $nombreCompleto . " - ASESOR(A) DE INVERSIÓN INMOBILIARIA";
                             $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            $promotores[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
                         }
                     }
                     elseif ($rol == "Captador")
@@ -130,6 +140,7 @@ class PostsController extends MvcPublicController
                         {
                             $nombreRol = $nombreCompleto . " - CAPTADOR(A)";
                             $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            $captadores[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
                         }
 
                     }
@@ -139,6 +150,7 @@ class PostsController extends MvcPublicController
                         {
                             $nombreRol = $nombreCompleto . " - GESTOR DE NEGOCIOS";
                             $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            $gestores[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
                         }
                     }
                     elseif ($rol == "Administrador")
@@ -147,6 +159,7 @@ class PostsController extends MvcPublicController
                         {
                             $nombreRol = $nombreCompleto . " - ADMINISTRADOR(A)";
                             $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            $administradores[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
                         }
                     }
                     elseif ($rol == "Propietario")
@@ -154,7 +167,7 @@ class PostsController extends MvcPublicController
                         $nombreRol = $nombreCompleto . " - PROPIETARIO(A)";
                         $indicadorCaptadorPropietario = 0;
 
-                        if (in_array("Promotor", $roles) || in_array("Captador", $roles))
+                        if (in_array("Captador", $roles))
                         {
                             if ($usuario["CRMdapliw_captador_propietario"] == $idUsuario)
                             {
@@ -165,6 +178,7 @@ class PostsController extends MvcPublicController
                         if ($indicadorCaptadorPropietario == 1 || in_array("Gestor de negocios", $roles) || in_array("Administrador", $roles))
                         {
                             $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            $propietarios[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
                         }
                     }                       
                     elseif ($rol == "Cliente")
@@ -173,7 +187,7 @@ class PostsController extends MvcPublicController
                         $indicadorPromotorCliente = 0; 
 
 
-                        if (in_array("Promotor", $roles) || in_array("Captador", $roles))
+                        if (in_array("Promotor", $roles))
                         {
                             if ($usuario["CRMdapliw_promotor_cliente"] == $idUsuario)
                             {
@@ -184,18 +198,20 @@ class PostsController extends MvcPublicController
                         if ($indicadorPromotorCliente == 1 || in_array("Gestor de negocios", $roles) || in_array("Administrador", $roles))
                         {
                             $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            $clientes[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                        }
+                    }
+                    elseif ($rol == "Outsourcing")
+                    { 
+                        if (in_array("Gestor de negocios", $roles) || in_array("Administrador", $roles))
+                        {
+                            $nombreRol = $nombreCompleto . " - OUTSOURCING(A)";
+                            $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
+                            $outsourcing[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $clave];
                         }
                     }
                 }
             }
-        }
-        if (isset($personas[0]["label"]))
-        {
-            $personasAsc = $this->array_orderby($personas, 'label', SORT_ASC); 
-        }
-        else
-        {
-            $personasAsc = [];
         }
 
         $this->load_model('Postmeta');
@@ -443,7 +459,14 @@ class PostsController extends MvcPublicController
                 "nombreUsuario" => $nombreUsuario,
                 "roles" => $roles,
                 "vistaPreferida" => $vistaPreferida,
-                "personasAsc" => $personasAsc,
+                "personas" => $personas,
+                "administradores" => $administradores,
+                "gestores" => $gestores,
+                "captadores" => $captadores,
+                "promotores" => $promotores,
+                "propietarios" => $propietarios,
+                "clientes" => $clientes,
+                "outsourcing" => $outsourcing,                
                 "userMetas" => $userMetas,
                 "usuarios" => $usuarios,           
                 "bienes" => $bienes,
