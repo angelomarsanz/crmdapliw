@@ -127,19 +127,19 @@
                 alt="Cerrar personas filtradas" class="iconoMenu">
             </button>
 
+            <button title="Cerrar" class="btn btn-link noVer" id="cerrarVerPersona10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                alt="Cerrar ver persona" class="iconoMenu">
+            </button>
+
             <button title="Guardar cambios" class="btn btn-link noVer" id="guardarCambiosPersona10">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/pencil.svg" ?> 
-                alt="Guardar cambios" class="iconoMenu" id="imagenGuardarPersona10">
+                alt="Guardar cambios persona" class="iconoMenu" id="imagenGuardarPersona10">
             </button>
 
             <button title="Preferencias" class="btn btn-link noVer" id="preferencias10">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/preferencias.svg" ?> 
                 alt="Preferencias" class="iconoMenu">
-            </button>     
-
-            <button title="Asociar propiedad" class="btn btn-link noVer" id="asociarPropiedad10">
-                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/tmbr-soloicon.svg" ?> 
-                alt="Asociar propiedad" class="iconoMenu">
             </button>     
 
             <button title="Agregar persona" class="btn btn-link noVer" id="agregarMasPersonas10">
@@ -187,7 +187,6 @@
                 alt="Agregar persona filtro" class="iconoMenu">
             </button>          
 
-
         </div>
 
         <!-- div con sufijo 20 -->
@@ -233,13 +232,13 @@
 			<div class="row">
 				<div class="col-4 col-md-4 text-center">
 					<button title="Agenda" class="btn btn-link" id="agenda40">
-						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/calendar.svg" ?>
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/agenda.svg" ?>
 							alt="Agenda" class="img-fluid mx-auto iconoPrincipal">
 					</button>
 				</div>
 				<div class="col-4 col-md-4 text-center">
 					<button title="Propiedades" class="btn btn-link" id="propiedades40">
-						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/tmbr-soloicon.svg" ?>
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/tmbr-icon.svg" ?>
 							alt="Propiedades" class="img-fluid iconoPrincipal">
 					</button>
 				</div>
@@ -539,37 +538,37 @@
 
 							<p style="color: black;">Roles*</p>
 
-							<div class="form-check">
+							<div class="form-check rol110">
 								<input type="checkbox" class="form-check-input" id="administrador110"> 
 								<label class='form-check-label' for="administrador110">&nbsp;&nbsp;Administrador</label>
 							</div>
 
-							<div class="form-check">
+							<div class="form-check rol110">
 								<input type="checkbox" class="form-check-input" id="gestorNegocios110"> 
 								<label class='form-check-label' for="gestorNegocios110">&nbsp;&nbsp;Gestor de negocios</label>
 							</div>
 
-							<div class="form-check">
+							<div class="form-check rol110">
 								<input type="checkbox" class="form-check-input" id="captador110"> 
 								<label class='form-check-label' for="captador110">&nbsp;&nbsp;Captador</label>
 							</div>
 
-							<div class="form-check">
+							<div class="form-check rol110">
 								<input type="checkbox" class="form-check-input" id="promotor110"> 
 								<label class='form-check-label' for="promotor110">&nbsp;&nbsp;Asesor de inversión inmobiliaria</label>
 							</div>
 
-							<div class="form-check">
+							<div class="form-check rol110">
 								<input type="checkbox" class="form-check-input" id="propietario110"> 
 								<label class='form-check-label' for="propietario110">&nbsp;&nbsp;Propietario</label>
 							</div>
 
-							<div class="form-check">
+							<div class="form-check rol110">
 								<input type="checkbox" class="form-check-input" id="cliente110"> 
 								<label class='form-check-label' for="cliente110">&nbsp;&nbsp;Cliente</label>
 							</div>
 
-							<div class="form-check">
+							<div class="form-check rol110">
 								<input type="checkbox" class="form-check-input" id="outsourcing110"> 
 								<label class='form-check-label' for="outsourcing110">&nbsp;&nbsp;Outsourcing</label>
 							</div>
@@ -2182,7 +2181,7 @@ function mostrarBienes(tipoContenido, valor)
 						
 						"<button class='btn btn-light ultimaActividad60' id='ultimaActividad60-" + bien.ID + "' title='Agenda'>" +
 							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-							"crmdapliw/app/public/images/calendar.svg alt='Agenda' class='icono'>" +
+							"crmdapliw/app/public/images/agenda.svg alt='Agenda' class='icono'>" +
 						"</button>" +
 						
 						"<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +
@@ -2311,7 +2310,7 @@ function mostrarBienes(tipoContenido, valor)
 
     $j("#cicloBienes60").html(bienes).find(".buscarCaptador60").autocomplete(
     {
-        source: gPersonas,
+        source: gCaptadores,
         select: function( event, ui ) 
         {
             idBien = $j(this).attr("id").substring(17);
@@ -4063,7 +4062,7 @@ function actualizarVectores(vectorGeneralActualizado)
 
     $j("#cicloBienes60").find(".buscarCaptador60").autocomplete(
     {
-        source: gPersonas,
+        source: gCaptadores,
         select: function( event, ui ) 
         {
             idBien = $j(this).attr("id").substring(17);
@@ -4088,7 +4087,7 @@ function actualizarVectores(vectorGeneralActualizado)
 
     $j('#nombreCaptador100').autocomplete(
     {
-        source: gPersonas,
+        source: gCaptadores,
         select: function( event, ui ) 
         {   
             idBien = gIdPostActual;
@@ -4103,7 +4102,7 @@ function actualizarVectores(vectorGeneralActualizado)
 
     $j('#nombreCliente100').autocomplete(
     {
-        source: gPersonas,
+        source: gClientes,
         select: function( event, ui ) 
         { 
             idBien = gIdPostActual;  
@@ -4134,20 +4133,22 @@ function actualizarVectores(vectorGeneralActualizado)
         source: gPersonas,
         select: function( event, ui ) 
         {   
+            gFuncionLlamadora = "busquedaPorPersona52";
             gIdPersonaActual = ui.item.id;    
             $j("#busquedaPersonas52").addClass('noVer');
             $j("#cerrarBusquedaPersonas10").addClass('noVer');
             $j("#busquedaPersonas10").addClass('noVer');
             $j("#cerrarBusquedaPorPersona10").removeClass('noVer');
             $j("#guardarCambiosPersona10").removeClass('noVer');
-            $j("#preferencias10").removeClass('noVer');
-            $j("#asociarPropiedad10").removeClass('noVer');
+            if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Cliente"))
+            {                   
+                $j("#preferencias10").removeClass('noVer');
+            }
             $j("#agregarPersonas110").removeClass('noVer');
             if ($j("#grupoRol110").hasClass('noVer') === false)
             {
                 $j("#grupoRol110").addClass('noVer');
             }
-            gFuncionLlamadora = "busquedaPorPersona52";
             cargarDatosPersona();
         }
     });
@@ -4315,8 +4316,10 @@ function eliminarPersona()
             {
                 $j("#cerrarBusquedaPorPersona10").addClass('noVer');
                 $j("#guardarCambiosPersona10").addClass('noVer');
-                $j("#preferencias10").addClass('noVer');
-                $j("#asociarPropiedad10").addClass('noVer');
+                if ($j("#preferencias10").hasClass('noVer') === false)
+                {
+                    $j("#preferencias10").addClass('noVer');            
+                }
                 $j("#agregarPersonas110").addClass('noVer');
                 $j("#busquedaPorPersona52").val("");
                 $j("#busquedaPersonas52").removeClass('noVer');
@@ -5290,31 +5293,72 @@ function mostrarPersonas(filtroPersonas)
 
     if (vectorFiltro[0])
     {
-        mosaicoPersonas(vectorFiltro);
+		if (gVistaPreferida.substring(0, 5) == "Lista")
+		{
+			listaPersonas(filtroPersonas, vectorFiltro);
+		}
+		else
+		{
+			mosaicoPersonas(filtroPersonas, vectorFiltro);
+		}
     }
 }
 
-function mosaicoPersonas(vectorFiltro)
+function mosaicoPersonas(filtroPersonas, vectorFiltro)
 {
     var mosaicoPersonas = "";
 
-    $j("#tituloPreferencias111").html(filtroPersonas);
+    $j("#tituloListaPersonas105").html(filtroPersonas);
     
     mosaicoPersonas += "<div class='col-md-4 mb-3'>";
 
     $j.each(vectorFiltro, function(clave, datos)  
     {			
         complementoId = datos.id;
-
+		
         mosaicoPersonas += 
-            "<div class='card' id='persona105-" + complementoId + "'>" +
+            "<div class='card' id='persona105-" + complementoId + "'>";
+				
+				if (gVistaPreferida == "Mosaicos con imágenes")
+				{
+					if (gUsuarios[complementoId]["fotoPerfil"])
+					{
+						mosaicoPersonas += 
+							"<img src=" + gUsuarios[complementoId]["fotoPerfil"] + " class='card-img-top img-fluid' alt='Foto del usuario'>";
+					}
+					else
+					{
+						mosaicoPersonas += 					
+							"<img class='card-img-top img-fluid' style='opacity: 0.3;' alt='Sin foto'" +
+							" src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
+							"crmdapliw/app/public/images/person.svg>";					
+					}
+				}
+				else
+				{
+					if (gUsuarios[complementoId]["fotoPerfil"])
+					{
+						mosaicoPersonas += 
+							"<a href=" + gUsuarios[complementoId]["fotoPerfil"] + " title='Ver foto' target='_blank'>" +
+							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera-slr.svg' ?>" +
+							" alt='Ver foto' class='icono'>" +
+							"</a>";
+					}
+					else
+					{
+						mosaicoPersonas += "Sin foto";
+					}
+				}
+				
+				mosaicoPersonas +=
+
                 "<div class='card-block'>" + 
                     "<h4 class='card-title'>" + datos.label + "</h4>" +
                     "<div class='card bg-light text-dark'>" +
                         "<div class='card-body'>" +
                             "<p>" +                                                            
-                                "<button class='btn btn-light modificarPreferencia111'" + 
-                                    "id='verPersona105-" + complementoId + "'" + 
+                                "<button class='btn btn-light verPersona105'" + 
+                                    " id='verPersona105-" + complementoId + "'" + 
                                     " title='Ver persona'>" +
                                     "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
                                     "crmdapliw/app/public/images/eye.svg alt='Ver persona' class='icono'" +
@@ -5332,6 +5376,129 @@ function mosaicoPersonas(vectorFiltro)
 
     mosaicoPersonas += "</div>";
     $j("#detalleListaPersonas105").html(mosaicoPersonas);
+}
+
+function listaPersonas(filtroPersonas, vectorFiltro)
+{
+    var listaPersonas = "";
+    var contador = 1;
+
+    $j("#tituloListaPersonas105").html(filtroPersonas);
+ 
+    listaPersonas += 
+        "<div class='table-responsive'>" +
+            "<table class='table table-striped table-hover'>" +
+                "<thead>" +
+                    "<tr>" +
+                        "<th scope='col' class='text-center' style='width:5%;'>No</th>" +
+                        "<th scope='col' class='text-center' style='width:10%;'>Foto</th>" +
+                        "<th scope='col' class='text-center' style='width:30%;'>Persona</th>" +
+                        "<th scope='col' class='text-center' style='width:25%;'></th>" +
+                    "</tr>" +
+                "</thead>" +
+                "<tbody>";
+
+    $j.each(vectorFiltro, function(clave, datos)  
+    {			
+        complementoId = datos.id;
+		
+		listaPersonas += 
+            "<tr>" +
+                "<td class='text-center align-middle'>" + contador + "</td>";
+							
+		if (gVistaPreferida == "Lista con imágenes")
+		{
+            if (gUsuarios[complementoId]["fotoPerfil"])    
+			{				
+				listaPersonas += 
+					"<td class='text-center align-middle'><img src=" + gUsuarios[complementoId]["fotoPerfil"] + " class='img-thumbnail' alt='Foto del usuario'></td>";
+			}
+			else
+			{
+				listaPersonas += 
+                    "<td class='text-center align-middle'>" +
+                        "<img class='card-img-top img-fluid' style='opacity: 0.3;' alt='Sin foto'" +
+                        " src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" +
+                        "crmdapliw/app/public/images/person.svg>" +			
+                    "</td>";
+			}
+		}
+		else
+		{
+			if (gUsuarios[complementoId]["fotoPerfil"])
+			{				
+				listaPersonas += 
+					"<td class='text-center align-middle'>" +
+					    "<a href=" + gUsuarios[complementoId]["fotoPerfil"] + " title='Ver foto' target='_blank'>" +
+					        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/camera-slr.svg' ?>" +
+					        " alt='Ver foto' class='icono'>" +
+					    "</a>" + 
+					"</td>";
+			}
+			else
+			{
+				listaPersonas += "<td class='text-center align-middle'>Sin foto</td>";
+			}
+		}
+
+		listaPersonas += 
+                "<td class='text-center align-middle'>" + datos.label + "</td>" +
+                "<td class='text-center align-middle'>" + 									
+                    "<button class='btn btn-light verPersona105'" + 
+                        " id='verPersona105-" + complementoId + "'" + 
+                        " title='Ver persona'>" +
+                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
+                        "crmdapliw/app/public/images/eye.svg alt='Ver persona' class='icono'" +
+                        " id='imagenVerPersona-" + complementoId + "'>" +
+                    "</button>" +
+                "</td>" +
+			"</tr>";
+        
+        contador++;
+	});
+    
+    listaPersonas += 
+                "</tbody>" +
+            "</table>" +
+        "</div>";
+
+    $j("#detalleListaPersonas105").html(listaPersonas);
+}
+
+function activarRoles()
+{
+    var rolesPermitidos =
+        {
+            "Administrador" : ["administrador110", "gestorNegocios110", "captador110", "promotor110", "propietario110", "cliente110", "outsourcing110"],
+            "Gestor de negocios" : ["captador110", "promotor110", "propietario110", "cliente110", "outsourcing110"],
+            "Captador" : ["propietario110"],
+            "Promotor" : ["cliente110"]
+        }
+
+    $j("#administrador110").addClass("noVer");
+    $j("#gestorNegocios110").addClass("noVer");
+    $j("#captador110").addClass("noVer");
+    $j("#promotor110").addClass("noVer");
+    $j("#propietario110").addClass("noVer");
+    $j("#cliente110").addClass("noVer");
+    $j("#outsourcing110").addClass("noVer");
+
+    $j.each(gRoles, function(clave1, datos1)  
+    {	
+        $j.each(rolesPermitidos, function(clave2, datos2)  
+        {	
+            if (datos1 == clave2)
+            {
+                $j.each(rolesPermitidos[clave2], function(clave3, datos3)  
+                {	
+                    if ($j("#" + datos3).hasClass('noVer'))
+                    {
+                        $j("#" + datos3).removeClass('noVer');
+                    }
+                });
+            }            
+        });
+    });
 }
 
 // Eventos
@@ -5649,7 +5816,7 @@ $j(document).ready(function()
 
     $j('#nombreCliente100').autocomplete(
     {
-        source: gPersonas,
+        source: gClientes,
         select: function( event, ui ) 
         { 
             idBien = gIdPostActual;  
@@ -5704,7 +5871,7 @@ $j(document).ready(function()
 
     $j('#nombreCaptador100').autocomplete(
     {
-        source: gPersonas,
+        source: gCaptadores,
         select: function( event, ui ) 
         {   
             idBien = gIdPostActual;
@@ -5864,6 +6031,7 @@ $j(document).ready(function()
         $j('#agenda80').removeClass('noVer');
         $j(gBotonCerrarLlamador).removeClass('noVer');
         $j("#agregarActividad10").removeClass('noVer');
+        window.scrollTo(0, 0);  
     });
 
     $j('#guardarActividad10').click(function()
@@ -5974,20 +6142,22 @@ $j(document).ready(function()
         source: gPersonas,
         select: function( event, ui ) 
         {   
+            gFuncionLlamadora = "busquedaPorPersona52";
             gIdPersonaActual = ui.item.id;    
             $j("#busquedaPersonas52").addClass('noVer');
             $j("#cerrarBusquedaPersonas10").addClass('noVer');
             $j("#busquedaPersonas10").addClass('noVer');
             $j("#cerrarBusquedaPorPersona10").removeClass('noVer');
             $j("#guardarCambiosPersona10").removeClass('noVer');
-            $j("#preferencias10").removeClass('noVer');
-            $j("#asociarPropiedad10").removeClass('noVer');
+            if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Cliente"))
+            {                   
+                $j("#preferencias10").removeClass('noVer');
+            }
             $j("#agregarPersonas110").removeClass('noVer');
             if ($j("#grupoRol110").hasClass('noVer') === false)
             {
                 $j("#grupoRol110").addClass('noVer');
             }
-            gFuncionLlamadora = "busquedaPorPersona52";
             cargarDatosPersona();
         }
     });
@@ -5996,8 +6166,10 @@ $j(document).ready(function()
     {
         $j("#cerrarBusquedaPorPersona10").addClass('noVer');
         $j("#guardarCambiosPersona10").addClass('noVer');
-        $j("#preferencias10").addClass('noVer');
-        $j("#asociarPropiedad10").addClass('noVer');
+        if ($j("#preferencias10").hasClass('noVer') === false)
+        {
+                $j("#preferencias10").addClass('noVer');            
+        }
         $j("#agregarPersonas110").addClass('noVer');
         $j("#busquedaPorPersona52").val("");
         borrarMensajesAnteriores();
@@ -6042,13 +6214,16 @@ $j(document).ready(function()
 			window.scrollTo(0, 0);           
 		}
     });
+    
     $j("#preferencias10").click(function()
     {
 		mostrarPreferencias();
         $j("#cerrarBusquedaPorPersona10").addClass('noVer');
         $j("#guardarCambiosPersona10").addClass('noVer');
-        $j("#preferencias10").addClass('noVer');
-        $j("#asociarPropiedad10").addClass('noVer');
+        if ($j("#preferencias10").hasClass('noVer') === false)
+        {
+                $j("#preferencias10").addClass('noVer');            
+        }
         $j("#agregarPersonas110").addClass('noVer');
         $j("#preferencias111").removeClass("noVer");
         $j("#cerrarPreferencias10").removeClass("noVer");
@@ -6058,19 +6233,25 @@ $j(document).ready(function()
     $j("#cerrarPreferencias10").click(function()
     {
         $j("#preferencias111").addClass("noVer");
-        $j("#cerrarPreferencias10").addClass("noVer");
+        if ($j("#preferencias10").hasClass('noVer') === false)
+        {
+                $j("#preferencias10").addClass('noVer');            
+        }
         $j("#agregarPreferencia10").addClass("noVer");
         $j("#cerrarBusquedaPorPersona10").removeClass('noVer');
         $j("#guardarCambiosPersona10").removeClass('noVer');
         $j("#preferencias10").removeClass('noVer');
-        $j("#asociarPropiedad10").removeClass('noVer');
         $j("#agregarPersonas110").removeClass('noVer');
+        window.scrollTo(0, 0);  
 	});
 
     $j("#agregarPreferencia10").click(function()
     {
         $j("#preferencias111").addClass("noVer");
-        $j("#cerrarPreferencias10").addClass("noVer");
+        if ($j("#preferencias10").hasClass('noVer') === false)
+        {
+                $j("#preferencias10").addClass('noVer');            
+        }
         $j("#agregarPreferencia10").addClass("noVer");
         tituloAgregarPreferencia = 
             "Agregar preferencia del cliente " + 
@@ -6090,6 +6271,7 @@ $j(document).ready(function()
         $j("#preferencias111").removeClass("noVer");
         $j("#cerrarPreferencias10").removeClass("noVer");
         $j("#agregarPreferencia10").removeClass("noVer");
+        window.scrollTo(0, 0);  
     });
 
     $j("#guardarPreferencia10").click(function()
@@ -6129,6 +6311,7 @@ $j(document).ready(function()
         $j("#preferencias111").removeClass("noVer");
         $j("#cerrarPreferencias10").removeClass("noVer");
         $j("#agregarPreferencia10").removeClass("noVer");
+        window.scrollTo(0, 0);  
     });
 
     $j("#guardarCambiosPreferencia10").click(function()
@@ -6174,14 +6357,53 @@ $j(document).ready(function()
 	{
 		$j("#busquedaGrupos52").val("Todos");
 		$j("#cerrarPersonasFiltradas10").addClass('noVer');
+        $j("#tituloListaPersonas105").html("");
         $j("#detalleListaPersonas105").html("");
 		$j("#listaPersonas105").addClass('noVer');
         $j("#agregarPersonaFiltro10").addClass('noVer');
 		$j("#busquedaPersonas52").removeClass('noVer');
         $j("#cerrarBusquedaPersonas10").removeClass('noVer');
         $j("#busquedaPersonas10").removeClass('noVer');
+        window.scrollTo(0, 0);  
 	});
-	
+
+    $j("#detalleListaPersonas105").on("click", ".verPersona105", function()
+    {
+        gFuncionLlamadora = "verPersona105";
+        gIdPersonaActual = $j(this).attr('id').substring(14);
+		$j("#listaPersonas105").addClass('noVer');
+		$j("#cerrarPersonasFiltradas10").addClass('noVer');
+        $j("#agregarPersonaFiltro10").addClass('noVer');
+        $j("#cerrarVerPersona10").removeClass('noVer');
+        $j("#guardarCambiosPersona10").removeClass('noVer');
+        if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Cliente"))
+        {                   
+            $j("#preferencias10").removeClass('noVer');
+        }
+        activarRoles()
+        $j("#agregarPersonas110").removeClass('noVer');
+        if ($j("#grupoRol110").hasClass('noVer') === false)
+        {
+            $j("#grupoRol110").addClass('noVer');
+        }
+        cargarDatosPersona();
+    });
+
+    $j("#cerrarVerPersona10").click(function()
+    {
+        $j("#cerrarVerPersona10").addClass('noVer');
+        $j("#guardarCambiosPersona10").addClass('noVer');
+        if ($j("#preferencias10").hasClass('noVer') === false)
+        {
+                $j("#preferencias10").addClass('noVer');            
+        }
+        $j("#agregarPersonas110").addClass('noVer');
+		$j("#listaPersonas105").removeClass('noVer');
+		$j("#cerrarPersonasFiltradas10").removeClass('noVer');
+        $j("#agregarPersonaFiltro10").removeClass('noVer');
+        window.scrollTo(0, 0);  
+    });
+
     $j('.map-wrapper').each(function(){
         mapField.init($j(this));
     });
