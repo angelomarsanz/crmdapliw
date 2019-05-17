@@ -6218,27 +6218,37 @@ $j(document).ready(function()
     $j("#preferencias10").click(function()
     {
 		mostrarPreferencias();
-        $j("#cerrarBusquedaPorPersona10").addClass('noVer');
-        $j("#guardarCambiosPersona10").addClass('noVer');
-        if ($j("#preferencias10").hasClass('noVer') === false)
+        if ($j("#cerrarBusquedaPorPersona10").hasClass('noVer') === false)
         {
-                $j("#preferencias10").addClass('noVer');            
+            $j("#cerrarBusquedaPorPersona10").addClass('noVer');
         }
+        if ($j("#cerrarVerPersona10").hasClass('noVer') === false)
+        {
+            $j("#cerrarVerPersona10").addClass('noVer');
+        }
+        $j("#guardarCambiosPersona10").addClass('noVer');
+        $j("#preferencias10").addClass('noVer');            
         $j("#agregarPersonas110").addClass('noVer');
         $j("#preferencias111").removeClass("noVer");
         $j("#cerrarPreferencias10").removeClass("noVer");
         $j("#agregarPreferencia10").removeClass("noVer");
+        window.scrollTo(0, 0); 
 	});
 
     $j("#cerrarPreferencias10").click(function()
     {
+        borrarMensajesAnteriores();
         $j("#preferencias111").addClass("noVer");
-        if ($j("#preferencias10").hasClass('noVer') === false)
-        {
-                $j("#preferencias10").addClass('noVer');            
-        }
+        $j("#cerrarPreferencias10").addClass("noVer");
         $j("#agregarPreferencia10").addClass("noVer");
-        $j("#cerrarBusquedaPorPersona10").removeClass('noVer');
+        if (gFuncionLlamadora == "busquedaPorPersona52")
+        {
+            $j("#cerrarBusquedaPorPersona10").removeClass('noVer');
+        }
+        else
+        {
+            $j("#cerrarVerPersona10").removeClass('noVer');
+        }
         $j("#guardarCambiosPersona10").removeClass('noVer');
         $j("#preferencias10").removeClass('noVer');
         $j("#agregarPersonas110").removeClass('noVer');
@@ -6248,10 +6258,6 @@ $j(document).ready(function()
     $j("#agregarPreferencia10").click(function()
     {
         $j("#preferencias111").addClass("noVer");
-        if ($j("#preferencias10").hasClass('noVer') === false)
-        {
-                $j("#preferencias10").addClass('noVer');            
-        }
         $j("#agregarPreferencia10").addClass("noVer");
         tituloAgregarPreferencia = 
             "Agregar preferencia del cliente " + 
@@ -6260,6 +6266,7 @@ $j(document).ready(function()
         $j("#agregarPreferencia112").removeClass("noVer");
         $j("#cerrarAgregarPreferencia10").removeClass("noVer");
         $j("#guardarPreferencia10").removeClass("noVer");
+        window.scrollTo(0, 0);  
     });
 
     $j("#cerrarAgregarPreferencia10").click(function()
@@ -6346,6 +6353,7 @@ $j(document).ready(function()
 			$j("#agregarPersonaFiltro10").removeClass('noVer');
             mostrarPersonas(filtroPersonas);
             $j("#listaPersonas105").removeClass('noVer');
+            window.scrollTo(0, 0); 
 		}
 		else
 		{
@@ -6381,16 +6389,18 @@ $j(document).ready(function()
             $j("#preferencias10").removeClass('noVer');
         }
         activarRoles()
-        $j("#agregarPersonas110").removeClass('noVer');
         if ($j("#grupoRol110").hasClass('noVer') === false)
         {
             $j("#grupoRol110").addClass('noVer');
         }
+        $j("#agregarPersonas110").removeClass('noVer');
         cargarDatosPersona();
+        window.scrollTo(0, 0); 
     });
 
     $j("#cerrarVerPersona10").click(function()
     {
+        borrarMensajesAnteriores();
         $j("#cerrarVerPersona10").addClass('noVer');
         $j("#guardarCambiosPersona10").addClass('noVer');
         if ($j("#preferencias10").hasClass('noVer') === false)
