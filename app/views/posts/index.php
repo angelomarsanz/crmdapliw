@@ -107,6 +107,11 @@
                 alt="Cerrar agregar persona" class="iconoMenu">
             </button>
 
+            <button title="Cerrar" class="btn btn-link noVer" id="cerrarAgregarPersonaFiltro10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
+                alt="Cerrar agregar persona filtro" class="iconoMenu">
+            </button>
+
             <button title="Guardar persona" class="btn btn-link noVer" id="guardarPersona10">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/check.svg" ?> 
                 alt="Guardar persona" class="iconoMenu" id="imagenGuardarPersona10">
@@ -2812,7 +2817,14 @@ function inicializarPersonas()
     $j("#email110").val("@");
     $j("#direccion110").val("");
 
-    $j("#tituloAgregarPersonas110").html("Agregar personas a la propiedad " + gMatrizBienes[gIdPostActual].post_title);
+    if (gFuncionLlamadora == "agregarPersonaFiltro10")
+    {
+        $j("#tituloAgregarPersonas110").html("Agregar persona");
+    }
+    else
+    {
+        $j("#tituloAgregarPersonas110").html("Agregar personas a la propiedad " + gMatrizBienes[gIdPostActual].post_title);
+    }
 }
 
 function guardarPersona(indicadorCheckbox)
@@ -2843,7 +2855,7 @@ function guardarPersona(indicadorCheckbox)
     else
     {
         roles = [];
-        $j("#rolesCheckbox110").each(function (index) 
+        $j("#rolesCheckbox110 input").each(function (index) 
         {
             if ($j(this).prop("checked") == true)
             {
@@ -2867,7 +2879,7 @@ function guardarPersona(indicadorCheckbox)
                 {
                     roles.push("Propietario");
                 }
-                if ($j(this).attr("id") == "Cliente110")
+                if ($j(this).attr("id") == "cliente110")
                 {
                     roles.push("Cliente");
                 }
@@ -2894,6 +2906,11 @@ function guardarPersona(indicadorCheckbox)
             "arregloPrueba" : arregloPrueba
         };  
     */
+
+    if (gFuncionLlamadora == "agregarPersonaFiltro10")
+    { 
+        gIdPostActual = 0;
+    }
 
     jsonPersona = 
         {"idPost" : gIdPostActual,
@@ -2932,20 +2949,34 @@ function guardarPersona(indicadorCheckbox)
 
             $j("#mensajesUsuario30").html(mensajesUsuario);
 
-            $j("#agregarPersonas110").addClass("noVer");
-            $j("#cerrarAgregarPersona10").addClass("noVer");
-            $j("#guardarPersona10").addClass("noVer");
-            personasBien(gIdPostActual);
-            $j("#personas100").removeClass("noVer");
-		    if (gFuncionLlamadora == "bienesSinActividad51")
-		    {
-                $j("#cerrarPersonasSinActividad10").removeClass('noVer');
-		    }
-		    else if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
-		    {	
-                $j("#cerrarPersonas10").removeClass('noVer');
-		    }
-            $j("#agregarPersona10").removeClass("noVer");
+            if (gFuncionLlamadora == "agregarPersonaFiltro10")
+            {
+                filtroPersonas = $j("#busquedaGrupos52").val();
+                $j("#agregarPersonas110").addClass("noVer");
+                $j("#cerrarAgregarPersonaFiltro10").addClass('noVer');
+                $j("#guardarPersona10").addClass("noVer");
+                $j("#cerrarPersonasFiltradas10").removeClass('noVer');
+                $j("#agregarPersonaFiltro10").removeClass('noVer');
+                mostrarPersonas(filtroPersonas);
+                $j("#listaPersonas105").removeClass('noVer');
+            }
+            else
+            {
+                $j("#agregarPersonas110").addClass("noVer");
+                $j("#cerrarAgregarPersona10").addClass("noVer");
+                $j("#guardarPersona10").addClass("noVer");
+                personasBien(gIdPostActual);
+                $j("#personas100").removeClass("noVer");
+                if (gFuncionLlamadora == "bienesSinActividad51")
+                {
+                    $j("#cerrarPersonasSinActividad10").removeClass('noVer');
+                }
+                else if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
+                {	
+                    $j("#cerrarPersonas10").removeClass('noVer');
+                }
+                $j("#agregarPersona10").removeClass("noVer");
+            }
             window.scrollTo(0, 0);           
         } 
         else 
@@ -5793,7 +5824,14 @@ $j(document).ready(function()
     {
         gImagenAnterior = $j("#guardarPersona10").html();  
         $j("#guardarPersona10").attr("disabled", true).html(gImagenEspere);
-        indicadorCheckbox = 0;
+        if (gFuncionLlamadora == "agregarPersonaFiltro10")
+        {
+            indicadorCheckbox = 1;    
+        }
+        else
+        {
+            indicadorCheckbox = 0;
+        }
         indicadorError = validarPersona(indicadorCheckbox);
 		if (indicadorError == 0)
 		{
@@ -6363,6 +6401,7 @@ $j(document).ready(function()
 	
 	$j("#cerrarPersonasFiltradas10").click(function()
 	{
+        borrarMensajesAnteriores();
 		$j("#busquedaGrupos52").val("Todos");
 		$j("#cerrarPersonasFiltradas10").addClass('noVer');
         $j("#tituloListaPersonas105").html("");
@@ -6405,7 +6444,7 @@ $j(document).ready(function()
         $j("#guardarCambiosPersona10").addClass('noVer');
         if ($j("#preferencias10").hasClass('noVer') === false)
         {
-                $j("#preferencias10").addClass('noVer');            
+            $j("#preferencias10").addClass('noVer');            
         }
         $j("#agregarPersonas110").addClass('noVer');
 		$j("#listaPersonas105").removeClass('noVer');
@@ -6414,8 +6453,43 @@ $j(document).ready(function()
         window.scrollTo(0, 0);  
     });
 
+    $j("#agregarPersonaFiltro10").click(function()
+    {     
+        gFuncionLlamadora = "agregarPersonaFiltro10";  
+        $j("#cerrarPersonasFiltradas10").addClass('noVer');
+		$j("#agregarPersonaFiltro10").addClass('noVer');
+        $j("#listaPersonas105").addClass('noVer');
+        inicializarPersonas();
+        activarRoles()
+        if ($j("#grupoRol110").hasClass('noVer') === false)
+        {
+            $j("#grupoRol110").addClass('noVer');
+        }
+        if ($j("#eliminarPersona110").hasClass('noVer') === false)
+        {
+            $j("#eliminarPersona110").addClass('noVer');
+        }
+        $j("#agregarPersonas110").removeClass("noVer");
+        $j("#cerrarAgregarPersonaFiltro10").removeClass('noVer');
+        $j("#guardarPersona10").removeClass("noVer");
+        window.scrollTo(0, 0);
+    });
+
+    $j("#cerrarAgregarPersonaFiltro10").click(function()
+    {       
+        borrarMensajesAnteriores();
+        $j("#agregarPersonas110").addClass("noVer");
+        $j("#cerrarAgregarPersonaFiltro10").addClass('noVer');
+        $j("#guardarPersona10").addClass("noVer");
+        $j("#cerrarPersonasFiltradas10").removeClass('noVer');
+		$j("#agregarPersonaFiltro10").removeClass('noVer');
+        $j("#listaPersonas105").removeClass('noVer');
+        window.scrollTo(0, 0);
+    });
+
     $j('.map-wrapper').each(function(){
         mapField.init($j(this));
     });
+
 });
 </script>

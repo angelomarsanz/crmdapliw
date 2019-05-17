@@ -128,6 +128,7 @@ class UsersController extends MvcPublicController
 
                     $fechaHoy = getdate();
 
+                    $claveSinEncriptacion = substr($primerNombreSaneado, 0, 1) . substr($primerApellidoSaneado, 0, 1) . $fechaHoy['seconds'] . $fechaHoy['minutes'] . '$';
 			        $clave = md5(substr($primerNombreSaneado, 0, 1) . substr($primerApellidoSaneado, 0, 1) . $fechaHoy['seconds'] . $fechaHoy['minutes'] . '$');
 
                     $fechaHora = new DateTime(); 
@@ -201,33 +202,39 @@ class UsersController extends MvcPublicController
                    
                         if ($indicadorError == 0)
                         {
-                            $metaValue = ["idUser" => $idUser, "activo" => "true"];
-                            $postmeta = ['post_id' => $_POST['idPost'], 'meta_key' => 'CRMdapliw_cliente', 'meta_value' => json_encode($metaValue)];
-                            $idPostmeta = $this->Postmeta->insert($postmeta);  
+                            if ($_POST['idPost'] > 0)
+                            { 
+                                $metaValue = ["idUser" => $idUser, "activo" => "true"];
+                                $postmeta = ['post_id' => $_POST['idPost'], 'meta_key' => 'CRMdapliw_cliente', 'meta_value' => json_encode($metaValue)];
+                                $idPostmeta = $this->Postmeta->insert($postmeta);  
 
-                            if ($idPostmeta == 0)
-                            {
-                                $binnacle = 
-                                    [
-                                        "novedad" => "No se pudo asociar la propiedad " . $_POST['idPost'] . " al cliente " . $idUser,
-                                        "tipo_clase" => "controlador",
-                                        "nombre_clase" => "Users",
-                                        "nombre_metodo" => "guardar_persona"                             
-                                    ];
+                                if ($idPostmeta == 0)
+                                {
+                                    $binnacle = 
+                                        [
+                                            "novedad" => "No se pudo asociar la propiedad " . $_POST['idPost'] . " al cliente " . $idUser,
+                                            "tipo_clase" => "controlador",
+                                            "nombre_clase" => "Users",
+                                            "nombre_metodo" => "guardar_persona"                             
+                                        ];
 
                                     $idBinnacle = $this->Binnacle->insert($binnacle);
 
-                                $jsondata["satisfactorio"] = false;
-                                $jsondata["mensaje"] = "No se pudo asociar la propiedad " . $_POST['idPost'] . " al cliente " . $idUser;
+                                    $indicadorError = 1;
+                                    $jsondata["satisfactorio"] = false;
+                                    $jsondata["mensaje"] = "No se pudo asociar la propiedad " . $_POST['idPost'] . " al cliente " . $idUser;
+                                }
                             }
-                            else
-                            {
-                                $jsondata["satisfactorio"] = true;
-                                $jsondata["mensaje"] = "La persona se agregó exitosamente ";
-                                $jsondata["idUser"] = $idUser;
-                                $jsondata["idPostmeta"] = $idPostmeta;
-                            }
-                        }
+                        }        
+                        if ($indicadorError == 0)
+                        {    
+                            inspiry_new_user_notification($idUser, $claveSinEncriptacion);
+                                                    
+                            $jsondata["satisfactorio"] = true;
+                            $jsondata["mensaje"] = "La persona se agregó exitosamente ";
+                            $jsondata["idUser"] = $idUser;
+                            $jsondata["idPostmeta"] = $idPostmeta;
+                        }                       
                     }
                     else
                     {
