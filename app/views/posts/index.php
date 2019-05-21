@@ -237,7 +237,7 @@
 			<div class="row">
 				<div class="col-4 col-md-4 text-center">
 					<button title="Agenda" class="btn btn-link" id="agenda40">
-						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/agenda.svg" ?>
+						<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/calendar.svg" ?>
 							alt="Agenda" class="img-fluid mx-auto iconoPrincipal">
 					</button>
 				</div>
@@ -2186,7 +2186,7 @@ function mostrarBienes(tipoContenido, valor)
 						
 						"<button class='btn btn-light ultimaActividad60' id='ultimaActividad60-" + bien.ID + "' title='Agenda'>" +
 							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
-							"crmdapliw/app/public/images/agenda.svg alt='Agenda' class='icono'>" +
+							"crmdapliw/app/public/images/calendar.svg alt='Agenda' class='icono'>" +
 						"</button>" +
 						
 						"<button class='btn btn-light personas60' id='personas60-" + bien.ID + "' title='Personas'>" +

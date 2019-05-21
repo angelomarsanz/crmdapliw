@@ -228,8 +228,10 @@ class UsersController extends MvcPublicController
                         }        
                         if ($indicadorError == 0)
                         {    
-                            inspiry_new_user_notification($idUser, $claveSinEncriptacion);
-                                                    
+                            if (in_array("Cliente", $_POST["persona"]["roles"]) == false)
+                            {
+                                inspiry_new_user_notification($idUser, $claveSinEncriptacion);
+                            }
                             $jsondata["satisfactorio"] = true;
                             $jsondata["mensaje"] = "La persona se agregó exitosamente ";
                             $jsondata["idUser"] = $idUser;
