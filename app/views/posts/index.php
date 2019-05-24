@@ -543,37 +543,37 @@
 
 							<p style="color: black;">Roles*</p>
 
-							<div class="form-check rol110">
+							<div class="form-check roles110">
 								<input type="checkbox" class="form-check-input" id="administrador110"> 
 								<label class='form-check-label' for="administrador110">&nbsp;&nbsp;Administrador</label>
 							</div>
 
-							<div class="form-check rol110">
+							<div class="form-check roles110">
 								<input type="checkbox" class="form-check-input" id="gestorNegocios110"> 
 								<label class='form-check-label' for="gestorNegocios110">&nbsp;&nbsp;Gestor de negocios</label>
 							</div>
 
-							<div class="form-check rol110">
+							<div class="form-check roles110">
 								<input type="checkbox" class="form-check-input" id="captador110"> 
 								<label class='form-check-label' for="captador110">&nbsp;&nbsp;Captador</label>
 							</div>
 
-							<div class="form-check rol110">
+							<div class="form-check roles110">
 								<input type="checkbox" class="form-check-input" id="promotor110"> 
 								<label class='form-check-label' for="promotor110">&nbsp;&nbsp;Asesor de inversión inmobiliaria</label>
 							</div>
 
-							<div class="form-check rol110">
+							<div class="form-check roles110">
 								<input type="checkbox" class="form-check-input" id="propietario110"> 
 								<label class='form-check-label' for="propietario110">&nbsp;&nbsp;Propietario</label>
 							</div>
 
-							<div class="form-check rol110">
+							<div class="form-check roles110">
 								<input type="checkbox" class="form-check-input" id="cliente110"> 
-								<label class='form-check-label' for="cliente110">&nbsp;&nbsp;Cliente</label>
+								<label class='form-check-label' for="cliente110">&nbsp;&nbsp;Cliente o comprador potencial</label>
 							</div>
 
-							<div class="form-check rol110">
+							<div class="form-check roles110">
 								<input type="checkbox" class="form-check-input" id="outsourcing110"> 
 								<label class='form-check-label' for="outsourcing110">&nbsp;&nbsp;Outsourcing</label>
 							</div>
@@ -2802,11 +2802,9 @@ function inicializarPersonas()
     $j("#tipoIdentificacion110").val("");
     $j("#numeroIdentificacion110").val(0);
     $j("#primerNombre110").val("");
-    $j("#segundoNombre110").val("");
     $j("#primerApellido110").val("");
-    $j("#segundoApellido110").val("");
 
-	$j("#rolesCheckbox110").each(function (index) 
+	$j("#rolesCheckbox110 input").each(function (index) 
 	{ 
 		$j(this).attr('checked', false);
 		$j(this).prop('checked', false);
@@ -4245,6 +4243,8 @@ function mostrarFotoPerfil()
 
 function cargarDatosPersona()
 {
+    borrarMensajesAnteriores();
+    
 	var tipoIdentificacion = "";
 	var numeroIdentificacion = "";
 	
@@ -4260,6 +4260,13 @@ function cargarDatosPersona()
     
     $j("#primerNombre110").val(gUsuarios[gIdPersonaActual].first_name);
     $j("#primerApellido110").val(gUsuarios[gIdPersonaActual].last_name);
+
+	$j("#rolesCheckbox110 input").each(function (index) 
+	{ 
+		$j(this).attr('checked', false);
+		$j(this).prop('checked', false);
+	});
+
     if (gUsuarios[gIdPersonaActual].CRMdapliw_roles.includes("Administrador"))
     {
    		$j("#administrador110").attr('checked', true);
@@ -4307,6 +4314,10 @@ function cargarDatosPersona()
     if (gUsuarios[gIdPersonaActual].CRMdapliw_direccion)
     {
         $j("#direccion110").val(gUsuarios[gIdPersonaActual].CRMdapliw_direccion);
+    }
+    if ($j("#eliminarPersona110").hasClass('noVer'))
+    {
+        $j("#eliminarPersona110").removeClass('noVer');
     }
 }
    
@@ -4356,6 +4367,21 @@ function eliminarPersona()
                 $j("#busquedaPersonas52").removeClass('noVer');
                 $j("#cerrarBusquedaPersonas10").removeClass('noVer');
                 $j("#busquedaPersonas10").removeClass('noVer');
+            }
+            else if (gFuncionLlamadora == "verPersona105")
+            {
+                $j("#cerrarVerPersona10").addClass('noVer');
+                $j("#guardarCambiosPersona10").addClass('noVer');
+                if ($j("#preferencias10").hasClass('noVer') === false)
+                {                  
+                    $j("#preferencias10").addClass('noVer');
+                }
+                $j("#agregarPersonas110").addClass('noVer');
+                $j("#cerrarPersonasFiltradas10").removeClass('noVer');
+                $j("#agregarPersonaFiltro10").removeClass('noVer');
+                filtroPersonas = $j("#busquedaGrupos52").val();
+                mostrarPersonas(filtroPersonas);
+                $j("#listaPersonas105").removeClass('noVer');                
             }
             window.scrollTo(0, 0);           
         } 
@@ -4505,6 +4531,36 @@ function guardarCambiosPersona(indicadorCheckbox)
                 "</div>";
 
             $j("#mensajesUsuario30").html(mensajesUsuario);
+
+            if (gFuncionLlamadora == "busquedaPorPersona52")
+            {
+                $j("#cerrarBusquedaPorPersona10").addClass('noVer');
+                $j("#guardarCambiosPersona10").addClass('noVer');
+                if ($j("#preferencias10").hasClass('noVer') === false)
+                {
+                    $j("#preferencias10").addClass('noVer');            
+                }
+                $j("#agregarPersonas110").addClass('noVer');
+                $j("#busquedaPorPersona52").val("");
+                $j("#busquedaPersonas52").removeClass('noVer');
+                $j("#cerrarBusquedaPersonas10").removeClass('noVer');
+                $j("#busquedaPersonas10").removeClass('noVer');
+            }
+            else if (gFuncionLlamadora == "verPersona105")
+            {
+                $j("#cerrarVerPersona10").addClass('noVer');
+                $j("#guardarCambiosPersona10").addClass('noVer');
+                if ($j("#preferencias10").hasClass('noVer') === false)
+                {                  
+                    $j("#preferencias10").addClass('noVer');
+                }
+                $j("#agregarPersonas110").addClass('noVer');
+                $j("#cerrarPersonasFiltradas10").removeClass('noVer');
+                $j("#agregarPersonaFiltro10").removeClass('noVer');
+                filtroPersonas = $j("#busquedaGrupos52").val();
+                mostrarPersonas(filtroPersonas);
+                $j("#listaPersonas105").removeClass('noVer');                
+            }
             window.scrollTo(0, 0);           
         } 
         else 
@@ -6371,7 +6427,12 @@ $j(document).ready(function()
     });
 
     $j("#detallePreferencias111").on("click", ".eliminarPreferencia111", function()
-    {    
+    {   
+        var r= confirm('¿Está seguro de que desea eliminar esta preferencia');
+        if (r == false)
+        {
+            return false;
+        } 
         idPreferencia = $j(this).attr("id");
         gImagenAnterior = $j(this).html();  
         $j(this).attr("disabled", true).html(gImagenEspere);
