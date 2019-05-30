@@ -4,7 +4,7 @@ class PostsController extends MvcPublicController
 {
     public function test_function()
     {
-        inspiry_new_user_notification( 18, 123 );
+        
     }
 
     public function index() 
