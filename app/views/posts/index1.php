@@ -261,13 +261,12 @@
 			<h2>Filtros Propiedades</h2>
             <div class="row">
                 <div class="col-md-4">
-					<p class="letraAzul">Individual</p>
 					<div class="form-group noVer">
 						<label for="busquedaCodigo50">Código</label>
 						<input type="text" class="form-control texto50" id="busquedaCodigo50">
 					</div>
 					<div class="form-group">
-						<label for="busquedaNombre50">Nombre</label>
+						<label for="busquedaNombre50" class="letraAzul">Nombre</label>
 						<input type="text" class="form-control texto50" id="busquedaNombre50">
 					</div>
                 </div>
@@ -292,11 +291,9 @@
 				</div>
 				<div class="col-md-4">
 					<p class="letraAzul">Otros</p>
-					<div class="form-group noVer">
-						<label for="busquedaZona50">Zona</label>
-						<input type="text" class="form-control texto50" id="busquedaZona50">
-					</div>
+
 					<p>Rango de precio</p>
+
 					<div class="form-group">
 						<label for="busquedaPrecioMinimo50">Desde</label>
 						<input type="number" class="form-control numero50" id="busquedaPrecioMinimo50">
@@ -306,8 +303,15 @@
 						<label for="busquedaPrecioMaximo50">Hasta</label>
 						<input type="number" class="form-control numero50" id="busquedaPrecioMaximo50">
 					</div>
+
+					<div class="form-group">
+						<label for="ubicacion50" class="letraAzul">Ubicación</label>
+						<input type="text" class="form-control texto50" id="ubicacion50">
+					</div>
+
 				</div> 
             </div>
+
         </div> 
  
         <!-- div con sufijo 51 -->
@@ -406,7 +410,7 @@
 							<div class="col-md-12">
 					            <div class="form-group noVer" id="grupoBusqueda90">
 						            <label for="busquedaPropiedad90">Propiedad</label>
-						            <input type="text" class="form-control texto50" id="busquedaPropiedad90">
+						            <input type="text" class="form-control" id="busquedaPropiedad90">
 					            </div>                                
                                 <div class="mensajesUsuario" id="mensajesBusqueda90"></div>
 							</div>
@@ -641,10 +645,6 @@
 			<h2 class="letraAzul" id="tituloAgregarPreferencia112"></h2>
 			<br />
 			<form>
-				<!-- ?php
-					$column_class = 'rh_form--1-column';
-					get_template_part( 'assets/modern/partials/property/view/form-fields/address-and-map' ); 
-				? -->
 				<div class="row">
 					<div class="col-md-4">
 					    <div class="input-group mb-3">
@@ -673,17 +673,11 @@
 						    <select class="custom-select" id="tipoOperacion112">
 							    <option selected value=""></option>
                                 <option value="Alquiler">Alquiler</option>
-                                <option value="Venta">Venta</option>
+                                <option value="Compra">Compra</option>
 						    </select>
 					    </div>
                         <div id="mensajesTipoOperacion112" class="mensajesUsuario"></div>
 						
-                        <div class="form-group">
-							<label for="ubicacion112">Ubicación</label>
-							<input type="text" class="form-control" id="ubicacion112">
-						</div>
-                        <div id="mensajesUbicacion112" class="mensajesUsuario"></div>
-
                     </div>
 					<div class="col-md-4">
 						<div class="form-group">
@@ -715,7 +709,35 @@
 							<input type="number" class="form-control" id="precioMaximo112">
 						</div>
 					</div>
-				</div>					
+				</div>		
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <?php
+                            $column_class = 'rh_form--1-column';
+                        ?>
+
+                        <div class="form-group">
+                            <label for="coordenadas112">Coordenadas Google Maps</label>
+                            <input type="text" class="form-control" id="coordenadas112" disabled>
+                        </div>
+
+                        <div class="rh_form__item rh_form--relative <?php echo esc_attr( $column_class ); ?> rh_form--columnAlign address-map-fields-wrapper">
+                            <div class="address-wrapper">
+                                <label for="address"><?php esc_html_e( 'Address', 'framework' ); ?></label>
+                                <input type="text" class="required" name="address" id="address" title="<?php esc_attr_e( '* Please provide a property address!', 'framework' ); ?>" />
+                            </div>
+                            <!-- /.address-wrapper -->
+                            <div class="map-wrapper">
+                                <button class="rh_btn rh_btn--secondary goto-address-button" type="button" value="address">Buscar dirección y coordenadas en Google Maps</button>
+                                <div class="map-canvas"></div>
+                                <input type="hidden" name="coordinates" class="map-coordinate" value="10.234146,-68.00510199999997" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 			</form>
         </div>
 
@@ -767,6 +789,8 @@ var gOutsourcing = gVectorGeneral.outsourcing;
 var gNotificaciones = gVectorGeneral.notificaciones;
 var gVistaPreferida = gVectorGeneral.vistaPreferida;
 var gOpcionesSelectActividades = gVectorGeneral.opcionesSelectActividades;
+var gDireccionesUnico = gVectorGeneral.direccionesUnico;
+
 gVectorGeneral = "";
 
 var gIdPostActual = "";
@@ -1956,7 +1980,7 @@ function filtrarPropiedades(idBienFiltro)
     {    
         $j(".texto50").each(function()
         {   
-            if ($j(this).val() > 0)
+            if ($j(this).val() != "")
             {
                 filtros = 1;
             }           
@@ -1991,16 +2015,16 @@ function filtrarPropiedades(idBienFiltro)
                     }
 		        }
 			
-		        if ($j("#busquedaBanos50").val() > 0)
-		        {
-			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_bathrooms)
-			        {
-			            if (gDatosBienes[datos1.ID].REAL_HOMES_property_bathrooms[0].valor == $j("#busquedaBanos50").val())
-			            {
-				            gBienes[clave1].ver = "true";
-			            }
+                if ($j("#busquedaBanos50").val() > 0)
+                {
+                    if (gDatosBienes[datos1.ID].REAL_HOMES_property_bathrooms)
+                    {
+                        if (gDatosBienes[datos1.ID].REAL_HOMES_property_bathrooms[0].valor == $j("#busquedaBanos50").val())
+                        {
+                            gBienes[clave1].ver = "true";
+                        }
                     }
-		        }
+                }
 				
 		        if ($j("#busquedaGarajes50").val() > 0)
 		        {
@@ -2057,7 +2081,24 @@ function filtrarPropiedades(idBienFiltro)
 				            gBienes[clave1].ver = "true";
 			            }
                     }
-		        }	
+		        }
+
+		        if ($j("#ubicacion50").val() != "")
+		        {
+			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_address)
+			        {
+                        dondeBusco = gDatosBienes[datos1.ID].REAL_HOMES_property_address[0].valor.toUpperCase();
+
+                        loQueBusco = $j("#ubicacion50").val().toUpperCase();
+
+                        console.log("donde Busco " + dondeBusco + " loQueBusco " + loQueBusco);
+
+			            if (dondeBusco.indexOf(loQueBusco) > -1)
+			            {
+				            gBienes[clave1].ver = "true";
+			            }
+                    }
+		        }
 	        });
         }
     }
@@ -4068,6 +4109,7 @@ function actualizarVectores(vectorGeneralActualizado)
     gNotificaciones = gVectorGeneral.notificaciones;	
     gVistaPreferida = gVectorGeneral.vistaPreferida;
     gOpcionesSelectActividades = gVectorGeneral.opcionesSelectActividades;
+    gDireccionesUnico = gVectorGeneral.direccionesUnico;
     gVectorGeneral = "";
 
     $j("#busquedaNombre50").autocomplete(
@@ -4179,6 +4221,14 @@ function actualizarVectores(vectorGeneralActualizado)
                 $j("#grupoRol110").addClass('noVer');
             }
             cargarDatosPersona();
+        }
+    });
+
+    $j("#ubicacion50").autocomplete(
+    {
+        source: gDireccionesUnico,
+        select: function( event, ui ) 
+        {   
         }
     });
 }
@@ -4878,6 +4928,7 @@ function mostrarPreferencias()
 
 	this.updatePositionInput = function(latLng){
 		this.container.find('.map-coordinate').val(latLng.lat() + ',' + latLng.lng());
+        $j("#coordenadas112").val(latLng.lat() + ',' + latLng.lng());
 	}
 
 	this.geocodeAddress = function(addressField){
@@ -4916,7 +4967,7 @@ function mostrarPreferencias()
 			source: function(request, response) {
 				// TODO: add 'region' option, to help bias geocoder.
 				that.geocoder.geocode( {'address': request.term }, function(results, status) {
-					response($.map(results, function(item) {
+					response($j.map(results, function(item) {
 						return {
 							label: item.formatted_address,
 							value: item.formatted_address,
@@ -4928,7 +4979,9 @@ function mostrarPreferencias()
 			},
 			select: function(event, ui) {
 				that.container.find(".map-coordinate").val(ui.item.latitude + ',' + ui.item.longitude );
-				var location = new window.google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+                $j("#coordenadas112").val(ui.item.latitude + ',' + ui.item.longitude);
+
+                var location = new window.google.maps.LatLng(ui.item.latitude, ui.item.longitude);
 				that.map.setCenter(location);
 				// Drop the Marker
 				setTimeout(function(){
@@ -5018,13 +5071,14 @@ function guardarPreferencia()
             {
                 "Tipo de propiedad" : $j("#tipoPropiedad112").val(),
                 "Tipo de operacion" : $j("#tipoOperacion112").val(),
-                "Ubicación" : $j("#ubicacion112").val(),
                 "Habitaciones" : $j("#habitaciones112").val(),
                 "Baños" : $j("#banos112").val(),
                 "Garajes" : $j("#garajes112").val(),
                 "Area M2" : $j("#area112").val(),
                 "Precio mínimo" : $j("#precioMinimo112").val(),
                 "Precio máximo" : $j("#precioMaximo112").val(),
+                "Ubicación" : $j("#address").val(),
+                "Coordenadas" : $j("#coordenadas112").val(),                
                 "Estatus" : "Activa"
             }
         };
@@ -5126,13 +5180,14 @@ function guardarCambiosPreferencia()
             {
                 "Tipo de propiedad" : $j("#tipoPropiedad112").val(),
                 "Tipo de operacion" : $j("#tipoOperacion112").val(),
-                "Ubicación" : $j("#ubicacion112").val(),
                 "Habitaciones" : $j("#habitaciones112").val(),
                 "Baños" : $j("#banos112").val(),
                 "Garajes" : $j("#garajes112").val(),
                 "Area M2" : $j("#area112").val(),
                 "Precio mínimo" : $j("#precioMinimo112").val(),
                 "Precio máximo" : $j("#precioMaximo112").val(),
+                "Ubicación" : $j("#address").val(),
+                "Coordenadas" : $j("#coordenadas112").val(),
                 "Estatus" : "Activa"
             }
         };
@@ -5221,6 +5276,13 @@ function cargarCamposPreferencia()
     $j("#area112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Area M2"]);
     $j("#precioMinimo112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Precio mínimo"]);
     $j("#precioMaximo112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Precio máximo"]);    
+    $j("#coordenadas112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Coordenadas"]);
+    $j("#address").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Ubicación"]);
+    $j(".map-coordinate").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Coordenadas"]);
+
+    $j('.map-wrapper').each(function(){
+        mapField.init($j(this));
+    });
 }
 
 function eliminarPreferencia(idPreferencia)
@@ -6351,12 +6413,22 @@ $j(document).ready(function()
 
     $j("#agregarPreferencia10").click(function()
     {
+        borrarMensajesAnteriores();
         $j("#preferencias111").addClass("noVer");
         $j("#agregarPreferencia10").addClass("noVer");
+        $j("#cerrarPreferencias10").addClass("noVer");
         tituloAgregarPreferencia = 
             "Agregar preferencia del cliente " + 
             gUsuarios[gIdPersonaActual].first_name + " " + gUsuarios[gIdPersonaActual].last_name; 
         $j("#tituloAgregarPreferencia112").html(tituloAgregarPreferencia);
+        $j("#coordenadas112").val("");
+        $j("#address").val("");
+        $j(".map-coordinate").val("10.234146,-68.00510199999997");
+
+        $j('.map-wrapper').each(function(){
+            mapField.init($j(this));
+        });
+
         $j("#agregarPreferencia112").removeClass("noVer");
         $j("#cerrarAgregarPreferencia10").removeClass("noVer");
         $j("#guardarPreferencia10").removeClass("noVer");
@@ -6388,6 +6460,7 @@ $j(document).ready(function()
 
     $j("#detallePreferencias111").on("click", ".modificarPreferencia111", function()
     {    
+        borrarMensajesAnteriores();
         gClavePreferencia = $j(this).attr('id').substring(24);
         cargarCamposPreferencia();
         $j("#preferencias111").addClass("noVer");
@@ -6550,6 +6623,14 @@ $j(document).ready(function()
 
     $j('.map-wrapper').each(function(){
         mapField.init($j(this));
+    });
+
+    $j("#ubicacion50").autocomplete(
+    {
+        source: gDireccionesUnico,
+        select: function( event, ui ) 
+        {   
+        }
     });
 
 });

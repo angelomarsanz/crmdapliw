@@ -207,7 +207,7 @@ class PostsController extends MvcPublicController
                     { 
                         if (in_array("Gestor de negocios", $roles) || in_array("Administrador", $roles))
                         {
-                            $nombreRol = $nombreCompleto . " - OUTSOURCING(A)";
+                            $nombreRol = $nombreCompleto . " - OUTSOURCING";
                             $personas[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $usuario["ID"]];
                             $outsourcing[] = ["label" => $nombreRol, "value" => $nombreRol, "id" => $usuario["ID"]];
                         }
@@ -297,7 +297,8 @@ class PostsController extends MvcPublicController
         $keyActual = 0;
         $idPostAnterior = 0;
         $datosBienes = [];
-		$notificaciones = 0;
+        $notificaciones = 0;
+        $direcciones = [];
         foreach ($propiedadesBienes as $propiedadesBien)
         {
             if ($contadorDatos == 0)
@@ -396,6 +397,13 @@ class PostsController extends MvcPublicController
                         "nombrePromotorCliente" => ""];
                 }
             }
+            elseif ($propiedadesBien->meta_key == "REAL_HOMES_property_address")
+            {
+                $direcciones[] = ["label" => $propiedadesBien->meta_value, "value" => $propiedadesBien->meta_value, "id" => $propiedadesBien->post_id];
+
+                $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][] = 
+                    ["valor" => $propiedadesBien->meta_value, "id" => $propiedadesBien->meta_id];
+            }
             else
             {
                 $datosBienes[$propiedadesBien->post_id][$propiedadesBien->meta_key][] = 
@@ -405,6 +413,8 @@ class PostsController extends MvcPublicController
             $contadorDatos++;
         }
 
+        $direccionesUnico = $this->unique_multidim_array($direcciones, 'label');
+       
         $opcionesActividades = $this->Postmeta->find(array(
             'conditions' => array(
                 'meta_key' => array('CRMdapliw_opcion_actividades'))));
@@ -477,7 +487,8 @@ class PostsController extends MvcPublicController
                 "bienesAutocomplete" => $bienesAutocomplete,
                 "datosBienes" => $datosBienes,
                 "notificaciones" => $notificaciones,
-                "opcionesSelectActividades" => $opcionesSelectActividades
+                "opcionesSelectActividades" => $opcionesSelectActividades,
+                "direccionesUnico" => $direccionesUnico
             ];
 
         return $vectorGeneral;        
@@ -617,4 +628,22 @@ class PostsController extends MvcPublicController
         }
         return $accesoPermitido;    
     }
+
+    public function unique_multidim_array($array, $key) 
+    { 
+        $temp_array = array(); 
+        $i = 0; 
+        $key_array = array(); 
+        
+        foreach($array as $val) 
+        { 
+            if (!in_array($val[$key], $key_array)) 
+            { 
+                $key_array[$i] = $val[$key]; 
+                $temp_array[] = $val; 
+            } 
+            $i++; 
+        } 
+        return $temp_array; 
+    } 
 }
