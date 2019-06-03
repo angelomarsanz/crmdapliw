@@ -389,6 +389,10 @@
             <h2 class="letraAzul" id="titulo60"></h2>
             <div class="row" id="cicloBienes60">
             </div>
+            <div class="row">
+                <div class="<div class='col-md-12" id="pieDePagina60">
+                </div>
+            </div>
             <br />
             <br />
             <br />
@@ -2004,83 +2008,110 @@ function filtrarPropiedades(idBienFiltro)
 
 	        $j.each(gBienes, function(clave1, datos1)  
 	        {
+                indicadorSeleccionado = 0;
+
 		        if ($j("#busquedaHabitaciones50").val() > 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_bedrooms)
                     {
-			            if (gDatosBienes[datos1.ID].REAL_HOMES_property_bedrooms[0].valor == $j("#busquedaHabitaciones50").val())
+			            if (gDatosBienes[datos1.ID].REAL_HOMES_property_bedrooms[0].valor != $j("#busquedaHabitaciones50").val())
 			            {
-                            gBienes[clave1].ver = "true";
+                            indicadorSeleccionado = 1;
 			            }
                     }
+                    else
+                    {
+                        indicadorSeleccionado = 1;
+		            }
 		        }
 			
-                if ($j("#busquedaBanos50").val() > 0)
-                {
-                    if (gDatosBienes[datos1.ID].REAL_HOMES_property_bathrooms)
-                    {
-                        if (gDatosBienes[datos1.ID].REAL_HOMES_property_bathrooms[0].valor == $j("#busquedaBanos50").val())
-                        {
-                            gBienes[clave1].ver = "true";
-                        }
+		        if ($j("#busquedaBanos50").val() > 0)
+		        {
+			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_bathrooms)
+			        {
+			            if (gDatosBienes[datos1.ID].REAL_HOMES_property_bathrooms[0].valor != $j("#busquedaBanos50").val())
+			            {
+				            indicadorSeleccionado = 1;
+			            }
                     }
-                }
+                    else
+                    {
+                        indicadorSeleccionado = 1;
+		            }
+		        }
 				
 		        if ($j("#busquedaGarajes50").val() > 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_garage)
 			        {
-			            if (gDatosBienes[datos1.ID].REAL_HOMES_property_garage[0].valor == $j("#busquedaGarajes50").val())
+			            if (gDatosBienes[datos1.ID].REAL_HOMES_property_garage[0].valor != $j("#busquedaGarajes50").val())
 			            {
-				            gBienes[clave1].ver = "true";
+				            indicadorSeleccionado = 1;
 			            }
                     }
+                    else
+                    {
+                        indicadorSeleccionado = 1;
+		            }
 		        }
 
 		        if ($j("#busquedaArea50").val() > 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_size)
 			        {
-			            if (parseFloat(gDatosBienes[datos1.ID].REAL_HOMES_property_size[0].valor) >= parseFloat($j("#busquedaArea50").val()))
+			            if (parseFloat(gDatosBienes[datos1.ID].REAL_HOMES_property_size[0].valor) < parseFloat($j("#busquedaArea50").val()))
 			            {
-				            gBienes[clave1].ver = "true";
+				            indicadorSeleccionado = 1;
 			            }
                     }
+                    else
+                    {
+                        indicadorSeleccionado = 1;
+		            }
 		        }
-		
-		        indicadorPrecio = 0;
-		
+			
 		        if ($j("#busquedaPrecioMinimo50").val() > 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_price)
 			        {
-			            if (parseFloat(gDatosBienes[datos1.ID].REAL_HOMES_property_price[0].valor) >= parseFloat($j("#busquedaPrecioMinimo50").val()))
-			            {
-				            if ($j("#busquedaPrecioMaximo50").val() > 0)
-				            {
-					            if (parseFloat(gDatosBienes[datos1.ID].REAL_HOMES_property_price[0].valor) <= parseFloat($j("#busquedaPrecioMaximo50").val()))
-					            {
-						            gBienes[clave1].ver = "true";
-					            }
-					            indicadorPrecio = 1;
-				            }
-				            else
-				            {
-					            gBienes[clave1].ver = "true";
-				            }
-			            }
+                        if (Number.isNaN(parseFloat(gDatosBienes[datos1.ID].REAL_HOMES_property_price[0].valor)))
+                        {
+                            indicadorSeleccionado = 1;
+                        }
+                        else
+                        {
+			                if (parseFloat(gDatosBienes[datos1.ID].REAL_HOMES_property_price[0].valor) < parseFloat($j("#busquedaPrecioMinimo50").val()))
+			                {
+					            indicadorSeleccionado = 1;
+			                }
+                        }
                     }
+                    else
+                    {
+                        indicadorSeleccionado = 1;
+		            }
 		        }
 		
-		        if ($j("#busquedaPrecioMaximo50").val() > 0 && indicadorPrecio == 0)
+		        if ($j("#busquedaPrecioMaximo50").val() > 0)
 		        {
 			        if (gDatosBienes[datos1.ID].REAL_HOMES_property_price)
 			        {
-			            if (parseFloat(gDatosBienes[datos1.ID].REAL_HOMES_property_price[0].valor) <= parseFloat($j("#busquedaPrecioMaximo50").val()))
-			            {
-				            gBienes[clave1].ver = "true";
-			            }
+                        if (Number.isNaN(parseFloat(gDatosBienes[datos1.ID].REAL_HOMES_property_price[0].valor)))
+                        {
+                            indicadorSeleccionado = 1;
+                        }
+                        else
+                        {
+			                if (parseFloat(gDatosBienes[datos1.ID].REAL_HOMES_property_price[0].valor) > parseFloat($j("#busquedaPrecioMaximo50").val()))
+			                {
+				                indicadorSeleccionado = 1;
+			                }
+                        }
                     }
+                    else
+                    {
+                        indicadorSeleccionado = 1;
+		            }
 		        }
 
 		        if ($j("#ubicacion50").val() != "")
@@ -2091,14 +2122,22 @@ function filtrarPropiedades(idBienFiltro)
 
                         loQueBusco = $j("#ubicacion50").val().toUpperCase();
 
-                        console.log("donde Busco " + dondeBusco + " loQueBusco " + loQueBusco);
-
-			            if (dondeBusco.indexOf(loQueBusco) > -1)
+			            if (dondeBusco.indexOf(loQueBusco) < 0)
 			            {
-				            gBienes[clave1].ver = "true";
+				            indicadorSeleccionado = 1;
 			            }
                     }
+                    else
+                    {
+                        indicadorSeleccionado = 1;
+		            }
 		        }
+
+                if (indicadorSeleccionado == 0)
+                {
+                    gBienes[clave1].ver = "true";
+                }
+
 	        });
         }
     }
@@ -2125,6 +2164,7 @@ function mostrarBienes(tipoContenido, valor)
 	var colorAlerta = "";
     var bienes = "";
     var contador = 1;
+    var coincidencias = 0;
 	
 	if (gVistaPreferida.substring(0, 5) == "Lista")
 	{
@@ -2242,6 +2282,7 @@ function mostrarBienes(tipoContenido, valor)
 					"</td>" +
 				"</tr>";
                 contador++;
+                coincidencias++;
 			}
 		});
         bienes += 
@@ -2348,6 +2389,8 @@ function mostrarBienes(tipoContenido, valor)
 							"</div>" +
 						"</div>" +
 					"</div>";
+                contador++;
+                coincidencias++;
 			}
 		});
 	}
@@ -2373,6 +2416,15 @@ function mostrarBienes(tipoContenido, valor)
     {
         primeraActividadPendiente(bien.ID);
     });   
+
+    if (coincidencias > 0)
+    {
+        $j("#pieDePagina60").html("<p>Total coincidencias: " + coincidencias + "</p>");
+    }
+    else
+    {
+        $j("#pieDePagina60").html("<p>" + "No se encontraron propiedades acordes con la búsqueda" + "</p>");
+    }
 }
 
 function primeraActividadPendiente(idBien)
@@ -2990,14 +3042,38 @@ function guardarPersona(indicadorCheckbox)
 
             if (gFuncionLlamadora == "agregarPersonaFiltro10")
             {
-                filtroPersonas = $j("#busquedaGrupos52").val();
                 $j("#agregarPersonas110").addClass("noVer");
                 $j("#cerrarAgregarPersonaFiltro10").addClass('noVer');
                 $j("#guardarPersona10").addClass("noVer");
-                $j("#cerrarPersonasFiltradas10").removeClass('noVer');
-                $j("#agregarPersonaFiltro10").removeClass('noVer');
-                mostrarPersonas(filtroPersonas);
-                $j("#listaPersonas105").removeClass('noVer');
+
+                if (roles.includes("Cliente"))
+                {
+                    gIdPersonaActual = response.idUser;
+
+                    tituloAgregarPreferencia = 
+                        "Agregar preferencia del cliente " + 
+                        gUsuarios[gIdPersonaActual].first_name + " " + gUsuarios[gIdPersonaActual].last_name; 
+                    $j("#tituloAgregarPreferencia112").html(tituloAgregarPreferencia);
+                    $j("#coordenadas112").val("");
+                    $j("#address").val("");
+                    $j(".map-coordinate").val("10.234146,-68.00510199999997");
+
+                    $j('.map-wrapper').each(function(){
+                        mapField.init($j(this));
+                    });
+
+                    $j("#agregarPreferencia112").removeClass("noVer");
+                    $j("#cerrarAgregarPreferencia10").removeClass("noVer");
+                    $j("#guardarPreferencia10").removeClass("noVer");
+                }
+                else
+                {
+                    filtroPersonas = $j("#busquedaGrupos52").val();
+                    $j("#cerrarPersonasFiltradas10").removeClass('noVer');
+                    $j("#agregarPersonaFiltro10").removeClass('noVer');
+                    mostrarPersonas(filtroPersonas);
+                    $j("#listaPersonas105").removeClass('noVer');
+                }
             }
             else
             {
@@ -5739,6 +5815,7 @@ $j(document).ready(function()
         $j("#busquedaZona50").val(""); 
         $j("#busquedaPrecioMinimo50").val(""); 
         $j("#busquedaPrecioMaximo50").val(""); 
+        $j("#ubicacion50").val("");
         $j("#principal40").removeClass('noVer');
         window.scrollTo(0, 0);
     });
@@ -6441,9 +6518,20 @@ $j(document).ready(function()
         $j("#cerrarAgregarPreferencia10").addClass("noVer");
         $j("#guardarPreferencia10").addClass("noVer");
         borrarMensajesAnteriores();
-        $j("#preferencias111").removeClass("noVer");
-        $j("#cerrarPreferencias10").removeClass("noVer");
-        $j("#agregarPreferencia10").removeClass("noVer");
+        if (gFuncionLlamadora == "agregarPersonaFiltro10")
+        {
+            filtroPersonas = $j("#busquedaGrupos52").val();
+            $j("#cerrarPersonasFiltradas10").removeClass('noVer');
+            $j("#agregarPersonaFiltro10").removeClass('noVer');
+            mostrarPersonas(filtroPersonas);
+            $j("#listaPersonas105").removeClass('noVer');
+        }
+        else
+        {
+            $j("#preferencias111").removeClass("noVer");
+            $j("#cerrarPreferencias10").removeClass("noVer");
+            $j("#agregarPreferencia10").removeClass("noVer");
+        }
         window.scrollTo(0, 0);  
     });
 
@@ -6581,9 +6669,11 @@ $j(document).ready(function()
             $j("#preferencias10").addClass('noVer');            
         }
         $j("#agregarPersonas110").addClass('noVer');
-		$j("#listaPersonas105").removeClass('noVer');
-		$j("#cerrarPersonasFiltradas10").removeClass('noVer');
+        filtroPersonas = $j("#busquedaGrupos52").val();
+        $j("#cerrarPersonasFiltradas10").removeClass('noVer');
         $j("#agregarPersonaFiltro10").removeClass('noVer');
+        mostrarPersonas(filtroPersonas);
+        $j("#listaPersonas105").removeClass('noVer');
         window.scrollTo(0, 0);  
     });
 

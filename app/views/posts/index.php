@@ -688,30 +688,40 @@
 							<label for="habitaciones112">Habitaciones</label>
 							<input type="number" class="form-control" id="habitaciones112">
 						</div>
+                        <div id="mensajesHabitaciones112" class="mensajesUsuario"></div>
+
 						<div class="form-group">
 							<label for="banos112">Baños</label>
 							<input type="Number" class="form-control" id="banos112">
 						</div>
+                        <div id="mensajesBanos112" class="mensajesUsuario"></div>
+
 						<div class="form-group">
 							<label for="garajes112">Garajes</label>
 							<input type="Number" class="form-control" id="garajes112">
 						</div>
+                        <div id="mensajesGarajes112" class="mensajesUsuario"></div>
+
 						<div class="form-group">
 							<label for="area112">Área M2 (igual o mayor a)</label>
 							<input type="Number" class="form-control" id="area112">
 						</div>
+                        <div id="mensajesArea112" class="mensajesUsuario"></div>
 					</div>
+
 					<div class="col-md-4">
 						<p>Rango de precio</p>
 						<div class="form-group">
 							<label for="precioMinimo112">Desde</label>
 							<input type="number" class="form-control" id="precioMinimo112">
 						</div>
+                        <div id="mensajesPrecioMinimo112" class="mensajesUsuario"></div>
 						
 						<div class="form-group">
 							<label for="precioMaximo112">Hasta</label>
 							<input type="number" class="form-control" id="precioMaximo112">
 						</div>
+                        <div id="mensajesPrecioMaximo112" class="mensajesUsuario"></div>
 					</div>
 				</div>		
 
@@ -727,11 +737,14 @@
                             <input type="text" class="form-control" id="coordenadas112" disabled>
                         </div>
 
+                        <div id="mensajesAddress" class="mensajesUsuario"></div>
+
                         <div class="rh_form__item rh_form--relative <?php echo esc_attr( $column_class ); ?> rh_form--columnAlign address-map-fields-wrapper">
                             <div class="address-wrapper">
                                 <label for="address"><?php esc_html_e( 'Address', 'framework' ); ?></label>
                                 <input type="text" class="required" name="address" id="address" title="<?php esc_attr_e( '* Please provide a property address!', 'framework' ); ?>" />
                             </div>
+
                             <!-- /.address-wrapper -->
                             <div class="map-wrapper">
                                 <button class="rh_btn rh_btn--secondary goto-address-button" type="button" value="address">Buscar dirección y coordenadas en Google Maps</button>
@@ -3042,14 +3055,38 @@ function guardarPersona(indicadorCheckbox)
 
             if (gFuncionLlamadora == "agregarPersonaFiltro10")
             {
-                filtroPersonas = $j("#busquedaGrupos52").val();
                 $j("#agregarPersonas110").addClass("noVer");
                 $j("#cerrarAgregarPersonaFiltro10").addClass('noVer');
                 $j("#guardarPersona10").addClass("noVer");
-                $j("#cerrarPersonasFiltradas10").removeClass('noVer');
-                $j("#agregarPersonaFiltro10").removeClass('noVer');
-                mostrarPersonas(filtroPersonas);
-                $j("#listaPersonas105").removeClass('noVer');
+
+                if (roles.includes("Cliente"))
+                {
+                    gIdPersonaActual = response.idUser;
+
+                    tituloAgregarPreferencia = 
+                        "Agregar preferencia del cliente " + 
+                        gUsuarios[gIdPersonaActual].first_name + " " + gUsuarios[gIdPersonaActual].last_name; 
+                    $j("#tituloAgregarPreferencia112").html(tituloAgregarPreferencia);
+                    $j("#coordenadas112").val("");
+                    $j("#address").val("");
+                    $j(".map-coordinate").val("10.234146,-68.00510199999997");
+
+                    $j('.map-wrapper').each(function(){
+                        mapField.init($j(this));
+                    });
+
+                    $j("#agregarPreferencia112").removeClass("noVer");
+                    $j("#cerrarAgregarPreferencia10").removeClass("noVer");
+                    $j("#guardarPreferencia10").removeClass("noVer");
+                }
+                else
+                {
+                    filtroPersonas = $j("#busquedaGrupos52").val();
+                    $j("#cerrarPersonasFiltradas10").removeClass('noVer');
+                    $j("#agregarPersonaFiltro10").removeClass('noVer');
+                    mostrarPersonas(filtroPersonas);
+                    $j("#listaPersonas105").removeClass('noVer');
+                }
             }
             else
             {
@@ -3144,10 +3181,10 @@ function validarPersona(indicadorCheckbox)
         $j("#mensajesTipo110").html(mensajeError);
     }
 
-    if ($j("#numeroIdentificacion110").val() == 0)
+    if ($j("#numeroIdentificacion110").val() < 1)
     {   
         indicadorError = 1;
-        mensajeError = anterior + "Escriba el número de identificacion" + posterior;
+        mensajeError = anterior + "Verifique el número de identificacion" + posterior;
         $j("#mensajesIdentificacion110").html(mensajeError);
     }
 
@@ -3170,6 +3207,20 @@ function validarPersona(indicadorCheckbox)
         indicadorError = 1;
         mensajeError = anterior + "Por favor escriba al menos un número de teléfono de la persona" + posterior;
         $j("#mensajesCelular110").html(mensajeError);
+        $j("#mensajesTelefono110").html(mensajeError);
+    }
+
+    if ($j("#celular110").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesCelular110").html(mensajeError);
+    }
+
+    if ($j("#telefonoFijo110").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
         $j("#mensajesTelefono110").html(mensajeError);
     }
 
@@ -5084,11 +5135,53 @@ function validarPreferencia()
         $j("#mensajesTipoOperacion112").html(mensajeError);
     }
 
-    if ($j("#ubicacion112").val() == "") 
+    if ($j("#habitaciones112").val() < 0)
     {   
         indicadorError = 1;
-        mensajeError = anterior + "Escriba la ubicación del inmueble" + posterior;
-        $j("#mensajesUbicacion112").html(mensajeError);
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesHabitaciones112").html(mensajeError);
+    }
+
+    if ($j("#banos112").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesBanos112").html(mensajeError);
+    }
+
+    if ($j("#garajes112").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesGarajes112").html(mensajeError);
+    }
+
+    if ($j("#area112").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesArea112").html(mensajeError);
+    }
+
+    if ($j("#precioMinimo112").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesPrecioMinimo112").html(mensajeError);
+    }
+
+    if ($j("#precioMaximo112").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesPrecioMaximo112").html(mensajeError);
+    }
+
+    if ($j("#address").val() == "") 
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Escriba la dirección del inmueble" + posterior;
+        $j("#mensajesAddress").html(mensajeError);
     }
 
     if (indicadorError == 1)
@@ -5115,7 +5208,7 @@ function guardarPreferencia()
     $j("#mensajesUsuario30").html(mensajesUsuario);
     window.scrollTo(0, 0);
 
-    $j("#ubicacion112").val($j.trim($j("#ubicacion112").val()));
+    $j("#address").val($j.trim($j("#address").val()));
 
     jsonPreferencia = 
         {"idUsuario" : gIdPersonaActual,
@@ -5223,7 +5316,7 @@ function guardarCambiosPreferencia()
     $j("#mensajesUsuario30").html(mensajesUsuario);
     window.scrollTo(0, 0);
 
-    $j("#ubicacion112").val($j.trim($j("#ubicacion112").val()));
+    $j("#address").val($j.trim($j("#address").val()));
 
     jsonPreferencia = 
         {"idUsuario" : gIdPersonaActual,
@@ -5321,7 +5414,6 @@ function cargarCamposPreferencia()
 {
     $j("#tipoPropiedad112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Tipo de propiedad"]);
     $j("#tipoOperacion112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Tipo de operacion"]);
-    $j("#ubicacion112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Ubicación"]);
     $j("#habitaciones112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Habitaciones"]);
     $j("#banos112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Baños"]);
     $j("#garajes112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Garajes"]);
@@ -5428,7 +5520,7 @@ function limpiarCamposPreferencia()
     $j("#tituloAgregarPreferencia112").html("");
     $j("#tipoPropiedad112").val("");
     $j("#tipoOperacion112").val("");
-    $j("#ubicacion112").val("");
+    $j("#address").val("");
     $j("#habitaciones112").val("");
     $j("#banos112").val("");
     $j("#garajes112").val("");
@@ -6494,9 +6586,20 @@ $j(document).ready(function()
         $j("#cerrarAgregarPreferencia10").addClass("noVer");
         $j("#guardarPreferencia10").addClass("noVer");
         borrarMensajesAnteriores();
-        $j("#preferencias111").removeClass("noVer");
-        $j("#cerrarPreferencias10").removeClass("noVer");
-        $j("#agregarPreferencia10").removeClass("noVer");
+        if (gFuncionLlamadora == "agregarPersonaFiltro10")
+        {
+            filtroPersonas = $j("#busquedaGrupos52").val();
+            $j("#cerrarPersonasFiltradas10").removeClass('noVer');
+            $j("#agregarPersonaFiltro10").removeClass('noVer');
+            mostrarPersonas(filtroPersonas);
+            $j("#listaPersonas105").removeClass('noVer');
+        }
+        else
+        {
+            $j("#preferencias111").removeClass("noVer");
+            $j("#cerrarPreferencias10").removeClass("noVer");
+            $j("#agregarPreferencia10").removeClass("noVer");
+        }
         window.scrollTo(0, 0);  
     });
 
@@ -6634,9 +6737,11 @@ $j(document).ready(function()
             $j("#preferencias10").addClass('noVer');            
         }
         $j("#agregarPersonas110").addClass('noVer');
-		$j("#listaPersonas105").removeClass('noVer');
-		$j("#cerrarPersonasFiltradas10").removeClass('noVer');
+        filtroPersonas = $j("#busquedaGrupos52").val();
+        $j("#cerrarPersonasFiltradas10").removeClass('noVer');
         $j("#agregarPersonaFiltro10").removeClass('noVer');
+        mostrarPersonas(filtroPersonas);
+        $j("#listaPersonas105").removeClass('noVer');
         window.scrollTo(0, 0);  
     });
 

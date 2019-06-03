@@ -36,6 +36,7 @@ class UsersController extends MvcPublicController
 
         $jsondata = [];
         $indicadorYaRegistrado = 0;
+        $idPostmeta = 0;
         $rolesAutorizados = 
             [
                 "Promotor",
