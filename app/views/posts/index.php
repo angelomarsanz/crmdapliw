@@ -37,6 +37,11 @@
                 alt="Cerrar propiedades filtradas" class="iconoMenu">
             </button>
 
+            <button title="Email" class="btn btn-link noVer" id="email10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/envelope-closed.svg" ?> 
+                alt="Enviar email" class="iconoMenu">
+            </button>
+
 			<a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad" target="_blank">
 				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
 				alt="Publicar propiedad" class="iconoMenu">
@@ -269,6 +274,38 @@
 						<label for="busquedaNombre50" class="letraAzul">Nombre</label>
 						<input type="text" class="form-control texto50" id="busquedaNombre50">
 					</div>
+
+                    <div class="input-group mb-3 noVer">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="tipoPropiedad50">Tipo de propiedad</label>
+                        </div>
+                        <select class="custom-select texto50" id="tipoPropiedad50">
+                            <option selected value=""></option>
+                            <option value="Apartamento">Apartamento</option>
+                            <option value="Casa">Casa</option>
+                            <option value="Galpón">Galpón</option>
+                            <option value="Hotel">Hotel</option>
+                            <option value="Local comercial">Local comercial</option>
+                            <option value="Oficina">Oficina</option>
+                            <option value="Proyecto en preventa">Proyecto en preventa</option>
+                            <option value="Terreno">Terreno</option>
+                            <option value="townhouse">townhouse</option>
+                        </select>
+                    </div>
+                    <div id="mensajesTipoPropiedad50" class="mensajesUsuario"></div>
+
+                    <div class="input-group mb-3 noVer">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="tipoOperacion50">Tipo de operación</label>
+                        </div>
+                        <select class="custom-select texto50" id="tipoOperacion50">
+                            <option selected value=""></option>
+                            <option value="Alquiler">Alquiler</option>
+                            <option value="Compra">Compra</option>
+                        </select>
+                    </div>
+                    <div id="mensajesTipoOperacion112" class="mensajesUsuario"></div>
+
                 </div>
                 <div class="col-md-4">
 					<p class="letraAzul">Prestaciones</p>
@@ -386,7 +423,17 @@
 				 
         <!-- div con sufijo 60 -->
         <div class="container formulario noVer" id="bienes60">
-            <h2 class="letraAzul" id="titulo60"></h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="letraAzul" id="titulo60"></h2>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+				        <label for="enviarA60">Enviar a:</label>
+				        <input type="text" class="form-control" id="enviarA60">
+			        </div>
+                </div>
+            </div>
             <div class="row" id="cicloBienes60">
             </div>
             <div class="row">
@@ -655,7 +702,7 @@
 						    <div class="input-group-prepend">
 							    <label class="input-group-text" for="tipoPropiedad112">Tipo de propiedad</label>
 						    </div>
-						    <select class="custom-select" id="tipoPropiedad112">
+						    <select class="custom-select texto112" id="tipoPropiedad112">
 							    <option selected value=""></option>
                                 <option value="Apartamento">Apartamento</option>
                                 <option value="Casa">Casa</option>
@@ -674,7 +721,7 @@
 						    <div class="input-group-prepend">
 							    <label class="input-group-text" for="tipoOperacion112">Tipo de operación</label>
 						    </div>
-						    <select class="custom-select" id="tipoOperacion112">
+						    <select class="custom-select texto112" id="tipoOperacion112">
 							    <option selected value=""></option>
                                 <option value="Alquiler">Alquiler</option>
                                 <option value="Compra">Compra</option>
@@ -686,25 +733,25 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="habitaciones112">Habitaciones</label>
-							<input type="number" class="form-control" id="habitaciones112">
+							<input type="number" class="form-control numero112" id="habitaciones112">
 						</div>
                         <div id="mensajesHabitaciones112" class="mensajesUsuario"></div>
 
 						<div class="form-group">
 							<label for="banos112">Baños</label>
-							<input type="Number" class="form-control" id="banos112">
+							<input type="Number" class="form-control numero112" id="banos112">
 						</div>
                         <div id="mensajesBanos112" class="mensajesUsuario"></div>
 
 						<div class="form-group">
 							<label for="garajes112">Garajes</label>
-							<input type="Number" class="form-control" id="garajes112">
+							<input type="Number" class="form-control numero112" id="garajes112">
 						</div>
                         <div id="mensajesGarajes112" class="mensajesUsuario"></div>
 
 						<div class="form-group">
 							<label for="area112">Área M2 (igual o mayor a)</label>
-							<input type="Number" class="form-control" id="area112">
+							<input type="Number" class="form-control numero112" id="area112">
 						</div>
                         <div id="mensajesArea112" class="mensajesUsuario"></div>
 					</div>
@@ -713,13 +760,13 @@
 						<p>Rango de precio</p>
 						<div class="form-group">
 							<label for="precioMinimo112">Desde</label>
-							<input type="number" class="form-control" id="precioMinimo112">
+							<input type="number" class="form-control numero112" id="precioMinimo112">
 						</div>
                         <div id="mensajesPrecioMinimo112" class="mensajesUsuario"></div>
 						
 						<div class="form-group">
 							<label for="precioMaximo112">Hasta</label>
-							<input type="number" class="form-control" id="precioMaximo112">
+							<input type="number" class="form-control numero112" id="precioMaximo112">
 						</div>
                         <div id="mensajesPrecioMaximo112" class="mensajesUsuario"></div>
 					</div>
@@ -742,7 +789,7 @@
                         <div class="rh_form__item rh_form--relative <?php echo esc_attr( $column_class ); ?> rh_form--columnAlign address-map-fields-wrapper">
                             <div class="address-wrapper">
                                 <label for="address"><?php esc_html_e( 'Address', 'framework' ); ?></label>
-                                <input type="text" class="required" name="address" id="address" title="<?php esc_attr_e( '* Please provide a property address!', 'framework' ); ?>" />
+                                <input type="text" class="required texto112" name="address" id="address" title="<?php esc_attr_e( '* Please provide a property address!', 'framework' ); ?>" />
                             </div>
 
                             <!-- /.address-wrapper -->
@@ -2189,8 +2236,9 @@ function mostrarBienes(tipoContenido, valor)
                             "<th scope='col' class='text-center' style='width:5%;'>No</th>" +
 							"<th scope='col' class='text-center' style='width:10%;'>Foto</th>" +
 							"<th scope='col' class='text-center' style='width:30%;'>Propiedad</th>" +
-                            "<th scope='col' class='text-center' style='width:30%;'>Captador</th>" +
+                            "<th scope='col' class='text-center' style='width:25%;'>Captador</th>" +
 							"<th scope='col' class='text-center' style='width:25%;'></th>" +
+                            "<th scope='col' class='text-center' style='width:5%;'></th>" +
 						"</tr>" +
 					"</thead>" +
 					"<tbody>";
@@ -2293,6 +2341,13 @@ function mostrarBienes(tipoContenido, valor)
 							"crmdapliw/app/public/images/document.svg alt='Documentos' class='icono'>" +
 						"</button>" +			
 					"</td>" +
+                    "<td>" +
+                        "<div class='form-check email60'>" +
+							"<input type='checkbox' class='form-check-input' id='email60-" + bien.ID + "'>" + 
+								"<label class='form-check-label' for='email60-" + bien.ID + "'></label>" +
+							"</div>" +
+                        "<div>" +
+                    "</td>"+
 				"</tr>";
                 contador++;
                 coincidencias++;
@@ -2409,6 +2464,28 @@ function mostrarBienes(tipoContenido, valor)
 	}
 
     $j("#titulo60").html(tipoContenido);
+
+    if (coincidencias > 0)
+    {
+        if ($j("#enviarA60").val() == "")
+        {
+            var mensajesUsuario = 
+                "<div class='alert alert-info alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>Escriba las primeras letras del nombre del cliente en 'Enviar a:', selecciónelo,  marque las propiedades que desea enviar y después haga clic en el ícono 'Email' </strong>" +
+                "</div>";
+        }
+        else
+        {
+            var mensajesUsuario = 
+                "<div class='alert alert-info alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>Marque las propiedades que desea enviar y después haga clic en el ícono 'Email' </strong>" +
+                "</div>";
+        }
+
+        $j("#mensajesUsuario30").html(mensajesUsuario);
+    }
 
     $j("#cicloBienes60").html(bienes).find(".buscarCaptador60").autocomplete(
     {
@@ -4334,6 +4411,15 @@ function actualizarVectores(vectorGeneralActualizado)
         {   
         }
     });
+
+    $j("#enviarA60").autocomplete(
+    {
+        source: gClientes,
+        select: function( event, ui ) 
+        {   
+            gIdPersonaActual = ui.item.id;    
+        }
+    });
 }
 
 function solicitudesDeCita()
@@ -5248,15 +5334,30 @@ function guardarPreferencia()
 
             $j("#mensajesUsuario30").html(mensajesUsuario);
 
-            limpiarCamposPreferencia();
             $j("#agregarPreferencia112").addClass("noVer");
             $j("#cerrarAgregarPreferencia10").addClass("noVer");
             $j("#guardarPreferencia10").addClass("noVer");
-		    mostrarPreferencias();
-            $j("#preferencias111").removeClass("noVer");
-            $j("#cerrarPreferencias10").removeClass("noVer");
-            $j("#agregarPreferencia10").removeClass("noVer");
-            window.scrollTo(0, 0);           
+		               
+            $j("#tipoPropiedad50").val($j("#tipoPropiedad112").val());
+            $j("#tipoOperacion50").val($j("#tipoOperacion112").val());
+            $j("#busquedaHabitaciones50").val($j("#habitaciones112").val());
+            $j("#busquedaBanos50").val($j("#banos112").val());
+            $j("#busquedaGarajes50").val($j("#garajes112").val());
+            $j("#busquedaArea50").val($j("#area112").val());
+            $j("#busquedaPrecioMinimo50").val($j("#precioMinimo112").val());
+            $j("#busquedaPrecioMaximo50").val($j("#precioMaximo112").val());
+            $j("#ubicacion50").val($j("#address").val());
+
+            $j("#enviarA60").val(gUsuarios[gIdPersonaActual].first_name + " " + gUsuarios[gIdPersonaActual].last_name);
+
+            limpiarCamposPreferencia();
+
+            filtrarPropiedades(0);
+            mostrarBienes("Propiedades", "");
+            $j("#bienes60").removeClass('noVer');
+            $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
+            $j("#publicarPropiedad10").removeClass('noVer');
+            window.scrollTo(0, 0);
         } 
         else 
         {
@@ -5794,6 +5895,21 @@ function activarRoles()
     });
 }
 
+function borrarCriteriosFiltroPropiedades()
+{
+    $j("#tipoPropiedad50").val(""); 
+    $j("#tipoOperacion50").val(""); 
+    $j("#busquedaCodigo50").val(""); 
+    $j("#busquedaHabitaciones50").val(""); 
+    $j("#busquedaBanos50").val(""); 
+    $j("#busquedaGarajes50").val(""); 
+    $j("#busquedaArea50").val(""); 
+    $j("#busquedaZona50").val(""); 
+    $j("#busquedaPrecioMinimo50").val(""); 
+    $j("#busquedaPrecioMaximo50").val(""); 
+    $j("#ubicacion50").val("");
+}
+
 // Eventos
 $j(document).ready(function()
 {
@@ -5874,16 +5990,8 @@ $j(document).ready(function()
         if (gNotificaciones > 0)
         {
             $j("#notificaciones20").removeClass('noVer');
-        } 
-        $j("#busquedaCodigo50").val(""); 
-        $j("#busquedaHabitaciones50").val(""); 
-        $j("#busquedaBanos50").val(""); 
-        $j("#busquedaGarajes50").val(""); 
-        $j("#busquedaArea50").val(""); 
-        $j("#busquedaZona50").val(""); 
-        $j("#busquedaPrecioMinimo50").val(""); 
-        $j("#busquedaPrecioMaximo50").val(""); 
-        $j("#ubicacion50").val("");
+        }
+        borrarCriteriosFiltroPropiedades();
         $j("#principal40").removeClass('noVer');
         window.scrollTo(0, 0);
     });
@@ -5918,13 +6026,16 @@ $j(document).ready(function()
         $j("#bienes60").removeClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
         $j("#publicarPropiedad10").removeClass('noVer');
+        $j("#email10").removeClass('noVer');
         window.scrollTo(0, 0);
     });
 
     $j('#cerrarPropiedadesFiltradas10').click(function()
     {
+
         $j("#bienes60").addClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").addClass('noVer');
+        $j("#email10").addClass('noVer');
 		if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
 		{
 			$j("#publicarPropiedad10").addClass('noVer');
@@ -5939,6 +6050,20 @@ $j(document).ready(function()
 			$j("#cerrarBusquedaAgenda10").removeClass('noVer');
 			$j("#busquedaAgenda10").removeClass('noVer');			
 		}
+        else if (gFuncionLlamadora == "agregarPersonaFiltro10" || 
+            gFuncionLlamadora == "verPersona105")
+        {
+            mostrarPreferencias();
+            $j("#preferencias111").removeClass("noVer");
+            $j("#cerrarPreferencias10").removeClass("noVer");
+            $j("#agregarPreferencia10").removeClass("noVer");
+            
+            if ($j("#publicarPropiedad10").hasClass('noVer') === false)
+            {
+                $j("#publicarPropiedad10").addClass('noVer');
+            }  
+            borrarCriteriosFiltroPropiedades();
+        }
         window.scrollTo(0, 0);
     });
 
@@ -6791,5 +6916,47 @@ $j(document).ready(function()
         }
     });
 
+    $j("#email10").click(function()
+    {       
+        bienesEmail = [];
+        
+        var coordenadaBien = "";
+
+        $j("#cicloBienes60 input").each(function (index) 
+        {
+            if ($j(this).prop("checked") == true)
+            {
+                idBien = $j(this).attr("id").substring(8);
+
+                coordenadaBien = "Sin coordenadas";
+
+                if (gDatosBienes[idBien].REAL_HOMES_property_location)
+                {
+                    coordenadaBien = gDatosBienes[idBien].REAL_HOMES_property_location[0].valor;
+                }
+                bienSeleccionado =
+                    {
+                        "guidBien" : gMatrizBienes[idBien].guid,
+                        "coordenada" : coordenadaBien
+                    };
+                bienesEmail.push(bienSeleccionado);
+            }
+        });
+        personaBienesEmail =
+            {
+                "cliente" : gUsuarios[gIdPersonaActual].first_name + " " + gUsuarios[gIdPersonaActual].last_name,
+                "email" : gUsuarios[gIdPersonaActual].email,
+                "propiedades" : bienesEmail
+            }
+    });
+
+    $j("#enviarA60").autocomplete(
+    {
+        source: gClientes,
+        select: function( event, ui ) 
+        {   
+            gIdPersonaActual = ui.item.id;    
+        }
+    });
 });
 </script>

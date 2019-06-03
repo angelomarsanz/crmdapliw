@@ -269,6 +269,38 @@
 						<label for="busquedaNombre50" class="letraAzul">Nombre</label>
 						<input type="text" class="form-control texto50" id="busquedaNombre50">
 					</div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="tipoPropiedad50">Tipo de propiedad</label>
+                        </div>
+                        <select class="custom-select texto50" id="tipoPropiedad50">
+                            <option selected value=""></option>
+                            <option value="Apartamento">Apartamento</option>
+                            <option value="Casa">Casa</option>
+                            <option value="Galpón">Galpón</option>
+                            <option value="Hotel">Hotel</option>
+                            <option value="Local comercial">Local comercial</option>
+                            <option value="Oficina">Oficina</option>
+                            <option value="Proyecto en preventa">Proyecto en preventa</option>
+                            <option value="Terreno">Terreno</option>
+                            <option value="townhouse">townhouse</option>
+                        </select>
+                    </div>
+                    <div id="mensajesTipoPropiedad50" class="mensajesUsuario"></div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="tipoOperacion50">Tipo de operación</label>
+                        </div>
+                        <select class="custom-select texto50" id="tipoOperacion50">
+                            <option selected value=""></option>
+                            <option value="Alquiler">Alquiler</option>
+                            <option value="Compra">Compra</option>
+                        </select>
+                    </div>
+                    <div id="mensajesTipoOperacion112" class="mensajesUsuario"></div>
+
                 </div>
                 <div class="col-md-4">
 					<p class="letraAzul">Prestaciones</p>
@@ -655,7 +687,7 @@
 						    <div class="input-group-prepend">
 							    <label class="input-group-text" for="tipoPropiedad112">Tipo de propiedad</label>
 						    </div>
-						    <select class="custom-select" id="tipoPropiedad112">
+						    <select class="custom-select texto112" id="tipoPropiedad112">
 							    <option selected value=""></option>
                                 <option value="Apartamento">Apartamento</option>
                                 <option value="Casa">Casa</option>
@@ -674,7 +706,7 @@
 						    <div class="input-group-prepend">
 							    <label class="input-group-text" for="tipoOperacion112">Tipo de operación</label>
 						    </div>
-						    <select class="custom-select" id="tipoOperacion112">
+						    <select class="custom-select texto112" id="tipoOperacion112">
 							    <option selected value=""></option>
                                 <option value="Alquiler">Alquiler</option>
                                 <option value="Compra">Compra</option>
@@ -686,32 +718,42 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="habitaciones112">Habitaciones</label>
-							<input type="number" class="form-control" id="habitaciones112">
+							<input type="number" class="form-control numero112" id="habitaciones112">
 						</div>
+                        <div id="mensajesHabitaciones112" class="mensajesUsuario"></div>
+
 						<div class="form-group">
 							<label for="banos112">Baños</label>
-							<input type="Number" class="form-control" id="banos112">
+							<input type="Number" class="form-control numero112" id="banos112">
 						</div>
+                        <div id="mensajesBanos112" class="mensajesUsuario"></div>
+
 						<div class="form-group">
 							<label for="garajes112">Garajes</label>
-							<input type="Number" class="form-control" id="garajes112">
+							<input type="Number" class="form-control numero112" id="garajes112">
 						</div>
+                        <div id="mensajesGarajes112" class="mensajesUsuario"></div>
+
 						<div class="form-group">
 							<label for="area112">Área M2 (igual o mayor a)</label>
-							<input type="Number" class="form-control" id="area112">
+							<input type="Number" class="form-control numero112" id="area112">
 						</div>
+                        <div id="mensajesArea112" class="mensajesUsuario"></div>
 					</div>
+
 					<div class="col-md-4">
 						<p>Rango de precio</p>
 						<div class="form-group">
 							<label for="precioMinimo112">Desde</label>
-							<input type="number" class="form-control" id="precioMinimo112">
+							<input type="number" class="form-control numero112" id="precioMinimo112">
 						</div>
+                        <div id="mensajesPrecioMinimo112" class="mensajesUsuario"></div>
 						
 						<div class="form-group">
 							<label for="precioMaximo112">Hasta</label>
-							<input type="number" class="form-control" id="precioMaximo112">
+							<input type="number" class="form-control numero112" id="precioMaximo112">
 						</div>
+                        <div id="mensajesPrecioMaximo112" class="mensajesUsuario"></div>
 					</div>
 				</div>		
 
@@ -727,11 +769,14 @@
                             <input type="text" class="form-control" id="coordenadas112" disabled>
                         </div>
 
+                        <div id="mensajesAddress" class="mensajesUsuario"></div>
+
                         <div class="rh_form__item rh_form--relative <?php echo esc_attr( $column_class ); ?> rh_form--columnAlign address-map-fields-wrapper">
                             <div class="address-wrapper">
                                 <label for="address"><?php esc_html_e( 'Address', 'framework' ); ?></label>
-                                <input type="text" class="required" name="address" id="address" title="<?php esc_attr_e( '* Please provide a property address!', 'framework' ); ?>" />
+                                <input type="text" class="required texto112" name="address" id="address" title="<?php esc_attr_e( '* Please provide a property address!', 'framework' ); ?>" />
                             </div>
+
                             <!-- /.address-wrapper -->
                             <div class="map-wrapper">
                                 <button class="rh_btn rh_btn--secondary goto-address-button" type="button" value="address">Buscar dirección y coordenadas en Google Maps</button>
@@ -3168,10 +3213,10 @@ function validarPersona(indicadorCheckbox)
         $j("#mensajesTipo110").html(mensajeError);
     }
 
-    if ($j("#numeroIdentificacion110").val() == 0)
+    if ($j("#numeroIdentificacion110").val() < 1)
     {   
         indicadorError = 1;
-        mensajeError = anterior + "Escriba el número de identificacion" + posterior;
+        mensajeError = anterior + "Verifique el número de identificacion" + posterior;
         $j("#mensajesIdentificacion110").html(mensajeError);
     }
 
@@ -3194,6 +3239,20 @@ function validarPersona(indicadorCheckbox)
         indicadorError = 1;
         mensajeError = anterior + "Por favor escriba al menos un número de teléfono de la persona" + posterior;
         $j("#mensajesCelular110").html(mensajeError);
+        $j("#mensajesTelefono110").html(mensajeError);
+    }
+
+    if ($j("#celular110").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesCelular110").html(mensajeError);
+    }
+
+    if ($j("#telefonoFijo110").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
         $j("#mensajesTelefono110").html(mensajeError);
     }
 
@@ -5108,11 +5167,53 @@ function validarPreferencia()
         $j("#mensajesTipoOperacion112").html(mensajeError);
     }
 
-    if ($j("#ubicacion112").val() == "") 
+    if ($j("#habitaciones112").val() < 0)
     {   
         indicadorError = 1;
-        mensajeError = anterior + "Escriba la ubicación del inmueble" + posterior;
-        $j("#mensajesUbicacion112").html(mensajeError);
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesHabitaciones112").html(mensajeError);
+    }
+
+    if ($j("#banos112").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesBanos112").html(mensajeError);
+    }
+
+    if ($j("#garajes112").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesGarajes112").html(mensajeError);
+    }
+
+    if ($j("#area112").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesArea112").html(mensajeError);
+    }
+
+    if ($j("#precioMinimo112").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesPrecioMinimo112").html(mensajeError);
+    }
+
+    if ($j("#precioMaximo112").val() < 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "No debe contener números negativos" + posterior;
+        $j("#mensajesPrecioMaximo112").html(mensajeError);
+    }
+
+    if ($j("#address").val() == "") 
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Escriba la dirección del inmueble" + posterior;
+        $j("#mensajesAddress").html(mensajeError);
     }
 
     if (indicadorError == 1)
@@ -5139,7 +5240,7 @@ function guardarPreferencia()
     $j("#mensajesUsuario30").html(mensajesUsuario);
     window.scrollTo(0, 0);
 
-    $j("#ubicacion112").val($j.trim($j("#ubicacion112").val()));
+    $j("#address").val($j.trim($j("#address").val()));
 
     jsonPreferencia = 
         {"idUsuario" : gIdPersonaActual,
@@ -5179,15 +5280,28 @@ function guardarPreferencia()
 
             $j("#mensajesUsuario30").html(mensajesUsuario);
 
-            limpiarCamposPreferencia();
             $j("#agregarPreferencia112").addClass("noVer");
             $j("#cerrarAgregarPreferencia10").addClass("noVer");
             $j("#guardarPreferencia10").addClass("noVer");
-		    mostrarPreferencias();
-            $j("#preferencias111").removeClass("noVer");
-            $j("#cerrarPreferencias10").removeClass("noVer");
-            $j("#agregarPreferencia10").removeClass("noVer");
-            window.scrollTo(0, 0);           
+		               
+            $j("#tipoPropiedad50").val($j("#tipoPropiedad112").val());
+            $j("#tipoOperacion50").val($j("#tipoOperacion112").val());
+            $j("#busquedaHabitaciones50").val($j("#habitaciones112").val());
+            $j("#busquedaBanos50").val($j("#banos112").val());
+            $j("#busquedaGarajes50").val($j("#garajes112").val());
+            $j("#busquedaArea50").val($j("#area112").val());
+            $j("#busquedaPrecioMinimo50").val($j("#precioMinimo112").val());
+            $j("#busquedaPrecioMaximo50").val($j("#precioMaximo112").val());
+            $j("#ubicacion50").val($j("#address").val());
+
+            limpiarCamposPreferencia();
+
+            filtrarPropiedades(0);
+            mostrarBienes("Propiedades", "");
+            $j("#bienes60").removeClass('noVer');
+            $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
+            $j("#publicarPropiedad10").removeClass('noVer');
+            window.scrollTo(0, 0);
         } 
         else 
         {
@@ -5247,7 +5361,7 @@ function guardarCambiosPreferencia()
     $j("#mensajesUsuario30").html(mensajesUsuario);
     window.scrollTo(0, 0);
 
-    $j("#ubicacion112").val($j.trim($j("#ubicacion112").val()));
+    $j("#address").val($j.trim($j("#address").val()));
 
     jsonPreferencia = 
         {"idUsuario" : gIdPersonaActual,
@@ -5345,7 +5459,6 @@ function cargarCamposPreferencia()
 {
     $j("#tipoPropiedad112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Tipo de propiedad"]);
     $j("#tipoOperacion112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Tipo de operacion"]);
-    $j("#ubicacion112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Ubicación"]);
     $j("#habitaciones112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Habitaciones"]);
     $j("#banos112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Baños"]);
     $j("#garajes112").val(gUsuarios[gIdPersonaActual].CRMdapliw_preferencias[gClavePreferencia]["Garajes"]);
@@ -5452,7 +5565,7 @@ function limpiarCamposPreferencia()
     $j("#tituloAgregarPreferencia112").html("");
     $j("#tipoPropiedad112").val("");
     $j("#tipoOperacion112").val("");
-    $j("#ubicacion112").val("");
+    $j("#address").val("");
     $j("#habitaciones112").val("");
     $j("#banos112").val("");
     $j("#garajes112").val("");
@@ -5726,6 +5839,21 @@ function activarRoles()
     });
 }
 
+function borrarCriteriosFiltroPropiedades()
+{
+    $j("#tipoPropiedad50").val(""); 
+    $j("#tipoOperacion50").val(""); 
+    $j("#busquedaCodigo50").val(""); 
+    $j("#busquedaHabitaciones50").val(""); 
+    $j("#busquedaBanos50").val(""); 
+    $j("#busquedaGarajes50").val(""); 
+    $j("#busquedaArea50").val(""); 
+    $j("#busquedaZona50").val(""); 
+    $j("#busquedaPrecioMinimo50").val(""); 
+    $j("#busquedaPrecioMaximo50").val(""); 
+    $j("#ubicacion50").val("");
+}
+
 // Eventos
 $j(document).ready(function()
 {
@@ -5806,16 +5934,8 @@ $j(document).ready(function()
         if (gNotificaciones > 0)
         {
             $j("#notificaciones20").removeClass('noVer');
-        } 
-        $j("#busquedaCodigo50").val(""); 
-        $j("#busquedaHabitaciones50").val(""); 
-        $j("#busquedaBanos50").val(""); 
-        $j("#busquedaGarajes50").val(""); 
-        $j("#busquedaArea50").val(""); 
-        $j("#busquedaZona50").val(""); 
-        $j("#busquedaPrecioMinimo50").val(""); 
-        $j("#busquedaPrecioMaximo50").val(""); 
-        $j("#ubicacion50").val("");
+        }
+        borrarCriteriosFiltroPropiedades();
         $j("#principal40").removeClass('noVer');
         window.scrollTo(0, 0);
     });
@@ -5855,6 +5975,7 @@ $j(document).ready(function()
 
     $j('#cerrarPropiedadesFiltradas10').click(function()
     {
+
         $j("#bienes60").addClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").addClass('noVer');
 		if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
@@ -5871,6 +5992,20 @@ $j(document).ready(function()
 			$j("#cerrarBusquedaAgenda10").removeClass('noVer');
 			$j("#busquedaAgenda10").removeClass('noVer');			
 		}
+        else if (gFuncionLlamadora == "agregarPersonaFiltro10" || 
+            gFuncionLlamadora == "verPersona105")
+        {
+            mostrarPreferencias();
+            $j("#preferencias111").removeClass("noVer");
+            $j("#cerrarPreferencias10").removeClass("noVer");
+            $j("#agregarPreferencia10").removeClass("noVer");
+            
+            if ($j("#publicarPropiedad10").hasClass('noVer') === false)
+            {
+                $j("#publicarPropiedad10").addClass('noVer');
+            }  
+            borrarCriteriosFiltroPropiedades();
+        }
         window.scrollTo(0, 0);
     });
 
