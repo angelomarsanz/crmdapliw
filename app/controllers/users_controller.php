@@ -4,15 +4,37 @@ class UsersController extends MvcPublicController
 {
     public function test_function()
     {
-        setlocale(LC_TIME, 'es_VE', 'es_VE.utf-8', 'es_VE.utf8'); 
-        date_default_timezone_set('America/Caracas');
+        $_POST["cliente"] = "Ángel Sanz";
+        $_POST["email"] = "angelomarsanz@gmail.com";
+        $_POST["contador"] = 1;
+        $_POST["propiedades"] =
+            [
+                [
+                    "nombreBien" => "Prueba",
+                    "guidBien" => "https://dapliw.org.ve",
+                    "coordenadas" => "0,0"
+                ]
+            ]; 
 
-        $fechaHoy = getdate();
+        $message = "Estimado(a) " . $_POST["cliente"] . ",\r\n\r\n";
 
-        $fechaHora = new DateTime(); 
-        $fechaHoraFormato = $fechaHora->format('Y-m-d H:i:s'); 
+        if ($_POST["contador"] > 1)
+        {
+            $message .= "Las siguientes propiedades están acorde con sus requerimientos:" . "\r\n\r\n";
+        }
+        else
+        {
+            $message .= "La siguiente propiedad está acorde con sus requerimientos:" . "\r\n\r\n";
+        }
 
-        echo "<p>FechaHoraFormato: " . $fechaHoraFormato . "</p>";
+        foreach ($_POST["propiedades"] as $propiedad)
+        {
+            $message .= "Propiedad: " . $propiedad["nombreBien"] .  "\r\n";
+            $message .= "Link: " . $propiedad["guidBien"] .  "\r\n";
+            $message .= "Coordenadas: " . $propiedad["coordenadas"] .  "\r\n\r\n";
+        }
+
+        wp_mail($_POST["email"], 'Propiedades sugeridas por Tu Mundo Bienes Raíces', $message );
     }
 
     public function show() 
@@ -535,4 +557,101 @@ class UsersController extends MvcPublicController
         }
         exit(json_encode($jsondata)); 
     }
+
+    public function enviar_email_propiedades()
+    {
+        $this->autoRender = false;
+
+        $jsondata = [];
+        $rolesAutorizados = 
+            [
+                "Promotor",
+                "Gestor de negocios",
+                "Administrador"
+            ];
+
+        $accesoPermitido = $this->verificar_permisos($rolesAutorizados);
+
+        if ($accesoPermitido == "true")
+        {
+            $this->load_model("Binnacle");
+            $this->load_model("Usermeta");
+            $this->load_model("Postmeta");
+            
+            $indicadorError = 0;
+           
+            if (isset($_POST["cliente"]))
+            {
+                $message = "Estimado(a) " . $_POST["cliente"] . ",\r\n\r\n";
+
+                if ($_POST["contador"] > 1)
+                {
+                    $message .= "Las siguientes propiedades están acorde con sus requerimientos:" . "\r\n\r\n";
+                }
+                else
+                {
+                    $message .= "La siguiente propiedad está acorde con sus requerimientos:" . "\r\n\r\n";
+                }
+        
+                foreach ($_POST["propiedades"] as $propiedad)
+                {
+                    $message .= "Propiedad: " . $propiedad["nombreBien"] .  "\r\n";
+                    $message .= "Link: " . $propiedad["guidBien"] .  "\r\n";
+                    $message .= "Coordenadas: " . $propiedad["coordenadas"] .  "\r\n\r\n";
+                }
+
+                $message .= "Atentamente, Tu Mundo Bienes Raíces.-";
+        
+                wp_mail($_POST["email"], 'Propiedades sugeridas por Tu Mundo Bienes Raíces', $message );
+
+                $jsondata["satisfactorio"] = true;
+                $jsondata["mensaje"] = "El correo se envió exitosamente ";
+            }                       
+            else
+            {
+                $jsondata["satisfactorio"] = false;
+                $jsondata["mensaje"] = "El correo no se pudo enviar. No existe la variable cliente";
+            }
+            require_once("posts_controller.php");
+            $postsController = new PostsController();
+            $vectorGeneral = $postsController->cargar_vectores();
+            $jsondata["vectorGeneral"] = $vectorGeneral;
+        }
+        else
+        {
+            $jsondata["satisfactorio"] = false;
+            $jsondata["mensaje"] = "Usuario no autorizado";
+            $vectorGeneral = "";        
+        }
+        exit(json_encode($jsondata)); 
+    }
+
+    public function email_propiedades( $user_id, $user_password ) {
+
+		$user = get_userdata( $user_id );
+
+		// The blogname option is escaped with esc_html on the way into the database in sanitize_option
+		// we want to reverse this for the plain text arena of emails.
+		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+
+		/**
+		 * Admin Email
+		 */
+		$message = sprintf( __( 'New user registration on your site %s:', 'framework' ), $blogname ) . "\r\n\r\n";
+		$message .= sprintf( __( 'Username: %s', 'framework' ), $user->user_login ) . "\r\n\r\n";
+		$message .= sprintf( __( 'Email: %s', 'framework' ), $user->user_email ) . "\r\n";
+
+		// wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration', 'framework' ), $blogname ), $message );
+
+		/**
+		 * Newly Registered User Email
+		 */
+		$message = sprintf( __( 'Welcome to %s', 'framework' ), $blogname ) . "\r\n\r\n";
+		$message .= sprintf( __( 'Your username is: %s', 'framework' ), $user->user_login ) . "\r\n\r\n";
+		$message .= sprintf( __( 'You can login using following password: %s', 'framework' ), $user_password ) . "\r\n\r\n";
+		$message .= __( 'It is highly recommended to change your password after login.', 'framework' ) . "\r\n\r\n";
+		$message .= __( 'For more details visit:', 'framework' ) . ' ' . home_url( '/' ) . "\r\n";
+
+		wp_mail( $user->user_email, sprintf( __( 'Welcome to %s', 'framework' ), $blogname ), $message );
+	}
 }
