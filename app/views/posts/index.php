@@ -2354,9 +2354,8 @@ function mostrarBienes(tipoContenido, valor)
                     "<td>" +
                         "<div class='form-check email60'>" +
 							"<input type='checkbox' class='form-check-input' id='email60-" + bien.ID + "'>" + 
-								"<label class='form-check-label' for='email60-" + bien.ID + "'></label>" +
-							"</div>" +
-                        "<div>" +
+							"<label class='form-check-label' for='email60-" + bien.ID + "'></label>" +
+						"</div>" +
                     "</td>"+
 				"</tr>";
                 contador++;
@@ -2460,6 +2459,11 @@ function mostrarBienes(tipoContenido, valor)
 											"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
 											"crmdapliw/app/public/images/document.svg alt='Documentos' class='icono'>" +
 										"</button>" +
+
+                                        "<div class='form-check email60'>" +
+                                            "<input type='checkbox' class='form-check-input' id='email60-" + bien.ID + "'>" + 
+                                            "<label class='form-check-label' for='email60-" + bien.ID + "'></label>" +
+                                        "</div>" +
 
 									"</p>" +
 								"</div>" +  
@@ -6010,8 +6014,6 @@ function enviarEmailPropiedades()
             "contador" : contadorBienes,
             "propiedades" : bienesEmail
         }
-
-        console.log(personaBienesEmail);
 
         $j.post("<?= mvc_public_url(array('controller' => 'users', 'action' => 'enviar_email_propiedades')) ?>", 
             personaBienesEmail, null, "json")          
