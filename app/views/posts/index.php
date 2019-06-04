@@ -6212,6 +6212,8 @@ $j(document).ready(function()
         $j("#bienes60").addClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").addClass('noVer');
         $j("#email10").addClass('noVer');
+        $j("#enviarA60").addClass('noVer');
+        $j("#alEmail60").addClass('noVer');
 		if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
 		{
 			$j("#publicarPropiedad10").addClass('noVer');
