@@ -246,6 +246,7 @@ class PostsController extends MvcPublicController
             $matrizBienes[$bien->ID]['nombre_autor'] = $usuarios[$bien->post_author]['first_name'] . ' ' . $usuarios[$bien->post_author]['last_name'];
 
             $matrizBienes[$bien->ID]['guid'] = $bien->guid;
+            $matrizBienes[$bien->ID]['sinGuid'] = htmlspecialchars_decode($bien->guid);
             $matrizBienes[$bien->ID]['post_status'] = $bien->post_status;
             $bienesAutocomplete[] = ["label" => $bien->post_title, "value" => $bien->post_title, "id" => $bien->ID];
         }
@@ -632,17 +633,15 @@ class PostsController extends MvcPublicController
     public function unique_multidim_array($array, $key) 
     { 
         $temp_array = array(); 
-        $i = 0; 
         $key_array = array(); 
         
         foreach($array as $val) 
         { 
             if (!in_array($val[$key], $key_array)) 
             { 
-                $key_array[$i] = $val[$key]; 
+                $key_array[] = $val[$key]; 
                 $temp_array[] = $val; 
             } 
-            $i++; 
         } 
         return $temp_array; 
     } 

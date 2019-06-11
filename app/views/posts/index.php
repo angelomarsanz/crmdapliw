@@ -918,7 +918,16 @@ var gRegex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 
 function testFunction()
 {
-
+    $j.each(gBienes, function(clave1, datos1) 
+		{		
+			if (datos1.ID == 5297)
+			{			
+                enlace = "<a href=" + datos1.guid + ">Prueba</a>";
+                $j("#testFunction00").html(enlace);
+				console.log(datos1.guid);
+                console.log(gMatrizBienes[5297].sinGuid);
+            }
+        });
 }
 
 function mostrarNotificaciones()
@@ -5960,7 +5969,7 @@ function enviarEmailPropiedades()
             bienSeleccionado =
                 {
                     "nombreBien" : gMatrizBienes[idBien].post_title,
-                    "guidBien" : gMatrizBienes[idBien].guid,
+                    "guidBien" : gMatrizBienes[idBien].sinGuid,
                     "coordenadas" : coordenadasBien
                 };
             bienesEmail.push(bienSeleccionado);
