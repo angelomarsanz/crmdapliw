@@ -1,3 +1,15 @@
+<?php
+    echo "<br />URI " . $_SERVER['REQUEST_URI'];
+    echo "<br />URL " . $_SERVER['REDIRECT_URL'];
+    echo "<br />Host " . $_SERVER['HTTP_HOST'];
+    $submitPropertyCrm = "";
+    if ($_SERVER['HTTP_HOST'] == "localhost"):
+        $submitPropertyCrm = "http://localhost/redetron/submit_property?crm=1";
+    else:
+        $submitPropertyCrm = "https://tumundobienesraices.com/";
+    endif;
+    echo "<br />" . $submitPropertyCrm;
+?>
 <div class="container">
     <?php if (isset($vectorGeneral["matrizBienes"]) && isset($vectorGeneral["datosBienes"])): ?>
         <!-- div con sufijo 00 -->
@@ -35,6 +47,11 @@
             <button title="Cerrar" class="btn btn-link noVer" id="cerrarPropiedadesFiltradas10">
                 <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/x.svg" ?> 
                 alt="Cerrar propiedades filtradas" class="iconoMenu">
+            </button>
+
+            <button title="Email" class="btn btn-link noVer" id="email10">
+                <img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/envelope-closed.svg" ?> 
+                alt="Enviar email" class="iconoMenu">
             </button>
 
 			<a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad" target="_blank">
@@ -270,7 +287,7 @@
 						<input type="text" class="form-control texto50" id="busquedaNombre50">
 					</div>
 
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 noVer">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="tipoPropiedad50">Tipo de propiedad</label>
                         </div>
@@ -289,7 +306,7 @@
                     </div>
                     <div id="mensajesTipoPropiedad50" class="mensajesUsuario"></div>
 
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 noVer">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="tipoOperacion50">Tipo de operación</label>
                         </div>
@@ -418,7 +435,25 @@
 				 
         <!-- div con sufijo 60 -->
         <div class="container formulario noVer" id="bienes60">
-            <h2 class="letraAzul" id="titulo60"></h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="letraAzul" id="titulo60"></h2>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+				        <label for="enviarA60">Enviar a:</label>
+				        <input type="text" class="form-control" id="enviarA60">
+			        </div>
+                    <div class="mensajesUsuario" id="mensajesEnviarA60"></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+				        <label for="alEmail60">Email:</label>
+				        <input type="text" class="form-control" id="alEmail60">
+			        </div>
+                    <div class="mensajesUsuario" id="mensajesAlEmail60"></div>
+                </div>
+            </div>
             <div class="row" id="cicloBienes60">
             </div>
             <div class="row">
@@ -889,11 +924,22 @@ var gImagenEspere =
     "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/apertureEspere.svg' ?>" +
     " alt='Por favor espere' class='iconoMenu imgr' id='imagenEspere'>";
 
+var gRegex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+
 // Funciones
 
 function testFunction()
 {
-
+    $j.each(gBienes, function(clave1, datos1) 
+		{		
+			if (datos1.ID == 5297)
+			{			
+                enlace = "<a href=" + datos1.guid + ">Prueba</a>";
+                $j("#testFunction00").html(enlace);
+				console.log(datos1.guid);
+                console.log(gMatrizBienes[5297].sinGuid);
+            }
+        });
 }
 
 function mostrarNotificaciones()
@@ -2221,8 +2267,9 @@ function mostrarBienes(tipoContenido, valor)
                             "<th scope='col' class='text-center' style='width:5%;'>No</th>" +
 							"<th scope='col' class='text-center' style='width:10%;'>Foto</th>" +
 							"<th scope='col' class='text-center' style='width:30%;'>Propiedad</th>" +
-                            "<th scope='col' class='text-center' style='width:30%;'>Captador</th>" +
+                            "<th scope='col' class='text-center' style='width:25%;'>Captador</th>" +
 							"<th scope='col' class='text-center' style='width:25%;'></th>" +
+                            "<th scope='col' class='text-center' style='width:5%;'></th>" +
 						"</tr>" +
 					"</thead>" +
 					"<tbody>";
@@ -2325,6 +2372,12 @@ function mostrarBienes(tipoContenido, valor)
 							"crmdapliw/app/public/images/document.svg alt='Documentos' class='icono'>" +
 						"</button>" +			
 					"</td>" +
+                    "<td>" +
+                        "<div class='form-check email60'>" +
+							"<input type='checkbox' class='form-check-input' id='email60-" + bien.ID + "'>" + 
+							"<label class='form-check-label' for='email60-" + bien.ID + "'></label>" +
+						"</div>" +
+                    "</td>"+
 				"</tr>";
                 contador++;
                 coincidencias++;
@@ -2428,6 +2481,11 @@ function mostrarBienes(tipoContenido, valor)
 											"crmdapliw/app/public/images/document.svg alt='Documentos' class='icono'>" +
 										"</button>" +
 
+                                        "<div class='form-check email60'>" +
+                                            "<input type='checkbox' class='form-check-input' id='email60-" + bien.ID + "'>" + 
+                                            "<label class='form-check-label' for='email60-" + bien.ID + "'></label>" +
+                                        "</div>" +
+
 									"</p>" +
 								"</div>" +  
 
@@ -2441,6 +2499,28 @@ function mostrarBienes(tipoContenido, valor)
 	}
 
     $j("#titulo60").html(tipoContenido);
+
+    if (coincidencias > 0)
+    {
+        if ($j("#enviarA60").val() == "")
+        {
+            var mensajesUsuario = 
+                "<div class='alert alert-info alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>Escriba las primeras letras del nombre del cliente en 'Enviar a:', seleccione el cliente, verifique el email, marque las propiedades que desea enviar y después haga clic en el ícono 'Email' </strong>" +
+                "</div>";
+        }
+        else
+        {
+            var mensajesUsuario = 
+                "<div class='alert alert-info alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>Verifique el email del cliente, marque las propiedades que desea enviar y después haga clic en el ícono 'Email' </strong>" +
+                "</div>";
+        }
+
+        $j("#mensajesUsuario30").html(mensajesUsuario);
+    }
 
     $j("#cicloBienes60").html(bienes).find(".buscarCaptador60").autocomplete(
     {
@@ -3202,7 +3282,7 @@ function validarPersona(indicadorCheckbox)
 
     var posterior = "</strong></div>"; 
     var indicadorTildado = 0; 
-    var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+
 
     borrarMensajesAnteriores();
     
@@ -3264,7 +3344,7 @@ function validarPersona(indicadorCheckbox)
     }
     else
     {
-        if (regex.test($j('#email110').val().trim()) == false) 
+        if (gRegex.test($j('#email110').val().trim()) == false) 
         {
             indicadorError = 1;
             mensajeError = anterior + "La dirección de correo no es válida" + posterior;
@@ -4366,6 +4446,16 @@ function actualizarVectores(vectorGeneralActualizado)
         {   
         }
     });
+
+    $j("#enviarA60").autocomplete(
+    {
+        source: gClientes,
+        select: function( event, ui ) 
+        {   
+            gIdPersonaActual = ui.item.id;  
+            $j("#alEmail60").val(gUsuarios[gIdPersonaActual].email);  
+        }
+    });
 }
 
 function solicitudesDeCita()
@@ -5294,12 +5384,17 @@ function guardarPreferencia()
             $j("#busquedaPrecioMaximo50").val($j("#precioMaximo112").val());
             $j("#ubicacion50").val($j("#address").val());
 
+            $j("#enviarA60").val(gUsuarios[gIdPersonaActual].first_name + " " + gUsuarios[gIdPersonaActual].last_name);
+
+            $j("#alEmail60").val(gUsuarios[gIdPersonaActual].email);
+
             limpiarCamposPreferencia();
 
             filtrarPropiedades(0);
             mostrarBienes("Propiedades", "");
             $j("#bienes60").removeClass('noVer');
             $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
+            $j("#email10").removeClass('noVer');
             $j("#publicarPropiedad10").removeClass('noVer');
             window.scrollTo(0, 0);
         } 
@@ -5854,6 +5949,164 @@ function borrarCriteriosFiltroPropiedades()
     $j("#ubicacion50").val("");
 }
 
+function enviarEmailPropiedades()
+{
+    bienesEmail = [];
+        
+    var coordenadaBien = "";
+    var contadorBienes = 0;
+    var indicadorError = 0;
+
+    borrarMensajesAnteriores();
+
+    var anterior =
+        "<div class='alert alert-danger alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>";
+
+    var posterior = "</strong></div>"; 
+
+    $j("#cicloBienes60 input").each(function (index) 
+    {
+        if ($j(this).prop("checked") == true)
+        {
+            idBien = $j(this).attr("id").substring(8);
+
+            coordenadasBien = "Sin coordenadas";
+
+            if (gDatosBienes[idBien].REAL_HOMES_property_location)
+            {
+                coordenadasBien = gDatosBienes[idBien].REAL_HOMES_property_location[0].valor;
+            }
+            bienSeleccionado =
+                {
+                    "nombreBien" : gMatrizBienes[idBien].post_title,
+                    "guidBien" : gMatrizBienes[idBien].sinGuid,
+                    "coordenadas" : coordenadasBien
+                };
+            bienesEmail.push(bienSeleccionado);
+            contadorBienes++;
+        }
+    });
+
+    if (gIdPersonaActual == "")
+    {
+        indicadorError = 1;
+        mensajeError = anterior + "Por favor escriba las primeras letras del nombre del cliente y seleccione" + posterior;
+        $j("#mensajesEnviarA60").html(mensajeError);        
+    }
+
+    if ($j("#enviarA60").val() == "")
+    {
+        indicadorError = 1;
+        mensajeError = anterior + "Por favor escriba las primeras letras del nombre del cliente y seleccione" + posterior;
+        $j("#mensajesEnviarA60").html(mensajeError);        
+    }
+
+    if ($j("#alEmail60").val() == "")
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Por favor escriba las primeras letras del nombre del cliente y seleccione" + posterior;
+        $j("#mensajesEnviarA60").html(mensajeError);     
+    }
+    else
+    {
+        if (gRegex.test($j('#alEmail60').val().trim()) == false) 
+        {
+            indicadorError = 1;
+            mensajeError = anterior + "La dirección de correo no es válida" + posterior;
+            $j("#mensajesAlEmail60").html(mensajeError);
+        }
+    }
+
+   if (contadorBienes == 0)
+    {   
+        indicadorError = 1;
+        mensajeError = anterior + "Por favor seleccione al menos una propiedad" + posterior;
+        $j("#mensajesUsuario30").html(mensajeError);
+    } 
+
+    if (indicadorError == 0)
+    {
+        personaBienesEmail =
+        {
+            "cliente" : gUsuarios[gIdPersonaActual].first_name + " " + gUsuarios[gIdPersonaActual].last_name,
+            "email" : $j("#alEmail60").val(),
+            "contador" : contadorBienes,
+            "propiedades" : bienesEmail
+        }
+
+        $j.post("<?= mvc_public_url(array('controller' => 'users', 'action' => 'enviar_email_propiedades')) ?>", 
+            personaBienesEmail, null, "json")          
+        .done(function(response) 
+        {
+            if (response.satisfactorio) 
+            {   
+                $j("#email10").attr("disabled", false).html(gImagenAnterior);
+
+                vectorGeneralActualizado = response.vectorGeneral;
+                actualizarVectores(vectorGeneralActualizado);
+
+                borrarMensajesAnteriores();                
+
+                mensajesUsuario =
+                    "<div class='alert alert-success alert-dismissible'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "<strong>" + response.mensaje + "</strong>" +
+                    "</div>";
+
+                $j("#mensajesUsuario30").html(mensajesUsuario);
+            } 
+            else 
+            {
+                $j("#email10").attr("disabled", false).html(gImagenAnterior);
+
+                if (response.mensaje != "Usuario no autorizado")
+                {
+                    vectorGeneralActualizado = response.vectorGeneral;
+                    actualizarVectores(vectorGeneralActualizado);
+                }
+
+                borrarMensajesAnteriores();                
+
+                mensajesUsuario =
+                    "<div class='alert alert-danger alert-dismissible'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "<strong>" + response.mensaje + "</strong>" +
+                    "</div>";
+
+                $j("#mensajesUsuario30").html(mensajesUsuario);
+            }
+            window.scrollTo(0, 0);           
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) 
+        {
+            $j("#email10").attr("disabled", false).html(gImagenAnterior);
+
+            borrarMensajesAnteriores();
+            mensajesUsuario =
+                "<div class='alert alert-danger alert-dismissible'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "<strong>" +
+                        "Estimado usuario el servidor tardó mucho en responder, " +
+                        "por favor pulse el botón 'Recargar página' " + 
+                        "<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . 'crmdapliw/app/public/images/reload.svg' ?>" +
+                        " alt='Recargar página' class='icono'>" +
+                        " que se encuentra a su derecha y luego consulte si efectivamente se guardaron los cambios" +
+                    "</strong>" + 
+                "</div>"; 
+
+            $j("#mensajesUsuario30").html(mensajesUsuario);
+            window.scrollTo(0, 0);
+        });
+    }
+    else
+    {
+        $j("#email10").attr("disabled", false).html(gImagenAnterior);
+        window.scrollTo(0, 0); 
+    }  
+}
+
 // Eventos
 $j(document).ready(function()
 {
@@ -5970,6 +6223,7 @@ $j(document).ready(function()
         $j("#bienes60").removeClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").removeClass('noVer');
         $j("#publicarPropiedad10").removeClass('noVer');
+        $j("#email10").removeClass('noVer');
         window.scrollTo(0, 0);
     });
 
@@ -5978,6 +6232,9 @@ $j(document).ready(function()
 
         $j("#bienes60").addClass('noVer');
         $j("#cerrarPropiedadesFiltradas10").addClass('noVer');
+        $j("#email10").addClass('noVer');
+        $j("#enviarA60").addClass('noVer');
+        $j("#alEmail60").addClass('noVer');
 		if (gFuncionLlamadora == "busquedaPropiedades10" || gFuncionLlamadora == "busquedaNombre50")
 		{
 			$j("#publicarPropiedad10").addClass('noVer');
@@ -6855,6 +7112,23 @@ $j(document).ready(function()
         source: gDireccionesUnico,
         select: function( event, ui ) 
         {   
+        }
+    });
+
+    $j("#email10").click(function()
+    {    
+        gImagenAnterior = $j("#email10").html();  
+        $j("#email10").attr("disabled", true).html(gImagenEspere); 
+        enviarEmailPropiedades();        
+    });
+
+    $j("#enviarA60").autocomplete(
+    {
+        source: gClientes,
+        select: function( event, ui ) 
+        {   
+            gIdPersonaActual = ui.item.id;  
+            $j("#alEmail60").val(gUsuarios[gIdPersonaActual].email);  
         }
     });
 

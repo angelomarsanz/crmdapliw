@@ -9,6 +9,7 @@ class PostsController extends MvcPublicController
 
     public function index() 
     {
+ 
         $rolesAutorizados = 
             [
                 "Promotor",
@@ -29,6 +30,27 @@ class PostsController extends MvcPublicController
     public function cargar_vectores() 
     {   
         $this->autoRender = false;
+
+        $vectorMensajes =
+            [
+                "1" => "La propiedad se agregó exitosamente",
+                "2" => "La propiedad se actualizó exitosamente"
+            ];
+
+        if (isset($_GET["indicadorRH"]))
+        {
+            foreach ($vectorMensajes as $claveMensaje => $mensaje)
+            {
+                if ($claveMensaje == $_GET["indicadorRH"])
+                {
+                    $mensajeRealHome = $mensaje;    
+                }
+            }                
+        }
+        else
+        {
+            $mensajeRealHome = "";
+        }
 
         $usuarioConectado = wp_get_current_user();
         $idUsuario = $usuarioConectado->id;
@@ -468,6 +490,7 @@ class PostsController extends MvcPublicController
 
         $vectorGeneral =
             [
+                "mensajeRealHome" => $mensajeRealHome,
                 "idUsuario" => $idUsuario,
                 "nombreUsuario" => $nombreUsuario,
                 "roles" => $roles,

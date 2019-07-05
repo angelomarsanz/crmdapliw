@@ -1,3 +1,25 @@
+<?php
+
+    $urlPrincipal = "";
+    $crm = 0;
+
+    if ($_SERVER['HTTP_HOST'] == "localhost"):
+        $urlPrincipal = "http://localhost/redetron/";
+        $crm = 1;
+    else:
+        if (substr($_SERVER['REQUEST_URI'], 1 , 1) == 'd'):
+            $urlPrincipal = "https://tumundobienesraices.com/dredetron/";
+            $crm = 2;
+        else:
+            $urlPrincipal = "https://tumundobienesraices.com/";
+            $crm = 3;
+        endif;
+    endif;
+
+    $urlSubmit = $urlPrincipal . "submit-property?crm=a" . $crm;
+    $urlEdit = $urlPrincipal . "submit-property?edit_property=";
+
+?>
 <div class="container">
     <?php if (isset($vectorGeneral["matrizBienes"]) && isset($vectorGeneral["datosBienes"])): ?>
         <!-- div con sufijo 00 -->
@@ -42,7 +64,7 @@
                 alt="Enviar email" class="iconoMenu">
             </button>
 
-			<a href=<?= mvc_public_url(array("controller" => "submit-property")) ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad" target="_blank">
+			<a href=<?= $urlSubmit ?> class="btn btn-link noVer" id="publicarPropiedad10" title="Publicar propiedad" target="_blank">
 				<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) . "crmdapliw/app/public/images/plus.svg" ?>
 				alt="Publicar propiedad" class="iconoMenu">
 			</a>
@@ -842,6 +864,7 @@
 // Variables globales
 
 var gVectorGeneral = <?= json_encode($vectorGeneral) ?>;
+var gMensajeRealHome = gVectorGeneral.mensajeRealHome;
 var gBienes = gVectorGeneral.bienes;
 var gMatrizBienes = gVectorGeneral.matrizBienes;
 var gBienesAutocomplete = gVectorGeneral.bienesAutocomplete;
@@ -2337,10 +2360,10 @@ function mostrarBienes(tipoContenido, valor)
 						"<a href=" + bien.guid + " title='Ver propiedad' target='_blank' class='btn btn-light' id='verPropiedad60'>" +
 						"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
 							"crmdapliw/app/public/images/eye.svg alt='ver propiedad' class='icono'>" +
-						"</a>" +								
-								
-						"<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
-							" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad' target='_blank'>" +
+						"</a>" +
+
+                        "<a href=<?= $urlEdit ?>" + bien.ID + "&crm=u<?= $crm ?>" +								
+							" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad'>" +
 							"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
 							"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
 						"</a>" +
@@ -2452,8 +2475,8 @@ function mostrarBienes(tipoContenido, valor)
 										"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
 											"crmdapliw/app/public/images/eye.svg alt='Ver propiedad' class='icono'>" +
 										"</a>" +								
-												
-										"<a href=<?= mvc_public_url(array('controller' => 'submit-property')) . '?edit_property=" + bien.ID + "' ?>" + 
+
+                                        "<a href=<?= $urlEdit ?>" + bien.ID + "&crm=u<?= $crm ?>" +
 											" class='btn btn-light' id='editarPropiedad60' title='Editar propiedad' target='_blank'>" +
 											"<img src=<?= mvc_public_url(array('controller' => 'wp-content', 'action' => 'plugins')) ?>" + 
 											"crmdapliw/app/public/images/pencil.svg alt='Editar propiedad' class='icono'>" +
@@ -4293,6 +4316,7 @@ function actualizarVectores(vectorGeneralActualizado)
 {
     gVectorGeneral = vectorGeneralActualizado;
     vectorGeneralActualizado = "";
+    gMensajeRealHome = gVectorGeneral.mensajeRealHome;
     gBienes = gVectorGeneral.bienes;
     gMatrizBienes = gVectorGeneral.matrizBienes;
     gBienesAutocomplete = gVectorGeneral.bienesAutocomplete;
@@ -6098,6 +6122,19 @@ function enviarEmailPropiedades()
 // Eventos
 $j(document).ready(function()
 {
+    console.log("gMensajeRealHome " + gMensajeRealHome);
+    if (gMensajeRealHome != "")
+    {
+        mensajesUsuario =
+        "<div class='alert alert-info alert-dismissible'>" +
+            "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+            "<strong>" + gMensajeRealHome + "</strong>" +
+        "</div>";	
+        
+        $j("#mensajesUsuario30").html(mensajesUsuario);
+        window.scrollTo(0, 0); 
+    }
+
     $j("#vistas20").val(gVistaPreferida);
 
     mostrarNotificaciones();

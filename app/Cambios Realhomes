@@ -1,6 +1,5 @@
-wp-content/themes/realhomes/assets/modern/partial/header/header.php:
-	<!-- AOSL 2019-04-30 -->
-	<div class="hamburger-box" style="background-color: #085b9e; opacity: 0.3;">
+Todos los cambios en el tema Real Homes tienen el comentario AOSL, indicando inicio y fin:
 
-	<!-- AOSL 2019-04-30 -->
-	<a style="padding: 0 0 0 1rem; opacity: 0.2" href="<?php echo esc_url( $theme_login_url ); ?>">
+wp-content/themes/realhomes/assets/modern/partial/header/header.php
+
+wp-content/themes/realhomes/assets/modern/partial/page/page-submit-property.php
